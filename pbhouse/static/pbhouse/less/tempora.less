@@ -225,6 +225,23 @@ header {
     margin-top: 0;
 }
 
+.team-member {
+    text-align: center;
+    margin-bottom: 50px;
+    img {
+        margin: 0 auto;
+        border: 7px solid @orange-light;
+    }
+    h4 {
+        margin-top: 25px;
+        margin-bottom: 0;
+        text-transform: none;
+    }
+    p {
+        margin-top: 0;
+    }
+}
+
 .service-box {
     max-width: 400px;
     margin: 50px auto 0;
@@ -324,20 +341,11 @@ header {
 }
 
 .btn-default {
-    border: 1px solid @theme-primary;
-    color: @theme-primary;
-    background-color: transparent;
-    &:hover,
-    &:focus {
-        border: 1px solid @theme-primary;
-        outline: none;
-        color: white;
-        background-color: @theme-primary;
-    }
+    .btn-base(rgba(255,255,255,0.7);@theme-primary;@theme-primary;);
 }
 
 .btn-primary {
-    .button-variant(white;@theme-primary;@theme-primary);
+    .btn-base(@theme-primary;@theme-primary;@theme-primary);
 }
 
 .btn-xl {
