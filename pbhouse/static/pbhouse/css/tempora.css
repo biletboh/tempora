@@ -9,7 +9,7 @@ body {
 hr {
   border-color: #A3112A;
   border-width: 3px;
-  max-width: 50px;
+  max-width: 75px;
 }
 hr.light {
   border-color: white;
@@ -23,6 +23,7 @@ a {
 a:hover,
 a:focus {
   color: #750c1e;
+  text-decoration: none;
 }
 h1,
 h2,
@@ -44,14 +45,18 @@ p {
   background-color: #222222;
   color: white;
 }
+.bg-partners {
+  background-color: #A3112A;
+  color: white;
+}
 .text-faded {
   color: rgba(255, 255, 255, 0.7);
 }
 section {
   padding: 100px 0;
 }
-aside {
-  padding: 50px 0;
+aside.clients img {
+  margin: 50px auto;
 }
 .no-padding {
   padding: 0;
@@ -166,6 +171,7 @@ header .header-content .header-content-inner h1 {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 30px;
+  word-spacing: 10px;
 }
 header .header-content .header-content-inner hr {
   margin: 30px auto;
@@ -291,6 +297,9 @@ header .header-content .header-content-inner p {
 .call-to-action h2 {
   margin: 0 auto 20px;
 }
+.contact-details li {
+  margin: 0 10px;
+}
 .text-primary {
   color: #A3112A;
 }
@@ -354,4 +363,76 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #222222;
+}
+.footer {
+  background-color: #eee;
+  line-height: 20px;
+}
+.footer nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+.footer nav > ul a:not(.btn) {
+  color: #777777;
+  display: block;
+  margin-bottom: 3px;
+}
+.footer nav > ul a:not(.btn):hover,
+.footer nav > ul a:not(.btn):focus {
+  color: #D66929;
+  text-decoration: none;
+}
+.footer .social-area {
+  padding: 15px 0;
+}
+.footer .social-area h5 {
+  padding-bottom: 15px;
+}
+.footer .social-area > a:not(.btn) {
+  color: #A3112A;
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 5px;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 20px;
+  text-align: center;
+}
+.footer .social-area > a:not(.btn):hover,
+.footer .social-area > a:not(.btn):focus {
+  color: #D66929;
+}
+.footer .copyright {
+  color: #777777;
+  padding: 10px 15px;
+  margin: 15px 3px;
+  line-height: 20px;
+  text-align: center;
+}
+.footer .copyright a:hover,
+.footer .copyright a:focus {
+  color: #D66929;
+  text-decoration: none;
+}
+.footer hr {
+  border-color: #dddddd;
+}
+.footer .title {
+  color: #777777;
+}
+.footer:not(.footer-big) nav > ul {
+  font-size: 16px;
+}
+.footer:not(.footer-big) nav > ul li {
+  margin-left: 20px;
+  float: left;
+}
+.footer:not(.footer-big) nav > ul a {
+  padding: 10px 0px;
+  margin: 15px 10px 15px 0px;
+}
+.footer-default {
+  background-color: whitesmoke;
 }

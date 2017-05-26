@@ -15,7 +15,7 @@ body {
 hr {
     border-color: @theme-primary;
     border-width: 3px;
-    max-width: 50px;
+    max-width: 75px;
 }
 
 hr.light {
@@ -28,6 +28,7 @@ a {
     &:hover,
     &:focus {
         color: darken(@theme-primary, 10%);
+        text-decoration: none;
     }
 }
 
@@ -55,6 +56,11 @@ p {
     color: white;
 }
 
+.bg-partners {
+    background-color: @theme-primary;
+    color: white;
+}
+
 .text-faded {
     color: fade(white, 70%);
 }
@@ -63,8 +69,10 @@ section {
     padding: 100px 0;
 }
 
-aside {
-    padding: 50px 0;
+aside.clients {
+    img {
+        margin: 50px auto;
+    }
 }
 
 .no-padding {
@@ -180,6 +188,7 @@ header {
                 margin-top: 0;
                 margin-bottom: 0;
                 font-size: 30px;
+                word-spacing: 10px;
             }
             hr {
                 margin: 30px auto;
@@ -318,6 +327,12 @@ header {
     }
 }
 
+.contact-details {
+    li {
+        margin: 0 10px;
+    }
+}
+
 // Bootstrap Overrides
 .text-primary {
     color: @theme-primary;
@@ -378,4 +393,91 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: @gray-darker;
+}
+
+.footer {
+  background-color: #eee;
+  line-height: 20px;
+}
+
+.footer nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+.footer nav > ul a:not(.btn) {
+  color: #777777;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.footer nav > ul a:not(.btn):hover, .footer nav > ul a:not(.btn):focus {
+  color: @orange-dim;
+  text-decoration: none;
+}
+
+.footer .social-area {
+  padding: 15px 0;
+}
+
+.footer .social-area h5 {
+  padding-bottom: 15px;
+}
+
+.footer .social-area > a:not(.btn) {
+  color: @theme-primary;
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 5px;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 20px;
+  text-align: center;
+}
+
+.footer .social-area > a:not(.btn):hover, .footer .social-area > a:not(.btn):focus {
+  color: @orange-dim;
+}
+
+.footer .copyright {
+  color: #777777;
+  padding: 10px 15px;
+  margin: 15px 3px;
+  line-height: 20px;
+  text-align: center;
+  a {
+    &:hover,
+    &:focus {
+        color: @orange-dim;
+        text-decoration: none;
+    }
+  }
+}
+
+.footer hr {
+  border-color: #dddddd;
+}
+
+.footer .title {
+  color: #777777;
+}
+
+.footer:not(.footer-big) nav > ul {
+  font-size: 16px;
+}
+
+.footer:not(.footer-big) nav > ul li {
+  margin-left: 20px;
+  float: left;
+}
+
+.footer:not(.footer-big) nav > ul a {
+  padding: 10px 0px;
+  margin: 15px 10px 15px 0px;
+}
+
+.footer-default {
+  background-color: whitesmoke;
 }
