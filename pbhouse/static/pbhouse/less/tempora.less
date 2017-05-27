@@ -333,6 +333,28 @@ header {
     }
 }
 
+// Map Section
+.map {
+    iframe {
+        max-width: 270px;
+    }
+    @media (min-width: 480px) {
+        iframe {
+            max-width: 430px;
+        }
+    }
+    @media (min-width: 768px) {
+        iframe {
+            max-width: 600px;
+        }
+    }
+    @media (min-width: 992px) {
+        iframe {
+            max-width: 800px;
+        }
+    }
+}
+
 // Bootstrap Overrides
 .text-primary {
     color: @theme-primary;

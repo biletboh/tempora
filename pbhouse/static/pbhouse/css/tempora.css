@@ -300,6 +300,24 @@ header .header-content .header-content-inner p {
 .contact-details li {
   margin: 0 10px;
 }
+.map iframe {
+  max-width: 270px;
+}
+@media (min-width: 480px) {
+  .map iframe {
+    max-width: 430px;
+  }
+}
+@media (min-width: 768px) {
+  .map iframe {
+    max-width: 600px;
+  }
+}
+@media (min-width: 992px) {
+  .map iframe {
+    max-width: 800px;
+  }
+}
 .text-primary {
   color: #A3112A;
 }
