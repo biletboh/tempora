@@ -6,12 +6,18 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
+from filebrowser.sites import site
 
 
 urlpatterns = [
             url(r'^admin/', admin.site.urls),
+            url(r'^upload/', include('django_file_form.urls')),
+            url(r'^tinymce/', include('tinymce.urls')),
+            url(r'^admin/filebrowser/', include(site.urls)),
+            url(r'^grappelli/', include('grappelli.urls')), 
             ] + i18n_patterns(
-                            url(r'^', include('pbhouse.urls'))
+                            url(r'^', include('pbhouse.urls')),
+                            url(r'^', include('blog.urls'))
                             )
 
 

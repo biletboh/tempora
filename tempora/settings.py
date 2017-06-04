@@ -34,6 +34,10 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'pbhouse.apps.PbhouseConfig',
+    'blog.apps.BlogConfig',
+    'grappelli',
+    'filebrowser',
+    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'easy_thumbnails',
+    'django_file_form',
+    'django_file_form.ajaxuploader',
+    'widget_tweaks',
+    'el_pagination',
 ]
 
 MIDDLEWARE = [

@@ -1,3 +1,11 @@
 Django==1.11.1
 nodeenv==1.1.2
 pytz==2017.2
+django-el-pagination==3.1.0
+django-file-form==0.2.3
+django-filebrowser==3.7.2
+django-form-utils==1.0.3
+django-grappelli==2.8.3
+django-tinymce==2.6.0
+django-widget-tweaks==1.4.1
+easy-thumbnails==2.4.1
