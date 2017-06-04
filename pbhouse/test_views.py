@@ -17,3 +17,18 @@ class LandingTestCase(TestCase):
         resp = self.client.get(url, follow=True)
         self.assertTemplateUsed(resp, 'pbhouse/landing.html')
 
+
+class ProfileTestCase(TestCase):
+
+    def test_status_code(self):
+        url = reverse('pbhouse:profile') 
+        self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'en'})
+        resp = self.client.get(url, follow=True)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_template(self):
+        url = reverse('pbhouse:profile') 
+        self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'en'})
+        resp = self.client.get(url, follow=True)
+        self.assertTemplateUsed(resp, 'pbhouse/dashboard.html')
+

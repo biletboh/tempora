@@ -11,3 +11,12 @@ class LandingPage(TemplateView):
         context['title'] = "Tempora Landing"
         return context
 
+
+class UserProfile(TemplateView):
+    template_name='pbhouse/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserProfile, self).get_context_data(**kwargs)
+        context['title'] = "UserProfile"
+        return context
+

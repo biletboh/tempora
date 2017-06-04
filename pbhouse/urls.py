@@ -6,5 +6,6 @@ app_name = 'pbhouse'
 
 urlpatterns = [
             url(r'^$', views.LandingPage.as_view(), name = 'landing'),
+            url(r'^dashboard$', views.UserProfile.as_view(), name = 'profile'),
             ]
 
