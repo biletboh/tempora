@@ -17,7 +17,7 @@ urlpatterns = [
             url(r'^grappelli/', include('grappelli.urls')), 
             ] + i18n_patterns(
                             url(r'^', include('pbhouse.urls')),
-                            url(r'^', include('blog.urls'))
+#                            url(r'^', include('blog.urls'))
                             )
 
 

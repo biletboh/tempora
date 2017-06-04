@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'pbhouse.apps.PbhouseConfig',
-    'blog.apps.BlogConfig',
+#    'blog.apps.BlogConfig',
     'grappelli',
     'filebrowser',
     'tinymce',
