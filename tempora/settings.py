@@ -33,23 +33,41 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # custom apps 
     'pbhouse.apps.PbhouseConfig',
+    'users.apps.UsersConfig',
 #    'blog.apps.BlogConfig',
+    
+    # filebrowser and tinymce apps
     'grappelli',
     'filebrowser',
     'tinymce',
+
+    # django core apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # allauth apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # additionals apps
     'easy_thumbnails',
     'django_file_form',
     'django_file_form.ajaxuploader',
     'widget_tweaks',
     'el_pagination',
+    'datetimewidget',
 ]
+
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -144,4 +162,68 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# allauth configuration
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False 
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_SIGNUP_FORM_CLASS = 'users.signupform.SignupForm'
+AUTH_USER_MODEL = 'users.UserProfile'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'test.credotrade@gmail.com'
+EMAIL_HOST_PASSWORD = 'nosorog999'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Tempora'
+
+LOGIN_REDIRECT_URL = '/dashboard'
+
+
+#Tumnails settings 
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'extra_small': {'size':(45, 45), 'crop': True},
+        'small': {'size':(60, 60), 'crop': True},
+        'medium': {'size': (750, 450), 'crop': True},
+        'large': {'size': (800, 550), 'crop': True},
+        'extra_large': {'size': (1200, 600), 'crop': True},
+        },
+    }
+
+THUMBNAIL_TRANSPARENCY_EXTENSION = 'png'
+
+
+#TinyMCE config
+TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = '/static/tiny_mce'
+
+TINYMCE_SPELLCHECKER = True
+TINYMCE_DEFAULT_CONFIG = {
+        'plugins': 'advlist,autolink,autoresize,emotions,fullpage,fullscreen,media,table,spellchecker,paste,searchreplace,wordcount',
+        'theme': "advanced",
+        'theme_advanced_resizing': True,
+        'theme_advanced_resize_horizontal': True,
+        'theme_advanced_buttons1': 'undo,redo,fontsizeselect,bold,italic,underline,strikethrough,|,forecolor,backcolor,|,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,|,link,unlink,|,image,media,|,emotions,blockquote,|,table,hr,sub,sup,charmap',
+        'theme_advanced_buttons2' : "",
+        'width': '100%',
+        'cleanup_on_startup': True,
+        'custom_undo_redo_levels': 10,
+        }
+TINYMCE_COMPRESSOR = False 
+TINYMCE_FILEBROWSER = True 
 

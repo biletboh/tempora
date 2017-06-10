@@ -1,0 +1,26 @@
+{% extends "pbhouse/dashboard.html" %}
+
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+
+<div class="">
+  {{title}} 
+</div>
+{% if messages %}
+<div class="message-top">
+  <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+      {{ message }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<div>
+  <p>Dashboard Page!</p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% load el_pagination_tags %}
+{% load static %}
+{% load thumbnail %}
+
+{% paginate userprofiles %}
+
+{% for userprofile in userprofiles %}
+<div class="col-lg-12">
+  <a href="{% url 'userprofile:edit' userprofile.id %}" class="">{{ userprofile.email }}
+  </a>
+  <small>{{ userprofile.first_name }}, {{ userprofile.last_name }}</small>
+  <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#{{ userprofile.id }}">
+    <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
+  </button>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="{{userprofile.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete {{ userprofile.email }}? </p> 
+      </div>
+      <div class="modal-footer">
+        <form action="{% url 'userprofile:delete' userprofile.id %}" method="post">{% csrf_token %}
+          <input type="submit" class="btn btn-primary" value="Yes" />
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<div class="pagination">
+  {% show_more%}
+</div>
+

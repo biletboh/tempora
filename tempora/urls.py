@@ -17,6 +17,8 @@ urlpatterns = [
             url(r'^grappelli/', include('grappelli.urls')), 
             ] + i18n_patterns(
                             url(r'^', include('pbhouse.urls')),
+                            url(r'^profiles/', include('users.urls')),
+                            url(r'^accounts/', include('allauth.urls')),
 #                            url(r'^', include('blog.urls'))
                             )
 

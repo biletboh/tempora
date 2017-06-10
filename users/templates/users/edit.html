@@ -1,0 +1,100 @@
+{% extends "pbhouse/dashboard.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+{% load object_attributes %}
+{% load default_values %}
+{% load i18n %}
+{% load tz %}
+
+<div class="dashboard-header">
+  {{title}}: {{ object.email }} 
+</div>
+{% if messages %}
+<div class="message-top">
+  <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+      {{ message }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<form action="" id="edit-form" name="create-form" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-12">
+      {% if form.errors %}
+      <div class="form-group-item text-danger">
+        {{ form.errors }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% render_field form.object_id value=object.id %}
+  <div class="row">
+    <div class="col-md-12">
+
+      {% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
+      {% for fieldset in form.fieldsets %}
+      <fieldset class="form-group {{ fieldset.classes }}">
+        {% if fieldset.description %}
+        <p class="description">{{ fieldset.description }}</p>
+        {% endif %}
+
+        {% for field in fieldset %}
+        {% if field.is_hidden %}
+        {{ field }}
+        {% else %}
+        <div class="row">
+          <div class="col-md-2">
+            {{ field.label_tag }}
+          </div>
+          <div class="col-md-10">
+            {% if fieldset.name == "main" %}
+            
+            {% if field.name == "gender" %}
+            {% with object.gender as gender %}
+            {% render_field field|default_choice:gender class+="form-control" %}
+            {% endwith %}
+            {% else %}
+            {% with object|object_attributes:field as val %}
+            {% render_field field class+="form-control" value=val %}
+            {% endwith %}
+            {% endif %}
+
+            {% else %}
+            {% with object|object_attributes:field as val %}
+            {% render_field field|default_value:val class+="form-control" %}
+            {% endwith %}
+            {% endif %}
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10 col-md-offset-2">
+            {{ field.errors }}
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </fieldset>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <input class="btn btn-default" type="submit" value="{% trans 'Submit' %}" />
+    </div>
+  </div>
+  <div id="test">
+  </div>
+</form>
+
+{% endblock %}
