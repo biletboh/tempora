@@ -6,7 +6,6 @@ from form_utils import forms as betterforms
 from allauth.account.forms import PasswordVerificationMixin, PasswordField
 
 from users.models import UserProfile
-from users.signupform import GENDER
 
 
 class BaseUserProfileForm(betterforms.BetterForm):
@@ -54,13 +53,4 @@ class UserCreateForm(BaseUserProfileForm):
 
     password1 = PasswordField(label=_('Password'), required=True)
     password2 = PasswordField(label=_('Password (again)'), required=True)
-
-
-class UserUpdateForm(BaseUserProfileForm):
-    """
-    Provide Form for updating of users without password required field.
-    """
-
-    password1 = PasswordField(label=_('Password'), required=False)
-    password2 = PasswordField(label=_('Password (again)'), required=False)
 
