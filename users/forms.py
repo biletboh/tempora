@@ -14,17 +14,26 @@ class BaseUserProfileForm(betterforms.BetterForm):
     """
 
     email = forms.CharField(label=_('Email'), max_length=100)
-    fist_name = forms.CharField(label=_('First Name'), max_length=80)
+    first_name = forms.CharField(label=_('First Name'), max_length=80)
     last_name = forms.CharField(label=_('Last Name'), max_length=80)
-    info = forms.CharField(label=_('Tell about yourself'), max_length=200)
-    facebook = forms.CharField(label=_('Facebook'), max_length=200)
-    twitter = forms.CharField(label=_('Twitter'), max_length=200)
-    linkedin = forms.CharField(label=_('Linkedin'), max_length=200)
-
-    is_staff = forms.BooleanField(label=_('Editor'), required=False, initial=False)
-    is_active = forms.BooleanField(label=_('Is Active'), required=False, initial=False)
-    first_name = forms.CharField(label=_('First Name'), max_length=200)
-    last_name = forms.CharField(label=_('Last Name'), max_length=200)
+    info = forms.CharField(
+                        label=_('Tell about yourself'), max_length=200,
+                        required=False,)
+    facebook = forms.CharField(
+                            label=_('Facebook'), max_length=200,
+                            required=False,)
+    twitter = forms.CharField(
+                            label=_('Twitter'), max_length=200,
+                            required=False,)
+    linkedin = forms.CharField(
+                            label=_('Linkedin'), max_length=200,
+                            required=False,)
+    is_staff = forms.BooleanField(
+                                label=_('Editor'), required=False, 
+                                initial=False)
+    is_active = forms.BooleanField(
+                                label=_('Is Active'), required=False,
+                                initial=False)
     
     def clean_password2(self):
         cleaned_data = super(BaseUserProfileForm, self).clean()
@@ -39,10 +48,9 @@ class BaseUserProfileForm(betterforms.BetterForm):
 
     class Meta:
         fieldsets = [
-                ('main', {'fields': ['email', 'last_name', 'first_name', ], 'legend': 'main', }),
-
-                ('check', {'fields': ['is_staff', 'is_active'], 'legend': 'main', }),
-                ('password', {'fields': ['password1', 'password2'], 'legend': 'main', }),
+                ('main', {'fields': ['email', 'last_name', 'first_name', 'info', 'facebook', 'twitter', 'linkedin'], 'legend': 'main', }),
+                ('privileges', {'fields': ['is_staff', 'is_active'], 'legend': 'privileges', }),
+                ('password', {'fields': ['password1', 'password2'], 'legend': 'password', }),
                 ]
 
 

@@ -6,8 +6,6 @@
 {% block content %}
 {% load static %}
 {% load widget_tweaks %}
-{% load object_attributes %}
-{% load default_values %}
 {% load i18n %}
 {% load tz %}
 
@@ -52,31 +50,28 @@
         {% if field.is_hidden %}
         {{ field }}
         {% else %}
+
+        {% if fieldset.name == "main" %}
         <div class="row">
           <div class="col-md-2">
             {{ field.label_tag }}
           </div>
           <div class="col-md-10">
-            {% if fieldset.name == "main" %}
-            
-            {% if field.name == "gender" %}
-            {% with object.gender as gender %}
-            {% render_field field|default_choice:gender class+="form-control" %}
-            {% endwith %}
-            {% else %}
-            {% with object|object_attributes:field as val %}
-            {% render_field field class+="form-control" value=val %}
-            {% endwith %}
-            {% endif %}
-
-            {% else %}
-            {% with object|object_attributes:field as val %}
-            {% render_field field|default_value:val class+="form-control" %}
-            {% endwith %}
-            {% endif %}
-
+            {% render_field field class+="form-control" %}
           </div>
         </div>
+        {% endif %}
+        {% if fieldset.name == "privileges" %}
+        <div class="row">
+          <div class="col-md-2">
+            {{ field.label_tag }}
+          </div>
+          <div class="col-md-10">
+            {% render_field field class+="form-control" %}
+          </div>
+        </div>
+        {% endif %}
+
         <div class="row">
           <div class="col-md-10 col-md-offset-2">
             {{ field.errors }}

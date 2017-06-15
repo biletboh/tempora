@@ -9,7 +9,7 @@ app_name = 'users'
 urlpatterns = [
 
             #  UserProfile urls 
-            url(r'^user/$', views.UserProfile.as_view(), name='profile'),
+            url(r'^user/$', views.Profile.as_view(), name='profile'),
             url(
                 r'^user/create/$', 
                 views.CreateUser.as_view(), name='create'),
@@ -22,6 +22,6 @@ urlpatterns = [
 
             url(
                 r'^user/list/$', views.EditUserList.as_view(),
-                name='user_list'),
+                name='edit_list'),
             ]
 

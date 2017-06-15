@@ -2,11 +2,11 @@
 {% load static %}
 {% load thumbnail %}
 
-{% paginate userprofiles %}
+{% paginate users %}
 
-{% for userprofile in userprofiles %}
+{% for userprofile in users %}
 <div class="col-lg-12">
-  <a href="{% url 'userprofile:edit' userprofile.id %}" class="">{{ userprofile.email }}
+  <a href="{% url 'users:edit' userprofile.id %}" class="">{{ userprofile.email }}
   </a>
   <small>{{ userprofile.first_name }}, {{ userprofile.last_name }}</small>
   <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#{{ userprofile.id }}">
@@ -26,7 +26,7 @@
         <p>Do you want to delete {{ userprofile.email }}? </p> 
       </div>
       <div class="modal-footer">
-        <form action="{% url 'userprofile:delete' userprofile.id %}" method="post">{% csrf_token %}
+        <form action="{% url 'users:delete' userprofile.id %}" method="post">{% csrf_token %}
           <input type="submit" class="btn btn-primary" value="Yes" />
           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         </form>

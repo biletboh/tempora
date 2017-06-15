@@ -12,11 +12,11 @@ from django.views.generic.detail import SingleObjectMixin
 
 from el_pagination.views import AjaxListView
 
-from users.forms import UserCreateForm, UserUpdateForm
+from users.forms import UserCreateForm, BaseUserProfileForm 
 from users.models import UserProfile
 
 
-class UserProfile(LoginRequiredMixin, TemplateView):
+class Profile(LoginRequiredMixin, TemplateView):
     """
     Render Profile page.
     """
@@ -42,7 +42,7 @@ class CreateUser(
     form_class = UserCreateForm
     template_name = 'users/create.html'
     success_url = reverse_lazy('users:create')
-    login_url = reverse_lazy('users:dashboard')
+    login_url = reverse_lazy('account_signin')
     success_message = _('A user was created successfully')
 
     def form_valid(self, form):
@@ -51,16 +51,18 @@ class CreateUser(
         last_name = form.cleaned_data['last_name'] 
         is_staff = form.cleaned_data['is_staff'] 
         is_active = form.cleaned_data['is_active'] 
-        gender = form.cleaned_data['gender'] 
-        phone = form.cleaned_data['phone'] 
-        birthdate = form.cleaned_data['birthdate'] 
+        facebook = form.cleaned_data['facebook'] 
+        twitter = form.cleaned_data['twitter'] 
+        linkedin = form.cleaned_data['linkedin'] 
+        avatar = form.cleaned_data['avatar'] 
         password = form.cleaned_data['password1'] 
 
         user = UserProfile.objects.create(
                                         email=email, first_name=first_name,
                                         last_name=last_name, is_staff=is_staff,
-                                        is_active=is_active, gender=gender,
-                                        phone=phone, birthdate=birthdate,
+                                        is_active=is_active, facebook=facebook,
+                                        twitter=twitter, liknedin=linkedin,
+                                        avatar=avatar
                                         )
         user.set_password(password)
         user.save()
@@ -92,12 +94,17 @@ class DisplayUser(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DisplayUser, self).get_context_data(**kwargs)
         initial = {
-                'phone': self.object.phone,
-                'birthdate': self.object.birthdate,
-                'password1': self.object.password,
-                'password2': self.object.password,
+                'email': self.object.email,
+                'first_name': self.object.first_name,
+                'last_name': self.object.last_name,
+                'info': self.object.info,
+                'facebook': self.object.facebook,
+                'twitter': self.object.twitter,
+                'linkedin': self.object.linkedin,
+                'is_active': self.object.is_active,
+                'is_staff': self.object.is_staff,
                 }
-        context['form'] = UserUpdateForm(initial=initial)
+        context['form'] = BaseUserProfileForm(initial=initial)
         context['title'] = _('Edit Users') 
         return context
 
@@ -107,7 +114,7 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
     Update a User.
     """
 
-    form_class = UserUpdateForm 
+    form_class = BaseUserProfileForm 
     model = UserProfile 
     success_message = _("A user was updated successfully")
     template_name = 'users/edit.html'
@@ -124,12 +131,10 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
         user.last_name = form.cleaned_data['last_name'] 
         user.is_staff = form.cleaned_data['is_staff'] 
         user.is_active = form.cleaned_data['is_active'] 
-        user.gender= form.cleaned_data['gender'] 
-        user.phone = form.cleaned_data['phone'] 
-        user.birthdate = form.cleaned_data['birthdate'] 
-        password = form.cleaned_data['password1']
-        if password:
-            user.set_password(password)
+        user.info = form.cleaned_data['info'] 
+        user.facebook = form.cleaned_data['facebook'] 
+        user.twitter = form.cleaned_data['twitter'] 
+        user.likedin = form.cleaned_data['linkedin'] 
         user.save()
         return super(UpdateUser, self).form_valid(form)
 
@@ -181,7 +186,7 @@ class EditUserList(LoginRequiredMixin, UserPassesTestMixin, AjaxListView):
     Render a list of Users to edit with ajax endless pagination.
     """
 
-    context_object_name = "userss"
+    context_object_name = "users"
     template_name = 'users/user_list.html'
     page_template = 'users/users.html'
     login_url = reverse_lazy('users:dashboard')
