@@ -42,7 +42,11 @@
           </div>
           <div class="profile_info">
             <span>Welcome,</span>
-            <h2>{{ user.email }}</h2>
+            {% if user.first_name and user.last_name %}
+            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+            {% else %}
+            <h2>{{ user.email }} </h2>
+            {% endif %}
           </div>
         </div>
         <!-- /menu profile quick info -->
@@ -52,11 +56,11 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>User</h3>
+            <h3>{% trans "Головне" %}</h3>
             <ul class="nav side-menu">
-              <li><a><i class="fa fa-user"></i> Profile <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-user"></i>{% trans "Мій профайл" %}<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="profile.html">Profile</a></li>
+                <li><a href="{% url 'users:edit' user.pk %}">{% trans "Оновити" %}</a></li>
               </ul>
               </li>
             </ul>
@@ -116,7 +120,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="">
             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="{% static 'pbhouse/img/dima.jpg' %}" alt="">John Doe
+              <img src="{% static 'pbhouse/img/dima.jpg' %}" alt="">{{ user.email }}
               <span class=" fa fa-angle-down"></span>
             </a>
             <ul class="dropdown-menu dropdown-usermenu pull-right">
