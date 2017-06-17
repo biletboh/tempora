@@ -1,7 +1,12 @@
 {% extends "pbhouse/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block head_title %}{% trans "Видавництво Темпора" %}{% endblock %}
 
 {% block content %}
-{% load static %}
+
+{% include "pbhouse/navbar_landing.html" %}
 
 <header>
   <div class="header-content">
@@ -368,3 +373,4 @@
 </section>
 
 {% endblock %}
+

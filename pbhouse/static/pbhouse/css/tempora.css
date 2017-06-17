@@ -55,6 +55,9 @@ p {
 section {
   padding: 100px 0;
 }
+section.page {
+  padding: 50px 25px;
+}
 aside.clients img {
   margin: 50px auto;
 }
@@ -144,6 +147,10 @@ aside.clients img {
   .navbar-default.affix .nav > li > a:hover,
   .navbar-default.affix .nav > li > a:focus:hover {
     color: #A3112A;
+  }
+  .navbar-default.navbar-page {
+    border-color: #A3112A;
+    border-width: 0 0 2px;
   }
 }
 header {
