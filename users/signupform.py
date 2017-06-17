@@ -3,8 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
 from form_utils import forms as betterforms
-from phonenumber_field.formfields import PhoneNumberField
-from phonenumber_field.widgets import PhoneNumberPrefixWidget 
 from datetimewidget.widgets import DateWidget
 
 from users.models import UserProfile
