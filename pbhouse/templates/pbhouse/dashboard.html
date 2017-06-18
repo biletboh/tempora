@@ -30,7 +30,7 @@
     <div class="col-md-3 left_col">
       <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-          <a href="index.html" class="site_title"><i class="fa fa-book"></i> <span>Tempora</span></a>
+          <a href="{% url 'users:profile' %}" class="site_title"><i class="fa fa-book"></i> <span>Tempora</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -101,7 +101,7 @@
           <a data-toggle="tooltip" data-placement="top" title="Lock">
             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
           </a>
-          <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+          <a data-toggle="tooltip" data-placement="top" title="Logout" href="{% url 'account_logout' %}">
             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
           </a>
         </div>
@@ -132,7 +132,7 @@
               </a>
               </li>
               <li><a href="javascript:;">Help</a></li>
-              <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+              <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
             </ul>
             </li>
 
@@ -146,7 +146,7 @@
               <a>
                 <span class="image"><img src="{% static 'pbhouse/img/dima.jpg' %}" alt="Profile Image" /></span>
                 <span>
-                  <span>John Smith</span>
+                  <span>{{ user.first_name }} {{ user.last_name }}</span>
                   <span class="time">3 mins ago</span>
                 </span>
                 <span class="message">
