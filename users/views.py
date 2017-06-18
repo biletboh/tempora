@@ -27,7 +27,7 @@ class Profile(LoginRequiredMixin, TemplateView):
         return reverse_lazy('account_login')
 
     def get_context_data(self, **kwargs):
-        context = super(UserProfile, self).get_context_data(**kwargs)
+        context = super(Profile, self).get_context_data(**kwargs)
         context['title'] = "UserProfile"
         return context
 
@@ -42,7 +42,7 @@ class CreateUser(
     form_class = UserCreateForm
     template_name = 'users/create.html'
     success_url = reverse_lazy('users:create')
-    login_url = reverse_lazy('account_signin')
+    login_url = reverse_lazy('users:profile')
     success_message = _('A user was created successfully')
 
     def form_valid(self, form):
@@ -69,6 +69,11 @@ class CreateUser(
 
         return super(CreateUser, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(CreateUser, self).get_context_data(**kwargs)
+        context['title'] = _('Create User')
+        return context
+
     def test_func(self):
         user = self.request.user.is_superuser
         if not user:
@@ -76,10 +81,6 @@ class CreateUser(
             messages.warning(self.request, denied)
         return user
 
-    def get_context_data(self, **kwargs):
-        context = super(CreateUser, self).get_context_data(**kwargs)
-        context['title'] = _('Create User')
-        return context
 
 
 class DisplayUser(DetailView):
@@ -147,12 +148,7 @@ class EditUser(LoginRequiredMixin, UserPassesTestMixin, View):
     Edit Users.
     """
     
-    def test_func(self):
-        user = self.request.user.is_superuser
-        if not user:
-            denied = _('You have to be a superuser to access this page.')
-            messages.warning(self.request, denied)
-        return user
+    login_url = reverse_lazy('users:dashboard')
 
     def get(self, request, *args, **kwargs):
         view = DisplayUser.as_view()
@@ -161,6 +157,18 @@ class EditUser(LoginRequiredMixin, UserPassesTestMixin, View):
     def post(self, request, *args, **kwargs):
         view = UpdateUser.as_view()
         return view(request, *args, **kwargs)
+
+    def test_func(self):
+        super_user = self.request.user.is_superuser
+        profile_user = self.request.user.pk
+        access_user = int(self.kwargs['pk'])
+        denied = _('You have to be a superuser to access this page.')
+
+        if super_user or (profile_user==access_user):
+            return True 
+
+        messages.warning(self.request, denied)
+        return False 
 
 
 class DeleteUser(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -189,7 +197,7 @@ class EditUserList(LoginRequiredMixin, UserPassesTestMixin, AjaxListView):
     context_object_name = "users"
     template_name = 'users/user_list.html'
     page_template = 'users/users.html'
-    login_url = reverse_lazy('users:dashboard')
+    login_url = reverse_lazy('users:profile')
 
     def get_context_data(self, **kwargs):
         context = super(EditUserList, self).get_context_data(**kwargs)
