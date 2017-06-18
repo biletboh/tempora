@@ -35,23 +35,17 @@
       {% endif %}
     </div>
   </div>
-  {% render_field form.object_id value=object.id %}
   <div class="row">
     <div class="col-md-12">
 
       {% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
       {% for fieldset in form.fieldsets %}
       <fieldset class="form-group {{ fieldset.classes }}">
-        {% if fieldset.description %}
-        <p class="description">{{ fieldset.description }}</p>
-        {% endif %}
-
         {% for field in fieldset %}
         {% if field.is_hidden %}
         {{ field }}
         {% else %}
 
-        {% if fieldset.name == "main" %}
         <div class="row">
           <div class="col-md-2">
             {{ field.label_tag }}
@@ -60,18 +54,6 @@
             {% render_field field class+="form-control" %}
           </div>
         </div>
-        {% endif %}
-        {% if fieldset.name == "privileges" %}
-        <div class="row">
-          <div class="col-md-2">
-            {{ field.label_tag }}
-          </div>
-          <div class="col-md-10">
-            {% render_field field class+="form-control" %}
-          </div>
-        </div>
-        {% endif %}
-
         <div class="row">
           <div class="col-md-10 col-md-offset-2">
             {{ field.errors }}

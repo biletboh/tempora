@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.shortcuts import render
@@ -12,7 +13,8 @@ from django.views.generic.detail import SingleObjectMixin
 
 from el_pagination.views import AjaxListView
 
-from users.forms import UserCreateForm, BaseUserProfileForm 
+from users.forms import UserCreateForm, UserUpdateForm,\
+    ProfileUpdateForm
 from users.models import UserProfile
 
 
@@ -39,7 +41,7 @@ class CreateUser(
     Create User.
     """
 
-    form_class = UserCreateForm
+    form_class = UserCreateForm 
     template_name = 'users/create.html'
     success_url = reverse_lazy('users:create')
     login_url = reverse_lazy('users:profile')
@@ -54,17 +56,25 @@ class CreateUser(
         facebook = form.cleaned_data['facebook'] 
         twitter = form.cleaned_data['twitter'] 
         linkedin = form.cleaned_data['linkedin'] 
-        avatar = form.cleaned_data['avatar'] 
+        goodreads = form.cleaned_data['goodreads'] 
+        #avatar = form.cleaned_data['avatar'] 
         password = form.cleaned_data['password1'] 
+        team = form.cleaned_data['team'] 
+        authors = form.cleaned_data['authors'] 
+        bloggers = form.cleaned_data['bloggers'] 
 
         user = UserProfile.objects.create(
                                         email=email, first_name=first_name,
                                         last_name=last_name, is_staff=is_staff,
                                         is_active=is_active, facebook=facebook,
-                                        twitter=twitter, liknedin=linkedin,
-                                        avatar=avatar
+                                        twitter=twitter, linkedin=linkedin,
+                                        goodreads=goodreads,# avatar=avatar
                                         )
         user.set_password(password)
+        user.groups.add(team)
+        user.groups.add(authors)
+        user.groups.add(bloggers)
+
         user.save()
 
         return super(CreateUser, self).form_valid(form)
@@ -82,7 +92,6 @@ class CreateUser(
         return user
 
 
-
 class DisplayUser(DetailView):
     """
     Get UserProfile for editting.
@@ -94,6 +103,10 @@ class DisplayUser(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(DisplayUser, self).get_context_data(**kwargs)
+        team = self.object.groups.filter(name='Team').exists()
+        authors = self.object.groups.filter(name='Authors').exists()
+        bloggers = self.object.groups.filter(name='Bloggers').exists()
+
         initial = {
                 'email': self.object.email,
                 'first_name': self.object.first_name,
@@ -104,10 +117,26 @@ class DisplayUser(DetailView):
                 'linkedin': self.object.linkedin,
                 'is_active': self.object.is_active,
                 'is_staff': self.object.is_staff,
+                'team': team,
+                'authors': authors,
+                'bloggers': bloggers,
                 }
-        context['form'] = BaseUserProfileForm(initial=initial)
+
+        context['form'] = self.get_update_form(initial=initial) 
         context['title'] = _('Edit Users') 
         return context
+
+    def get_update_form(self, initial):
+        super_user = self.request.user.is_superuser
+        if super_user:
+            return UserUpdateForm(initial=initial)
+        else:
+            del initial['is_active']
+            del initial['is_staff']
+            del initial['team']
+            del initial['authors']
+            del initial['bloggers']
+            return ProfileUpdateForm(initial=initial)
 
 
 class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
@@ -115,7 +144,7 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
     Update a User.
     """
 
-    form_class = BaseUserProfileForm 
+    form_class = UserUpdateForm
     model = UserProfile 
     success_message = _("A user was updated successfully")
     template_name = 'users/edit.html'
@@ -136,11 +165,45 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
         user.facebook = form.cleaned_data['facebook'] 
         user.twitter = form.cleaned_data['twitter'] 
         user.likedin = form.cleaned_data['linkedin'] 
+        user.goodreads = form.cleaned_data['goodreads'] 
+        
+        # Check if the user has prviviledges to edit 
+        # group membership and user active status.
+        current_user = self.request.user
+        if current_user.is_superuser:
+            user.is_staff = form.cleaned_data['is_staff'] 
+            user.is_active = form.cleaned_data['is_active'] 
+            self.set_user_group(form, user, 'Team')
+            self.set_user_group(form, user, 'Authors')
+            self.set_user_group(form, user, 'Bloggers')
+            
+        # set user password
+        password = form.cleaned_data['password1'] 
+        if password:
+            user.set_password(password)
+
+        # save user updates
         user.save()
+
         return super(UpdateUser, self).form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('users:edit', kwargs={'pk': self.object.pk})
+
+    def set_user_group(self, form, user, name):
+        try:
+            group = Group.objects.get(name=name)            
+        except:
+            raise Exception('Group does not exist.')
+
+        # add or remove group membership 
+        checked = form.cleaned_data[name.lower()]
+        print('form', checked)
+        if checked:
+            user.groups.add(group)
+        else:
+            user.groups.remove(group)
+        return user
 
 
 class EditUser(LoginRequiredMixin, UserPassesTestMixin, View):

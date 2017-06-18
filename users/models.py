@@ -25,6 +25,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     facebook = models.CharField(max_length=128, blank=True)
     twitter = models.CharField(max_length=128, blank=True)
     linkedin = models.CharField(max_length=128, blank=True)
+    goodreads = models.CharField(max_length=128, blank=True)
 
     is_staff = models.BooleanField(
         _('staff status'),

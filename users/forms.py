@@ -13,11 +13,12 @@ class BaseUserProfileForm(betterforms.BetterForm):
     Provide Base Form for UserProfile.
     """
 
-    email = forms.CharField(label=_('Email'), max_length=100)
-    first_name = forms.CharField(label=_('First Name'), max_length=80)
-    last_name = forms.CharField(label=_('Last Name'), max_length=80)
+    email = forms.CharField(label=_('Емейл'), max_length=100)
+    first_name = forms.CharField(label=_("Ім'я"), max_length=80)
+    last_name = forms.CharField(label=_('Прізвище'), max_length=80)
     info = forms.CharField(
-                        label=_('Tell about yourself'), max_length=200,
+                        label=_('Розкажіть про себе'), max_length=256,
+                        widget=forms.Textarea,
                         required=False,)
     facebook = forms.CharField(
                             label=_('Facebook'), max_length=200,
@@ -28,13 +29,10 @@ class BaseUserProfileForm(betterforms.BetterForm):
     linkedin = forms.CharField(
                             label=_('Linkedin'), max_length=200,
                             required=False,)
-    is_staff = forms.BooleanField(
-                                label=_('Editor'), required=False, 
-                                initial=False)
-    is_active = forms.BooleanField(
-                                label=_('Is Active'), required=False,
-                                initial=False)
-    
+    goodreads = forms.CharField(
+                            label=_('Goodreads'), max_length=200,
+                            required=False,)
+ 
     def clean_password2(self):
         cleaned_data = super(BaseUserProfileForm, self).clean()
         password1 = cleaned_data.get('password1')
@@ -46,19 +44,68 @@ class BaseUserProfileForm(betterforms.BetterForm):
         return password2 
 
 
+class UserManagementForm(BaseUserProfileForm):
+    """
+    Provide Form for creation of users with password required field.
+    """
+    
+    is_staff = forms.BooleanField(
+                                label=_('Редактор(ка)'), required=False, 
+                                initial=False)
+    is_active = forms.BooleanField(
+                                label=_('Активний'), required=False,
+                                initial=False)
+    team = forms.BooleanField(
+                            label=_('Співробітник(ця)'), required=False,
+                                initial=False)
+    authors = forms.BooleanField(
+                            label=_('Автор(к)а'), required=False,
+                            initial=False)
+    bloggers = forms.BooleanField(
+                            label=_('Блогер(ка)'), required=False,
+                            initial=False)
+    
     class Meta:
         fieldsets = [
-                ('main', {'fields': ['email', 'last_name', 'first_name', 'info', 'facebook', 'twitter', 'linkedin'], 'legend': 'main', }),
-                ('privileges', {'fields': ['is_staff', 'is_active'], 'legend': 'privileges', }),
+                ('main', {'fields': ['email', 'last_name', 'first_name', 'info', 'facebook', 'twitter', 'linkedin', 'goodreads', ], 'legend': 'main', }),
+                ('privileges', {'fields': ['is_staff', 'is_active', 'team', 'authors', 'bloggers'], 'legend': 'privileges', }),
                 ('password', {'fields': ['password1', 'password2'], 'legend': 'password', }),
                 ]
 
 
-class UserCreateForm(BaseUserProfileForm):
+
+
+class UserCreateForm(UserManagementForm):
     """
     Provide Form for creation of users with password required field.
     """
+    
+    password1 = PasswordField(label=_('Пароль'), required=True)
+    password2 = PasswordField(label=_('Пароль (знову)'), required=True)
 
-    password1 = PasswordField(label=_('Password'), required=True)
-    password2 = PasswordField(label=_('Password (again)'), required=True)
+
+class UserUpdateForm(UserManagementForm):
+    """
+    Provide Form for user update with optional password update.
+    """
+    
+    password1 = PasswordField(label=_('Пароль'), required=False)
+    password2 = PasswordField(label=_('Пароль (знову)'), required=False)
+
+
+class ProfileUpdateForm(BaseUserProfileForm):
+    """
+    Provide Form for profile information update 
+    with optional password update.
+    """
+    
+    password1 = PasswordField(label=_('Пароль'))
+    password2 = PasswordField(label=_('Пароль (знову)'))
+
+    class Meta:
+        fieldsets = [
+                ('main', {'fields': ['email', 'last_name', 'first_name', 'info', 'facebook', 'twitter', 'linkedin', 'goodreads', ], 'legend': 'main', }),
+                ('password', {'fields': ['password1', 'password2'], 'legend': 'password', }),
+                ]
+
 
