@@ -29,8 +29,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <!-- Custom Fonts -->
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i&amp;subset=cyrillic-ext" rel="stylesheet">
 
 <!-- Plugin CSS -->
 <link href="{% static 'pbhouse/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
@@ -50,21 +50,25 @@
     <nav class="pull-left">
       <ul>
         <li>
-        <a href="#">Our History</a>
+        <a href="{% url 'pbhouse:landing' %}">{% trans "Головна" %}</a>
         </li>
         <li>
-        <a href="#">Blog</a>
+        <a href="#">{% trans "Наша Історія" %}</a>
         </li>
-
+        <li>
+        <a href="#">{% trans "Блог" %}</a>
+        </li>
       </ul>
     </nav>
       <div class="social-area pull-right">
         <a href="https://www.facebook.com/temporapub/" target="_blank" class="btn-social btn-facebook btn-simple">
           <i class="fa fa-2x fa-facebook-square"></i>
         </a>
+        <!--
         <a class="btn-social btn-twitter btn-simple">
           <i class="fa fa-2x fa-twitter"></i>
         </a>
+        -->
       </div>
     <div class="copyright">
       2017 <a href="https://github.com/biletboh" target="_blank">#bb</a>       </div>

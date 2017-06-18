@@ -8,23 +8,25 @@
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
       </button>
-      <a class="navbar-brand page-scroll" href="{% url 'pbhouse:landing' %}">Tempora</a>
+      <a class="navbar-brand page-scroll" href="{% url 'pbhouse:landing' %}">Темпора</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+        <!--
         <li>
-        <a class="page-scroll" href="#about">Blog</a>
+        <a class="page-scroll" href="#about">{% trans "Блог" %}</a>
         </li>
         <li>
-        <a class="page-scroll" href="#services">Projects</a>
+        <a class="page-scroll" href="#services">{% trans "Проекти" %}</a>
         </li>
         <li>
-        <a class="page-scroll" href="#portfolio">Books</a>
+        <a class="page-scroll" href="#">{% trans "Книги" %}</a>
         </li>
+        -->
         <li>
-        <a class="page-scroll" href="#contact">Contact</a>
+          <a class="page-scroll" href="#contact">{% trans "Контакти" %}</a>
         </li>
         <li>
           <a class="page-scroll" href="{% url 'account_login' %}">{% trans 'Увійти' %}</a>
@@ -35,5 +37,3 @@
   </div>
   <!-- /.container-fluid -->
 </nav>
-
-

@@ -11,10 +11,9 @@
 <header>
   <div class="header-content">
     <div class="header-content-inner">
-      <h1 id="homeHeading">Tempora aptari decet</h1>
+      <h1 id="homeHeading">{% trans "Видавничий дім Темпора" %}</h1>
       <br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="#about" class="btn btn-default btn-xl page-scroll">Find Out More</a>
+      <p>{% trans "Видавничий дім «Темпора» — це передовсім простір для вільного обміну думками й смислами. Нашою цінністю є відкритий діалог з активним читачем, який не лише приймає культурний продукт, а й бере участь у його творенні й популяризації." %}</p>
     </div>
   </div>
 </header>
@@ -23,9 +22,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center">
-        <h2 class="section-heading">Publishing house desciption</h2>
+        <h2 class="section-heading">{% trans "Про нас" %}</h2>
         <hr class="light">
-        <p class="text-faded">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text-faded">{% trans "Видавництво Темпора було засноване 2001 року й спочакту спеціалізувалося на історичній літературі й мемуаристиці. Зараз до сфери наших зацікавлень входять сучасна українська й зарубіжна проза, постмодерна література, художній репортаж, різнотематичний нон-фікшн і науково-популярні книжки." %}</p>
+        <!--<a href="" class="btn btn-default btn-xl page-scroll">Find Out More</a> -->
       </div>
     </div>
   </div>
@@ -241,26 +241,13 @@
 <aside class="clients bg-sections">
   <div class="container">
     <div class="row">
+      {% if parnters %}
       <div class="col-md-3 col-sm-6">
         <a href="#">
           <img src="{% static 'pbhouse/img/litakcent.png' %}" class="img-responsive img-centered" alt="">
         </a>
       </div>
-      <div class="col-md-3 col-sm-6">
-        <a href="#">
-          <img src="{% static 'pbhouse/img/ye2_logo.png' %}" class="img-responsive img-centered" alt="">
-        </a>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <a href="#">
-          <img src="{% static 'pbhouse/img/litakcent.png' %}" class="img-responsive img-centered" alt="">
-        </a>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <a href="#">
-          <img src="{% static 'pbhouse/img/litakcent.png' %}" class="img-responsive img-centered" alt="">
-        </a>
-      </div>
+      {% endif %}
     </div>
   </div>
 </aside>
@@ -270,10 +257,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center">
-        <h2 class="section-heading">Let's Get In Touch!</h2>
+        <h2 class="section-heading">{% trans "На зв’язку!" %}</h2>
         <hr class="primary">
-        <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
-
+        <p>{% trans "Ми постійно шукаємо нових авторів, перекладачів, коректорів — усіх, хто готовий долучитися до творення української культури. Тож «Темпора» відкрита до співпраці. Подзвоніть нам чи напишіть листа — і ми обов’язково вийдемо на контакт." %}</p>
         <ul class="list-inline contact-details">
           <li>
           <i class="fa fa-envelope-o fa-2x sr-contact"></i>
@@ -285,14 +271,16 @@
         </p>
         <ul class="list-inline banner-social-buttons">
           <li>
+          <a href="https://www.facebook.com/temporapub/" class="btn btn-primary btn-lg" target="_blank"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+          </li>
+          <!--
+          <li>
           <a href="" class="btn btn-primary btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
           </li>
-          <li>
-          <a href="https://www.facebook.com/temporapub/" class="btn btn-primary btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
-          </li>
-          <li>
+                    <li>
           <a href="" class="btn btn-primary btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
           </li>
+          -->
         </ul>
       </div>
     </div>
@@ -304,7 +292,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2>Mail Us</h2>
+        <h2>Напишіть нам!</h2>
         <br>
       </div>
     </div>
@@ -315,29 +303,29 @@
         <form name="sentMessage" id="contactForm" novalidate>
           <div class="row control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label for="name">Name</label>
-              <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+              <label for="name">{% trans "Ім’я" %}</label>
+              <input type="text" class="form-control" placeholder="{% trans "Ім’я" %}" id="name" required data-validation-required-message="{% trans "Будь ласка, уведіть ваше ім’я." %}">
               <p class="help-block text-danger"></p>
             </div>
           </div>
           <div class="row control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label for="email">Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+              <label for="email">{% trans "Електронна скринька" %}</label>
+              <input type="email" class="form-control" placeholder="{% trans "Емейл" %}" id="email" required data-validation-required-message="{% trans "Будь ласка, уведіть ваш емайл." %}">
               <p class="help-block text-danger"></p>
             </div>
           </div>
           <div class="row control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label for="phone">Phone Number</label>
-              <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+              <label for="phone">{% trans "Номер телефону" %}</label>
+              <input type="tel" class="form-control" placeholder="{% trans "Телефон" %}" id="phone" required data-validation-required-message="{% trans "Будь ласка, уведіть номер вашого телефону." %}">
               <p class="help-block text-danger"></p>
             </div>
           </div>
           <div class="row control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label for="message">Message</label>
-              <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+              <label for="message">{% trans "Повідомлення" %}</label>
+              <textarea rows="5" class="form-control" placeholder="{% trans "Повідомлення" %}" id="message" required data-validation-required-message="{% trans "Будь ласка, уведіть повідомлення." %}"></textarea>
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -345,7 +333,7 @@
           <div id="success"></div>
           <div class="row">
             <div class="form-group col-xs-12">
-              <button type="submit" class="btn btn-primary btn-lg">Send</button>
+              <button type="submit" class="btn btn-primary btn-lg">{% trans "Надіслати" %}</button>
             </div>
           </div>
         </form>
@@ -359,9 +347,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center">
-        <h2 class="section-heading">Our Address</h2>
+        <h2 class="section-heading">{% trans "Наша Адреса" %}</h2>
         <hr class="primary">
-        <p>Ukraine, 01030, Kyiv, Bohdana Khmelnytskoho Street 32, Office 4</p>
+        <p>{% trans "Україна, 01030, Київ, Богдана Хмельницького 32, Офіс 4" %}</p>
       </div>
     </div>
     <div class="row">
@@ -373,4 +361,3 @@
 </section>
 
 {% endblock %}
-
