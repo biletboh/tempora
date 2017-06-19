@@ -186,8 +186,8 @@ AUTH_USER_MODEL = 'users.UserProfile'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'test.credotrade@gmail.com'
-EMAIL_HOST_PASSWORD = 'nosorog999'
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'tempora.publ.house@gmail.com'
+EMAIL_HOST_PASSWORD = 'TemporaFiliaVeritas'
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Tempora'
 
 LOGIN_REDIRECT_URL = '/dashboard'

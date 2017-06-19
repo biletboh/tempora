@@ -139,34 +139,22 @@
             <li role="presentation" class="dropdown">
             <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-envelope-o"></i>
-              <span class="badge bg-green">6</span>
+              <span class="badge bg-green">{{ messages|length}}</span>
             </a>
+            {% if messages %}
             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+              {% for message in messages %}
               <li>
-              <a>
-                <span class="image"><img src="{% static 'pbhouse/img/dima.jpg' %}" alt="Profile Image" /></span>
-                <span>
-                  <span>{{ user.first_name }} {{ user.last_name }}</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
+              {% if message.tags %} 
+              <span class="message text-danger">{{ message.tags }}: </span>
+              {% endif %}
+              <span class="message">
+                {{ message }}
+              </span>
               </li>
-              <li>
-              <a>
-                <span class="image"><img src="{% static 'pbhouse/img/dima.jpg' %}" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-              </li>
+              {% endfor %}
             </ul>
+            {% endif %}
             </li>
           </ul>
         </nav>
@@ -176,23 +164,36 @@
 
     <!-- page content -->
     <div class="right_col" role="main">
-      {% block content %}
-      {% endblock %}
-      <!-- top tiles -->
-      <!-- /top tiles -->
+      <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>{{ title }}</small></h2>
+              <div class="clearfix"></div>
+            </div>
 
+            {% block content %}
+            {% endblock %}
+
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- /page content -->
 
-    <!-- footer content -->
-    <footer>
-      <div class="pull-right">
-        Tempora</a>
-      </div>
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
   </div>
 </div>
+  <!-- footer content -->
+  <footer>
+    <div class="pull-right">
+      Tempora</a>
+  </div>
+  <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+
 
 <!-- jQuery -->
 <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
