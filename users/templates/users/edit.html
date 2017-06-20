@@ -10,7 +10,7 @@
 {% load tz %}
 
 <!-- Edit form -->
-<form action="" id="edit-form" name="create-form" enctype="multipart/form-data" method="post">
+<form action="" id="edit-form" name="edit-form" enctype="multipart/form-data" method="post">
   {% csrf_token %}
   <div class="row">
     <div class="col-md-12">
@@ -57,6 +57,14 @@
   <div id="test">
   </div>
 </form>
-<!-- end of the edit form -->
+<!-- End of the edit form -->
+
+<!-- Image upload -->
+{% include 'pbhouse/upload_template.html' %}
+<script type="text/javascript">
+$(function() {
+    initUploadFields($('#edit-form'));
+    });
+</script>
 
 {% endblock %}

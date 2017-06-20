@@ -2,13 +2,14 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
+from django_file_form.forms import FileFormMixin, UploadedFileField
 from form_utils import forms as betterforms
 from allauth.account.forms import PasswordVerificationMixin, PasswordField
 
 from users.models import UserProfile
 
 
-class BaseUserProfileForm(betterforms.BetterForm):
+class BaseUserProfileForm(FileFormMixin, betterforms.BetterForm):
     """
     Provide Base Form for UserProfile.
     """
@@ -32,6 +33,11 @@ class BaseUserProfileForm(betterforms.BetterForm):
     goodreads = forms.CharField(
                             label=_('Goodreads'), max_length=200,
                             required=False,)
+    avatar = UploadedFileField(label=_('Світлина'), required=False)
+    form_id = forms.CharField(widget=forms.HiddenInput(), required=False)
+    upload_url = forms.CharField(widget=forms.HiddenInput(), required=False)
+    delete_url = forms.CharField(widget=forms.HiddenInput(), required=False)
+
  
     def clean_password2(self):
         cleaned_data = super(BaseUserProfileForm, self).clean()
@@ -67,12 +73,23 @@ class UserManagementForm(BaseUserProfileForm):
     
     class Meta:
         fieldsets = [
-                ('main', {'fields': ['email', 'last_name', 'first_name', 'info', 'facebook', 'twitter', 'linkedin', 'goodreads', ], 'legend': 'main', }),
-                ('privileges', {'fields': ['is_staff', 'is_active', 'team', 'authors', 'bloggers'], 'legend': 'privileges', }),
-                ('password', {'fields': ['password1', 'password2'], 'legend': 'password', }),
+                ('main', {'fields': [
+                                'email', 'last_name', 'first_name', 'info',
+                                'facebook', 'twitter', 'linkedin', 
+                                'goodreads',
+                                ], 'legend': 'main', }),
+                ('privileges', {'fields': [
+                                        'is_staff', 'is_active', 'team',
+                                        'authors', 'bloggers'
+                                        ], 'legend': 'privileges', }),
+                ('password', {
+                            'fields': ['password1', 'password2'],
+                            'legend': 'password', }),
+                ('avatar', {'fields': [
+                                    'avatar', 'form_id', 'upload_url',
+                                    'delete_url'
+                                    ], 'legend': 'password', }),
                 ]
-
-
 
 
 class UserCreateForm(UserManagementForm):
@@ -99,13 +116,22 @@ class ProfileUpdateForm(BaseUserProfileForm):
     with optional password update.
     """
     
-    password1 = PasswordField(label=_('Пароль'))
-    password2 = PasswordField(label=_('Пароль (знову)'))
+    password1 = PasswordField(label=_('Пароль'), required=False)
+    password2 = PasswordField(label=_('Пароль (знову)'), required=False)
 
     class Meta:
         fieldsets = [
-                ('main', {'fields': ['email', 'last_name', 'first_name', 'info', 'facebook', 'twitter', 'linkedin', 'goodreads', ], 'legend': 'main', }),
-                ('password', {'fields': ['password1', 'password2'], 'legend': 'password', }),
+                ('main', {'fields': [
+                                'email', 'last_name', 'first_name', 'info',
+                                'facebook', 'twitter', 'linkedin',
+                                'goodreads',
+                                ], 'legend': 'main', }),
+                ('password', {
+                            'fields': ['password1', 'password2'],
+                            'legend': 'password', }),
+                ('avatar', {'fields': [
+                                    'avatar', 'form_id', 'upload_url',
+                                    'delete_url'
+                                    ], 'legend': 'password', }),
                 ]
-
 

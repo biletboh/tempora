@@ -176,6 +176,11 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
             self.set_user_group(form, user, 'Team')
             self.set_user_group(form, user, 'Authors')
             self.set_user_group(form, user, 'Bloggers')
+
+        # set avatar
+        avatar = form.cleaned_data['avatar']
+        if avatar: 
+            user.avatar = avatar
             
         # set user password
         password = form.cleaned_data['password1'] 
@@ -184,6 +189,9 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
 
         # save user updates
         user.save()
+        
+        # delete temporary files
+        form.delete_temporary_files()
 
         return super(UpdateUser, self).form_valid(form)
 

@@ -22,6 +22,19 @@
 <!-- Theme CSS -->
 <link href="{% static 'pbhouse/css/dashboard.css' %}" rel="stylesheet">
 
+<!-- jQuery -->
+<script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- File Uploader -->
+<script src="{% static 'ajaxuploader/js/fileuploader.js' %}"></script>
+<script src="{% static 'file_form/file_form.js' %}"></script>
+
+<!-- File Uploader Css -->
+<link rel="stylesheet" href="{% static 'ajaxuploader/css/fileuploader.css' %}">
+
 </head>
 
 <body class="nav-md">
@@ -38,7 +51,9 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
           <div class="profile_pic">
-            <img src="{% static 'pbhouse/img/dima.jpg' %}" alt="..." class="img-circle profile_img">
+            {% if user.avatar %}
+            <img src="{{ user.avatar.extra_small.url }}" alt="{% trans "Світлина користувача" %}" class="img-circle profile_img">
+            {% endif %}
           </div>
           <div class="profile_info">
             <span>Welcome,</span>
@@ -120,7 +135,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="">
             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="{% static 'pbhouse/img/dima.jpg' %}" alt="">{{ user.email }}
+              <img src="{{ user.avatar.extra_small.url }}" alt="">{{ user.email }}
               <span class=" fa fa-angle-down"></span>
             </a>
             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -193,13 +208,6 @@
   <div class="clearfix"></div>
 </footer>
 <!-- /footer content -->
-
-
-<!-- jQuery -->
-<script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="{% static 'pbhouse/js/dashboard.js' %}"></script>
