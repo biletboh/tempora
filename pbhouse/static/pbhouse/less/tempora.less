@@ -22,6 +22,11 @@ hr.light {
     border-color: white;
 }
 
+.separator {
+    border-top: 1px solid #D8D8D8;
+    margin: 10px 0;
+}
+
 a {
     .transition-all;
     color: @theme-primary;
@@ -42,9 +47,12 @@ h6 {
 }
 
 p {
-    font-size: 16px;
+    font-size: 12pt;
     line-height: 1.5;
     margin-bottom: 20px;
+    .text-helper {
+        font-size: 10pt;
+    }
 }
 
 .bg-primary {
@@ -69,6 +77,12 @@ section {
     padding: 100px 0;
     &.page {
         padding: 50px 25px;
+    }
+    &.login {
+        padding: 100px 50px;
+        background-image: url('../img/open-book.jpg');
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -395,6 +409,55 @@ header {
 .btn-xl {
     padding: 15px 30px;
 }
+
+// Form Styles
+.form-custom {
+    margin: 20px 0;
+    border: 1px solid #c8c8c8;
+    border-radius: 0;
+    background: @orange-light;
+    &:focus {
+    border: 0;
+    background: lighten(@orange-light, 10%);
+    box-shadow: inset 0 2px 2px rgba(0,0,0,.075),0 0 8px rgb(214,105,41);
+    }
+}
+
+.form-group-custom {
+    margin: 20px 0;
+}
+
+// Box Styles
+.box {
+    background-color: @theme-primary;
+    color: #FFF;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 350px;
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+    h1 {
+        font-size: 18pt;
+        font-weight: 700;
+    }
+    a {
+        color: @orange-dim;
+        &:hover   {
+            color: lighten(@orange-dim, 10%);
+        }
+    }
+    .btn-primary {
+        background: @orange-dim;
+        color: lighten(@orange-dim, 30%);
+        font-weight: 700;
+        font-size: 11pt;
+        border: none;
+        &:hover {
+            background: lighten(@orange-dim, 10%);
+            color: #FFF;
+            border: none;
+        }
+    }
+} 
 
 //
 .floating-label-form-group {

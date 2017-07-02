@@ -12,20 +12,17 @@ class SignupForm(forms.Form):
     """
     Render Custom SignupForm.
     """
-
-    first_name = forms.CharField(max_length=40, label=_('First Name'))
-    last_name = forms.CharField(max_length=40, label=_('Last Name'))
-#    info = forms.CharField(label=_('Tell about yourself'), max_length=200)
-#    facebook = forms.CharField(label=_('Facebook'), max_length=200)
-#    twitter = forms.CharField(label=_('Twitter'), max_length=200)
-#    linkedin = forms.CharField(label=_('Linkedin'), max_length=200)
+    fn_attrs = {'placeholder': _('Ім’я')}     
+    ln_attrs = {'placeholder': _('Прізвище')}     
+    first_name = forms.CharField(
+                            max_length=40, label=_('Ім’я'),
+                            widget=forms.TextInput(attrs=fn_attrs))
+    last_name = forms.CharField(
+                            max_length=40, label=_('Прізвище'),
+                            widget=forms.TextInput(attrs=ln_attrs))
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
-#        user.info = self.cleaned_data['info']
-#        user.facebook = self.cleaned_data['facebook']
-#        user.twitter = self.cleaned_data['twitter']
-#        user.linkedin = self.cleaned_data['linkedin']
         user.save()
 

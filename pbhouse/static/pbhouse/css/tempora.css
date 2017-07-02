@@ -14,6 +14,10 @@ hr {
 hr.light {
   border-color: white;
 }
+.separator {
+  border-top: 1px solid #D8D8D8;
+  margin: 10px 0;
+}
 a {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
@@ -34,9 +38,12 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 p {
-  font-size: 16px;
+  font-size: 12pt;
   line-height: 1.5;
   margin-bottom: 20px;
+}
+p .text-helper {
+  font-size: 10pt;
 }
 .bg-primary {
   background-color: #A3112A;
@@ -57,6 +64,12 @@ section {
 }
 section.page {
   padding: 50px 25px;
+}
+section.login {
+  padding: 100px 50px;
+  background-image: url('../img/open-book.jpg');
+  width: 100%;
+  height: 100%;
 }
 aside.clients img {
   margin: 50px auto;
@@ -367,6 +380,50 @@ header .header-content .header-content-inner p {
 }
 .btn-xl {
   padding: 15px 30px;
+}
+.form-custom {
+  margin: 20px 0;
+  border: 1px solid #c8c8c8;
+  border-radius: 0;
+  background: #FFD1AA;
+}
+.form-custom:focus {
+  border: 0;
+  background: #ffeddd;
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.075), 0 0 8px #d66929;
+}
+.form-group-custom {
+  margin: 20px 0;
+}
+.box {
+  background-color: #A3112A;
+  color: #FFF;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 350px;
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+}
+.box h1 {
+  font-size: 18pt;
+  font-weight: 700;
+}
+.box a {
+  color: #D66929;
+}
+.box a:hover {
+  color: #de8754;
+}
+.box .btn-primary {
+  background: #D66929;
+  color: #efc3a9;
+  font-weight: 700;
+  font-size: 11pt;
+  border: none;
+}
+.box .btn-primary:hover {
+  background: #de8754;
+  color: #FFF;
+  border: none;
 }
 .floating-label-form-group {
   position: relative;
