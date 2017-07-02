@@ -7,7 +7,6 @@
 
 {% block content %}
 
-
 {% include "pbhouse/navbar.html" %}
 
 <section class="login">
@@ -32,7 +31,7 @@
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
-      <div class="form-group-custom margin-top text-center">
+      <div class="form-group-custom text-center">
         <ul class="list-inline">
           <li>
           <button class="btn btn-primary" type="submit">{% trans "Зареєструватись" %}</button>
