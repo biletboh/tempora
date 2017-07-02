@@ -1,35 +1,36 @@
 {% extends "pbhouse/dashboard.html" %}
 
-{% block content %}
+{% load i18n %}
 {% load static %}
 {% load widget_tweaks %}
+
+{% block head_title %}{% trans "Профіль" %}{% endblock %}
+{% block page_title %}{% trans "Профіль" %}{% endblock %}
+
+{% block content %}
 
 <!-- Profile content -->
 <div class="x_content">
   <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-    <div class="profile_img">
-      <div id="crop-avatar">
-        <!-- Current avatar -->
-        <img class="img-responsive avatar-view" src="/static/images/picture.jpg" alt="Avatar" title="Change the avatar">
-      </div>
-    </div>
-    <h3>Samuel Doe</h3>
-
+    
     <ul class="list-unstyled user_data">
-      <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
-      </li>
-
       <li>
-      <i class="fa fa-briefcase user-profile-icon"></i> Software Engineer
+      <div class="profile_img">
+        <!-- Current avatar -->
+        {% if user.avatar %}
+        <img src="{{ user.avatar.big_avatar.url }}" alt="{% trans "Світлина користувача" %}" class="img-circle">
+        {% endif %}
+      </div>
       </li>
-
-      <li class="m-top-xs">
-      <i class="fa fa-external-link user-profile-icon"></i>
-      <a href="http://www.kimlabs.com/profile/" target="_blank">www.kimlabs.com</a>
+      <li>
+      <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+      </li>
+      <li>
+      <i class="fa fa-briefcase user-profile-icon"></i> {{ user.info }} 
       </li>
     </ul>
 
-    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+    <a href="{% url 'users:edit' user.pk %}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>{% trans "Оновити" %}</a>
     <br />
 
   </div>
@@ -40,10 +41,6 @@
         <h2>User Activity Report</h2>
       </div>
       <div class="col-md-6">
-        <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-          <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-        </div>
       </div>
     </div>
     <!-- start of user-activity-graph -->

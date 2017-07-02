@@ -57,7 +57,7 @@ class CreateUser(
         twitter = form.cleaned_data['twitter'] 
         linkedin = form.cleaned_data['linkedin'] 
         goodreads = form.cleaned_data['goodreads'] 
-        #avatar = form.cleaned_data['avatar'] 
+        avatar = form.cleaned_data['avatar'] 
         password = form.cleaned_data['password1'] 
         team = form.cleaned_data['team'] 
         authors = form.cleaned_data['authors'] 
@@ -68,7 +68,7 @@ class CreateUser(
                                         last_name=last_name, is_staff=is_staff,
                                         is_active=is_active, facebook=facebook,
                                         twitter=twitter, linkedin=linkedin,
-                                        goodreads=goodreads,# avatar=avatar
+                                        goodreads=goodreads, avatar=avatar
                                         )
         user.set_password(password)
         user.groups.add(team)

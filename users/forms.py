@@ -99,6 +99,26 @@ class UserCreateForm(UserManagementForm):
     
     password1 = PasswordField(label=_('Пароль'), required=True)
     password2 = PasswordField(label=_('Пароль (знову)'), required=True)
+    
+    class Meta:
+        fieldsets = [
+                ('main', {'fields': [
+                                'email', 'last_name', 'first_name', 'info',
+                                'facebook', 'twitter', 'linkedin', 
+                                'goodreads',
+                                ], 'legend': 'main', }),
+                ('privileges', {'fields': [
+                                        'is_staff', 'is_active', 'team',
+                                        'authors', 'bloggers'
+                                        ], 'legend': 'privileges', }),
+                ('password', {
+                            'fields': ['password1', 'password2'],
+                            'legend': 'password', }),
+                ('avatar', {'fields': [
+                                    'avatar', 'upload_url',
+                                    'form_id', 'delete_url'
+                                    ], 'legend': 'password', }),
+                ]
 
 
 class UserUpdateForm(UserManagementForm):
