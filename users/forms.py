@@ -22,17 +22,21 @@ class BaseUserProfileForm(FileFormMixin, betterforms.BetterForm):
                         widget=forms.Textarea,
                         required=False,)
     facebook = forms.CharField(
-                            label=_('Facebook'), max_length=200,
+                            label=_('Facebook'), max_length=128,
                             required=False,)
     twitter = forms.CharField(
-                            label=_('Twitter'), max_length=200,
+                            label=_('Twitter'), max_length=128,
                             required=False,)
     linkedin = forms.CharField(
-                            label=_('Linkedin'), max_length=200,
+                            label=_('Linkedin'), max_length=128,
                             required=False,)
     goodreads = forms.CharField(
-                            label=_('Goodreads'), max_length=200,
+                            label=_('Goodreads'), max_length=128,
                             required=False,)
+    position = forms.CharField(
+                            label=_('Посада'), max_length=128,
+                            required=False,)
+
     avatar = UploadedFileField(label=_('Світлина'), required=False)
     form_id = forms.CharField(widget=forms.HiddenInput(), required=False)
     upload_url = forms.CharField(widget=forms.HiddenInput(), required=False)
@@ -74,9 +78,9 @@ class UserManagementForm(BaseUserProfileForm):
     class Meta:
         fieldsets = [
                 ('main', {'fields': [
-                                'email', 'last_name', 'first_name', 'info',
-                                'facebook', 'twitter', 'linkedin', 
-                                'goodreads',
+                                'email', 'last_name', 'first_name',
+                                'position', 'info', 'facebook', 'twitter',
+                                'linkedin', 'goodreads',
                                 ], 'legend': 'main', }),
                 ('privileges', {'fields': [
                                         'is_staff', 'is_active', 'team',
@@ -100,26 +104,6 @@ class UserCreateForm(UserManagementForm):
     password1 = PasswordField(label=_('Пароль'), required=True)
     password2 = PasswordField(label=_('Пароль (знову)'), required=True)
     
-    class Meta:
-        fieldsets = [
-                ('main', {'fields': [
-                                'email', 'last_name', 'first_name', 'info',
-                                'facebook', 'twitter', 'linkedin', 
-                                'goodreads',
-                                ], 'legend': 'main', }),
-                ('privileges', {'fields': [
-                                        'is_staff', 'is_active', 'team',
-                                        'authors', 'bloggers'
-                                        ], 'legend': 'privileges', }),
-                ('password', {
-                            'fields': ['password1', 'password2'],
-                            'legend': 'password', }),
-                ('avatar', {'fields': [
-                                    'avatar', 'upload_url',
-                                    'form_id', 'delete_url'
-                                    ], 'legend': 'password', }),
-                ]
-
 
 class UserUpdateForm(UserManagementForm):
     """

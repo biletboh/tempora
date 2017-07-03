@@ -51,6 +51,8 @@ class CreateUser(
         email = form.cleaned_data['email'] 
         first_name = form.cleaned_data['first_name'] 
         last_name = form.cleaned_data['last_name'] 
+        position = form.cleaned_data['position'] 
+        info = form.cleaned_data['info'] 
         is_staff = form.cleaned_data['is_staff'] 
         is_active = form.cleaned_data['is_active'] 
         facebook = form.cleaned_data['facebook'] 
@@ -65,7 +67,8 @@ class CreateUser(
 
         user = UserProfile.objects.create(
                                         email=email, first_name=first_name,
-                                        last_name=last_name, is_staff=is_staff,
+                                        last_name=last_name, position=position,
+                                        is_staff=is_staff,
                                         is_active=is_active, facebook=facebook,
                                         twitter=twitter, linkedin=linkedin,
                                         goodreads=goodreads, avatar=avatar
@@ -111,6 +114,7 @@ class DisplayUser(DetailView):
                 'email': self.object.email,
                 'first_name': self.object.first_name,
                 'last_name': self.object.last_name,
+                'position': self.object.position,
                 'info': self.object.info,
                 'facebook': self.object.facebook,
                 'twitter': self.object.twitter,
@@ -136,6 +140,7 @@ class DisplayUser(DetailView):
             del initial['team']
             del initial['authors']
             del initial['bloggers']
+            del initial['position']
             return ProfileUpdateForm(initial=initial)
 
 
@@ -159,6 +164,7 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
         user.email = form.cleaned_data['email'] 
         user.first_name = form.cleaned_data['first_name'] 
         user.last_name = form.cleaned_data['last_name'] 
+        user.position = form.cleaned_data['position'] 
         user.is_staff = form.cleaned_data['is_staff'] 
         user.is_active = form.cleaned_data['is_active'] 
         user.info = form.cleaned_data['info'] 
