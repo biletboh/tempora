@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View, DetailView, CreateView, DeleteView,\
         TemplateView
+from users.models import UserProfile as UserProfileModel
 
 
 class LandingPage(TemplateView):
@@ -13,10 +14,18 @@ class LandingPage(TemplateView):
 
 
 class UserProfile(TemplateView):
-    template_name='pbhouse/dashboard.html'
+    template_name='users/profile.html'
+
+
+class Team(TemplateView):
+    """
+    Render Team page.
+    """
+
+    template_name='pbhouse/team.html'
 
     def get_context_data(self, **kwargs):
-        context = super(UserProfile, self).get_context_data(**kwargs)
-        context['title'] = "UserProfile"
+        context = super(Team, self).get_context_data(**kwargs)
+        context['team'] = UserProfileModel.objects.all()
         return context
 
