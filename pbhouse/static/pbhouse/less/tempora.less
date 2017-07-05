@@ -83,6 +83,10 @@ section {
         background-image: url('../img/open-book.jpg');
         width: 100%;
         height: 100%;
+        @media (max-width: 767px){
+            padding: 75px 15px 50px;
+            height: auto;
+        }
     }
 }
 
@@ -546,15 +550,17 @@ body {
 }
 
 .footer {
-  background-color: lighten(@orange-light, 10%);
-  line-height: 20px;
-}
-
-.footer nav > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
+    background-color: lighten(@orange-light, 10%);
+    line-height: 20px;
+    @media(max-width: 767px) {
+           text-align: center;
+    }
+    nav > ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+    }
 }
 
 .footer nav > ul a:not(.btn) {
@@ -619,8 +625,11 @@ body {
 }
 
 .footer:not(.footer-big) nav > ul li {
-  margin-left: 20px;
-  float: left;
+    margin-left: 20px;
+    float: left;
+    @media (max-width: 767px) {
+        float: none !important;
+    }
 }
 
 .footer:not(.footer-big) nav > ul a {
@@ -630,4 +639,10 @@ body {
 
 .footer-default {
   background-color: whitesmoke;
+}
+
+@media (max-width: 767px){
+    .footer nav.pull-left, .footer:not(.footer-big) nav > ul li, .pull-right {
+        float: none !important;
+    }
 }

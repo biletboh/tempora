@@ -71,6 +71,12 @@ section.login {
   width: 100%;
   height: 100%;
 }
+@media (max-width: 767px) {
+  section.login {
+    padding: 75px 15px 50px;
+    height: auto;
+  }
+}
 aside.clients img {
   margin: 50px auto;
 }
@@ -499,6 +505,11 @@ body {
   background-color: #ffeddd;
   line-height: 20px;
 }
+@media (max-width: 767px) {
+  .footer {
+    text-align: center;
+  }
+}
 .footer nav > ul {
   list-style: none;
   margin: 0;
@@ -560,10 +571,22 @@ body {
   margin-left: 20px;
   float: left;
 }
+@media (max-width: 767px) {
+  .footer:not(.footer-big) nav > ul li {
+    float: none !important;
+  }
+}
 .footer:not(.footer-big) nav > ul a {
   padding: 10px 0px;
   margin: 15px 10px 15px 0px;
 }
 .footer-default {
   background-color: whitesmoke;
+}
+@media (max-width: 767px) {
+  .footer nav.pull-left,
+  .footer:not(.footer-big) nav > ul li,
+  .pull-right {
+    float: none !important;
+  }
 }
