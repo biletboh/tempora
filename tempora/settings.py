@@ -18,11 +18,11 @@ conf.read(os.path.join(BASE_DIR, 'settings.ini'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = conf.get(
-                    'archapp', 'secret',
+                    'tempora', 'secret',
                     fallback='8ze8kfn8@c!jat$*wryy+u@2^+1@ln27t5fql54qfq$2x$ac8x')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = conf.getboolean('archapp', 'debug', fallback = True)
+DEBUG = conf.getboolean('tempora', 'debug', fallback = True)
 
 ALLOWED_HOSTS = ['*']
 
