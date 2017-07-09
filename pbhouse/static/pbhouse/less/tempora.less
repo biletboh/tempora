@@ -390,7 +390,7 @@ header {
     padding-left:0;
 }
 
-// Button Styes
+// Button Styles
 
 .btn {
     text-transform: uppercase;
@@ -412,6 +412,20 @@ header {
 
 .btn-xl {
     padding: 15px 30px;
+}
+
+#top.btn {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    bottom: 75px;
+    left: 30px;
+    background: lighten(@orange-dim, 15%);
+    border-color: lighten(@orange-dim, 15%);
+    &:hover {
+        background: @orange-dim;
+        border-color: @orange-dim;
+    }
 }
 
 // Form Styles

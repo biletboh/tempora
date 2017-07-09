@@ -3,7 +3,7 @@
 {% load static %}
 {% load widget_tweaks %}
 
-{% block head_title %}{% trans "Видавництво Темпора" %}{% endblock %}
+{% block head_title %}{% trans "Видавництво «Темпора»" %}{% endblock %}
 
 {% block content %}
 
@@ -12,11 +12,13 @@
 <header>
   <div class="header-content">
     <div class="header-content-inner">
-      <h1 id="homeHeading">{% trans "Видавничий дім Темпора" %}</h1>
+      <h1 id="homeHeading">{% trans "Видавничий дім «Темпора»" %}</h1>
       <br>
       <p>{% trans "Видавничий дім «Темпора» — це передовсім простір для вільного обміну думками й смислами. Нашою цінністю є відкритий діалог з активним читачем, який не лише приймає культурний продукт, а й бере участь у його творенні й популяризації." %}</p>
     </div>
   </div>
+
+  <button id="top" type="button" class="btn btn-primary btn-top btn-lg" data-spy="affix"><i class="fa fa-2x fa-angle-double-up" aria-hidden="true"></i></button>
 </header>
 
 <section class="bg-primary" id="about">
@@ -25,7 +27,7 @@
       <div class="col-lg-8 col-lg-offset-2 text-center">
         <h2 class="section-heading">{% trans "Про нас" %}</h2>
         <hr class="light">
-        <p class="">{% trans "Видавництво Темпора було засноване 2001 року й спочакту спеціалізувалося на історичній літературі й мемуаристиці. Зараз до сфери наших зацікавлень входять сучасна українська й зарубіжна проза, постмодерна література, художній репортаж, різнотематичний нон-фікшн і науково-популярні книжки." %}</p>
+        <p class="">{% trans "Видавництво «Темпора» було засноване 2001 року й спочакту спеціалізувалося на історичній літературі й мемуаристиці. Зараз до сфери наших зацікавлень входять сучасна українська й зарубіжна проза, постмодерна література, художній репортаж, різнотематичний нон-фікшн і науково-популярні книжки." %}</p>
         <!--<a href="" class="btn btn-default btn-xl page-scroll">Find Out More</a> -->
       </div>
     </div>

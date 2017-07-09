@@ -2,13 +2,11 @@ $(function() {
   // Submit form
   $('#contactForm').on('submit', function(event){
     event.preventDefault();
-    console.log("form submitted!")  // check
     send_message();
   });
 
   // Ajax for posting 
   function send_message() {
-    console.log("send_message is working!"); // check
     var name = $('#id_name').val();
     var email = $('#id_email').val();
     var phone = $('#id_phone').val();
@@ -38,7 +36,6 @@ $(function() {
         $('#id_message').val(''); // remove the value from the input
         $('#message').html("<div class='alert bg-success'>Повідомлення надіслано!"+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"); // add success message 
 
-        console.log("success"); // another sanity check
       },
       // handle a non-successful response
       //error : function(jqXHR,errmsg,err) {
@@ -48,7 +45,6 @@ $(function() {
           jQuery.each(jsonResponse, function(key, value) { 
             $("#message").append("<div class='alert alert-danger'>"+value+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
           });
-          console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
       }
     });
   };
@@ -101,7 +97,3 @@ $(function() {
   });
 });
 
-// When clicking on Full hide fail/success boxes
-//$('#name').focus(function() {
- //   $('#success').html('');
-//});

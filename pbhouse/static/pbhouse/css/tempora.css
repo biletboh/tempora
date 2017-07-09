@@ -387,6 +387,19 @@ header .header-content .header-content-inner p {
 .btn-xl {
   padding: 15px 30px;
 }
+#top.btn {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  bottom: 75px;
+  left: 30px;
+  background: #e29669;
+  border-color: #e29669;
+}
+#top.btn:hover {
+  background: #D66929;
+  border-color: #D66929;
+}
 .form-custom {
   margin: 20px 0;
   border: 1px solid #c8c8c8;
