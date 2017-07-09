@@ -9,6 +9,7 @@ from django.views.generic import View, DetailView, CreateView, DeleteView,\
         TemplateView, FormView
 
 from pbhouse.forms import ContactForm
+from pbhouse.utils import send_contact_message
 from users.models import UserProfile as UserProfileModel
 
 
@@ -54,7 +55,7 @@ class LandingPage(SuccessMessageMixin, AjaxableResponseMixin, FormView):
         email = form.cleaned_data['email'] 
         phone = form.cleaned_data['phone'] 
         message = form.cleaned_data['message'] 
-        print(name, email, phone, message)
+        send_contact_message(name, email, phone, message)
 
         return super(LandingPage, self).form_valid(form)
 

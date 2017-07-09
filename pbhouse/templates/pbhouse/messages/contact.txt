@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}Ім’я: {{ name }}. Емайл: {{email}}. Телефон: {{ phone }}. Повідомленя: {{ message }}.{% endblocktrans %}
