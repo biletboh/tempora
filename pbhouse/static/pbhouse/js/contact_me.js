@@ -1,73 +1,107 @@
 $(function() {
+  // Submit form
+  $('#contactForm').on('submit', function(event){
+    event.preventDefault();
+    console.log("form submitted!")  // check
+    send_message();
+  });
 
-    $("#contactForm input,#contactForm textarea").jqBootstrapValidation({
-        preventSubmit: true,
-        submitError: function($form, event, errors) {
-            // additional error messages or events
-        },
-        submitSuccess: function($form, event) {
-            // Prevent spam click and default submit behaviour
-            $("#btnSubmit").attr("disabled", true);
-            event.preventDefault();
-            
-            // get values from FORM
-            var name = $("input#name").val();
-            var email = $("input#email").val();
-            var phone = $("input#phone").val();
-            var message = $("textarea#message").val();
-            var firstName = name; // For Success/Failure Message
-            // Check for white space in name for Success/Fail message
-            if (firstName.indexOf(' ') >= 0) {
-                firstName = name.split(' ').slice(0, -1).join(' ');
-            }
-            $.ajax({
-                url: "././mail/contact_me.php",
-                type: "POST",
-                data: {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    message: message
-                },
-                cache: false,
-                success: function() {
-                    // Enable button & show success message
-                    $("#btnSubmit").attr("disabled", false);
-                    $('#success').html("<div class='alert alert-success'>");
-                    $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                        .append("</button>");
-                    $('#success > .alert-success')
-                        .append("<strong>Your message has been sent. </strong>");
-                    $('#success > .alert-success')
-                        .append('</div>');
+  // Ajax for posting 
+  function send_message() {
+    console.log("send_message is working!"); // check
+    var name = $('#id_name').val();
+    var email = $('#id_email').val();
+    var phone = $('#id_phone').val();
+    var message = $('#id_message').val();
 
-                    //clear all fields
-                    $('#contactForm').trigger("reset");
-                },
-                error: function() {
-                    // Fail message
-                    $('#success').html("<div class='alert alert-danger'>");
-                    $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                        .append("</button>");
-                    $('#success > .alert-danger').append("<strong>Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!");
-                    $('#success > .alert-danger').append('</div>');
-                    //clear all fields
-                    $('#contactForm').trigger("reset");
-                },
-            });
-        },
-        filter: function() {
-            return $(this).is(":visible");
-        },
+    var formData = new FormData();
+    
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('message', message);
+
+    console.log(formData)
+    $.ajax({
+      url : window.location.href, // the endpoint
+      type : "POST", // http method
+      data : formData, // data sent with the post request
+
+      processData: false,  // tell jQuery not to process the data
+      contentType: false,
+
+      // handle a successful response
+      success : function(json) {
+        $('#id_name').val(''); // remove the value from the input
+        $('#id_email').val(''); // remove the value from the input
+        $('#id_phone').val(''); // remove the value from the input
+        $('#id_message').val(''); // remove the value from the input
+        $('#message').html("<div class='alert bg-success'>Повідомлення надіслано!"+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"); // add success message 
+
+        console.log("success"); // another sanity check
+      },
+      // handle a non-successful response
+      //error : function(jqXHR,errmsg,err) {
+      error : function(xhr,textStatus,errorThrown) {
+          var data = xhr.responseText;
+          var jsonResponse = JSON.parse(data);
+          jQuery.each(jsonResponse, function(key, value) { 
+            $("#message").append("<div class='alert alert-danger'>"+value+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+          });
+          console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+      }
     });
+  };
 
-    $("a[data-toggle=\"tab\"]").click(function(e) {
-        e.preventDefault();
-        $(this).tab("show");
-    });
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  var csrftoken = getCookie('csrftoken');
+
+  function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+
+  function sameOrigin(url) {
+    // test that a given url is a same-origin URL
+    // url could be relative or scheme relative or absolute
+    var host = document.location.host; // host + port
+    var protocol = document.location.protocol;
+    var sr_origin = '//' + host;
+    var origin = protocol + sr_origin;
+    // Allow absolute or scheme relative URLs to same origin
+    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+      (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+      // or any other URL that isn't scheme relative or absolute i.e relative.
+      !(/^(\/\/|http:|https:).*/.test(url));
+  }
+
+    $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+        // Send the token to same-origin, relative URLs only.
+        // Send the token only if the method warrants CSRF protection
+        // Using the CSRFToken value acquired earlier
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
+    }
+  });
 });
 
 // When clicking on Full hide fail/success boxes
-$('#name').focus(function() {
-    $('#success').html('');
-});
+//$('#name').focus(function() {
+ //   $('#success').html('');
+//});

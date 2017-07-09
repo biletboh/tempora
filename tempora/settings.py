@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'el_pagination',
     'datetimewidget',
+    'phonenumber_field',
 ]
 
 
