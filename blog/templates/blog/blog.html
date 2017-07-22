@@ -1,0 +1,48 @@
+{% extends "pbhouse/base.html" %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block head_title %}{% trans "Блог" %}{% endblock %}
+
+{% block content %}
+
+{% include "pbhouse/navbar.html" %}
+
+<header class="blog-header" style="">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="section-heading text-center">{% trans "Блог" %}</h1>
+        <hr class="grey"> 
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <!-- Start of endless pagination -->
+        <div class="endless_page_template">
+
+          {% include "blog/post_list.html" %}
+
+          {% block js %}
+          {{ block.super }}
+          <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+          <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+          <script>$.endlessPaginate({paginateOnScroll: true});</script>
+          {% endblock %}
+
+        </div>
+        <!-- End of endless pagination -->
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

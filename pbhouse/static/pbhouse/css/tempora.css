@@ -14,6 +14,11 @@ hr {
 hr.light {
   border-color: white;
 }
+hr.grey {
+  border-color: darkgray;
+  border-width: 1px;
+  max-width: 100%;
+}
 .separator {
   border-top: 1px solid #D8D8D8;
   margin: 10px 0;
@@ -61,6 +66,9 @@ p .text-helper {
 }
 section {
   padding: 100px 0;
+}
+section.content {
+  padding: 10px;
 }
 section.page {
   padding: 50px 25px;
@@ -184,6 +192,12 @@ header {
   background-image: url('../img/header.jpg');
   text-align: center;
   color: white;
+}
+header.blog-header {
+  padding: 100px 0 10px 0;
+  color: #333333;
+  min-height: 50px;
+  background-image: none;
 }
 header .header-content {
   position: relative;
@@ -601,5 +615,45 @@ body {
   .footer:not(.footer-big) nav > ul li,
   .pull-right {
     float: none !important;
+  }
+}
+.post-preview {
+  display: flex;
+  justify-content: flex-start;
+}
+.post-preview .post-img {
+  margin: 0 25px;
+}
+.post-preview > .post-preview-text > a {
+  color: #333333;
+}
+.post-preview > .post-preview-text > a:hover,
+.post-preview > .post-preview-text > a:focus {
+  text-decoration: none;
+  color: #A3112A;
+}
+.post-preview > .post-preview-text > a > .post-preview-text > .post-title {
+  font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.post-preview > .post-preview-text > .post-meta {
+  color: #777777;
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 0;
+}
+.post-preview > .post-preview-text > .post-meta > .post-preview-text > a {
+  text-decoration: none;
+  color: #333333;
+}
+.post-preview > .post-preview-text > .post-meta > .post-preview-text > a:hover,
+.post-preview > .post-preview-text > .post-meta > .post-preview-text > a:focus {
+  color: #A3112A;
+  text-decoration: underline;
+}
+@media only screen and (min-width: 768px) {
+  .post-preview > .post-preview-text > a > .post-title {
+    font-size: 36px;
   }
 }

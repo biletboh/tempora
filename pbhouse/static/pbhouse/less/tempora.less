@@ -13,13 +13,17 @@ body {
 }
 
 hr {
+    &.light {
+    border-color: white;
+    }
+    &.grey {
+    border-color: darkgray;
+    border-width: 1px;
+    max-width: 100%;
+    }
     border-color: @theme-primary;
     border-width: 3px;
     max-width: 600px;
-}
-
-hr.light {
-    border-color: white;
 }
 
 .separator {
@@ -75,6 +79,9 @@ p {
 
 section {
     padding: 100px 0;
+    &.content {
+        padding: 10px;
+    }
     &.page {
         padding: 50px 25px;
     }
@@ -193,6 +200,12 @@ aside.clients {
 // Homepage Header
 
 header {
+    &.blog-header {
+        padding: 100px 0 10px 0;
+        color: rgb(51,51,51); 
+        min-height: 50px;
+        background-image: none;
+    }
     position: relative;
     width: 100%;
     min-height: auto;
@@ -252,6 +265,8 @@ header {
         }
     }
 }
+
+
 
 // Sections
 
@@ -660,3 +675,51 @@ body {
         float: none !important;
     }
 }
+
+// Post Preview Pages
+
+.post-preview {
+  display: flex;
+  justify-content: flex-start;
+  .post-img {
+     margin: 0 25px;
+  }
+	> .post-preview-text > a {
+		color: @gray-dark;
+		&:hover,
+		&:focus {
+			text-decoration: none;
+			color: @theme-primary;
+		}
+		> .post-preview-text > .post-title {
+			font-size: 30px;
+			margin-top: 30px;
+			margin-bottom: 10px;
+		}
+	}
+	> .post-preview-text > .post-meta {
+		color: @gray-light;
+		font-size: 18px;
+		font-style: italic;
+		margin-top: 0;
+	> .post-preview-text > a {
+		
+			text-decoration: none;
+			color: @gray-dark;
+			&:hover,
+			&:focus {
+				color: @theme-primary;
+				text-decoration: underline;
+			}
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		> .post-preview-text > a {
+			> .post-title {
+				font-size: 36px;
+			}
+		}
+	}
+}
+
+

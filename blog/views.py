@@ -48,7 +48,8 @@ class CreatePost(SuccessMessageMixin, FormView):
         post = Post(
                 title=form.cleaned_data['title'],
                 body=form.cleaned_data['body'],
-                image=form.cleaned_data['image'])
+                image=form.cleaned_data['image'],
+                user=self.request.user)
         post.save()
         form.delete_temporary_files()
         return super(CreatePost, self).form_valid(form)

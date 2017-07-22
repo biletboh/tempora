@@ -207,6 +207,7 @@ THUMBNAIL_ALIASES = {
         'extra_small': {'size':(45, 45), 'crop': True},
         'small': {'size':(60, 60), 'crop': True},
         'big_avatar': {'size': (150, 150), 'crop': True},
+        'preview': {'size': (250, 200), 'crop': True},
         'medium': {'size': (750, 450), 'crop': True},
         'large': {'size': (800, 550), 'crop': True},
         'extra_large': {'size': (1200, 600), 'crop': True},
