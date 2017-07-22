@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     # custom apps 
     'pbhouse.apps.PbhouseConfig',
     'users.apps.UsersConfig',
-#    'blog.apps.BlogConfig',
+    'blog.apps.BlogConfig',
     
     # filebrowser and tinymce apps
     'grappelli',

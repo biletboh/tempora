@@ -35,6 +35,9 @@
 <!-- File Uploader Css -->
 <link rel="stylesheet" href="{% static 'ajaxuploader/css/fileuploader.css' %}">
 
+<!-- Form Media -->
+{{ form.media }}
+
 </head>
 
 <body class="nav-md">
@@ -99,7 +102,7 @@
             <ul class="nav side-menu">
               <li><a><i class="fa fa-pencil"></i> Blog <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="">Create Post</a></li>
+                <li><a href="{% url 'blog:create' %}">Create Post</a></li>
               </ul>
               </li>
             </ul>
