@@ -1,0 +1,28 @@
+{% extends "pbhouse/base.html" %}
+
+{% block content %}
+{% load static %}
+{% load thumbnail %}
+
+<!-- Post page -->
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="intro-text text-center">
+        <strong>{{ object.title }}</strong>
+      </h1>
+    </div>
+    <div class="col-md-12">
+      <img class="img-responsive" src="{{ object.image.large.url }}" alt="{{ object.image.name }}">
+    </div>
+    <div class="col-md-12">
+      <div class=""> 
+        {{ object.body|safe }} 
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "pbhouse/dashboard.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Редагувати пост" %}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+      {% include "pbhouse/form.html" with title="Edit User Profile" %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

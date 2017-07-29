@@ -1,0 +1,48 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load tz %}
+
+<form action="" id="base-form" name="{{ form_id }}-form" class="" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+    <h4 class="card-title">{{ title }}</h4>
+  <div class="content">
+    {% render_field form.object_id value=object.id %}
+
+    {% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
+    {% for fieldset in form.fieldsets %}
+    {% if fieldset.description %}
+    <p class="description">{{ fieldset.description }}</p>
+    {% endif %}
+
+    {% for field in fieldset %}
+    {% if field.is_hidden %}
+    {{ field }}
+    {% else %}
+    <div class="row">
+      <label class="col-sm-2 label-on-left">{{ field.label }}</label>
+      <div class="col-sm-10">
+        <div class="form-group">
+          {% render_field field class+="form-control" %}
+          {{ field.errors }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    <div class="row">
+      <div class="col-md-6">
+        <input class="btn btn-default" type="submit" value="{% trans 'Submit' %}" />
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Image upload -->
+{% include 'pbhouse/upload_template.html' %}
+<script type="text/javascript">
+$(function() {
+    initUploadFields($('#base-form'));
+    });
+</script>
