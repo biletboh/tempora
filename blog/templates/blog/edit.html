@@ -5,12 +5,13 @@
 {% load i18n %}
 
 {% block head_title %}{% trans "Редагувати пост" %}{% endblock %}
+{% block page_title %}{% trans "Редагувати пост" %}{% endblock %}
 
 {% block content %}
 
 <div class="row">
   <div class="col-md-12">
-      {% include "pbhouse/form.html" with title="Edit User Profile" %}
+      {% include "pbhouse/form.html" %}
     </div>
   </div>
 </div>

@@ -2236,6 +2236,9 @@ select.parsley-error {
     background: #FAEDEC;
     border: 1px solid #E85445
 }
+.flat {
+  display: none;
+}
 .btn-group .parsley-errors-list {
     display: none
 }

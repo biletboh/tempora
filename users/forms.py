@@ -61,19 +61,24 @@ class UserManagementForm(BaseUserProfileForm):
     
     is_staff = forms.BooleanField(
                                 label=_('Редактор(ка)'), required=False, 
-                                initial=False)
+                                initial=False,
+                                widget=forms.CheckboxInput(attrs={'class':'flat'}))
     is_active = forms.BooleanField(
                                 label=_('Активний'), required=False,
-                                initial=False)
+                                initial=False,
+                                widget=forms.CheckboxInput(attrs={'class':'flat'}))
     team = forms.BooleanField(
                             label=_('Співробітник(ця)'), required=False,
-                                initial=False)
+                                initial=False,
+                                widget=forms.CheckboxInput(attrs={'class':'flat'}))
     authors = forms.BooleanField(
                             label=_('Автор(к)а'), required=False,
-                            initial=False)
+                            initial=False,
+                            widget=forms.CheckboxInput(attrs={'class':'flat'}))
     bloggers = forms.BooleanField(
                             label=_('Блогер(ка)'), required=False,
-                            initial=False)
+                            initial=False,
+                            widget=forms.CheckboxInput(attrs={'class':'flat'}))
     
     class Meta:
         fieldsets = [
