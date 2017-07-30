@@ -42,7 +42,7 @@ class CreatePost(SuccessMessageMixin, FormView):
 
     form_class = PostForm 
     template_name = 'blog/create.html'
-    success_url = reverse_lazy('blog:blog')
+    success_url = reverse_lazy('blog:edit_list')
     #login_url = reverse_lazy('blog:blog') 
     success_message = "A post was created successfully"
 

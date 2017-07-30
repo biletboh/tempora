@@ -15,9 +15,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li>
+        <a class="page-scroll" href="{% url 'blog:blog' %}">{% trans 'Блог' %}</a>
+        </li>
+        <li>
         <a class="page-scroll" href="{% url 'pbhouse:team' %}">{% trans 'Команда' %}</a>
         </li>
-
         <li>
         <a class="page-scroll" href="{% url 'pbhouse:landing' %}#contact">{% trans 'Контакти' %}</a>
         </li>

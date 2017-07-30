@@ -4322,3 +4322,8 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     height: 300px !important;
   }
 }
+
+/* Pagination */
+.pagination {
+  display: block;
+}
