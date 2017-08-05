@@ -7,12 +7,12 @@ from django.utils import timezone
 
 
 class PostForm(FileFormMixin, betterforms.BetterForm):
-    title = forms.CharField(label="name", max_length=200)
+    title = forms.CharField(label="Назва", max_length=200)
     body = forms.CharField(
-                        label="body",
+                        label="Текст",
                         widget=TinyMCE(attrs={'cols': 80, 'rows': 50}), 
                         required=False)
-    image = UploadedFileField(label="image", required = False)
+    image = UploadedFileField(label="Світлина", required = False)
     form_id = forms.CharField(widget = forms.HiddenInput(), required = False)
     upload_url = forms.CharField(widget = forms.HiddenInput(), required = False)
     delete_url = forms.CharField(widget = forms.HiddenInput(), required = False)
