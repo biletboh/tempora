@@ -73,6 +73,6 @@ class Team(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Team, self).get_context_data(**kwargs)
-        context['team'] = UserProfileModel.objects.all()
+        context['team'] = UserProfileModel.objects.filter(groups__name='Team')
         return context
 
