@@ -84,7 +84,11 @@ class UserManagementForm(BaseUserProfileForm):
         fieldsets = [
                 ('main', {'fields': [
                                 'email', 'last_name', 'first_name',
-                                'position', 'info', 'facebook', 'twitter',
+                                'position', 
+                                ], 'legend': 'main', }),
+                ('info', {'fields': ['info'], 'legend': 'main', }),
+                ('social', {'fields': [
+                                'facebook', 'twitter',
                                 'linkedin', 'goodreads',
                                 ], 'legend': 'main', }),
                 ('privileges', {'fields': [
