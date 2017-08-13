@@ -1,10 +1,9 @@
-from django.shortcuts import render
-from django.views.generic import View, DetailView, FormView, TemplateView,\
-        DeleteView, ListView 
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import View, DetailView, FormView, TemplateView,\
+        DeleteView, ListView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 
 from el_pagination.views import AjaxListView
@@ -77,7 +76,6 @@ class DisplayPost(DetailView):
         context['form'] = PostForm(initial=initial)
         return context
 
-
 class UpdatePost(SuccessMessageMixin, SingleObjectMixin, FormView):
     """
     Update a Post.
@@ -117,7 +115,7 @@ class EditPost(LoginRequiredMixin, UserPassesTestMixin, View):
     """
     
     login_url = reverse_lazy('users:dashboard') 
-
+    
     def get(self, request, *args, **kwargs):
         view = DisplayPost.as_view()
         return view(request, *args, **kwargs)
