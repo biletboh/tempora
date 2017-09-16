@@ -12,17 +12,17 @@ from blog.models import Post
 from blog.forms import PostForm
 
 
-class PostList(AjaxListView):
+class PostList(ListView):
     """
     Render List of posts.
     """
 
+    model = Post
     context_object_name = "posts"
     template_name = 'blog/blog.html'
-    page_template = 'blog/post_list.html'
-
-    def get_queryset(self): 
-        return Post.objects.all()
+    #page_template = 'blog/post_list.html'
+    paginate_by = 10
+    queryset = Post.objects.all()
 
 
 class Page(DetailView):

@@ -25,21 +25,43 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-        <!-- Start of endless pagination -->
-        <div class="endless_page_template">
-
-          {% include "blog/post_list.html" %}
-
-          {% block js %}
-          {{ block.super }}
-          <script src="http://code.jquery.com/jquery-latest.js"></script>
-
-          <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
-          <script>$.endlessPaginate({paginateOnScroll: true});</script>
-          {% endblock %}
-
+        <!-- Start of pagination -->
+        {% for post in posts %}
+        <div class="post-preview">
+          <img class="post-img img-responsive" src="{{ post.image.preview.url }}" alt="{{ post.image.name }}">
+          <div class="post-preview-text">
+            <a href="{% url 'blog:page' post.id %}" class="">
+              <h2 class="post-title">{{ post.title }}</h2>
+            </a>
+            <p class="post-meta"><a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a> {{ post.pub_date }}</p>
+          </div>
         </div>
-        <!-- End of endless pagination -->
+        <hr class="grey">
+        {% endfor %}
+
+        {% if is_paginated %}
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+          <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+          {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+          {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+        {% endif %}
+
+        <!-- End of pagination -->
       </div>
     </div>
   </div>
