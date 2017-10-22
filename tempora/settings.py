@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'pbhouse.apps.PbhouseConfig',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
+    'tags.apps.TagsConfig',
     
     # filebrowser and tinymce apps
     'grappelli',

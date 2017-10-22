@@ -107,6 +107,12 @@
                 <li><a href="{% url 'blog:edit_list' %}">{% trans "Дивитися пости" %}</a></li>
               </ul>
               </li>
+              <li><a><i class="fa fa-pencil"></i> Tags <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{% url 'tags:create' %}">{% trans "Додати тег" %}</a></li>
+                <li><a href="">{% trans "Дивитися теги" %}</a></li>
+              </ul>
+              </li>
             </ul>
           </div>
           {% endif %}

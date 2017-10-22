@@ -19,7 +19,8 @@ urlpatterns = [
                             url(r'^', include('pbhouse.urls')),
                             url(r'^profiles/', include('users.urls')),
                             url(r'^accounts/', include('allauth.urls')),
-                            url(r'^blog/', include('blog.urls'))
+                            url(r'^blog/', include('blog.urls')),
+                            url(r'^tag/', include('tags.urls'))
                             )
 
 

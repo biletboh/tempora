@@ -4,6 +4,7 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from tinymce.models import HTMLField
 
 from users.models import UserProfile
+from tags.models import Tag
 
 
 class Post(models.Model):
@@ -12,6 +13,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField(default=timezone.datetime.now)
     image = ThumbnailerImageField(upload_to='photos/blog', blank=True) 
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    tag = models.ManyToManyField(Tag)
     
     class Meta:
         ordering = ('-pub_date',)

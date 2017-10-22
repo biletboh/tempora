@@ -34,7 +34,9 @@ class Page(DetailView):
     template_name = 'blog/page.html'
 
 
-class CreatePost(SuccessMessageMixin, FormView):
+class CreatePost(
+                SuccessMessageMixin, LoginRequiredMixin,
+                UserPassesTestMixin, FormView):
     """
     Create Posts.
     """
@@ -42,8 +44,8 @@ class CreatePost(SuccessMessageMixin, FormView):
     form_class = PostForm 
     template_name = 'blog/create.html'
     success_url = reverse_lazy('blog:edit_list')
-    #login_url = reverse_lazy('blog:blog') 
-    success_message = "A post was created successfully"
+    login_url = reverse_lazy('blog:dashboard')
+    success_message = _('Пост створено.')
 
     def form_valid(self, form):
         post = Post(
@@ -54,6 +56,13 @@ class CreatePost(SuccessMessageMixin, FormView):
         post.save()
         form.delete_temporary_files()
         return super(CreatePost, self).form_valid(form)
+
+    def test_func(self):
+        user = self.request.user.is_staff
+        if not user:
+            denied = _('У вас немає повноважень, щоб переглядати цю сторінку.')
+            messages.warning(self.request, denied)
+        return user
 
 
 class DisplayPost(DetailView):
@@ -165,7 +174,7 @@ class EditPostList(LoginRequiredMixin, UserPassesTestMixin, AjaxListView):
     def test_func(self):
         user = self.request.user.is_staff
         if not user:
-            denied = _('You have to be a moderator to access this page.')
+            denied = _('У вас немає повноважень, щоб переглядати цю сторінку.')
             messages.warning(self.request, denied)
         return user
 
