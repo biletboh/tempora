@@ -14,12 +14,9 @@
 <meta name="author" content="">
 
 <title>
-  {% if title %}
-  {{ title }}
-  {% else %}
   {% block head_title %}
+  {% trans "Видавництво Темпора" %}
   {% endblock %}
-  {% endif %}
 </title>
 
 <!-- Bootstrap Core CSS -->
@@ -36,14 +33,19 @@
 <link href="{% static 'pbhouse/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
 
 <!-- Theme CSS -->
-<link href="{% static 'pbhouse/css/tempora.css' %}" rel="stylesheet">
+<link href="{% static 'core/css/tempora.css' %}" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
 
-<!-- content -->
+<!-- Start navbar -->
+{% block navbar %}{% include "core/navbar.html" %}{% endblock %}
+<!-- End navbar -->
+
+<!-- Start Content -->
 {% block content %}{% endblock %}
+<!-- End content -->
 
 <footer class="footer">
   <div class="container">
@@ -87,7 +89,7 @@
 <script src="{% static 'pbhouse/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 
 <!-- Theme JavaScript -->
-<script src="{% static 'pbhouse/js/tempora.js' %}"></script>
+<script src="{% static 'core/js/tempora.js' %}"></script>
 
 <!-- Contact Form JavaScript -->
 <script src="{% static 'pbhouse/js/jqBootstrapValidation.js' %}"></script>

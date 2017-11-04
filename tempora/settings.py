@@ -31,9 +31,10 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     # custom apps 
+    'core.apps.CoreConfig',
     'pbhouse.apps.PbhouseConfig',
     'users.apps.UsersConfig',
-#    'blog.apps.BlogConfig',
+    'projects.apps.ProjectsConfig',
     
     # filebrowser and tinymce apps
     'grappelli',
