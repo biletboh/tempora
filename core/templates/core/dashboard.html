@@ -82,12 +82,18 @@
           </div>
           {% if user.is_superuser %}
           <div class="menu_section">
-            <h3>{% trans "Акаунти" %}</h3>
+            <h3>{% trans "Дії" %}</h3>
             <ul class="nav side-menu">
               <li><a><i class="fa fa-user"></i>{% trans "Користувачі" %}<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="{% url 'users:create' %}">{% trans "Додати" %} </a></li>
                 <li><a href="{% url 'users:edit_list' %}">{% trans "Модерувати" %}</a></li>
+              </ul>
+              </li>
+              <li><a><i class="fa fa-user"></i>{% trans "Проекти" %}<span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{% url 'projects:create' %}">{% trans "Додати" %} </a></li>
+                <li><a href="{% url 'projects:dashboard_projects' %}">{% trans "Модерувати" %}</a></li>
               </ul>
               </li>
             </ul>

@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'pbhouse.apps.PbhouseConfig',
     'users.apps.UsersConfig',
     'projects.apps.ProjectsConfig',
-    
+
     # filebrowser and tinymce apps
     'grappelli',
     'filebrowser',

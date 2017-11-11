@@ -150,7 +150,7 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
     """
 
     form_class = UserUpdateForm
-    model = UserProfile 
+    model = UserProfile
     success_message = _("A user was updated successfully")
     template_name = 'users/edit.html'
 
@@ -185,17 +185,17 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
 
         # set avatar
         avatar = form.cleaned_data['avatar']
-        if avatar: 
+        if avatar:
             user.avatar = avatar
-            
+
         # set user password
-        password = form.cleaned_data['password1'] 
+        password = form.cleaned_data['password1']
         if password:
             user.set_password(password)
 
         # save user updates
         user.save()
-        
+
         # delete temporary files
         form.delete_temporary_files()
 
@@ -206,7 +206,7 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
 
     def set_user_group(self, form, user, name):
         try:
-            group = Group.objects.get(name=name)            
+            group = Group.objects.get(name=name)
         except:
             raise Exception('Group does not exist.')
 
@@ -224,7 +224,7 @@ class EditUser(LoginRequiredMixin, UserPassesTestMixin, View):
     """
     Edit Users.
     """
-    
+
     login_url = reverse_lazy('users:dashboard')
 
     def get(self, request, *args, **kwargs):
@@ -242,10 +242,10 @@ class EditUser(LoginRequiredMixin, UserPassesTestMixin, View):
         denied = _('You have to be a superuser to access this page.')
 
         if super_user or (profile_user==access_user):
-            return True 
+            return True
 
         messages.warning(self.request, denied)
-        return False 
+        return False
 
 
 class DeleteUser(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -253,7 +253,7 @@ class DeleteUser(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     Delete a User.
     """
 
-    model = UserProfile 
+    model = UserProfile
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users:user_list')
     login_url = reverse_lazy('users:dashboard')
@@ -267,9 +267,7 @@ class DeleteUser(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 class EditUserList(LoginRequiredMixin, UserPassesTestMixin, AjaxListView):
-    """
-    Render a list of Users to edit with ajax endless pagination.
-    """
+    """Render a list of Users to edit with ajax endless pagination."""
 
     context_object_name = "users"
     template_name = 'users/user_list.html'

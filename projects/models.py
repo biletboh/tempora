@@ -15,7 +15,7 @@ class Project(models.Model):
                                     default=timezone.datetime.now)
     image = ThumbnailerImageField('Світлина',
                                   upload_to='photos/projects',
-                                  blank=True) 
+                                  blank=True)
     curators = models.ManyToManyField(UserProfile,
                                       related_name='projects')
     slug = models.SlugField('Посилання', unique=True, null=True)

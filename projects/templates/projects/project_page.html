@@ -9,22 +9,26 @@
 
 <div class="content">
 
-<!-- Start Projects Section -->
-<section id="projects">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2 class="section-heading">{% trans "Проекти" %}</h2>
-        <br>
-      </div>
-    </div>
-    <div class="row">
-    <!-- Here comes the content -->
+    <!-- Start Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">{{ object.title }}</h2>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                <!-- Here comes the content -->
 
-    </div>
-  </div>
-</section>
-<!-- End Projects Sections -->
+                {{ object.description }}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Projects Sections -->
 
 </div>
 

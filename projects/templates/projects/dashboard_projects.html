@@ -1,0 +1,90 @@
+{% extends "core/dashboard.html" %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block head_title %}{% trans "Список Проектів" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="x_content">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Назва</th>
+            <th>Дії</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for project in projects %}
+          <tr>
+            <th scope="row">{{ project.id }}</th>
+            <td>{{ project.title }}</td>
+            <td>
+              <a href="{% url 'projects:update' project.slug %}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Редагувати</a>
+              <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{{ project.id }}">
+                <i class="fa fa-trash-o"></i>{% trans "Видалити" %}
+              </button>
+            </td>
+          </tr>
+
+          <!-- Delete Modal -->
+          <div class="modal fade" id="{{ project.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Do you want to delete {{ project.title }}? </p> 
+                </div>
+                <div class="modal-footer">
+                  <form action="{% url 'projects:delete' project.slug %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="Yes" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<!-- Start of pagination -->
+{% if is_paginated %}
+<ul class="pagination">
+  {% if page_obj.has_previous %}
+  <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+  {% else %}
+  <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in paginator.page_range %}
+  {% if page_obj.number == i %}
+  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+  {% else %}
+  <li><a href="?page={{ i }}">{{ i }}</a></li>
+  {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+  <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+  {% else %}
+  <li class="disabled"><span>&raquo;</span></li>
+  {% endif %}
+</ul>
+{% endif %}
+<!-- End of pagination -->
+
+{% endblock %}
