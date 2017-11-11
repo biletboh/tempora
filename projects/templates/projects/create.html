@@ -9,51 +9,127 @@
 
 {% block content %}
 
-<form action="" name="create-form" id="create-form" enctype="multipart/form-data" method="post">
-  {% csrf_token %}
-  <div class="row">
-    <div class="col-md-12">
-      {% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
-      {% for fieldset in form.fieldsets %}
-      <fieldset class="form-group {{ fieldset.classes }}">
-        {% if fieldset.description %}
-        <p class="description">{{ fieldset.description }}</p>
-        {% endif %}
-        {% for field in fieldset %}
-        {% if field.is_hidden %}
-        {% render_field field class="form-field" %}
-        {% else %}
-        <div class="row">
-          <div class="col-md-2">
-            {{ field.label_tag }}
-          </div>
-          <div class="col-md-10">
-            {{ field|attr:"class:form-control" }}
-          </div>
+<form action="" name="create-form" id="create-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="row">
+        <div class="col-md-12">
+            {{ form.non_field_errors }}
         </div>
-        <div class="row">
-          <div class="col-md-10 col-md-offset-2">
-            {{ field.errors }}
-          </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.title.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.title|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.title.errors }}
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endif %}
-        {% endfor %}
-      </fieldset>
-      {% endfor %}
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <input class="btn btn-default" type="submit" value="Submit"/>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.short_descr.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.short_descr|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.short_descr.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.description.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.description|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.description.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">
+                        {{ form.slug.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        {{ form.slug|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.slug.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">
+                        {{ form.image.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        {{ form.image|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.image.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.curators.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.curators|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.curators.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input class="btn btn-default" type="submit" value="Submit"/>
+        </div>
+    </div>
 </form>
 
 <!-- Image upload -->
 {% include 'pbhouse/upload_template.html' %}
 <script type="text/javascript">
-$(function() {
-    initUploadFields($('#create-form'));
+    $(function() {
+        initUploadFields($('#create-form'));
     });
 </script>
 
