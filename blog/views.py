@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -26,25 +27,21 @@ class PostList(ListView):
 
 
 class Page(DetailView):
-    """
-    Render Post Page.
-    """
+    """Render Post Page."""
 
-    model = Post 
+    model = Post
     template_name = 'blog/page.html'
 
 
 class CreatePost(
                 SuccessMessageMixin, LoginRequiredMixin,
                 UserPassesTestMixin, FormView):
-    """
-    Create Posts.
-    """
+    """Create Posts."""
 
-    form_class = PostForm 
+    form_class = PostForm
     template_name = 'blog/create.html'
     success_url = reverse_lazy('blog:edit_list')
-    login_url = reverse_lazy('blog:dashboard')
+    login_url = reverse_lazy('users:dashboard')
     success_message = _('Пост створено.')
 
     def form_valid(self, form):
@@ -58,21 +55,21 @@ class CreatePost(
         return super(CreatePost, self).form_valid(form)
 
     def test_func(self):
-        user = self.request.user.is_staff
-        if not user:
+        staff = self.request.user.is_staff
+        super_user = self.request.user.is_superuser
+        if not (staff or super_user):
             denied = _('У вас немає повноважень, щоб переглядати цю сторінку.')
             messages.warning(self.request, denied)
-        return user
+            return False
+        return True
 
 
 class DisplayPost(DetailView):
-    """
-    Get Post for editting.
-    """
+    """Get Post for editting."""
 
-    model = Post 
+    model = Post
     template_name = 'blog/edit.html'
-    login_url = reverse_lazy('users:dashboard') 
+    login_url = reverse_lazy('users:dashboard')
 
     def get_context_data(self, **kwargs):
         context = super(DisplayPost, self).get_context_data(**kwargs)
@@ -85,28 +82,27 @@ class DisplayPost(DetailView):
         context['form'] = PostForm(initial=initial)
         return context
 
-class UpdatePost(SuccessMessageMixin, SingleObjectMixin, FormView):
-    """
-    Update a Post.
-    """
 
-    form_class = PostForm 
-    model = Post 
+class UpdatePost(SuccessMessageMixin, SingleObjectMixin, FormView):
+    """Update a Post."""
+
+    form_class = PostForm
+    model = Post
     success_message = _('Пост оновлено успішно.')
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super(UpdatePost, self).post(request, *args, **kwargs)
- 
+
     def form_valid(self, form):
         params = {'pk': self.object.pk}
         post = Post.objects.get(**params)
 
-        post.title= form.cleaned_data['title'] 
-        post.body = form.cleaned_data['body'] 
+        post.title= form.cleaned_data['title']
+        post.body = form.cleaned_data['body']
         image = form.cleaned_data['image']
 
-        if image: 
+        if image:
             post.image = image
         post.save()
 
@@ -119,12 +115,10 @@ class UpdatePost(SuccessMessageMixin, SingleObjectMixin, FormView):
 
 
 class EditPost(LoginRequiredMixin, UserPassesTestMixin, View):
-    """
-    Edit post.
-    """
-    
-    login_url = reverse_lazy('users:dashboard') 
-    
+    """Edit post."""
+
+    login_url = reverse_lazy('users:dashboard')
+
     def get(self, request, *args, **kwargs):
         view = DisplayPost.as_view()
         return view(request, *args, **kwargs)
@@ -132,7 +126,7 @@ class EditPost(LoginRequiredMixin, UserPassesTestMixin, View):
     def post(self, request, *args, **kwargs):
         view = UpdatePost.as_view()
         return view(request, *args, **kwargs)
-    
+
     def test_func(self):
         user = self.request.user.is_staff
         if not user:
@@ -146,7 +140,7 @@ class DeletePost(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     Delete Post.
     """
 
-    model = Post 
+    model = Post
     success_url = reverse_lazy('blog:edit_list')
     login_url = reverse_lazy('users:dashboard')
 
@@ -168,9 +162,9 @@ class EditPostList(LoginRequiredMixin, UserPassesTestMixin, AjaxListView):
     page_template = 'blog/posts.html'
     login_url = reverse_lazy('users:dashboard')
 
-    def get_queryset(self): 
+    def get_queryset(self):
         return Post.objects.all()
-    
+
     def test_func(self):
         user = self.request.user.is_staff
         if not user:

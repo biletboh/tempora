@@ -13,6 +13,11 @@ body {
 }
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper {
+  flex: 1 0 auto;
 }
 hr {
   border-color: #A3112A;
@@ -512,8 +517,8 @@ article p {
   display: none;
   position: fixed;
   z-index: 1;
-  bottom: 75px;
-  left: 30px;
+  bottom: 90px;
+  right: 30px;
   background: #e29669;
   border-color: #e29669;
 }

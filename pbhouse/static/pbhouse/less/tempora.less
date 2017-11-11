@@ -8,6 +8,11 @@ body {
 }
 body {
     .serif-font;
+    display: flex;
+    flex-direction: column;
+}
+.wrapper {
+    flex: 1 0 auto;
 }
 hr {
     &.light {
@@ -478,8 +483,8 @@ article {
     display: none;
     position: fixed;
     z-index: 1;
-    bottom: 75px;
-    left: 30px;
+    bottom: 90px;
+    right: 30px;
     background: lighten(@orange-dim, 15%);
     border-color: lighten(@orange-dim, 15%);
     &:hover {
