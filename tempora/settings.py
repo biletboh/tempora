@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
     'tags.apps.TagsConfig',
-    
+
     # filebrowser and tinymce apps
     'grappelli',
     'filebrowser',
@@ -184,7 +184,7 @@ AUTHENTICATION_BACKENDS = (
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False 
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
@@ -209,6 +209,8 @@ THUMBNAIL_ALIASES = {
         'small': {'size':(60, 60), 'crop': True},
         'big_avatar': {'size': (150, 150), 'crop': True},
         'preview': {'size': (250, 200), 'crop': True},
+        'blog_first': {'size': (960, 720), 'crop': True},
+        'blog_second': {'size': (400, 300), 'crop': True},
         'medium': {'size': (750, 450), 'crop': True},
         'large': {'size': (800, 450), 'crop': True},
         'extra_large': {'size': (1200, 600), 'crop': True},

@@ -704,6 +704,8 @@ body {
 .post-preview {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
     .post-img {
         margin: 0 25px;
     }
@@ -713,11 +715,12 @@ body {
             text-decoration: none;
             color: @theme-primary;
         }
-        > .post-preview-text > .post-title {
-            font-size: 30px;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
+    }
+    .post-preview-text .post-title {
+        font-size: 30pt;
+        font-weight: 700;
+        margin-top: 30px;
+        margin-bottom: 10px;
     }
     > .post-preview-text > .post-meta {
         color: @gray-light;
@@ -742,6 +745,10 @@ body {
         }
     }
 }
+.post-img-second {
+        display: flex;
+        justify-content: center;
+    }
 // Pagination
 .pagination {
     display: block;

@@ -15,33 +15,87 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="section-heading text-center">{% trans "Блог" %}</h1>
-                    <hr class="grey"> 
                 </div>
             </div>
         </div>
     </header>
 
     <section class="content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                <div class="col-lg-12 col-md-12">
                     <!-- Start of pagination -->
                     {% for post in posts %}
-                    <div class="post-preview">
-                        <div class="view view-first">
-                            <img class="post-img img-responsive" src="{{ post.image.preview.url }}" alt="{{ post.image.name }}">
-                            <div class="mask">
-                                <p>A cool description of some sort between these tags. I am so cool and awesomely awesome.</p>
-                                <a href="{% url 'blog:page' post.id %}" class="info">Read More</a>
+                    {% if forloop.first %}
+                    <div class="row post-preview">
+                        <div class="col-md-6">
+                            <div class="view view-first">
+                                <img class="post-img img-responsive" src="{{ post.image.blog_first.url }}" alt="{{ post.image.name }}">
+                                <div class="mask">
+                                    <p>A cool description of some sort between these tags. I am so cool and awesomely awesome.</p>
+                                    <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Read More</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="post-preview-text">
-                            <a href="{% url 'blog:page' post.id %}" class="">
-                                <h2 class="post-title">{{ post.title }}</h2>
-                            </a>
-                            <p class="post-meta"><a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a> {{ post.pub_date }}</p>
+                        <div class="col-md-6">
+                            <div class="post-preview-text">
+                                <a href="{% url 'blog:page' post.id %}" class="">
+                                    <h2 class="post-title">{{ post.title }}</h2>
+                                </a>
+                                <p class="post-meta">by <a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></p>
+                            </div>
                         </div>
                     </div>
+                    {% elif forloop.counter == 2 or forloop.counter == 3 or forloop.counter == 4 %} 
+                    {% if forloop.counter == 2 %}
+                    <div class="row">
+                    {% endif %}
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12 post-img-second">
+                                <div class="view view-first">
+                                    <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
+                                    <div class="mask">
+                                        <p>A cool description of some sort between these tags. I am so cool and awesomely awesome.</p>
+                                        <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="post-preview-text">
+                                    <a href="{% url 'blog:page' post.id %}" class="">
+                                        <h2 class="post-title">{{ post.title }}</h2>
+                                    </a>
+                                    <p class="post-meta">by <a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter == 4 %}
+                    </div>
+                    {% endif %}
+                    {% else %}
+                    <div class="row post-preview">
+                        <div class="col-md-6">
+                            <div class="view view-first">
+                                <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
+                                <div class="mask">
+                                    <p>A cool description of some sort between these tags. I am so cool and awesomely awesome.</p>
+                                    <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="post-preview-text">
+                                <a href="{% url 'blog:page' post.id %}" class="">
+                                    <h2 class="post-title">{{ post.title }}</h2>
+                                </a>
+                                <p class="post-meta">by <a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
                     {% endfor %}
 
                     {% if is_paginated %}
