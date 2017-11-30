@@ -14,13 +14,14 @@ urlpatterns = [
             url(r'^upload/', include('django_file_form.urls')),
             url(r'^tinymce/', include('tinymce.urls')),
             url(r'^admin/filebrowser/', include(site.urls)),
-            url(r'^grappelli/', include('grappelli.urls')), 
+            url(r'^grappelli/', include('grappelli.urls')),
             ] + i18n_patterns(
                             url(r'^', include('pbhouse.urls')),
                             url(r'^profiles/', include('users.urls')),
                             url(r'^accounts/', include('allauth.urls')),
                             url(r'^blog/', include('blog.urls')),
-                            url(r'^projects/', include('projects.urls'))
+                            url(r'^projects/', include('projects.urls')),
+                            url(r'^tag/', include('tags.urls'))
                             )
 
 

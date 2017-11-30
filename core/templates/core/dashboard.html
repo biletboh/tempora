@@ -97,14 +97,20 @@
             </ul>
           </div>
           {% endif %}
-          {% if user.is_staff %}
+          {% if user.is_staff or user.is_superuser %}
           <div class="menu_section">
-            <h3>Blog</h3>
+              <h3>{% trans "Блог" %}</h3>
             <ul class="nav side-menu">
-              <li><a><i class="fa fa-pencil"></i> Blog <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-pencil"></i>{% trans "Блог" %}<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="{% url 'blog:create' %}">{% trans "Додати пост" %}</a></li>
                 <li><a href="{% url 'blog:edit_list' %}">{% trans "Дивитися пости" %}</a></li>
+              </ul>
+              </li>
+              <li><a><i class="fa fa-pencil"></i> Tags <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{% url 'tags:create' %}">{% trans "Додати тег" %}</a></li>
+                <li><a href="">{% trans "Дивитися теги" %}</a></li>
               </ul>
               </li>
             </ul>

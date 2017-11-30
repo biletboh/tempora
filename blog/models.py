@@ -4,12 +4,14 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from tinymce.models import HTMLField
 
 from users.models import UserProfile
+from tags.models import Tag
 
 
 class Post(models.Model):
     """Store post data for a blog."""
 
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    tag = models.ManyToManyField(Tag)
     title = models.CharField('Заголовок', max_length=200)
     short_descr = HTMLField('Короткий опис', blank=True)
     body = HTMLField('Текст', blank=True)

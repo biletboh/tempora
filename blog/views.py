@@ -1,8 +1,7 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, FormView,\
-        DeleteView, ListView, UpdateView
+from django.views.generic import DetailView,\
+        DeleteView, ListView, UpdateView, CreateView
 
 from blog.models import Post
 from blog.forms import PostModelForm
@@ -25,17 +24,13 @@ class Page(DetailView):
     template_name = 'blog/page.html'
 
 
-class CreatePost(SuccessMessageMixin, FormView):
+class CreatePost(SuccessMessageMixin, CreateView):
     """Create Posts."""
 
     form_class = PostModelForm
     template_name = 'blog/create.html'
     success_url = reverse_lazy('blog:edit_list')
     success_message = "A post was created successfully"
-
-    def form_valid(self, form):
-        form.delete_temporary_files()
-        return super(CreatePost, self).form_valid(form)
 
     def get_form_kwargs(self):
         kwargs = super(CreatePost, self).get_form_kwargs()
@@ -58,7 +53,7 @@ class UpdatePost(UpdateView):
         return kwargs
 
 
-class DeletePost(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeletePost(DeleteView):
     """Delete Post."""
 
     model = Post
@@ -66,7 +61,7 @@ class DeletePost(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = reverse_lazy('users:dashboard')
 
 
-class EditPostList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class EditPostList(ListView):
     """Render a list of Posts to edit with ajax endless pagination."""
 
     context_object_name = "posts"

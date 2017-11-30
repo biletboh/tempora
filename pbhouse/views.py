@@ -54,14 +54,10 @@ class LandingPage(SuccessMessageMixin, AjaxableResponseMixin, FormView):
         name = form.cleaned_data['name'] 
         email = form.cleaned_data['email'] 
         phone = form.cleaned_data['phone'] 
-        message = form.cleaned_data['message'] 
+        message = form.cleaned_data['message']
         send_contact_message(name, email, phone, message)
 
         return super(LandingPage, self).form_valid(form)
-
-
-class UserProfile(TemplateView):
-    template_name='users/profile.html'
 
 
 class Team(TemplateView):
