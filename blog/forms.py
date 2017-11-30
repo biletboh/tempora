@@ -1,30 +1,33 @@
 from django import forms
-from django_file_form.forms import FileFormMixin, UploadedFileField
-from form_utils import forms as betterforms
+from django_file_form.forms import UploadedFileField
 from tinymce.widgets import TinyMCE
-from django.forms.widgets import HiddenInput
-from django.utils import timezone
+
+from core.mixins import CustomFileFormMixin
+from blog.models import Post
 
 
-class PostForm(FileFormMixin, betterforms.BetterForm):
-    title = forms.CharField(label="Назва", max_length=200)
-    body = forms.CharField(
-                        label="Текст",
-                        widget=TinyMCE(attrs={'cols': 80, 'rows': 50}), 
-                        required=False)
-    image = UploadedFileField(label="Світлина", required = False)
-    form_id = forms.CharField(widget = forms.HiddenInput(), required = False)
-    upload_url = forms.CharField(widget = forms.HiddenInput(), required = False)
-    delete_url = forms.CharField(widget = forms.HiddenInput(), required = False)
+class PostModelForm(CustomFileFormMixin, forms.ModelForm):
+    """Render Post model form."""
+
+    image = UploadedFileField(label='Світлина', required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super(PostModelForm, self).__init__(*args, **kwargs)
 
     class Meta:
-        fieldsets = [
-                ('main', {'fields': ['title',], 'legend': 'main', }),
-                ('text-area', {'fields': ['body'], 'legend': 'text-area'}),
-                ('images', {
-                        'fields': [
-                                    'image', 'form_id', 'upload_url', 
-                                    'delete_url'],
-                        'legend': 'images'}),
-                ]
+        model = Post
+        fields = ('title', 'body', 'short_descr', 'slug')
+        widgets = {
+            'short_descr': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'description': TinyMCE(attrs={'cols': 80, 'rows': 50}),
+        }
 
+    def save(self, commit=True):
+        instance = super(PostModelForm, self)\
+                .save(commit=False)
+        instance.user = self.user
+
+        if commit:
+            instance.save()
+        return instance
