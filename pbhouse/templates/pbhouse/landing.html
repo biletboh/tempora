@@ -1,13 +1,13 @@
-{% extends "pbhouse/base.html" %}
+{% extends "core/base.html" %}
 {% load i18n %}
 {% load static %}
 {% load widget_tweaks %}
 
 {% block head_title %}{% trans "Видавництво «Темпора»" %}{% endblock %}
 
-{% block content %}
+{% block navbar %}{% include "pbhouse/navbar_landing.html" %}{% endblock %}
 
-{% include "pbhouse/navbar_landing.html" %}
+{% block content %}
 
 <header class="landing">
   <div class="header-content">

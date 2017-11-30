@@ -1,4 +1,4 @@
-{% extends "pbhouse/base.html" %}
+{% extends "core/base.html" %}
 
 {% load i18n %}
 {% load widget_tweaks %}
@@ -7,43 +7,43 @@
 
 {% block content %}
 
-{% include "pbhouse/navbar.html" %}
+<div class="content">
 
-<section class="login">
-
-  <div class="box">
-
-    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-      <div class="form-group-custom">
-        <h1 class="text-center text-uppercase">{% trans "Sign Up" %}</h1>
-        {% csrf_token %}
-        {% for field in form %}
-        {{ field|attr:"class:form-control form-custom"}}
-        {{ field.errors }}
-        {% endfor %}
-        {% if form.errors %}
-        <div class="text-danger">
-          {% trans "Your username or password didn't match. Please try again." %}
+  <!-- Start Signup Section -->
+  <section class="login">
+    <div class="box">
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        <div class="form-group-custom">
+          <h1 class="text-center text-uppercase">{% trans "Sign Up" %}</h1>
+          {% csrf_token %}
+          {% for field in form %}
+          {{ field|attr:"class:form-control form-custom"}}
+          {{ field.errors }}
+          {% endfor %}
+          {% if form.errors %}
+          <div class="text-danger">
+            {% trans "Your username or password didn't match. Please try again." %}
+          </div>
+          {% endif %}
         </div>
+
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-      </div>
+        <div class="form-group-custom text-center">
+          <ul class="list-inline">
+            <li>
+            <button class="btn btn-primary" type="submit">{% trans "Зареєструватись" %}</button>
+            </li>
+          </ul>
+        </div>
+      </form>
+      <div class="separator"> </div>
+      <p class="text-helper">{% blocktrans %}Уже зареєстровані? Будь ласка, <a href="{{ login_url }}">увійдіть</a>.{% endblocktrans %}</p>
+    </div>
+  </section>
+  <!-- End Signup Section -->
 
-      {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-      {% endif %}
-      <div class="form-group-custom text-center">
-        <ul class="list-inline">
-          <li>
-          <button class="btn btn-primary" type="submit">{% trans "Зареєструватись" %}</button>
-          </li>
-        </ul>
-      </div>
-
-    </form>
-
-    <div class="separator"> </div>
-    <p class="text-helper">{% blocktrans %}Уже зареєстровані? Будь ласка, <a href="{{ login_url }}">увійдіть</a>.{% endblocktrans %}</p>
-  </div>
-</section>
+</div>
 
 {% endblock %}
