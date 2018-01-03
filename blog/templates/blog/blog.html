@@ -1,20 +1,20 @@
-{% extends "pbhouse/base.html" %}
+{% extends "core/base.html" %}
 
 {% load i18n %}
 {% load widget_tweaks %}
 {% load static %}
 
-{% block head_title %}{% trans "Блог" %}{% endblock %}
+{% block head_title %}Блог Видавництва "Темпора"{% endblock %}
 
 {% block content %}
 
-{% include "pbhouse/navbar.html" %}
+{% include "core/navbar.html" %}
 <div class="wrapper">
     <header class="blog-header" style="">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="section-heading text-center">{% trans "Блог" %}</h1>
+                    <h1 class="section-heading text-center hidden">Блог Видавництва "Темпора"</h1>
                 </div>
             </div>
         </div>
@@ -32,8 +32,7 @@
                             <div class="view view-first">
                                 <img class="post-img img-responsive" src="{{ post.image.blog_first.url }}" alt="{{ post.image.name }}">
                                 <div class="mask">
-                                    <p>A cool description of some sort between these tags. I am so cool and awesomely awesome.</p>
-                                    <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Read More</a>
+                                    <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Читати</a>
                                 </div>
                             </div>
                         </div>
@@ -42,33 +41,40 @@
                                 <a href="{% url 'blog:page' post.id %}" class="">
                                     <h2 class="post-title">{{ post.title }}</h2>
                                 </a>
-                                <p class="post-meta">by <a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></p>
-                            </div>
+								<p>{{ post.short_descr }}</p>
+								<p class="post-meta">
+								<span class="meta"><a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></span>
+								<span class="meta">{{ post.pub_date }}</span>
+								</p>
+							</div>
                         </div>
                     </div>
                     {% elif forloop.counter == 2 or forloop.counter == 3 or forloop.counter == 4 %} 
                     {% if forloop.counter == 2 %}
-                    <div class="row">
+                    <div class="row post-preview-middle">
                     {% endif %}
                     <div class="col-md-4">
                         <div class="row">
-                            <div class="col-md-12 post-img-second">
+                            <div class="col-md-12 post-img-middle">
                                 <div class="view view-first">
                                     <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
                                     <div class="mask">
-                                        <p>A cool description of some sort between these tags. I am so cool and awesomely awesome.</p>
-                                        <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Read More</a>
+                                        <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Читати</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="post-preview-text">
                                     <a href="{% url 'blog:page' post.id %}" class="">
-                                        <h2 class="post-title">{{ post.title }}</h2>
-                                    </a>
-                                    <p class="post-meta">by <a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></p>
-                                </div>
-                            </div>
+                                        <h2 class="post-title middle">{{ post.title }}</h2>
+									</a>
+									<p>{{ post.short_descr }}</p>
+									<p class="post-meta">
+									<span class="meta"><a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></span>
+									<span class="meta">{{ post.pub_date }}</span>
+									</p>
+								</div>
+							</div>
                         </div>
                     </div>
                     {% if forloop.counter == 4 %}
@@ -80,17 +86,20 @@
                             <div class="view view-first">
                                 <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
                                 <div class="mask">
-                                    <p>A cool description of some sort between these tags. I am so cool and awesomely awesome.</p>
-                                    <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Read More</a>
+                                    <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Читати</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="post-preview-text">
                                 <a href="{% url 'blog:page' post.id %}" class="">
-                                    <h2 class="post-title">{{ post.title }}</h2>
+                                    <h2 class="post-title bottom">{{ post.title }}</h2>
                                 </a>
-                                <p class="post-meta">by <a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></p>
+								<p>{{ post.short_descr }}</p>
+								<p class="post-meta">
+								<span class="meta"><a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></span>
+								<span class="meta">{{ post.pub_date }}</span>
+								</p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +110,7 @@
                     {% if is_paginated %}
                     <ul class="pagination">
                         {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
                         {% else %}
                         <li class="disabled"><span>&laquo;</span></li>
                         {% endif %}
@@ -109,11 +118,11 @@
                         {% if page_obj.number == i %}
                         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
                         {% else %}
-                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        <li><a href="?page={{ i }}" class="btn btn-primary btn-sm">{{ i }}</a></li>
                         {% endif %}
                         {% endfor %}
                         {% if page_obj.has_next %}
-                        <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                        <li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
                         {% else %}
                         <li class="disabled"><span>&raquo;</span></li>
                         {% endif %}

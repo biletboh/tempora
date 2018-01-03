@@ -66,10 +66,12 @@
 }
 
 .view-first .mask {
+  padding-top: 30%;
   height: 100%;
+  width: 100%;
   opacity: 0;
-  background-color:rgba(163, 17, 42, 0.3);
-  transition: all 0.4s ease-in-out;
+  background-color:rgba(163, 17, 42, 0.5);
+  transition: all 0.6s ease-in-out;
 }
 
 .view-first h2 {
@@ -80,7 +82,6 @@
 }
 
 .view-first p {
-  padding-top: 30%;
   transform: translateY(100px);
   opacity: 0;
   transition: all 0.2s linear;

@@ -1,10 +1,14 @@
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView,\
         DeleteView, ListView, UpdateView, CreateView
 
+from django_filters.views import FilterView
+
 from blog.models import Post
 from blog.forms import PostModelForm
+from blog.filters import PostFilter
 
 
 class PostList(ListView):
@@ -44,8 +48,10 @@ class UpdatePost(UpdateView):
     model = Post
     form_class = PostModelForm
     template_name = 'blog/update.html'
-    success_url = reverse_lazy('blog:update')
     success_message = 'Пост оновлено.'
+
+    def get_success_url(self):
+        return reverse_lazy('blog:update', kwargs={'slug': self.object.slug})
 
     def get_form_kwargs(self):
         kwargs = super(UpdatePost, self).get_form_kwargs()
@@ -61,13 +67,15 @@ class DeletePost(DeleteView):
     login_url = reverse_lazy('users:dashboard')
 
 
-class EditPostList(ListView):
+class EditPostList(LoginRequiredMixin, FilterView):
     """Render a list of Posts to edit with ajax endless pagination."""
 
-    context_object_name = "posts"
+    model = Post
     template_name = 'blog/edit_list.html'
-    page_template = 'blog/posts.html'
+    context_object_name = 'posts'
+    paginate_by = 20
     login_url = reverse_lazy('users:dashboard')
+    filterset_class = PostFilter
 
     def get_queryset(self):
         return Post.objects.all()

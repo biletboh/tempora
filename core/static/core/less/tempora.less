@@ -1,5 +1,6 @@
 @import "variables.less";
 @import "mixins.less";
+
 // Global Components
 html,
 body {
@@ -45,7 +46,7 @@ h6 {
     .sans-serif-font;
 }
 p {
-    font-size: 12pt;
+    font-size: 18px;
     line-height: 1.5;
     margin-bottom: 20px;
     .text-helper {
@@ -179,7 +180,7 @@ aside.clients {
 // Homepage Header
 header {
     &.blog-header {
-        padding: 100px 0 10px 0;
+        padding: 70px 0 0 0;
         color: rgb(51, 51, 51);
         min-height: 50px;
         background-image: none;
@@ -192,12 +193,11 @@ header {
         .background-cover;
         // NOTE: Background images are set within the HTML using inline CSS!
         margin-bottom: 50px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
         .site-heading, .post-heading, .page-heading {
-            padding: 100px 0 50px;
             color: white;
-            @media only screen and (min-width: 768px) {
-                padding: 150px 0;
-            }
         }
         .site-heading,
         .page-heading {
@@ -221,30 +221,16 @@ header {
             }
         }
         .post-heading {
-            text-align: left;
-            h1 {
-                font-size: 35px;
-            }
-            .subheading,
-            .meta {
-                line-height: 1.1;
-                display: block;
-            }
-            .subheading {
-                .sans-serif-font;
-                font-size: 24px;
-                margin: 10px 0 30px;
-                font-weight: 600;
-            }
-            .meta {
-                .serif-font;
-                font-style: italic;
-                font-weight: 300;
-                font-size: 20px;
-                a {
-                    .link;
-                }
-            }
+            text-align: right;
+			margin: 2em 3em;
+			h1 {
+				font-size: 35px;
+				span {
+					background-color: rgba(0,0,0,.5);
+					padding: 5px 10px;
+					line-height: 1.7em;
+				}
+			}
             @media only screen and (min-width: 768px) {
                 h1 {
                     font-size: 55px;
@@ -322,12 +308,18 @@ header {
 
 // Article
 article {
-    p {
-        font-weight: 300;
-        font-size: 14pt;
-        line-height: 1.7;
-        margin: 30px 0;
-    }
+	p {
+		font-weight: 300;
+		font-size: 14pt;
+		line-height: 1.7;
+		margin: 30px 0;
+	}
+	.post-attribution {
+		margin-bottom: 3em;
+		a {
+			font-weight: 600;
+		}
+	}
 }
 
 // Sections
@@ -476,6 +468,22 @@ article {
     .btn-base(@theme-primary;
     @theme-primary;
     @theme-primary);
+}
+.pagination>li>a, .pagination>li>span,
+.pagination>li:first-child>a, .pagination>li:first-child>span, 
+.pagination>li:last-child>a, .pagination>li:last-child>span {
+    .btn-base(@theme-primary;
+    @theme-primary;
+    @theme-primary);
+	border-radius: 0;
+	margin: 0 5px;
+	font-size: 12px;
+}
+.pagination>.active>span {
+	.btn-hover(@theme-primary; @theme-primary);
+	&:hover {
+		.btn-hover(darken(@theme-primary, 5%); darken(@theme-primary, 5%));
+	}
 }
 .btn-xl {
     padding: 15px 30px;
@@ -707,36 +715,26 @@ body {
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 20px;
-    .post-img {
-        margin: 0 25px;
-    }
-    > .post-preview-text > a {
-        color: @gray-dark;
-        &:hover, &:focus {
-            text-decoration: none;
-            color: @theme-primary;
-        }
-    }
-    .post-preview-text .post-title {
-        font-size: 30pt;
-        font-weight: 700;
-        margin-top: 30px;
-        margin-bottom: 10px;
-    }
-    > .post-preview-text > .post-meta {
-        color: @gray-light;
-        font-size: 18px;
-        font-style: italic;
-        margin-top: 0;
-        > .post-preview-text > a {
-            text-decoration: none;
-            color: @gray-dark;
-            &:hover, &:focus {
-                color: @theme-primary;
-                text-decoration: underline;
-            }
-        }
-    }
+	padding: 0 35px;
+	.post-preview-text .post-title {
+		font-size: 30pt;
+		font-weight: 700;
+		margin-bottom: 0.6em;
+		line-height: 1.4em;
+		&.bottom {
+			margin-top: 1em;
+			font-size: 24pt;
+			font-weight: 600;
+		}
+	}
+	.post-preview-text .post-meta {
+		font-size: 14px;
+		margin-top: 0;
+		a {
+			font-weight: 600;
+		}
+
+	}
     @media only screen and (min-width: 768px) {
         > .post-preview-text > a {
             > .post-title {
@@ -746,10 +744,32 @@ body {
         }
     }
 }
-.post-img-second {
+.post-preview-middle {
+	margin: 3em 0;
+	.post-preview-text {
+		margin: 0 35px;
+	}
+	.post-preview-text .post-title {
+		margin-top: 1em;
+		font-size: 20pt;
+		font-weight: 600;
+	}
+	.post-preview-text .post-meta {
+		font-size: 14px;
+		margin-top: 0;
+		a {
+			font-weight: 600;
+		}
+
+	}
+}
+.post-img-middle {
         display: flex;
         justify-content: center;
     }
+.post-heading h1 {
+}
+
 // Pagination
 .pagination {
     display: block;

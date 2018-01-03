@@ -12,14 +12,17 @@ class Post(models.Model):
 
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag)
-    title = models.CharField('Заголовок', max_length=200)
-    short_descr = HTMLField('Короткий опис', blank=True)
+    title = models.CharField('Заголовок', max_length=128)
+    short_descr = HTMLField('Короткий опис', max_length=256, blank=True)
     body = HTMLField('Текст', blank=True)
     pub_date = models.DateTimeField('Дата публікації',
                                     default=timezone.datetime.now)
     image = ThumbnailerImageField('Світлина', upload_to='photos/blog',
                                   blank=True)
     slug = models.SlugField('Посилання', unique=True, null=True)
+
+    def __str__(self):
+        return 'Post: %s' % self.title
 
     class Meta:
         ordering = ('-pub_date',)

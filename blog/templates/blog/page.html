@@ -1,33 +1,32 @@
-{% extends "pbhouse/base.html" %}
+{% extends "core/base.html" %}
 
 {% load thumbnail %}
 {% load static %}
 
 {% block content %}
 
-{% include "pbhouse/navbar.html" %}
+{% include "core/navbar.html" %}
 
 <!-- Post page -->
 <header class="post-header" style="background-image: url('{{ object.image.large.url }}')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading">
-          <h1>{{ object.title }}</h1>
-          <span class="meta"><a href="#">{{ object.user.first_name }} {{ object.user.last_name }}</a> {{ object.pub_date }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="post-heading">
+		<h1><span>{{ object.title }}</span></h1>
+	</div>
 </header>
 <article>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        {{ object.body|safe }} 
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				{{ object.body|safe }} 
+			</div>
+		</div>
+		<div class="row post-attribution">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<span class="meta"><a href="#">{{ object.user.first_name }} {{ object.user.last_name }}</a></span>
+				<span class="meta">{{ object.pub_date }}</span>
+			</div>
+		</div>
+	</div>
 </article>
 
 {% endblock %}

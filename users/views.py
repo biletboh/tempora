@@ -1,13 +1,11 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import View, TemplateView, CreateView, DetailView,\
+from django.views.generic import View, TemplateView, DetailView,\
         FormView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 
@@ -18,21 +16,18 @@ from users.forms import UserCreateForm, UserUpdateForm,\
 from users.models import UserProfile
 
 
-class Profile(LoginRequiredMixin, TemplateView):
+class Profile(TemplateView):
     """Render Profile page."""
 
-    template_name='users/profile.html'
+    template_name = 'users/profile.html'
 
-    def get_login_url(self):
-        return reverse_lazy('account_login')
+    # def get_login_url(self):
+    #    return reverse_lazy('account_login')
 
 
-class CreateUser(
-                LoginRequiredMixin, UserPassesTestMixin,
-                SuccessMessageMixin, FormView):
-    """
-    Create User.
-    """
+class CreateUser(LoginRequiredMixin, UserPassesTestMixin,
+                 SuccessMessageMixin, FormView):
+    """Create User."""
 
     form_class = UserCreateForm
     template_name = 'users/create.html'
@@ -162,7 +157,7 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
         user.likedin = form.cleaned_data['linkedin']
         user.goodreads = form.cleaned_data['goodreads']
 
-        # Check if the user has prviviledges to edit 
+        # Check if the user has prviviledges to edit
         # group membership and user active status.
         current_user = self.request.user
         if current_user.is_superuser:
@@ -199,7 +194,7 @@ class UpdateUser(SuccessMessageMixin, SingleObjectMixin, FormView):
         except:
             raise Exception('Group does not exist.')
 
-        # add or remove group membership 
+        # add or remove group membership
         checked = form.cleaned_data[name.lower()]
         print('form', checked)
         if checked:

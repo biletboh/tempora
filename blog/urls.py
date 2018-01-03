@@ -16,9 +16,9 @@ urlpatterns = [
                 r'^update/list/$', views.EditPostList.as_view(),
                 name='edit_list'),
             url(
-                r'^post/update/(?P<pk>[0-9]+)/$',
+                r'^post/update/(?P<slug>[\w-]+)/$',
                 views.UpdatePost.as_view(),
-                name='edit'),
+                name='update'),
             url(
                 r'^post/delete/(?P<pk>[0-9]+)/$',
                 views.DeletePost.as_view(),

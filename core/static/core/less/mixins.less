@@ -1,4 +1,5 @@
 // Mixins
+@import "variables.less";
 
 .transition-all() {
     -webkit-transition: all 0.35s;
@@ -12,17 +13,19 @@
     background-size: cover;
     -o-background-size: cover;
 }
-
+.btn-hover(@background; @border) {
+	border: 2px solid @border;
+	outline: none;
+	color: white;
+	background-color: @background;
+}
 .btn-base(@color; @background; @border) {
     border: 2px solid @border;
     color: @color;
     background-color: transparent;
     &:hover,
     &:focus {
-        border: 2px solid @border;
-        outline: none;
-        color: white;
-        background-color: @background;
+		.btn-hover(@background; @border);
     }
 }
 
@@ -94,6 +97,13 @@
     color: @theme-primary;
     &:hover, &:focus {
         color: darken(@theme-primary, 10%);
+        text-decoration: none;
+    }
+}
+.link-light {
+    color: lighten(@theme-primary, 25%);
+    &:hover, &:focus {
+        color: lighten(@theme-primary, 35%);
         text-decoration: none;
     }
 }

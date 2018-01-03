@@ -42,7 +42,7 @@ class BaseUserProfileForm(FileFormMixin, betterforms.BetterForm):
     upload_url = forms.CharField(widget=forms.HiddenInput(), required=False)
     delete_url = forms.CharField(widget=forms.HiddenInput(), required=False)
 
- 
+
     def clean_password2(self):
         cleaned_data = super(BaseUserProfileForm, self).clean()
         password1 = cleaned_data.get('password1')
@@ -51,16 +51,16 @@ class BaseUserProfileForm(FileFormMixin, betterforms.BetterForm):
             self.add_error(
                 'password2', _("You must type the same password each time.")
             )
-        return password2 
+        return password2
 
 
 class UserManagementForm(BaseUserProfileForm):
     """
     Provide Form for creation of users with password required field.
     """
-    
+
     is_staff = forms.BooleanField(
-                                label=_('Редактор(ка)'), required=False, 
+                                label=_('Редактор(ка)'), required=False,
                                 initial=False,
                                 widget=forms.CheckboxInput(attrs={'class':'flat'}))
     is_active = forms.BooleanField(
@@ -79,12 +79,12 @@ class UserManagementForm(BaseUserProfileForm):
                             label=_('Блогер(ка)'), required=False,
                             initial=False,
                             widget=forms.CheckboxInput(attrs={'class':'flat'}))
-    
+
     class Meta:
         fieldsets = [
                 ('main', {'fields': [
                                 'email', 'last_name', 'first_name',
-                                'position', 
+                                'position',
                                 ], 'legend': 'main', }),
                 ('info', {'fields': ['info'], 'legend': 'main', }),
                 ('social', {'fields': [
@@ -109,26 +109,26 @@ class UserCreateForm(UserManagementForm):
     """
     Provide Form for creation of users with password required field.
     """
-    
+
     password1 = PasswordField(label=_('Пароль'), required=True)
     password2 = PasswordField(label=_('Пароль (знову)'), required=True)
-    
+
 
 class UserUpdateForm(UserManagementForm):
     """
     Provide Form for user update with optional password update.
     """
-    
+
     password1 = PasswordField(label=_('Пароль'), required=False)
     password2 = PasswordField(label=_('Пароль (знову)'), required=False)
 
 
 class ProfileUpdateForm(BaseUserProfileForm):
     """
-    Provide Form for profile information update 
+    Provide Form for profile information update
     with optional password update.
     """
-    
+
     password1 = PasswordField(label=_('Пароль'), required=False)
     password2 = PasswordField(label=_('Пароль (знову)'), required=False)
 
