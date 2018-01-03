@@ -18,11 +18,11 @@ conf.read(os.path.join(BASE_DIR, 'settings.ini'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = conf.get(
-                    'tempora', 'secret',
-                    fallback='8ze8kfn8@c!jat$*wryy+u@2^+1@ln27t5fql54qfq$2x$ac8x')
+                'tempora', 'secret',
+                fallback='8ze8kfn8@c!jat$*wryy+u@2^+1@ln27t5fql54qfq$2x$ac8x')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = conf.getboolean('tempora', 'debug', fallback = True)
+DEBUG = conf.getboolean('tempora', 'debug', fallback=True)
 
 ALLOWED_HOSTS = ['*']
 
@@ -30,12 +30,14 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    # custom apps 
+    # custom apps
     'core.apps.CoreConfig',
     'pbhouse.apps.PbhouseConfig',
     'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
     'projects.apps.ProjectsConfig',
-    
+    'tags.apps.TagsConfig',
+
     # filebrowser and tinymce apps
     'grappelli',
     'filebrowser',
@@ -59,6 +61,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'django_file_form',
     'django_file_form.ajaxuploader',
+    'django_filters',
     'widget_tweaks',
     'el_pagination',
     'datetimewidget',
@@ -104,17 +107,16 @@ WSGI_APPLICATION = 'tempora.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 CURRDB = {'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': os.path.join(BASE_DIR, 'db.sqlite3')}
+          'NAME': os.path.join(BASE_DIR, 'db.sqlite3')}
 
 if DEBUG is False:
-    CURRDB = {  'ENGINE': 'django.db.backends.postgresql',
-                'NAME': conf.get('tempora', 'dbname', fallback = 'tempora'),
-                'USER': conf.get('tempora', 'dbuser', fallback = 'postgres'),
-                'PASSWORD': conf.get(
-                                    'tempora', 'dbpass',
-                                    fallback = 'postgres'),
-                'HOST': 'localhost',
-                'PORT': '5432' }
+    CURRDB = {'ENGINE': 'django.db.backends.postgresql',
+              'NAME': conf.get('tempora', 'dbname', fallback='tempora'),
+              'USER': conf.get('tempora', 'dbuser', fallback='postgres'),
+              'PASSWORD': conf.get('tempora', 'dbpass',
+                                   fallback='postgres'),
+              'HOST': 'localhost',
+              'PORT': '5432'}
 
 DATABASES = {
     'default': CURRDB
@@ -124,32 +126,29 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': ('django.contrib.auth.password_validation'
+              + '.UserAttributeSimilarityValidator'),
+     },
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+     },
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+     },
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
+     },
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'uk'
 
 LANGUAGES = (
         ('en', _('English')),
         ('uk', _('Ukrainian')),
         )
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
@@ -181,10 +180,11 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+ACCOUNT_ADAPTER = 'users.adapter.AccountAdapter'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False 
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
@@ -198,18 +198,21 @@ EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'tempora.publ.house@gmail.com'
 EMAIL_HOST_PASSWORD = 'TemporaFiliaVeritas'
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Tempora'
 
-LOGIN_REDIRECT_URL = '/dashboard'
+LOGIN_REDIRECT_URL = '/profiles/dashboard/'
 
 
-#Tumnails settings 
+# Tumnails settings
 
 THUMBNAIL_ALIASES = {
     '': {
-        'extra_small': {'size':(45, 45), 'crop': True},
-        'small': {'size':(60, 60), 'crop': True},
+        'extra_small': {'size': (45, 45), 'crop': True},
+        'small': {'size': (60, 60), 'crop': True},
         'big_avatar': {'size': (150, 150), 'crop': True},
+        'preview': {'size': (250, 200), 'crop': True},
+        'blog_first': {'size': (960, 720), 'crop': True},
+        'blog_second': {'size': (400, 300), 'crop': True},
         'medium': {'size': (750, 450), 'crop': True},
-        'large': {'size': (800, 550), 'crop': True},
+        'large': {'size': (800, 450), 'crop': True},
         'extra_large': {'size': (1200, 600), 'crop': True},
         },
     }
@@ -217,22 +220,28 @@ THUMBNAIL_ALIASES = {
 THUMBNAIL_TRANSPARENCY_EXTENSION = 'png'
 
 
-#TinyMCE config
+# TinyMCE config
 TINYMCE_JS_URL = '/static/tiny_mce/tiny_mce.js'
 TINYMCE_JS_ROOT = '/static/tiny_mce'
 
 TINYMCE_SPELLCHECKER = True
 TINYMCE_DEFAULT_CONFIG = {
-        'plugins': 'advlist,autolink,autoresize,emotions,fullpage,fullscreen,media,table,spellchecker,paste,searchreplace,wordcount',
-        'theme': "advanced",
-        'theme_advanced_resizing': True,
-        'theme_advanced_resize_horizontal': True,
-        'theme_advanced_buttons1': 'undo,redo,fontsizeselect,bold,italic,underline,strikethrough,|,forecolor,backcolor,|,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,|,link,unlink,|,image,media,|,emotions,blockquote,|,table,hr,sub,sup,charmap',
-        'theme_advanced_buttons2' : "",
-        'width': '100%',
-        'cleanup_on_startup': True,
-        'custom_undo_redo_levels': 10,
-        }
-TINYMCE_COMPRESSOR = False 
-TINYMCE_FILEBROWSER = True 
-
+    'plugins': ('advlist,autolink,autoresize,emotions,fullpage,fullscreen,'
+                + 'media,table,spellchecker,paste,searchreplace,wordcount'),
+    'theme': "advanced",
+    'theme_advanced_resizing': True,
+    'theme_advanced_resize_horizontal': True,
+    'theme_advanced_buttons1': ('undo,redo,fontsizeselect,bold,italic,'
+                                + 'underline,strikethrough,|,forecolor,'
+                                + 'backcolor,|,bullist,numlist,|,justifyleft,'
+                                + 'justifycenter,justifyright,justifyfull,|,'
+                                + 'outdent,indent,|,link,unlink,|,image,media,'
+                                + '|,emotions,blockquote,|,table,hr,sub,sup,'
+                                + 'charmap'),
+    'theme_advanced_buttons2': "",
+    'width': '100%',
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+    }
+TINYMCE_COMPRESSOR = False
+TINYMCE_FILEBROWSER = True

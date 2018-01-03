@@ -1,0 +1,71 @@
+{% extends "core/dashboard.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+{% load paginate_filters %}
+
+{% block content %}
+
+<div class="right_col" role="main">
+	<div class="">
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>Список постів</small></h2>
+						<div class="clearfix"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Назва</th>
+										<th>Дата Публікації</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for post in posts %}
+									<tr>
+										<td>{{ post.id }}</td>
+										<td><a href="{% url 'blog:update' post.slug %}">{{ post.title }}</a></td>
+										<td>{{ post.pub_date }}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+
+							{% if is_paginated %}
+							<ul class="pagination">
+								{% if page_obj.has_previous %}
+								<li><a href="?{% filter_page page=page_obj.previous_page_number %}">&laquo;</a></li>
+								{% else %}
+								<li class="disabled"><span>&laquo;</span></li>
+								{% endif %}
+								{% for i in paginator.page_range %}
+								{% if page_obj.number == i %}
+								<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+								{% else %}
+								<li><a href="?{% filter_page page=i %}">{{ i }}</a></li>
+								{% endif %}
+								{% endfor %}
+								{% if page_obj.has_next %}
+								<li><a href="?{% filter_page page=page_obj.next_page_number %}">&raquo;</a></li>
+								{% else %}
+								<li class="disabled"><span>&raquo;</span></li>
+								{% endif %}
+							</ul>
+							{% endif %}
+						</div>
+
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

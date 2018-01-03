@@ -5,88 +5,52 @@
 
 {% paginate users %}
 
-<div class="x_content">
-
-  <!-- start project list -->
-  <table class="table table-striped projects">
-    <thead>
-      <tr>
-        <th style="width: 1%">#</th>
-        <th>{% trans "Емейл" %}</th>
-        <th>{% trans "Ім’я" %}</th>
-        <th>{% trans "Роль" %}</th>
-        <th style="width: 20%">{% trans "Редагувати" %}</th>
-      </tr>
-    </thead>
-    <tbody>
-
-
-
-    {% for userprofile in users %}
-    <tr>
-      <td>#</td>
-      <td>
-        <a href="{% url 'users:edit' userprofile.id %}">{{ userprofile.email }}</a>
-      </td>
-      <td>
-        <ul class="list-inline">
-          <li>
-          {{ userprofile.first_name }}
-          </li>
-          <li>
-          {{ userprofile.last_name }}
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul class="list-inline">
-          {% for group in user.groups.all %}
-          <li>
-          <button type="button" class="btn btn-success btn-xs">{{ group }}</button>
-          </li>
-          {% endfor %}
-        </ul>
-      </td>
-      <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{{ userprofile.id }}">
-          <i class="fa fa-trash-o"></i>{% trans "Видалити" %}
-        </button>
-
-      </td>
-    </tr>
-
-    <!-- Delete Modal -->
-    <div class="modal fade" id="{{userprofile.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Delete</h4>
-          </div>
-          <div class="modal-body">
-            <p>Do you want to delete {{ userprofile.email }}? </p> 
-          </div>
-          <div class="modal-footer">
-            <form action="{% url 'users:delete' userprofile.id %}" method="post">{% csrf_token %}
-              <input type="submit" class="btn btn-primary" value="Yes" />
-              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-            </form>
-          </div>
-        </div>
-      </div>
+{% for userprofile in users %}
+<div class="items">
+  <div class="row">
+    <div class="col-sm-3">
+      {{ userprofile.email }}
     </div>
-
-    {% endfor %}
-
-
-    <div class="pagination">
-      {% show_more%}
+    <div class="col-sm-3">
+      {{ userprofile.first_name }} {{ userprofile.last_name }}
     </div>
-
-
-    </tbody>
-  </table>
+    <div class="col-sm-3">
+      {% for group in userprofile.groups.all %}
+      <button type="button" class="btn btn-success btn-xs">{{ group }}</button>
+      {% endfor %}
+    </div>
+    <div class="col-sm-3">
+      <a href="{% url 'users:edit' userprofile.id %}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+      <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{{ userprofile.id }}">
+        <i class="fa fa-trash-o"></i>
+      </button>
+    </div>
+  </div>
 </div>
 
+<!-- Delete Modal -->
+<div class="modal fade" id="{{userprofile.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete {{ userprofile.email }}? </p> 
+      </div>
+      <div class="modal-footer">
+        <form action="{% url 'users:delete' userprofile.id %}" method="post">{% csrf_token %}
+          <input type="submit" class="btn btn-primary" value="Yes" />
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<div class="pagination">
+  {% show_more%}
+</div>

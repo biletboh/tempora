@@ -4,209 +4,211 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>{% block head_title %}{% endblock %}</title>
+        <title>{% block head_title %}{% endblock %}</title>
 
-<!-- Bootstrap Core CSS -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Font Awesome -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Font Awesome -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-<!-- Theme CSS -->
-<link href="{% static 'pbhouse/css/dashboard.css' %}" rel="stylesheet">
+        <!-- Theme CSS -->
+        <link href="{% static 'core/css/dashboard.css' %}" rel="stylesheet">
 
-<!-- jQuery -->
-<script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+        <!-- iCheck CSS -->
+        <link href="{% static 'pbhouse/vendor/iCheck/skins/flat/green.css' %}" rel="stylesheet">
 
-<!-- Bootstrap Core JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- jQuery -->
+        <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
 
-<!-- File Uploader -->
-<script src="{% static 'ajaxuploader/js/fileuploader.js' %}"></script>
-<script src="{% static 'file_form/file_form.js' %}"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- File Uploader Css -->
-<link rel="stylesheet" href="{% static 'ajaxuploader/css/fileuploader.css' %}">
 
-</head>
 
-<body class="nav-md">
-<div class="container body">
-  <div class="main_container">
-    <div class="col-md-3 left_col">
-      <div class="left_col scroll-view">
-        <div class="navbar nav_title" style="border: 0;">
-          <a href="{% url 'users:profile' %}" class="site_title"><i class="fa fa-book"></i> <span>Tempora</span></a>
-        </div>
+        <!-- File Uploader Css -->
+        <link rel="stylesheet" href="{% static 'ajaxuploader/css/fileuploader.css' %}">
 
-        <div class="clearfix"></div>
+        <!-- Form Media -->
+        {{ form.media }}
 
-        <!-- menu profile quick info -->
-        <div class="profile clearfix">
-          <div class="profile_pic">
-            {% if user.avatar %}
-            <img src="{{ user.avatar.extra_small.url }}" alt="{% trans "Світлина користувача" %}" class="img-circle profile_img">
-            {% endif %}
-          </div>
-          <div class="profile_info">
-            <span>Welcome,</span>
-            {% if user.first_name and user.last_name %}
-            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-            {% else %}
-            <h2>{{ user.email }} </h2>
-            {% endif %}
-          </div>
-        </div>
-        <!-- /menu profile quick info -->
+    </head>
 
-        <br />
+    <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col">
+                    <div class="left_col scroll-view">
+                        <div class="navbar nav_title" style="border: 0;">
+                            <a href="{% url 'users:dashboard' %}" class="site_title"><i class="fa fa-book"></i> <span>Tempora</span></a>
+                        </div>
 
-        <!-- sidebar menu -->
-        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-          <div class="menu_section">
-            <h3>{% trans "Головне" %}</h3>
-            <ul class="nav side-menu">
-              <li><a><i class="fa fa-user"></i>{% trans "Мій профайл" %}<span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="{% url 'users:edit' user.pk %}">{% trans "Оновити" %}</a></li>
-              </ul>
-              </li>
-            </ul>
-          </div>
-          {% if user.is_superuser %}
-          <div class="menu_section">
-            <h3>{% trans "Акаунти" %}</h3>
-            <ul class="nav side-menu">
-              <li><a><i class="fa fa-user"></i>{% trans "Користувачі" %}<span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="{% url 'users:create' %}">{% trans "Додати" %} </a></li>
-                <li><a href="{% url 'users:edit_list' %}">{% trans "Модерувати" %}</a></li>
-              </ul>
-              </li>
-            </ul>
-          </div>
-          {% endif %}
-          {% if user.is_staff %}
-          <div class="menu_section">
-            <h3>Blog</h3>
-            <ul class="nav side-menu">
-              <li><a><i class="fa fa-pencil"></i> Blog <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="">Create Post</a></li>
-              </ul>
-              </li>
-            </ul>
-          </div>
-          {% endif %}
+                        <div class="clearfix"></div>
 
-        </div>
-        <!-- /sidebar menu -->
+                        <!-- menu profile quick info -->
+                        <div class="profile clearfix">
+                            <div class="profile_pic">
+                                {% if user.avatar %}
+                                <img src="{{ user.avatar.extra_small.url }}" alt="{% trans "Світлина користувача" %}" class="img-circle profile_img">
+                                {% endif %}
+                            </div>
+                            <div class="profile_info">
+                                <span>Welcome,</span>
+                                {% if user.first_name and user.last_name %}
+                                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                                {% else %}
+                                <h2>{{ user.email }} </h2>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- /menu profile quick info -->
 
-        <!-- /menu footer buttons -->
-        <div class="sidebar-footer hidden-small">
-          <a data-toggle="tooltip" data-placement="top" title="Settings">
-            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-          </a>
-          <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-          </a>
-          <a data-toggle="tooltip" data-placement="top" title="Lock">
-            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-          </a>
-          <a data-toggle="tooltip" data-placement="top" title="Logout" href="{% url 'account_logout' %}">
-            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-          </a>
-        </div>
-        <!-- /menu footer buttons -->
-      </div>
-    </div>
+                        <br />
 
-    <!-- top navigation -->
-    <div class="top_nav">
-      <div class="nav_menu">
-        <nav>
-          <div class="nav toggle">
-            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-          </div>
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <h3>{% trans "Головне" %}</h3>
+                                <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-user"></i>{% trans "Мій профайл" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'users:edit' user.pk %}">{% trans "Оновити" %}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            {% if user.is_superuser %}
+                            <div class="menu_section">
+                                <h3>{% trans "Акаунти" %}</h3>
+                                <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-user"></i>{% trans "Користувачі" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'users:create' %}">{% trans "Додати" %} </a></li>
+                                            <li><a href="{% url 'users:edit_list' %}">{% trans "Модерувати" %}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endif %}
+                            {% if user.is_staff or user.is_superuser %}
+                            <div class="menu_section">
+                                <h3>{% trans "Блог" %}</h3>
+                                <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-pencil"></i>{% trans "Блог" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'blog:create' %}">{% trans "Додати пост" %}</a></li>
+                                            <li><a href="{% url 'blog:edit_list' %}">{% trans "Дивитися пости" %}</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-pencil"></i> Tags <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'tags:create' %}">{% trans "Додати тег" %}</a></li>
+                                            <li><a href="">{% trans "Дивитися теги" %}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endif %}
 
-          <ul class="nav navbar-nav navbar-right">
-            <li class="">
-            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="{{ user.avatar.extra_small.url }}" alt="">{{ user.email }}
-              <span class=" fa fa-angle-down"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-usermenu pull-right">
-              <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-            </ul>
-            </li>
+                        </div>
+                        <!-- /sidebar menu -->
 
-            <li role="presentation" class="dropdown">
-            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-envelope-o"></i>
-              <span class="badge bg-green">{{ messages|length}}</span>
-            </a>
-            {% if messages %}
-            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-              {% for message in messages %}
-              <li>
-              {% if message.tags %} 
-              <span class="message text-danger">{{ message.tags }}: </span>
-              {% endif %}
-              <span class="message">
-                {{ message }}
-              </span>
-              </li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    <!-- /top navigation -->
+                        <!-- /menu footer buttons -->
+                        <div class="sidebar-footer hidden-small">
+                            <a data-toggle="tooltip" data-placement="top" title="Settings">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="Lock">
+                                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="Logout" href="{% url 'account_logout' %}">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                        <!-- /menu footer buttons -->
+                    </div>
+                </div>
 
-    <!-- page content -->
-    <div class="right_col" role="main">
-      <div class="">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>{% block page_title %} {% endblock %}</small></h2>
-              <div class="clearfix"></div>
+                <!-- top navigation -->
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav>
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <img src="{{ user.avatar.extra_small.url }}" alt="">{{ user.email }}
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    </ul>
+                                </li>
+
+                                <li role="presentation" class="dropdown">
+                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-envelope-o"></i>
+                                        <span class="badge bg-green">{{ messages|length}}</span>
+                                    </a>
+                                    {% if messages %}
+                                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                        {% for message in messages %}
+                                        <li>
+                                            {% if message.tags %} 
+                                            <span class="message text-danger">{{ message.tags }}: </span>
+                                            {% endif %}
+                                            <span class="message">
+                                                {{ message }}
+                                            </span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- /top navigation -->
+
+                <!-- page content -->
+                {% block content %}
+                {% endblock %}
+
+                <!-- /page content -->
             </div>
-
-            {% block content %}
-            {% endblock %}
-
-          </div>
         </div>
-      </div>
-    </div>
-    <!-- /page content -->
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                Tempora</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
 
-  </div>
-</div>
-  <!-- footer content -->
-  <footer>
-    <div class="pull-right">
-      Tempora</a>
-  </div>
-  <div class="clearfix"></div>
-</footer>
-<!-- /footer content -->
+        <!-- Custom Theme Scripts -->
+        <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{% static 'pbhouse/vendor/iCheck/icheck.min.js' %}"></script>
+        <script src="{% static 'pbhouse/js/dashboard.js' %}"></script>
+        <!-- File Uploader -->
+        <script src="{% static 'ajaxuploader/js/fileuploader.js' %}"></script>
+        <script src="{% static 'file_form/file_form.js' %}"></script>
+        <script src="{% static 'core/js/dashboard.js' %}"></script>
 
-<!-- Custom Theme Scripts -->
-<script src="{% static 'pbhouse/js/dashboard.js' %}"></script>
-
-</body>
+    </body>
 </html>

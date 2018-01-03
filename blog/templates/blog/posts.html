@@ -1,0 +1,48 @@
+{% load el_pagination_tags %}
+{% load static %}
+{% load thumbnail %}
+{% load i18n %}
+
+{% paginate posts %}
+
+{% for post in posts%}
+<div class="items">
+  <div class="row">
+    <div class="col-sm-6">{{ post.title }}</div>
+    <div class="col-sm-2">{{ post.user.first_name }} {{ post.user.last_name }}</div>
+    <div class="col-sm-2">{{ post.pub_date }}</div>
+    <div class="col-sm-2">
+      <a href="{% url 'blog:edit' post.id %}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+      <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{{ post.id }}">
+        <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete {{ post.title }}? </p> 
+      </div>
+      <div class="modal-footer">
+        <form action="{% url 'blog:delete' post.id %}" method="post">{% csrf_token %}
+          <input type="submit" class="btn btn-primary" value="Yes" />
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<div class="pagination">
+  {% show_more%}
+</div>

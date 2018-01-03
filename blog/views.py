@@ -1,67 +1,81 @@
-from django.shortcuts import render
-from django.views.generic import View, DetailView, FormView, TemplateView,\
-        DeleteView, ListView 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.views.generic import DetailView,\
+        DeleteView, ListView, UpdateView, CreateView
 
-from el_pagination.views import AjaxListView
+from django_filters.views import FilterView
 
 from blog.models import Post
-from blog.forms import PostForm
+from blog.forms import PostModelForm
+from blog.filters import PostFilter
 
 
-class PostList(AjaxListView):
-    """
-    Render List of posts.
-    """
+class PostList(ListView):
+    """Render List of posts."""
 
+    model = Post
     context_object_name = "posts"
     template_name = 'blog/blog.html'
-    page_template = 'blog/post_list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(PostList, self).get_context_data(**kwargs)
-        context['title'] = 'Blog'
-        return context
-
-    def get_queryset(self): 
-        return Post.objects.all()
+    paginate_by = 10
+    queryset = Post.objects.all()
 
 
 class Page(DetailView):
-    """
-    Render Post Page.
-    """
+    """Render Post Page."""
 
-    model = Post 
+    model = Post
     template_name = 'blog/page.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(Page, self).get_context_data(**kwargs)
-        context['title'] = 'Blog Page'
-        return context
 
+class CreatePost(SuccessMessageMixin, CreateView):
+    """Create Posts."""
 
-class CreatePost(SuccessMessageMixin, FormView):
-    """
-    Create Posts.
-    """
-
-    form_class = PostForm 
+    form_class = PostModelForm
     template_name = 'blog/create.html'
-    success_url = reverse_lazy('blog:blog')
-    #login_url = reverse_lazy('blog:blog') 
+    success_url = reverse_lazy('blog:edit_list')
     success_message = "A post was created successfully"
 
-    def form_valid(self, form):
-        post = Post(title=form.cleaned_data['title'], body=form.cleaned_data['body'], image=form.cleaned_data['image'])
-        post.save()
-        form.delete_temporary_files()
-        return super(CreatePost, self).form_valid(form)
+    def get_form_kwargs(self):
+        kwargs = super(CreatePost, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
-    def get_context_data(self, **kwargs):
-        context = super(CreatePost, self).get_context_data(**kwargs)
-        context['title'] = 'Create Post'
-        return context
 
+class UpdatePost(UpdateView):
+    """Update an internal deposit."""
+
+    model = Post
+    form_class = PostModelForm
+    template_name = 'blog/update.html'
+    success_message = 'Пост оновлено.'
+
+    def get_success_url(self):
+        return reverse_lazy('blog:update', kwargs={'slug': self.object.slug})
+
+    def get_form_kwargs(self):
+        kwargs = super(UpdatePost, self).get_form_kwargs()
+        kwargs['user'] = self.object.user
+        return kwargs
+
+
+class DeletePost(DeleteView):
+    """Delete Post."""
+
+    model = Post
+    success_url = reverse_lazy('blog:edit_list')
+    login_url = reverse_lazy('users:dashboard')
+
+
+class EditPostList(LoginRequiredMixin, FilterView):
+    """Render a list of Posts to edit with ajax endless pagination."""
+
+    model = Post
+    template_name = 'blog/edit_list.html'
+    context_object_name = 'posts'
+    paginate_by = 20
+    login_url = reverse_lazy('users:dashboard')
+    filterset_class = PostFilter
+
+    def get_queryset(self):
+        return Post.objects.all()

@@ -29,13 +29,13 @@ class PostListTestCase(TestCase):
                                 )
 
     def test_status_code(self):
-        url = reverse('blog:blog') 
+        url = reverse('blog:blog')
         self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'en'})
         resp = self.client.get(url, follow=True)
         self.assertEqual(resp.status_code, 200)
 
     def test_context(self):
-        url = reverse('blog:blog') 
+        url = reverse('blog:blog')
         self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'en'})
         resp = self.client.get(url, follow=True)
         self.assertTrue('posts' in resp.context)
@@ -43,7 +43,7 @@ class PostListTestCase(TestCase):
                 len([post.pk for post in resp.context['posts']]), 2)
 
     def test_template(self):
-        url = reverse('blog:blog') 
+        url = reverse('blog:blog')
         self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'en'})
         resp = self.client.get(url, follow=True)
         self.assertTemplateUsed(resp, 'blog/blog.html')
@@ -60,7 +60,7 @@ class PageTestCase(TestCase):
                                 title='test post',
                                 body='body of the test post',
                                 )
-    
+
     def test_status_code(self):
         url = reverse('blog:page', kwargs={'pk':1})
         self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'en'})

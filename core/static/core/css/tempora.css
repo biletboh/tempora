@@ -1,3 +1,19 @@
+.link {
+  color: #A3112A;
+}
+.link:hover,
+.link:focus {
+  color: #750c1e;
+  text-decoration: none;
+}
+.link-light {
+  color: #ec4864;
+}
+.link-light:hover,
+.link-light:focus {
+  color: #f1768b;
+  text-decoration: none;
+}
 html,
 body {
   height: 100%;
@@ -18,6 +34,11 @@ hr {
 }
 hr.light {
   border-color: white;
+}
+hr.grey {
+  border-color: darkgray;
+  border-width: 1px;
+  max-width: 100%;
 }
 .separator {
   border-top: 1px solid #D8D8D8;
@@ -43,7 +64,7 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 p {
-  font-size: 12pt;
+  font-size: 18px;
   line-height: 1.5;
   margin-bottom: 20px;
 }
@@ -66,6 +87,9 @@ p .text-helper {
 }
 section {
   padding: 100px 0;
+}
+section.content {
+  padding: 10px;
 }
 section.page {
   padding: 50px 25px;
@@ -190,6 +214,81 @@ header {
   text-align: center;
   color: white;
 }
+header.blog-header {
+  padding: 70px 0 0 0;
+  color: #333333;
+  min-height: 50px;
+  background-image: none;
+}
+header.post-header {
+  margin-top: 52px;
+  background-color: rgba(0, 0, 0, 0.5);
+  background: no-repeat center center;
+  background-attachment: scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+header.post-header .site-heading,
+header.post-header .post-heading,
+header.post-header .page-heading {
+  color: white;
+}
+header.post-header .site-heading,
+header.post-header .page-heading {
+  text-align: center;
+}
+header.post-header .site-heading h1,
+header.post-header .page-heading h1 {
+  margin-top: 0;
+  font-size: 50px;
+}
+header.post-header .site-heading .subheading,
+header.post-header .page-heading .subheading {
+  font-size: 24px;
+  line-height: 1.1;
+  display: block;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 300;
+  margin: 10px 0 0;
+}
+@media only screen and (min-width: 768px) {
+  header.post-header .site-heading h1,
+  header.post-header .page-heading h1 {
+    font-size: 80px;
+  }
+}
+header.post-header .post-heading {
+  text-align: right;
+  margin: 2em 3em;
+}
+header.post-header .post-heading h1 {
+  font-size: 35px;
+}
+header.post-header .post-heading h1 span {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  line-height: 1.7em;
+}
+@media only screen and (min-width: 768px) {
+  header.post-header .post-heading h1 {
+    font-size: 55px;
+    font-weight: 800;
+  }
+  header.post-header .post-heading .subheading {
+    font-size: 30px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  header.post-header {
+    min-height: 85%;
+  }
+}
 header .header-content {
   position: relative;
   text-align: center;
@@ -239,6 +338,18 @@ header .header-content .header-content-inner p {
     margin-left: auto;
     margin-right: auto;
   }
+}
+article p {
+  font-weight: 300;
+  font-size: 14pt;
+  line-height: 1.7;
+  margin: 30px 0;
+}
+article .post-attribution {
+  margin-bottom: 3em;
+}
+article .post-attribution a {
+  font-weight: 600;
 }
 .section-heading {
   margin-top: 0;
@@ -389,6 +500,48 @@ header .header-content .header-content-inner p {
   color: white;
   background-color: #A3112A;
 }
+.pagination > li > a,
+.pagination > li > span,
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border: 2px solid #A3112A;
+  color: #A3112A;
+  background-color: transparent;
+  border-radius: 0;
+  margin: 0 5px;
+  font-size: 12px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li:first-child > a:hover,
+.pagination > li:first-child > span:hover,
+.pagination > li:last-child > a:hover,
+.pagination > li:last-child > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus,
+.pagination > li:first-child > a:focus,
+.pagination > li:first-child > span:focus,
+.pagination > li:last-child > a:focus,
+.pagination > li:last-child > span:focus {
+  border: 2px solid #A3112A;
+  outline: none;
+  color: white;
+  background-color: #A3112A;
+}
+.pagination > .active > span {
+  border: 2px solid #A3112A;
+  outline: none;
+  color: white;
+  background-color: #A3112A;
+}
+.pagination > .active > span:hover {
+  border: 2px solid #8c0f24;
+  outline: none;
+  color: white;
+  background-color: #8c0f24;
+}
 .btn-xl {
   padding: 15px 30px;
 }
@@ -396,8 +549,8 @@ header .header-content .header-content-inner p {
   display: none;
   position: fixed;
   z-index: 1;
-  bottom: 75px;
-  left: 30px;
+  bottom: 90px;
+  right: 30px;
   background: #e29669;
   border-color: #e29669;
 }
@@ -479,10 +632,10 @@ header .header-content .header-content-inner p {
   vertical-align: middle;
   vertical-align: baseline;
   opacity: 0;
-  -webkit-transition: top 0.3s ease,opacity 0.3s ease;
-  -moz-transition: top 0.3s ease,opacity 0.3s ease;
-  -ms-transition: top 0.3s ease,opacity 0.3s ease;
-  transition: top 0.3s ease,opacity 0.3s ease;
+  -webkit-transition: top 0.3s ease, opacity 0.3s ease;
+  -moz-transition: top 0.3s ease, opacity 0.3s ease;
+  -ms-transition: top 0.3s ease, opacity 0.3s ease;
+  transition: top 0.3s ease, opacity 0.3s ease;
 }
 .floating-label-form-group:not(:first-child) {
   padding-left: 14px;
@@ -607,4 +760,60 @@ body {
   .pull-right {
     float: none !important;
   }
+}
+.post-preview {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 35px;
+}
+.post-preview .post-preview-text .post-title {
+  font-size: 30pt;
+  font-weight: 700;
+  margin-bottom: 0.6em;
+  line-height: 1.4em;
+}
+.post-preview .post-preview-text .post-title.bottom {
+  margin-top: 1em;
+  font-size: 24pt;
+  font-weight: 600;
+}
+.post-preview .post-preview-text .post-meta {
+  font-size: 14px;
+  margin-top: 0;
+}
+.post-preview .post-preview-text .post-meta a {
+  font-weight: 600;
+}
+@media only screen and (min-width: 768px) {
+  .post-preview > .post-preview-text > a > .post-title {
+    font-size: 36px;
+    font-weight: 700;
+  }
+}
+.post-preview-middle {
+  margin: 3em 0;
+}
+.post-preview-middle .post-preview-text {
+  margin: 0 35px;
+}
+.post-preview-middle .post-preview-text .post-title {
+  margin-top: 1em;
+  font-size: 20pt;
+  font-weight: 600;
+}
+.post-preview-middle .post-preview-text .post-meta {
+  font-size: 14px;
+  margin-top: 0;
+}
+.post-preview-middle .post-preview-text .post-meta a {
+  font-weight: 600;
+}
+.post-img-middle {
+  display: flex;
+  justify-content: center;
+}
+.pagination {
+  display: block;
 }
