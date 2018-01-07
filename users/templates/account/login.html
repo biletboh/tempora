@@ -4,7 +4,7 @@
 {% load account socialaccount %}
 {% load widget_tweaks %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}{% trans "Увійти" %}{% endblock %}
 
 {% block content %}
 
@@ -23,7 +23,7 @@
         {% endfor %}
         {% if form.errors %}
         <div class="text-danger">
-          {% trans "Your username or password didn't match. Please try again." %}
+          {% trans "Ваш пароль та логін не співпадають." %}
         </div>
         {% endif %}
       </div>
@@ -38,7 +38,7 @@
           <button class="btn btn-primary" type="submit">{% trans "Увійти" %}</button>
           </li>
           <li>
-          <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+          <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Забули пароль?" %}</a>
           </li>
         </ul>
       </div>
@@ -64,8 +64,7 @@
 
   {% else %}
   <div class="separator"> </div>
-  <p class="text-helper">{% blocktrans %}Якщо ви поки не створили акаунт,
-  <a href="{{ signup_url }}">зареєструйтеся</a>.{% endblocktrans %}</p>
+  <p class="text-helper text-center"><a href="{{ signup_url }}">Зареєструватися</a>.</p>
   {% endif %}
   </div>
 </section>

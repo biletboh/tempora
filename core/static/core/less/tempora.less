@@ -60,8 +60,8 @@ p {
     background-color: @gray-darker;
     color: white;
 }
-.bg-sections {
-    background-color: lighten(@orange-light, 15%);
+.sections-dark {
+    background-color: lighten(@theme-primary, 62%);
     color: black;
 }
 .text-faded {
@@ -77,7 +77,6 @@ section {
     }
     &.login {
         padding: 100px 50px;
-        background-image: url('../img/open-book.jpg');
         width: 100%;
         height: 100%;
         @media (max-width: 767px) {
@@ -155,7 +154,8 @@ aside.clients {
         }
         &.affix {
             background-color: white;
-            border-color: fade(@gray-darker, 5%);
+            border-color: #A3112A;
+			border-width: 0 0 2px;
             .navbar-header .navbar-brand {
                 color: @theme-primary;
                 font-size: 14px;
@@ -331,7 +331,8 @@ article {
     margin-bottom: 50px;
     img {
         margin: 0 auto;
-        border: 7px solid @orange-light;
+        border: 7px solid;
+		border-color: lighten(@theme-primary, 45%);
     }
     h4 {
         margin-top: 25px;
@@ -494,23 +495,26 @@ article {
     z-index: 1;
     bottom: 90px;
     right: 30px;
-    background: lighten(@orange-dim, 15%);
-    border-color: lighten(@orange-dim, 15%);
+	color: #ffffff;
+    background: lighten(@theme-primary, 5%);
+    border-color: lighten(@theme-primary, 5%);
     &:hover {
-        background: @orange-dim;
-        border-color: @orange-dim;
+        background: darken(@theme-primary, 5%);
+        border-color: darken(@theme-primary, 5%);
     }
 }
 // Form Styles
 .form-custom {
     margin: 20px 0;
-    border: 1px solid #c8c8c8;
+    border: 1px solid rgba(0, 0, 0, .4);
+	border-width: 0 0 1px;
     border-radius: 0;
-    background: @orange-light;
+	height: 42px;
+    box-shadow: none;
     &:focus {
-        border: 0;
-        background: lighten(@orange-light, 10%);
-        box-shadow: inset 0 2px 2px rgba(0, 0, 0, .075), 0 0 8px rgb(214, 105, 41);
+		border: 1px solid @theme-primary;
+		border-width: 0 0 1px;
+		box-shadow: none;
     }
 }
 .form-group-custom {
@@ -518,7 +522,7 @@ article {
 }
 // Box Styles
 .box {
-    background-color: @theme-primary;
+    border: 2px solid @theme-primary;
     color: #FFF;
     padding: 20px;
     margin: 0 auto;
@@ -528,23 +532,9 @@ article {
         font-size: 18pt;
         font-weight: 700;
     }
-    a {
-        color: @orange-dim;
-        &:hover {
-            color: lighten(@orange-dim, 10%);
-        }
-    }
     .btn-primary {
-        background: @orange-dim;
-        color: lighten(@orange-dim, 30%);
         font-weight: 700;
         font-size: 11pt;
-        border: none;
-        &:hover {
-            background: lighten(@orange-dim, 10%);
-            color: #FFF;
-            border: none;
-        }
     }
 }
 //
@@ -624,7 +614,9 @@ body {
     webkit-tap-highlight-color: @gray-darker;
 }
 .footer {
-    background-color: lighten(@orange-light, 10%);
+	border: 2px solid @theme-primary; 
+	border-width: 1px 0 0; 
+    background-color: lighten(@theme-primary, 58%);
     line-height: 20px;
     @media(max-width: 767px) {
         text-align: center;
@@ -637,13 +629,12 @@ body {
     }
 }
 .footer nav > ul a:not(.btn) {
-    color: #777777;
+    /*color: #777777;*/
     display: block;
     margin-bottom: 3px;
 }
 .footer nav > ul a:not(.btn):hover,
 .footer nav > ul a:not(.btn):focus {
-    color: @orange-dim;
     text-decoration: none;
 }
 .footer .social-area {
@@ -653,7 +644,6 @@ body {
     padding-bottom: 15px;
 }
 .footer .social-area > a:not(.btn) {
-    color: @theme-primary;
     display: inline-block;
     vertical-align: top;
     padding: 10px 5px;
@@ -662,22 +652,13 @@ body {
     line-height: 20px;
     text-align: center;
 }
-.footer .social-area > a:not(.btn):hover,
-.footer .social-area > a:not(.btn):focus {
-    color: @orange-dim;
-}
+
 .footer .copyright {
     color: #777777;
     padding: 10px 15px;
     margin: 15px 3px;
     line-height: 20px;
     text-align: center;
-    a {
-        &:hover, &:focus {
-            color: @orange-dim;
-            text-decoration: none;
-        }
-    }
 }
 .footer hr {
     border-color: #dddddd;
