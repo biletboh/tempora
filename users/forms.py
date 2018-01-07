@@ -1,150 +1,108 @@
 from django import forms
+from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone
 
-from django_file_form.forms import FileFormMixin, UploadedFileField
-from form_utils import forms as betterforms
-from allauth.account.forms import PasswordVerificationMixin, PasswordField
+from django_file_form.forms import UploadedFileField
 
+from core.mixins import CustomFileFormMixin
 from users.models import UserProfile
 
 
-class BaseUserProfileForm(FileFormMixin, betterforms.BetterForm):
-    """
-    Provide Base Form for UserProfile.
-    """
+class BaseUserModelForm(CustomFileFormMixin, forms.ModelForm):
+    """Render User model form."""
 
-    email = forms.CharField(label=_('Емейл'), max_length=100)
-    first_name = forms.CharField(label=_("Ім'я"), max_length=80)
-    last_name = forms.CharField(label=_('Прізвище'), max_length=80)
-    info = forms.CharField(
-                        label=_('Розкажіть про себе'), max_length=256,
-                        widget=forms.Textarea,
-                        required=False,)
-    facebook = forms.CharField(
-                            label=_('Facebook'), max_length=128,
-                            required=False,)
-    twitter = forms.CharField(
-                            label=_('Twitter'), max_length=128,
-                            required=False,)
-    linkedin = forms.CharField(
-                            label=_('Linkedin'), max_length=128,
-                            required=False,)
-    goodreads = forms.CharField(
-                            label=_('Goodreads'), max_length=128,
-                            required=False,)
-    position = forms.CharField(
-                            label=_('Посада'), max_length=128,
-                            required=False,)
+    avatar = UploadedFileField(label='Світлина', required=False)
 
-    avatar = UploadedFileField(label=_('Світлина'), required=False)
-    form_id = forms.CharField(widget=forms.HiddenInput(), required=False)
-    upload_url = forms.CharField(widget=forms.HiddenInput(), required=False)
-    delete_url = forms.CharField(widget=forms.HiddenInput(), required=False)
+    def __init__(self, *args, **kwargs):
+        super(BaseUserModelForm, self).__init__(*args, **kwargs)
 
-
-    def clean_password2(self):
-        cleaned_data = super(BaseUserProfileForm, self).clean()
-        password1 = cleaned_data.get('password1')
-        password2 = cleaned_data.get('password2')
-        if (password1 and password2) and password1 != password2:
-            self.add_error(
-                'password2', _("You must type the same password each time.")
-            )
-        return password2
-
-
-class UserManagementForm(BaseUserProfileForm):
-    """
-    Provide Form for creation of users with password required field.
-    """
-
-    is_staff = forms.BooleanField(
-                                label=_('Редактор(ка)'), required=False,
-                                initial=False,
-                                widget=forms.CheckboxInput(attrs={'class':'flat'}))
-    is_active = forms.BooleanField(
-                                label=_('Активний'), required=False,
-                                initial=False,
-                                widget=forms.CheckboxInput(attrs={'class':'flat'}))
-    team = forms.BooleanField(
-                            label=_('Співробітник(ця)'), required=False,
-                                initial=False,
-                                widget=forms.CheckboxInput(attrs={'class':'flat'}))
-    authors = forms.BooleanField(
-                            label=_('Автор(к)а'), required=False,
-                            initial=False,
-                            widget=forms.CheckboxInput(attrs={'class':'flat'}))
-    bloggers = forms.BooleanField(
-                            label=_('Блогер(ка)'), required=False,
-                            initial=False,
-                            widget=forms.CheckboxInput(attrs={'class':'flat'}))
+        # set an intial image
+        if self.instance:
+            self.fields['avatar'].initial = self.instance.avatar
 
     class Meta:
-        fieldsets = [
-                ('main', {'fields': [
-                                'email', 'last_name', 'first_name',
-                                'position',
-                                ], 'legend': 'main', }),
-                ('info', {'fields': ['info'], 'legend': 'main', }),
-                ('social', {'fields': [
-                                'facebook', 'twitter',
-                                'linkedin', 'goodreads',
-                                ], 'legend': 'main', }),
-                ('privileges', {'fields': [
-                                        'is_staff', 'is_active', 'team',
-                                        'authors', 'bloggers'
-                                        ], 'legend': 'privileges', }),
-                ('password', {
-                            'fields': ['password1', 'password2'],
-                            'legend': 'password', }),
-                ('avatar', {'fields': [
-                                    'avatar', 'form_id', 'upload_url',
-                                    'delete_url'
-                                    ], 'legend': 'password', }),
-                ]
+        model = UserProfile
+        fields = ('email', 'first_name', 'last_name', 'position', 'info',
+                  'facebook', 'twitter', 'linkedin', 'goodreads')
+        widgets = {
+            'info': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+        }
 
 
-class UserCreateForm(UserManagementForm):
-    """
-    Provide Form for creation of users with password required field.
-    """
+class AccountUserModelForm(BaseUserModelForm):
 
-    password1 = PasswordField(label=_('Пароль'), required=True)
-    password2 = PasswordField(label=_('Пароль (знову)'), required=True)
+    def save(self, commit=True):
+        instance = super(UserModelForm, self)\
+                .save(commit=False)
+
+        # set user profile image
+        avatar = self.cleaned_data['avatar']
+        instance.avatar = avatar
+
+        if commit:
+            instance.save()
+            self.delete_temporary_files()
+
+        return instance
 
 
-class UserUpdateForm(UserManagementForm):
-    """
-    Provide Form for user update with optional password update.
-    """
+class UserModelForm(BaseUserModelForm):
+    """Render Admin User model form."""
 
-    password1 = PasswordField(label=_('Пароль'), required=False)
-    password2 = PasswordField(label=_('Пароль (знову)'), required=False)
+    team = forms.BooleanField(label=_('Співробітник(ця)'), required=False,
+                              initial=False)
+    author = forms.BooleanField(label=_('Автор(к)а'), required=False,
+                                initial=False)
+    blogger = forms.BooleanField(label=_('Блогер(ка)'), required=False,
+                                 initial=False)
 
+    def __init__(self, *args, **kwargs):
+        super(UserModelForm, self).__init__(*args, **kwargs)
 
-class ProfileUpdateForm(BaseUserProfileForm):
-    """
-    Provide Form for profile information update
-    with optional password update.
-    """
+        # user groups
+        self.team = Group.objects.get(name='Team')
+        self.authors = Group.objects.get(name='Authors')
+        self.bloggers = Group.objects.get(name='Bloggers')
 
-    password1 = PasswordField(label=_('Пароль'), required=False)
-    password2 = PasswordField(label=_('Пароль (знову)'), required=False)
+        if self.instance.id:
+            in_team = self.instance.groups.filter(name='Team').exists()
+            in_authors = self.instance.groups.filter(name='Authors').exists()
+            in_bloggers = self.instance.groups.filter(name='Bloggers').exists()
+            self.fields['team'].initial = in_team
+            self.fields['author'].initial = in_authors
+            self.fields['blogger'].initial = in_bloggers
 
     class Meta:
-        fieldsets = [
-                ('main', {'fields': [
-                                'email', 'last_name', 'first_name', 'info',
-                                'facebook', 'twitter', 'linkedin',
-                                'goodreads',
-                                ], 'legend': 'main', }),
-                ('password', {
-                            'fields': ['password1', 'password2'],
-                            'legend': 'password', }),
-                ('avatar', {'fields': [
-                                    'avatar', 'form_id', 'upload_url',
-                                    'delete_url'
-                                    ], 'legend': 'password', }),
-                ]
+        model = UserProfile
+        fields = ('email', 'first_name', 'last_name', 'position', 'info',
+                  'is_staff', 'is_active', 'facebook', 'twitter', 'linkedin',
+                  'goodreads')
+        widgets = {
+            'info': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+        }
 
+    def save(self, commit=True):
+        instance = super(UserModelForm, self)\
+                .save(commit=True)
+
+        # set user profile image
+        avatar = self.cleaned_data['avatar']
+        instance.avatar = avatar
+
+        # set user groups
+        team = self.cleaned_data['team']
+        author = self.cleaned_data['author']
+        blogger = self.cleaned_data['blogger']
+
+        if team:
+            instance.groups.add(self.team)
+        if author:
+            instance.groups.add(self.authors)
+        if blogger:
+            instance.groups.add(self.bloggers)
+
+        if commit:
+            instance.save()
+            self.delete_temporary_files()
+
+        return instance

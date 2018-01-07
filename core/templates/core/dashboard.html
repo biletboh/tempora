@@ -19,6 +19,10 @@
         <!-- Font Awesome -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+		<!-- Offline Bootstrap and Font Awesome -->
+		<link href="{% static 'core/vendor/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+		<link href="{% static 'core/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+
         <!-- Theme CSS -->
         <link href="{% static 'core/css/dashboard.css' %}" rel="stylesheet">
 
@@ -75,23 +79,21 @@
                         <!-- sidebar menu -->
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
-                                <h3>{% trans "Головне" %}</h3>
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-user"></i>{% trans "Мій профайл" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{% url 'users:edit' user.pk %}">{% trans "Оновити" %}</a></li>
+                                            <li><a href="{% url 'users:account_update' user.pk %}">{% trans "Оновити" %}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                             {% if user.is_superuser %}
                             <div class="menu_section">
-                                <h3>{% trans "Акаунти" %}</h3>
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-user"></i>{% trans "Користувачі" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{% url 'users:create' %}">{% trans "Додати" %} </a></li>
-                                            <li><a href="{% url 'users:edit_list' %}">{% trans "Модерувати" %}</a></li>
+                                            <li><a href="{% url 'users:user_list' %}">{% trans "Модерувати" %}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -99,7 +101,6 @@
                             {% endif %}
                             {% if user.is_staff or user.is_superuser %}
                             <div class="menu_section">
-                                <h3>{% trans "Блог" %}</h3>
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-pencil"></i>{% trans "Блог" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
@@ -203,6 +204,11 @@
         <!-- Custom Theme Scripts -->
         <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<!-- Offline jQuery and Bootstrap Core JavaScript -->
+		<script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
+		<script src="{% static 'core/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
         <script src="{% static 'pbhouse/vendor/iCheck/icheck.min.js' %}"></script>
         <script src="{% static 'pbhouse/js/dashboard.js' %}"></script>
         <!-- File Uploader -->

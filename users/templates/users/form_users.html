@@ -1,87 +1,257 @@
-{% load static %}
 {% load widget_tweaks %}
-{% load i18n %}
-{% load tz %}
 
-<form action="" id="base-form" name="users-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
-  {% csrf_token %}
-  <div class="content">
-    {% render_field form.object_id value=object.id %}
-
-    {% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
-
+<form action="" name="user-form" id="post-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ form.form_id }}
+    {{ form.upload_url }}
+    {{ form.delete_url }}
+    {% if form.non_field_errors %}
     <div class="row">
-      <div class="col-sm-6">
-        {% for field in form.fieldsets.main %}
-        {% if field.is_hidden %}
-        {{ field }}
-        {% else %}
-        <div class="form-group">
-          <label class="col-sm-4 control-label">{{ field.label }}</label>
-          <div class="col-sm-8">
-            {% render_field field class+="form-control" %}
-            {{ field.errors }}
-          </div>
+        <div class="col-md-12">
+            {{ form.non_field_errors }}
         </div>
-        {% endif %}
-        {% endfor %}
-      </div>
-      <div class="col-sm-6">
-        {% for field in form.fieldsets.social %}
-        {% if field.is_hidden %}
-        {{ field }}
-        {% else %}
-        <div class="form-group">
-          <label class="col-sm-4 control-label">{{ field.label }}</label>
-          <div class="col-sm-8">
-            {% render_field field class+="form-control" %}
-            {{ field.errors }}
-          </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-      </div>
     </div>
+    {% endif %}
     <div class="row">
-      <div class="col-sm-12">
-        {% for field in form.fieldsets.info %}
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{ field.label }}</label>
-          <div class="col-sm-10">
-            {% render_field field class+="form-control" %}
-            {{ field.errors }}
-          </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.email.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.email|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.email.errors }}
+                    </div>
+                </div>
+            </div>
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.first_name.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.first_name|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.first_name.errors }}
+                    </div>
+                </div>
+            </div>
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.last_name.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.last_name|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.last_name.errors }}
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endfor %}
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        {% for field in form.fieldsets.privileges %}
-        <div class="col-sm-4">
-          <div class="checkbox">
-            <label class="col-sm-6 control-label">{{ field.label }}</label>
-            <div class="col-sm-6">
-            {% render_field field class+="form-control" %}
-            {{ field.errors }}
-          </div>
-          </div>
+		<div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.info.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.info|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.info.errors }}
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endfor %}
-      </div>
     </div>
+	<div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.position.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.position|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.position.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-6">
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.avatar.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.avatar|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.avatar.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.facebook.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.facebook|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.facebook.errors }}
+                    </div>
+                </div>
+            </div>
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.twitter.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.twitter|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.twitter.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.linkedin.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.linkedin|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.linkedin.errors }}
+                    </div>
+                </div>
+            </div>
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        {{ form.goodreads.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.goodreads|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.goodreads.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	{% if user.is_superuser %}	
+	<div class="row">
+        <div class="col-md-2">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="first-name">
+                        {{ form.is_staff.label }}
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        {{ form.is_staff|attr:"class:form-control flat" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.is_staff.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-2">
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="first-name">
+                        {{ form.is_active.label }}
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        {{ form.is_active|attr:"class:form-control flat" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.is_active.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-2">
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-8 col-sm-6 col-xs-6" for="first-name">
+                        {{ form.team.label }}
+                    </label>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                        {{ form.team|attr:"class:form-control flat" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.team.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-2">
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="first-name">
+                        {{ form.author.label }}
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        {{ form.author|attr:"class:form-control flat" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.author.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-2">
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-8 col-sm-6 col-xs-6" for="first-name">
+                        {{ form.blogger.label }}
+                    </label>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                        {{ form.blogger|attr:"class:form-control flat" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.blogger.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	{% endif %}
+       
     <div class="row">
-      <div class="col-md-6">
-        <input class="btn btn-default" type="submit" value="{% trans 'Submit' %}" />
-      </div>
+        <div class="col-md-4 col-md-offset-2">
+            <input class="btn btn-primary" type="submit" value="Submit"/>
+        </div>
     </div>
-  </div>
 </form>
 
+
 <!-- Image upload -->
-{% include 'pbhouse/upload_template.html' %}
+{% include 'core/upload_template.html' %}
 <script type="text/javascript">
 $(function() {
-    initUploadFields($('#base-form'));
+    initUploadFields($('#user-form'));
     });
 </script>

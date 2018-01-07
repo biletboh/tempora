@@ -43,7 +43,7 @@ class CreatePost(SuccessMessageMixin, CreateView):
 
 
 class UpdatePost(UpdateView):
-    """Update an internal deposit."""
+    """Update a post."""
 
     model = Post
     form_class = PostModelForm
