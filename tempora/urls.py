@@ -1,5 +1,4 @@
-"""tempora URL Configuration
-"""
+"""Tempora URL Configuration."""
 
 from django.conf.urls import url, include
 from django.conf.urls.i18n import i18n_patterns
@@ -21,7 +20,9 @@ urlpatterns = [
                             url(r'^accounts/', include('allauth.urls')),
                             url(r'^blog/', include('blog.urls')),
                             url(r'^projects/', include('projects.urls')),
-                            url(r'^tag/', include('tags.urls'))
+                            url(r'^tag/', include('tags.urls')),
+                            url(r'^books/', include('books.urls')),
+                            url(r'^authors/', include('authors.urls')),
                             )
 
 

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'projects.apps.ProjectsConfig',
     'tags.apps.TagsConfig',
+    'books.apps.BooksConfig',
+    'authors.apps.AuthorsConfig',
 
     # filebrowser and tinymce apps
     'grappelli',

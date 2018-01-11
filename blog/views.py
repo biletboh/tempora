@@ -34,7 +34,7 @@ class CreatePost(SuccessMessageMixin, CreateView):
     form_class = PostModelForm
     template_name = 'blog/create.html'
     success_url = reverse_lazy('blog:edit_list')
-    success_message = "A post was created successfully"
+    success_message = 'Запис додано!'
 
     def get_form_kwargs(self):
         kwargs = super(CreatePost, self).get_form_kwargs()
@@ -48,7 +48,8 @@ class UpdatePost(UpdateView):
     model = Post
     form_class = PostModelForm
     template_name = 'blog/update.html'
-    success_message = 'Пост оновлено.'
+    success_url = reverse_lazy('blog:update')
+    success_message = 'Запис оновлено!'
 
     def get_success_url(self):
         return reverse_lazy('blog:update', kwargs={'slug': self.object.slug})
@@ -60,7 +61,7 @@ class UpdatePost(UpdateView):
 
 
 class DeletePost(DeleteView):
-    """Delete Post."""
+    """Delete a Post."""
 
     model = Post
     success_url = reverse_lazy('blog:edit_list')
@@ -68,7 +69,7 @@ class DeletePost(DeleteView):
 
 
 class EditPostList(LoginRequiredMixin, FilterView):
-    """Render a list of Posts to edit with ajax endless pagination."""
+    """Render a list of Posts to edit."""
 
     model = Post
     template_name = 'blog/edit_list.html'
@@ -76,6 +77,4 @@ class EditPostList(LoginRequiredMixin, FilterView):
     paginate_by = 20
     login_url = reverse_lazy('users:dashboard')
     filterset_class = PostFilter
-
-    def get_queryset(self):
-        return Post.objects.all()
+    queryset = Post.objects.all()

@@ -1,41 +1,45 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
-from django.views.generic import View, DetailView, FormView, TemplateView,\
-        DeleteView, ListView, UpdateView
-from django.views.generic.detail import SingleObjectMixin
-
-from el_pagination.views import AjaxListView
+from django.views.generic import CreateView,\
+        ListView, UpdateView, DeleteView
 
 from tags.models import Tag
-from tags.forms import TagForm
 
 
-class CreateTag(SuccessMessageMixin, FormView):
-    """
-    Create a tag.
-    """
+class CreateTag(SuccessMessageMixin, CreateView):
+    """Create a tag."""
 
-    form_class = TagForm 
+    model = Tag
+    fields = ('title', 'description')
     template_name = 'tags/create.html'
-    success_url = reverse_lazy('tags:edit_list')
-    login_url = reverse_lazy('pbhouse:dashboard') 
-    success_message = _('Тег додано.') 
+    success_url = reverse_lazy('tags:admin_list')
+    success_message = 'Тег додано!'
 
-    def form_valid(self, form):
-        tag = Tag(
-                title=form.cleaned_data['title'],
-                description=form.cleaned_data['description'],
-                )
-        tag.save()
-        form.delete_temporary_files()
-        return super(CreateTag, self).form_valid(form)
 
-    def test_func(self):
-        user = self.request.user.is_staff
-        if not user:
-            denied = _('У вас немає повноважень, щоб переглядати цю сторінку.')
-            messages.warning(self.request, denied)
-        return user
+class UpdateTag(SuccessMessageMixin, UpdateView):
+    """Update a tag."""
 
+    model = Tag
+    fields = ('title', 'description')
+    template_name = 'tags/update.html'
+    success_url = reverse_lazy('tags:update')
+    success_message = 'Тег оновлено!'
+
+
+class DeleteTag(SuccessMessageMixin, DeleteView):
+    """Delete a tag."""
+
+    model = Tag
+    success_url = reverse_lazy('tags:admin_list')
+    login_url = reverse_lazy('users:dashboard')
+    success_message = 'Тег видалено!'
+
+
+class AdminTagList(ListView):
+    """Render a list of tags to edit."""
+
+    model = Tag
+    context_object_name = 'tags'
+    template_name = 'tags/list.html'
+    paginate_by = 10
+    queryset = Tag.objects.all()
