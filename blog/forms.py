@@ -7,7 +7,7 @@ from blog.models import Post
 
 
 class PostModelForm(CustomFileFormMixin, forms.ModelForm):
-    """Render Post model form."""
+    """Render a Post model form."""
 
     image = UploadedFileField(label='Світлина', required=False)
 

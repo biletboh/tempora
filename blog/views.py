@@ -30,7 +30,7 @@ class CreatePost(SuccessMessageMixin, CreateView):
     form_class = PostModelForm
     template_name = 'blog/create.html'
     success_url = reverse_lazy('blog:edit_list')
-    success_message = "A post was created successfully"
+    success_message = 'Запис додано!'
 
     def get_form_kwargs(self):
         kwargs = super(CreatePost, self).get_form_kwargs()
@@ -39,13 +39,13 @@ class CreatePost(SuccessMessageMixin, CreateView):
 
 
 class UpdatePost(UpdateView):
-    """Update an internal deposit."""
+    """Update a Post."""
 
     model = Post
     form_class = PostModelForm
     template_name = 'blog/update.html'
     success_url = reverse_lazy('blog:update')
-    success_message = 'Пост оновлено.'
+    success_message = 'Запис оновлено!'
 
     def get_form_kwargs(self):
         kwargs = super(UpdatePost, self).get_form_kwargs()
@@ -54,7 +54,7 @@ class UpdatePost(UpdateView):
 
 
 class DeletePost(DeleteView):
-    """Delete Post."""
+    """Delete a Post."""
 
     model = Post
     success_url = reverse_lazy('blog:edit_list')
@@ -62,12 +62,10 @@ class DeletePost(DeleteView):
 
 
 class EditPostList(ListView):
-    """Render a list of Posts to edit with ajax endless pagination."""
+    """Render a list of Posts to edit."""
 
-    context_object_name = "posts"
+    model = Post
+    context_object_name = 'posts'
     template_name = 'blog/edit_list.html'
-    page_template = 'blog/posts.html'
-    login_url = reverse_lazy('users:dashboard')
-
-    def get_queryset(self):
-        return Post.objects.all()
+    paginate_by = 10
+    queryset = Post.objects.all()
