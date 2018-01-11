@@ -29,7 +29,7 @@ class CreateBook(SuccessMessageMixin, CreateView):
 
     form_class = BookModelForm
     template_name = 'books/create.html'
-    success_url = reverse_lazy('books:admin_list')
+    success_url = reverse_lazy('books:update_list')
     success_message = 'Книгу додано!'
 
 
@@ -57,6 +57,6 @@ class AdminBookList(ListView):
 
     model = Book
     context_object_name = 'books'
-    template_name = 'books/list.html'
+    template_name = 'books/update_list.html'
     paginate_by = 10
     queryset = Book.objects.all()

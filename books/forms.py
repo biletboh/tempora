@@ -11,8 +11,9 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
     image = UploadedFileField(label='Світлина', required=False)
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
         super(BookModelForm, self).__init__(*args, **kwargs)
+        if self.instance:
+            self.fields['image'].initial = self.instance.image
 
     class Meta:
         model = Book
@@ -21,3 +22,8 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
                   'pages', 'cover', 'weight', 'height', 'length',
                   'depth', 'publisher', 'isbn_13', 'isbn_10',
                   'authors', 'tags', 'slug')
+        widgets = {
+            'short_descr': forms.Textarea(attrs={'cols': 80, 'rows': 2}),
+            'from_author': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 12}),
+        }

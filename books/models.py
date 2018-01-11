@@ -35,25 +35,24 @@ class Book(models.Model):
                         blank=True, null=True)
     in_stock = models.CharField('У наявності', max_length=10, default='Тверда',
                                 choices=IN_STOCK, blank=True)
-    pages = models.IntegerField('Сторінки')
+    pages = models.IntegerField('Сторінки', blank=True)
     cover = models.CharField('Обгортка', max_length=10, default='Тверда',
                              choices=COVERS, blank=True)
     weight = models.IntegerField('Вага (г)', null=True, blank=True)
     height = models.DecimalField(
-                        'Висота', max_digits=6, decimal_places=2,
-                        validators=[MinValueValidator(Decimal('0.01'))],
+                        'Висота', max_digits=6, decimal_places=1,
+                        validators=[MinValueValidator(Decimal('0.1'))],
                         blank=True, null=True)
     length = models.DecimalField(
-                        'Ширина', max_digits=6, decimal_places=2,
-                        validators=[MinValueValidator(Decimal('0.01'))],
+                        'Ширина', max_digits=6, decimal_places=1,
+                        validators=[MinValueValidator(Decimal('0.1'))],
                         blank=True, null=True)
     depth = models.DecimalField(
-                        'Глибина', max_digits=6, decimal_places=2,
-                        validators=[MinValueValidator(Decimal('0.01'))],
+                        'Глибина', max_digits=6, decimal_places=1,
+                        validators=[MinValueValidator(Decimal('0.1'))],
                         blank=True, null=True)
-    publisher = models.IntegerField('Видавництво',
-                                    default='Видавничий дім "Темпора"')
-
+    publisher = models.CharField('Видавництво', max_length=90,
+                                 default='Видавничий дім "Темпора"')
     isbn_13 = models.CharField('ISBN-13', max_length=15, blank=True)
     isbn_10 = models.CharField('ISBN-10', max_length=15, blank=True)
 

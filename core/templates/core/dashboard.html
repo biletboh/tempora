@@ -35,8 +35,6 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
         <!-- File Uploader Css -->
         <link rel="stylesheet" href="{% static 'ajaxuploader/css/fileuploader.css' %}">
 
@@ -53,10 +51,9 @@
                         <div class="navbar nav_title" style="border: 0;">
                             <a href="{% url 'users:dashboard' %}" class="site_title"><i class="fa fa-book"></i> <span>Tempora</span></a>
                         </div>
-
                         <div class="clearfix"></div>
 
-                        <!-- menu profile quick info -->
+                        <!-- Menu profile quick info -->
                         <div class="profile clearfix">
                             <div class="profile_pic">
                                 {% if user.avatar %}
@@ -74,8 +71,6 @@
                         </div>
                         <!-- /menu profile quick info -->
 
-                        <br />
-
                         <!-- sidebar menu -->
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
@@ -87,37 +82,28 @@
                                     </li>
                                 </ul>
                             </div>
-                            {% if user.is_superuser %}
                             <div class="menu_section">
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-user"></i>{% trans "Користувачі" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{% url 'users:create' %}">{% trans "Додати" %} </a></li>
-                                            <li><a href="{% url 'users:user_list' %}">{% trans "Модерувати" %}</a></li>
+                                            <li><a href="{% url 'users:create' %}">{% trans "Додати користувача" %} </a></li>
+                                            <li><a href="{% url 'users:user_list' %}">{% trans "Дивитися користувачів" %}</a></li>
+                                        </ul>
+                                    </li>
+									<li><a><i class="fa fa-pencil"></i>{% trans "Блог" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'blog:create' %}">{% trans "Додати запис" %}</a></li>
+                                            <li><a href="{% url 'blog:edit_list' %}">{% trans "Дивитися записи" %}</a></li>
+                                        </ul>
+                                    </li>
+									<li><a><i class="fa fa-pencil"></i>{% trans "Книги" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'books:create' %}">{% trans "Додати книгу" %}</a></li>
+                                            <li><a href="{% url 'books:update_list' %}">{% trans "Дивитися книгу" %}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
-                            {% endif %}
-                            {% if user.is_staff or user.is_superuser %}
-                            <div class="menu_section">
-                                <ul class="nav side-menu">
-                                    <li><a><i class="fa fa-pencil"></i>{% trans "Блог" %}<span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="{% url 'blog:create' %}">{% trans "Додати пост" %}</a></li>
-                                            <li><a href="{% url 'blog:edit_list' %}">{% trans "Дивитися пости" %}</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a><i class="fa fa-pencil"></i> Tags <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="{% url 'tags:create' %}">{% trans "Додати тег" %}</a></li>
-                                            <li><a href="">{% trans "Дивитися теги" %}</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            {% endif %}
-
                         </div>
                         <!-- /sidebar menu -->
 
@@ -210,7 +196,6 @@
 		<script src="{% static 'core/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 
         <script src="{% static 'pbhouse/vendor/iCheck/icheck.min.js' %}"></script>
-        <script src="{% static 'pbhouse/js/dashboard.js' %}"></script>
         <!-- File Uploader -->
         <script src="{% static 'ajaxuploader/js/fileuploader.js' %}"></script>
         <script src="{% static 'file_form/file_form.js' %}"></script>
