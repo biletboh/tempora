@@ -84,24 +84,31 @@
                             </div>
                             <div class="menu_section">
                                 <ul class="nav side-menu">
-                                    <li><a><i class="fa fa-user"></i>{% trans "Користувачі" %}<span class="fa fa-chevron-down"></span></a>
+                                    <li><a><i class="fa fa-users"></i>{% trans "Користувачі" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{% url 'users:create' %}">{% trans "Додати користувача" %} </a></li>
-                                            <li><a href="{% url 'users:user_list' %}">{% trans "Дивитися користувачів" %}</a></li>
+                                            <li><a href="{% url 'users:update_list' %}">{% trans "Дивитися користувачів" %}</a></li>
                                         </ul>
                                     </li>
-									<li><a><i class="fa fa-pencil"></i>{% trans "Блог" %}<span class="fa fa-chevron-down"></span></a>
+									<li><a><i class="fa fa-newspaper-o" aria-hidden="true"></i>{% trans "Блог" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{% url 'blog:create' %}">{% trans "Додати запис" %}</a></li>
-                                            <li><a href="{% url 'blog:edit_list' %}">{% trans "Дивитися записи" %}</a></li>
+                                            <li><a href="{% url 'blog:update_list' %}">{% trans "Дивитися записи" %}</a></li>
                                         </ul>
                                     </li>
-									<li><a><i class="fa fa-pencil"></i>{% trans "Книги" %}<span class="fa fa-chevron-down"></span></a>
+									<li><a><i class="fa fa-book" aria-hidden="true"></i>{% trans "Книги" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{% url 'books:create' %}">{% trans "Додати книгу" %}</a></li>
-                                            <li><a href="{% url 'books:update_list' %}">{% trans "Дивитися книгу" %}</a></li>
+                                            <li><a href="{% url 'books:update_list' %}">{% trans "Дивитися книги" %}</a></li>
                                         </ul>
                                     </li>
+									<li><a><i class="fa fa-user-o" aria-hidden="true"></i>{% trans "Автори" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'authors:create' %}">{% trans "Додати автора" %}</a></li>
+                                            <li><a href="{% url 'authors:update_list' %}">{% trans "Дивитися авторів" %}</a></li>
+                                        </ul>
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>

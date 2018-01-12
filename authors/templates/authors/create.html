@@ -2,23 +2,23 @@
 
 {% load static %}
 {% load widget_tweaks %}
-{% load i18n %}
 
-{% block head_title %}{% trans "Редагувати акаунт" %}{% endblock %}
+{% block head_title %}Додати автора{% endblock %}
 
 {% block content %}
+
 <div class="right_col" role="main">
 	<div class="clearfix"></div>
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-					<h2>Редагувати акаунт</small></h2>
+					<h2>Додати автора</small></h2>
 					<div class="clearfix"></div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						{% include "users/form_users.html" %}
+						{% include "authors/form_author.html" %}
 					</div>
 				</div>
 			</div>

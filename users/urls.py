@@ -25,5 +25,5 @@ urlpatterns = [
 
             url(
                 r'^list/$', views.UserList.as_view(),
-                name='user_list'),
+                name='update_list'),
             ]

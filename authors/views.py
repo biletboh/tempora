@@ -29,7 +29,7 @@ class CreateAuthor(SuccessMessageMixin, CreateView):
 
     form_class = AuthorModelForm
     template_name = 'authors/create.html'
-    success_url = reverse_lazy('authors:admin_list')
+    success_url = reverse_lazy('authors:update_list')
     success_message = 'Автора додано!'
 
 
@@ -52,11 +52,11 @@ class DeleteAuthor(SuccessMessageMixin, DeleteView):
     success_message = 'Автора видалено!'
 
 
-class AdminAuthorList(ListView):
+class UpdateAuthorList(ListView):
     """Render a list of authors to edit."""
 
     model = Author
     context_object_name = 'authors'
-    template_name = 'authors/list.html'
+    template_name = 'authors/update_list.html'
     paginate_by = 10
     queryset = Author.objects.all()

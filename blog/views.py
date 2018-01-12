@@ -33,7 +33,7 @@ class CreatePost(SuccessMessageMixin, CreateView):
 
     form_class = PostModelForm
     template_name = 'blog/create.html'
-    success_url = reverse_lazy('blog:edit_list')
+    success_url = reverse_lazy('blog:update_list')
     success_message = 'Запис додано!'
 
     def get_form_kwargs(self):
@@ -64,15 +64,15 @@ class DeletePost(DeleteView):
     """Delete a Post."""
 
     model = Post
-    success_url = reverse_lazy('blog:edit_list')
+    success_url = reverse_lazy('blog:update_list')
     login_url = reverse_lazy('users:dashboard')
 
 
-class EditPostList(LoginRequiredMixin, FilterView):
+class UpdatePostList(LoginRequiredMixin, FilterView):
     """Render a list of Posts to edit."""
 
     model = Post
-    template_name = 'blog/edit_list.html'
+    template_name = 'blog/update_list.html'
     context_object_name = 'posts'
     paginate_by = 20
     login_url = reverse_lazy('users:dashboard')

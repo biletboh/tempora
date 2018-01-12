@@ -64,7 +64,7 @@ class UserList(SuccessMessageMixin, IsSuperUserTestMixin, FilterView):
     """Render a list of Users to edit."""
 
     model = UserProfile
-    template_name = 'users/user_list.html'
+    template_name = 'users/update_list.html'
     context_object_name = "users"
     paginate_by = 20
     login_url = reverse_lazy('users:profile')
