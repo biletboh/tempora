@@ -108,7 +108,12 @@
                                             <li><a href="{% url 'authors:update_list' %}">{% trans "Дивитися авторів" %}</a></li>
                                         </ul>
                                     </li>
-
+									<li><a><i class="fa fa-tags" aria-hidden="true"></i>{% trans "Теги" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'tags:create' %}">{% trans "Додати тег" %}</a></li>
+                                            <li><a href="{% url 'tags:update_list' %}">{% trans "Дивитися теги" %}</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -116,16 +121,7 @@
 
                         <!-- /menu footer buttons -->
                         <div class="sidebar-footer hidden-small">
-                            <a data-toggle="tooltip" data-placement="top" title="Settings">
-                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                            </a>
-                            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                            </a>
-                            <a data-toggle="tooltip" data-placement="top" title="Lock">
-                                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                            </a>
-                            <a data-toggle="tooltip" data-placement="top" title="Logout" href="{% url 'account_logout' %}">
+                            <a class="pull-right" data-toggle="tooltip" data-placement="top" title="Logout" href="{% url 'account_logout' %}">
                                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                             </a>
                         </div>
@@ -188,9 +184,12 @@
         <!-- footer content -->
         <footer>
             <div class="pull-right">
-                Tempora</a>
-            </div>
-            <div class="clearfix"></div>
+				<a href="{% url 'pbhouse:landing' %}#about">Tempora</a>
+			</div>
+			<div class="copyright">
+				<i class="fa fa-copyright" aria-hidden="true"></i> 2018 видавництво "Темпора"
+			</div>
+			<div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
 

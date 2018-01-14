@@ -32,7 +32,7 @@ class BaseUserModelForm(CustomFileFormMixin, forms.ModelForm):
 class AccountUserModelForm(BaseUserModelForm):
 
     def save(self, commit=True):
-        instance = super(UserModelForm, self)\
+        instance = super(AccountUserModelForm, self)\
                 .save(commit=False)
 
         # set user profile image

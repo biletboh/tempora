@@ -29,9 +29,11 @@
 							<li>
 								<h3>{{ user.first_name }} {{ user.last_name }}</h3>
 							</li>
+							{% if user.info %}
 							<li>
 								<i class="fa fa-briefcase user-profile-icon"></i> {{ user.info }} 
 							</li>
+							{% endif %}
 						</ul>
 
 						<a href="{% url 'users:account_update' user.pk %}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>{% trans "Оновити" %}</a>

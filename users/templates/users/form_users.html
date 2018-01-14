@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.email.auto_id }}">
                         {{ form.email.label }}<span class="required">*</span>
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -29,7 +29,7 @@
             </div>
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.first_name.auto_id }}">
                         {{ form.first_name.label }}<span class="required">*</span>
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -42,7 +42,7 @@
             </div>
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.last_name.auto_id }}">
                         {{ form.last_name.label }}<span class="required">*</span>
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -57,7 +57,7 @@
 		<div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.info.auto_id }}">
                         {{ form.info.label }}
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -74,7 +74,7 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.position.auto_id }}">
                         {{ form.position.label }}
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -89,7 +89,7 @@
 		<div class="col-md-6">
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.avatar.auto_id }}">
                         {{ form.avatar.label }}
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -106,7 +106,7 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.facebook.auto_id }}">
                         {{ form.facebook.label }}
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -119,7 +119,7 @@
             </div>
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.twitter.auto_id }}">
                         {{ form.twitter.label }}
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -134,7 +134,7 @@
 		<div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.linkedin.auto_id }}">
                         {{ form.linkedin.label }}
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -147,7 +147,7 @@
             </div>
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.goodreads.auto_id }}">
                         {{ form.goodreads.label }}
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -165,7 +165,7 @@
         <div class="col-md-2">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="first-name">
+                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="{{ form.is_staff.auto_id }}">
                         {{ form.is_staff.label }}
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -180,7 +180,7 @@
 		<div class="col-md-2">
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="first-name">
+                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="{{ form.is_active.auto_id }}">
                         {{ form.is_active.label }}
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -195,7 +195,7 @@
 		<div class="col-md-2">
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-8 col-sm-6 col-xs-6" for="first-name">
+                    <label class="control-label col-md-8 col-sm-6 col-xs-6" for="{{ form.team.auto_id }}">
                         {{ form.team.label }}
                     </label>
                     <div class="col-md-4 col-sm-6 col-xs-6">
@@ -210,7 +210,7 @@
 		<div class="col-md-2">
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="first-name">
+                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="{{ form.author.auto_id }}">
                         {{ form.author.label }}
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -225,7 +225,7 @@
 		<div class="col-md-2">
 			<div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-8 col-sm-6 col-xs-6" for="first-name">
+                    <label class="control-label col-md-8 col-sm-6 col-xs-6" for="{{ form.blogger.auto_id }}">
                         {{ form.blogger.label }}
                     </label>
                     <div class="col-md-4 col-sm-6 col-xs-6">

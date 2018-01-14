@@ -39,8 +39,11 @@ class UpdateAuthor(SuccessMessageMixin, UpdateView):
     model = Author
     form_class = AuthorModelForm
     template_name = 'authors/update.html'
-    success_url = reverse_lazy('authors:update')
     success_message = 'Автора оновлено!'
+
+    def get_success_url(self):
+        return reverse_lazy('authors:update',
+                            kwargs={'slug': self.object.slug})
 
 
 class DeleteAuthor(SuccessMessageMixin, DeleteView):

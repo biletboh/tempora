@@ -39,8 +39,10 @@ class UpdateBook(SuccessMessageMixin, UpdateView):
     model = Book
     form_class = BookModelForm
     template_name = 'books/update.html'
-    success_url = reverse_lazy('books:update')
     success_message = 'Книгу оновлено!'
+
+    def get_success_url(self):
+        return reverse_lazy('books:update', kwargs={'slug': self.object.slug})
 
 
 class DeleteBook(SuccessMessageMixin, DeleteView):

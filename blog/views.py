@@ -48,7 +48,6 @@ class UpdatePost(UpdateView):
     model = Post
     form_class = PostModelForm
     template_name = 'blog/update.html'
-    success_url = reverse_lazy('blog:update')
     success_message = 'Запис оновлено!'
 
     def get_success_url(self):
