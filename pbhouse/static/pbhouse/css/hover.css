@@ -7,7 +7,7 @@
   position: relative;
   text-align: center;
   cursor: default;
-  background: #fff url(../images/bgimg.jpg) no-repeat center center
+  background: #fff no-repeat center center
 }
 
 .view .mask,

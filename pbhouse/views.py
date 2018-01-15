@@ -8,6 +8,7 @@ from django.views.generic import TemplateView, FormView
 from blog.models import Post
 from pbhouse.forms import ContactForm
 from pbhouse.utils import send_contact_message
+from projects.models import Project
 from users.models import UserProfile as UserProfileModel
 
 
@@ -58,6 +59,7 @@ class LandingPage(SuccessMessageMixin, AjaxableResponseMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super(LandingPage, self).get_context_data(**kwargs)
         context['posts'] = Post.objects.all()[:3]
+        context['projects'] = Project.objects.all()
         return context
 
 

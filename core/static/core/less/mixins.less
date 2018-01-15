@@ -23,12 +23,10 @@
     border: 2px solid @border;
     color: @color;
     background-color: transparent;
-    &:hover,
-    &:focus {
+	&:hover, &:focus, &:active {
 		.btn-hover(@background; @border);
-    }
+	}
 }
-
 .button-variant(@color; @background; @border) {
 	color: @color;
 	background-color: @background;
@@ -106,4 +104,12 @@
         color: lighten(@theme-primary, 35%);
         text-decoration: none;
     }
+}
+.header-dark {
+	font-size: 35px;
+	span {
+		background-color: rgba(0,0,0,.5);
+		padding: 5px 10px;
+		line-height: 1.7em;
+	}
 }

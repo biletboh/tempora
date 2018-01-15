@@ -11,7 +11,7 @@ urlpatterns = [
             url(r'^create/$', views.CreateBook.as_view(),
                 name='create'),
             url(r'^(?P<slug>[-\w]+)/$', views.BookPage.as_view(), name='page'),
-            url(r'^update/list/$', views.AdminBookList.as_view(),
+            url(r'^update/list/$', views.UpdateBookList.as_view(),
                 name='update_list'),
             url(r'^update/(?P<slug>[-\w]+)/$',
                 views.UpdateBook.as_view(),

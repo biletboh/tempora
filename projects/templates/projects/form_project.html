@@ -50,14 +50,14 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.body.auto_id }}">
-                        {{ form.body.label }}<span class="required">*</span>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.description.auto_id }}">
+                        {{ form.description.label }}<span class="required">*</span>
                     </label>
                     <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.body|attr:"class:form-control" }}
+                        {{ form.description|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
-                        {{ form.body.errors }}
+                        {{ form.description.errors }}
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.image.auto_id }}">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.image.auto_id }}first-name">
                         {{ form.image.label }}<span class="required">*</span>
                     </label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
@@ -95,6 +95,25 @@
 					{% endif %}
                 </div>
             </div>
+        </div>
+    </div>
+	<div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.curators.auto_id }}">
+                        {{ form.curators.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        {{ form.curators|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.curators.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
         </div>
     </div>
     <div class="row">

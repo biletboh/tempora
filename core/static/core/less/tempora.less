@@ -224,12 +224,7 @@ header {
             text-align: right;
 			margin: 2em 3em;
 			h1 {
-				font-size: 35px;
-				span {
-					background-color: rgba(0,0,0,.5);
-					padding: 5px 10px;
-					line-height: 1.7em;
-				}
+				.header-dark;	
 			}
             @media only screen and (min-width: 768px) {
                 h1 {
@@ -492,7 +487,7 @@ article {
 #top.btn {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     bottom: 90px;
     right: 30px;
 	color: #ffffff;
@@ -754,4 +749,38 @@ body {
 // Pagination
 .pagination {
     display: block;
+}
+
+// Owl carousel
+#owl-main .owl-pagination {
+	bottom: 30px;
+}
+#owl-main:hover .owl-pagination {
+	bottom: 55px;
+}
+#owl-main .caption h2 span {
+	font-size: 50px;
+	font-weight: 600;
+	padding: .250em 0.250em;
+}
+.owl-pagination .owl-page span {
+	background-color: #DA5068;
+}
+.owl-pagination .owl-page.active span, .owl-pagination .owl-page:hover span {
+	background-color: @theme-primary;
+}
+#projects h2 {
+	.header-dark;
+}
+#projects p span {
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: .250em 0.450em;
+	line-height: 1.8em;
+}
+#projects .btn-primary {
+	.btn-base(@theme-primary;
+	@theme-primary;
+	@theme-primary);
+	color: #ffffff;
+	background-color: rgba(163, 17, 42, 0.5);
 }

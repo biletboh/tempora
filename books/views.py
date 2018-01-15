@@ -49,12 +49,12 @@ class DeleteBook(SuccessMessageMixin, DeleteView):
     """Delete a book."""
 
     model = Book
-    success_url = reverse_lazy('books:admin_list')
+    success_url = reverse_lazy('books:update_list')
     login_url = reverse_lazy('users:dashboard')
     success_message = 'Книгу видалено!'
 
 
-class AdminBookList(ListView):
+class UpdateBookList(ListView):
     """Render a list of books to edit."""
 
     model = Book

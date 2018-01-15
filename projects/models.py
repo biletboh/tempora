@@ -14,8 +14,7 @@ class Project(models.Model):
     pub_date = models.DateTimeField('Дата публікації',
                                     default=timezone.datetime.now)
     image = ThumbnailerImageField('Світлина',
-                                  upload_to='photos/projects',
-                                  blank=True) 
+                                  upload_to='photos/projects')
     curators = models.ManyToManyField(UserProfile,
                                       related_name='projects')
     slug = models.SlugField('Посилання', unique=True, null=True)
@@ -27,4 +26,3 @@ class Project(models.Model):
 
     def __str__(self):
         return 'Project %s' % self.title
-

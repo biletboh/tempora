@@ -96,6 +96,12 @@
                                             <li><a href="{% url 'blog:update_list' %}">{% trans "Дивитися записи" %}</a></li>
                                         </ul>
                                     </li>
+									<li><a><i class="fa fa-rocket" aria-hidden="true"></i>{% trans "Проекти" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'projects:create' %}">{% trans "Додати проекти" %}</a></li>
+                                            <li><a href="{% url 'projects:update_list' %}">{% trans "Дивитися проекти" %}</a></li>
+                                        </ul>
+                                    </li>
 									<li><a><i class="fa fa-book" aria-hidden="true"></i>{% trans "Книги" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{% url 'books:create' %}">{% trans "Додати книгу" %}</a></li>

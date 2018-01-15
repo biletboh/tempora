@@ -14,6 +14,14 @@
   color: #f1768b;
   text-decoration: none;
 }
+.header-dark {
+  font-size: 35px;
+}
+.header-dark span {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  line-height: 1.7em;
+}
 html,
 body {
   height: 100%;
@@ -483,7 +491,8 @@ article .post-attribution a {
   background-color: transparent;
 }
 .btn-default:hover,
-.btn-default:focus {
+.btn-default:focus,
+.btn-default:active {
   border: 2px solid #A3112A;
   outline: none;
   color: white;
@@ -495,7 +504,8 @@ article .post-attribution a {
   background-color: transparent;
 }
 .btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:focus,
+.btn-primary:active {
   border: 2px solid #A3112A;
   outline: none;
   color: white;
@@ -525,7 +535,13 @@ article .post-attribution a {
 .pagination > li:first-child > a:focus,
 .pagination > li:first-child > span:focus,
 .pagination > li:last-child > a:focus,
-.pagination > li:last-child > span:focus {
+.pagination > li:last-child > span:focus,
+.pagination > li > a:active,
+.pagination > li > span:active,
+.pagination > li:first-child > a:active,
+.pagination > li:first-child > span:active,
+.pagination > li:last-child > a:active,
+.pagination > li:last-child > span:active {
   border: 2px solid #A3112A;
   outline: none;
   color: white;
@@ -549,7 +565,7 @@ article .post-attribution a {
 #top.btn {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 100;
   bottom: 90px;
   right: 30px;
   color: #ffffff;
@@ -797,4 +813,50 @@ body {
 }
 .pagination {
   display: block;
+}
+#owl-main .owl-pagination {
+  bottom: 30px;
+}
+#owl-main:hover .owl-pagination {
+  bottom: 55px;
+}
+#owl-main .caption h2 span {
+  font-size: 50px;
+  font-weight: 600;
+  padding: .250em 0.250em;
+}
+.owl-pagination .owl-page span {
+  background-color: #DA5068;
+}
+.owl-pagination .owl-page.active span,
+.owl-pagination .owl-page:hover span {
+  background-color: #A3112A;
+}
+#projects h2 {
+  font-size: 35px;
+}
+#projects h2 span {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  line-height: 1.7em;
+}
+#projects p span {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: .250em 0.450em;
+  line-height: 1.8em;
+}
+#projects .btn-primary {
+  border: 2px solid #A3112A;
+  color: #A3112A;
+  background-color: transparent;
+  color: #ffffff;
+  background-color: rgba(163, 17, 42, 0.5);
+}
+#projects .btn-primary:hover,
+#projects .btn-primary:focus,
+#projects .btn-primary:active {
+  border: 2px solid #A3112A;
+  outline: none;
+  color: white;
+  background-color: #A3112A;
 }

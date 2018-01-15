@@ -1,0 +1,102 @@
+{% extends "core/dashboard.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+{% load paginate_filters %}
+
+{% block head_title %}Список проектів{% endblock %}
+
+{% block content %}
+
+<div class="right_col" role="main">
+	<div class="">
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>Список проектів</small></h2>
+						<div class="clearfix"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Заголовок</th>
+										<th>Дата</th>
+										<th>Дії</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for project in projects %}
+									<tr>
+										<td>{{ project.id }}</td>
+										<td>{{ project.title }}</td>
+										<td>{{ project.pub_date }}</td>
+										<td>
+											<a href="{% url 'projects:update' project.slug %}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+											<button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{{ project.id }}">
+												<i class="fa fa-trash-o"></i>
+											</button>
+										</td>
+									</tr>
+
+									<!-- Delete Modal -->
+									<div class="modal fade" id="{{ project.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title" id="myModalLabel">Видалити</h4>
+												</div>
+												<div class="modal-body">
+													<p>Ви хочете видалити {{ project.title }}?</p> 
+												</div>
+												<div class="modal-footer">
+													<form action="{% url 'projects:delete' project.pk %}" method="post">{% csrf_token %}
+														<input type="submit" class="btn btn-primary" value="Так" />
+														<button type="button" class="btn btn-default" data-dismiss="modal">Ні</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									{% endfor %}
+								</tbody>
+							</table>
+
+							{% if is_paginated %}
+							<ul class="pagination">
+								{% if page_obj.has_previous %}
+								<li><a href="?{% filter_page page=page_obj.previous_page_number %}">&laquo;</a></li>
+								{% else %}
+								<li class="disabled"><span>&laquo;</span></li>
+								{% endif %}
+								{% for i in paginator.page_range %}
+								{% if page_obj.number == i %}
+								<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+								{% else %}
+								<li><a href="?{% filter_page page=i %}">{{ i }}</a></li>
+								{% endif %}
+								{% endfor %}
+								{% if page_obj.has_next %}
+								<li><a href="?{% filter_page page=page_obj.next_page_number %}">&raquo;</a></li>
+								{% else %}
+								<li class="disabled"><span>&raquo;</span></li>
+								{% endif %}
+							</ul>
+							{% endif %}
+						</div>
+
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
