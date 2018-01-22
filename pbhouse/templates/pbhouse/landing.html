@@ -86,19 +86,19 @@
 			  <div class="caption vertical-center text-right">
 				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
 				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="#" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
+				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
 			  </div>
 			  {% elif forloop.counter|divisibleby:3 %}
 			  <div class="caption vertical-center text-left">
 				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
 				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="#" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
+				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
 			  </div>
 			  {% else %}
 			  <div class="caption vertical-center text-center">
 				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
 				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="#" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
+				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
 			  </div>
 			  {% endif %}
 		  </div>

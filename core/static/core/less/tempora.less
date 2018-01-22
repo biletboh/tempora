@@ -326,7 +326,7 @@ article {
     margin-bottom: 50px;
     img {
         margin: 0 auto;
-        border: 7px solid;
+        border: 4px solid;
 		border-color: lighten(@theme-primary, 45%);
     }
     h4 {
@@ -782,5 +782,22 @@ body {
 	@theme-primary;
 	@theme-primary);
 	color: #ffffff;
-	background-color: rgba(163, 17, 42, 0.5);
+	background-color: rgba(163, 17, 42, 0.2);
 }
+.project {
+	padding: 25px 0;
+	&.header {
+		padding: 0 0 25px;
+		min-height: 40rem;
+	}
+	img {
+		margin: auto;
+	}
+	hr {
+		margin-left: 0;
+	}
+	.text-muted {
+		margin-top: 2rem;
+	}
+}
+

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from easy_thumbnails.fields import ThumbnailerImageField
+from tags.models import Tag
 from users.models import UserProfile
 
 
@@ -15,8 +16,9 @@ class Project(models.Model):
                                     default=timezone.datetime.now)
     image = ThumbnailerImageField('Світлина',
                                   upload_to='photos/projects')
-    curators = models.ManyToManyField(UserProfile,
-                                      related_name='projects')
+    curators = models.ManyToManyField(UserProfile, related_name='projects')
+    project_tag = models.ForeignKey(Tag, related_name='project_tag', null=True)
+    tags = models.ManyToManyField(Tag, related_name='projects', blank=True)
     slug = models.SlugField('Посилання', unique=True, null=True)
 
     class Meta:

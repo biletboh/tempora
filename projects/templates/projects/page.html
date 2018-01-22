@@ -3,30 +3,76 @@
 {% load thumbnail %}
 {% load static %}
 
+{% block navbar %}{% include "pbhouse/navbar_landing.html" %}{% endblock %}
+
 {% block content %}
-
-{% include "core/navbar.html" %}
-
-<!-- Post page -->
-<header class="post-header" style="background-image: url('{{ object.image.large.url }}')">
-	<div class="post-heading">
-		<h1><span>{{ object.title }}</span></h1>
-	</div>
+<header class="project header" style="background-image: url('{{ object.image.extra_large.url }}')">
 </header>
-<article>
+<section class="project">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				{{ object.body|safe }} 
-			</div>
-		</div>
-		<div class="row post-attribution">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<span class="meta"><a href="#">{{ object.user.first_name }} {{ object.user.last_name }}</a></span>
-				<span class="meta">{{ object.pub_date }}</span>
+			<div class="col-md-10 col-md-offset-1">
+				<div class="text-center">
+					<h1>{{ object.title }}</h1>
+					<p>{{ object.short_descr|safe }}</p>
+				</div>
 			</div>
 		</div>
 	</div>
-</article>
-
+</section>
+<section class="project" id="blog">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="row post-preview-middle">
+					{% for post in posts %}
+					<div class="col-md-4">
+						<div class="row">
+							<div class="col-md-12 post-img-middle">
+								<div class="view view-first">
+									<img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
+									<div class="mask">
+										<a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Читати</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="post-preview-text">
+									<a href="{% url 'blog:page' post.id %}" class="">
+										<h2 class="post-title middle">{{ post.title }}</h2>
+									</a>
+									<p>{{ post.short_descr }}</p>
+									<p class="post-meta">
+									<span class="meta"><a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></span>
+									<span class="meta">{{ post.pub_date }}</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="project" id="contact">
+  <div class="container">
+    <div class="row">
+		<div class="col-lg-5 text-center">
+			{% for curator in object.curators.all %}
+			<div class="curators team-member">
+				<img src="{{ curator.avatar.extra_large_avatar.url }}" class="img-responsive img-circle" alt="Curator's image">
+				<p class="text-muted">Куратор: {{ curator.first_name }} {{ curator.last_name }}</p>
+			</div>
+			{% endfor %}
+		</div>
+      <div class="col-lg-7 text-left">
+        <h2 class="section-heading">Про проект</h2>
+        <hr class="primary">
+		<p>{{ object.description|safe }}</p>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

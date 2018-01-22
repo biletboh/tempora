@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'el_pagination',
     'datetimewidget',
     'phonenumber_field',
+    'ajax_select',
 ]
 
 
@@ -210,9 +211,11 @@ THUMBNAIL_ALIASES = {
         'extra_small': {'size': (45, 45), 'crop': True},
         'small': {'size': (60, 60), 'crop': True},
         'big_avatar': {'size': (150, 150), 'crop': True},
+        'extra_large_avatar': {'size': (300, 300), 'crop': True},
         'preview': {'size': (250, 200), 'crop': True},
         'blog_first': {'size': (960, 720), 'crop': True},
         'blog_second': {'size': (400, 300), 'crop': True},
+        'project': {'size': (1000, 480), 'crop': True},
         'medium': {'size': (750, 450), 'crop': True},
         'large': {'size': (800, 480), 'crop': True},
         'extra_large': {'size': (1200, 600), 'crop': True},

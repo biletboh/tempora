@@ -5,7 +5,9 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
+
 from filebrowser.sites import site
+from ajax_select import urls as ajax_select_urls
 
 
 urlpatterns = [
@@ -14,6 +16,7 @@ urlpatterns = [
             url(r'^tinymce/', include('tinymce.urls')),
             url(r'^admin/filebrowser/', include(site.urls)),
             url(r'^grappelli/', include('grappelli.urls')),
+            url(r'^ajax_select/', include(ajax_select_urls)),
             ] + i18n_patterns(
                             url(r'^', include('pbhouse.urls')),
                             url(r'^profiles/', include('users.urls')),

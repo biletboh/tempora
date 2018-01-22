@@ -64,13 +64,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.slug.auto_id }}">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.slug.auto_id }}">
                         {{ form.slug.label }}<span class="required">*</span>
                     </label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-md-10 col-sm-10 col-xs-12">
                         {{ form.slug|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -79,10 +79,28 @@
                 </div>
             </div>
         </div>
+        
+    </div>
+	<div class="row">
         <div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.image.auto_id }}first-name">
+					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.project_tag.auto_id }}">
+                        {{ form.project_tag.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        {{ form.project_tag|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.project_tag.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.image.auto_id }}">
                         {{ form.image.label }}<span class="required">*</span>
                     </label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
@@ -98,6 +116,23 @@
         </div>
     </div>
 	<div class="row">
+		<div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
+                        {{ form.tags.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        {{ form.tags|attr:"class:form-control" }}
+                    </div>
+					{% if form.tags.errors %}
+                    <div class="col-md-12">
+                        {{ form.tags.errors }}
+                    </div>
+					{% endif %}
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             <div class="row">
                 <div class="form-group">
@@ -113,8 +148,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-        </div>
     </div>
     <div class="row">
         <div class="col-md-12 text-center">
@@ -126,8 +159,13 @@
 <!-- Image upload -->
 {% include 'core/upload_template.html' %}
 
+{% block js %}
 <script type="text/javascript">
-    $(function() {
-        initUploadFields($('#post-form'));
-    });
+$(function() {
+	initUploadFields($('#post-form'));
+	var kill = $('.ui-icon.ui-icon-trash');
+    kill.empty();
+    kill.append('<i class="fa fa-lg fa-trash" aria-hidden="true"></i>');
+});
 </script>
+{% endblock %}

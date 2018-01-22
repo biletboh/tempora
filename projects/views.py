@@ -1,17 +1,24 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, UpdateView,\
+from django.views.generic import CreateView, DetailView, UpdateView,\
     DeleteView, ListView
 
+from blog.models import Post
 from projects.forms import ProjectModelForm
 from projects.models import Project
 from core.mixins import IsSuperUserTestMixin
 
 
-class ProjectPage(TemplateView):
+class ProjectPage(DetailView):
     """Render projects page."""
 
-    template_name = 'projects/project_page.html'
+    model = Project
+    template_name = 'projects/page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectPage, self).get_context_data(**kwargs)
+        context['posts'] = Post.objects.all()[:3]
+        return context
 
 
 class CreateProject(IsSuperUserTestMixin, SuccessMessageMixin, CreateView):

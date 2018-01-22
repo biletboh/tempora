@@ -22,7 +22,7 @@
                 {% for member in team %}
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img src="{{member.avatar.big_avatar.url }}" class="img-responsive img-circle" alt="">
+                        <img src="{{ member.avatar.big_avatar.url }}" class="img-responsive img-circle" alt="">
                         <h4>{{ member.first_name }} {{ member.last_name }}</h4>
                         <p class="text-muted">{{ member.position }}</p>
                         <ul class="list-inline social-buttons">

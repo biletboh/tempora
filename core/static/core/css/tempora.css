@@ -368,7 +368,7 @@ article .post-attribution a {
 }
 .team-member img {
   margin: 0 auto;
-  border: 7px solid;
+  border: 4px solid;
   border-color: #f6a4b2;
 }
 .team-member h4 {
@@ -850,7 +850,7 @@ body {
   color: #A3112A;
   background-color: transparent;
   color: #ffffff;
-  background-color: rgba(163, 17, 42, 0.5);
+  background-color: rgba(163, 17, 42, 0.2);
 }
 #projects .btn-primary:hover,
 #projects .btn-primary:focus,
@@ -859,4 +859,20 @@ body {
   outline: none;
   color: white;
   background-color: #A3112A;
+}
+.project {
+  padding: 25px 0;
+}
+.project.header {
+  padding: 0 0 25px;
+  min-height: 40rem;
+}
+.project img {
+  margin: auto;
+}
+.project hr {
+  margin-left: 0;
+}
+.project .text-muted {
+  margin-top: 2rem;
 }
