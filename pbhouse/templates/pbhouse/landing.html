@@ -20,7 +20,18 @@
 
   <button id="top" type="button" class="btn btn-primary btn-top btn-lg" data-spy="affix"><i class="fa fa-2x fa-angle-double-up" aria-hidden="true"></i></button>
 </header>
-
+<section class="sections-dark" id="books">
+	<div class="owl-carousel owl-theme">
+		{% for book in books %}
+		<div class="item text-center">
+			<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
+			<a href="{% url 'books:page' book.slug %}">
+				<h4>{{ book.title }}</h4>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+</section>
 <section class="bg-primary" id="about">
   <div class="container">
     <div class="row">
@@ -30,6 +41,37 @@
         <p class="">{% trans "Видавництво «Темпора» було засноване 2001 року й спочакту спеціалізувалося на історичній літературі й мемуаристиці. Зараз до сфери наших зацікавлень входять сучасна українська й зарубіжна проза, постмодерна література, художній репортаж, різнотематичний нон-фікшн і науково-популярні книжки." %}</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section class="no-padding" id="projects">
+  <div id="owl-main" class="owl-carousel height-md owl-inner-nav owl-ui-lg">
+	  {% for project in projects %}
+      <div class="item" style="background-image: url({{ project.image.large.url }});">
+		  <div class="container">
+			  {% if forloop.counter|divisibleby:2 %}
+			  <div class="caption vertical-center text-right">
+				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
+				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
+				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
+			  </div>
+			  {% elif forloop.counter|divisibleby:3 %}
+			  <div class="caption vertical-center text-left">
+				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
+				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
+				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
+			  </div>
+			  {% else %}
+			  <div class="caption vertical-center text-center">
+				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
+				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
+				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
+			  </div>
+			  {% endif %}
+		  </div>
+	  </div>
+	  {% endfor %}
   </div>
 </section>
 
@@ -75,38 +117,6 @@
 		</div>
 	</div>
 </section>
-
-<!-- Projects Section -->
-<section class="no-padding" id="projects">
-  <div id="owl-main" class="owl-carousel height-md owl-inner-nav owl-ui-lg">
-	  {% for project in projects %}
-      <div class="item" style="background-image: url({{ project.image.large.url }});">
-		  <div class="container">
-			  {% if forloop.counter|divisibleby:2 %}
-			  <div class="caption vertical-center text-right">
-				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
-				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
-			  </div>
-			  {% elif forloop.counter|divisibleby:3 %}
-			  <div class="caption vertical-center text-left">
-				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
-				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
-			  </div>
-			  {% else %}
-			  <div class="caption vertical-center text-center">
-				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
-				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
-			  </div>
-			  {% endif %}
-		  </div>
-	  </div>
-	  {% endfor %}
-  </div>
-</section>
-
 
 <!--
 <section id="services">
@@ -378,5 +388,19 @@
     </div>
   </div>
 </section>
+{% endblock %}
 
+{% block js %}
+<script>
+	$('#books .owl-carousel').owlCarousel({
+		navigation:true,
+		items: 4,
+		autoPlay: 5000,
+        stopOnHover: true,
+        navigation: true,
+        pagination: true,
+        addClassActive: true,
+        navigationText: ["<i class='fa fa-angle-left' aria-hidden='true'></i>", "<i class='fa fa-angle-right' aria-hidden='true'></i>"],
+	})
+</script>
 {% endblock %}

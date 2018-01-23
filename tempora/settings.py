@@ -215,6 +215,7 @@ THUMBNAIL_ALIASES = {
         'preview': {'size': (250, 200), 'crop': True},
         'blog_first': {'size': (960, 720), 'crop': True},
         'blog_second': {'size': (400, 300), 'crop': True},
+        'book': {'size': (300, 450), 'crop': True},
         'project': {'size': (1000, 480), 'crop': True},
         'medium': {'size': (750, 450), 'crop': True},
         'large': {'size': (800, 480), 'crop': True},

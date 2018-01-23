@@ -35,7 +35,7 @@ class Book(models.Model):
                         blank=True, null=True)
     in_stock = models.CharField('У наявності', max_length=10, default='Тверда',
                                 choices=IN_STOCK, blank=True)
-    pages = models.IntegerField('Сторінки', blank=True)
+    pages = models.IntegerField('Сторінки', null=True, blank=True)
     cover = models.CharField('Обгортка', max_length=10, default='Тверда',
                              choices=COVERS, blank=True)
     weight = models.IntegerField('Вага (г)', null=True, blank=True)

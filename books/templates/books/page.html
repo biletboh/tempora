@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+
+{% load thumbnail %}
+{% load static %}
+
+{% block navbar %}{% include "core/navbar.html" %}{% endblock %}
+
+{% block content %}
+<div class="content">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-1">
+					<div class="row">
+						<div class="col-md-12">
+							<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="book-details">
+								<p>Сторінки: {{ book.pages }}</p>
+								<p>Обкладинка: {{ book.cover }}</p>
+								<p>Розмір: {{ book.height}} x {{ book.length }} x {{ book.depth }}</p>
+								<p>Вага: {{ book.weight|default:'0' }}</p>
+								<p>ISBN: {{ book.isbn_13 }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="book-description">
+						<h1>{{ book.title }}</h1>
+						<h3>{{ book.price }} грн.</h3>
+						<p class="short-description">{{ book.short_descr }}</p>
+						<p>{{ book.description|safe }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}
