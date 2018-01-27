@@ -106,11 +106,9 @@
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         {{ form.image|attr:"class:form-control" }}
                     </div>
-					{% if form.image.errors %}
                     <div class="col-md-12">
                         {{ form.image.errors }}
                     </div>
-					{% endif %}
                 </div>
             </div>
         </div>
@@ -125,11 +123,9 @@
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         {{ form.tags|attr:"class:form-control" }}
                     </div>
-					{% if form.tags.errors %}
                     <div class="col-md-12">
                         {{ form.tags.errors }}
                     </div>
-					{% endif %}
                 </div>
             </div>
         </div>
@@ -163,9 +159,7 @@
 <script type="text/javascript">
 $(function() {
 	initUploadFields($('#post-form'));
-	var kill = $('.ui-icon.ui-icon-trash');
-    kill.empty();
-    kill.append('<i class="fa fa-lg fa-trash" aria-hidden="true"></i>');
+	
 });
 </script>
 {% endblock %}

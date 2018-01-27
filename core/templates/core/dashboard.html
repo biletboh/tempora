@@ -37,9 +37,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <!-- Form Media -->
-        {{ form.media }}
+        
 
     </head>
 
@@ -199,18 +197,20 @@
         </footer>
         <!-- /footer content -->
 
-        <!-- Custom Theme Scripts -->
-        <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 		<!-- Offline jQuery and Bootstrap Core JavaScript -->
+		<!--
 		<script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
 		<script src="{% static 'core/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+		-->
+
+		<!-- Form Media -->
+        {{ form.media }}
 
         <script src="{% static 'pbhouse/vendor/iCheck/icheck.min.js' %}"></script>
         <!-- File Uploader -->
         <script src="{% static 'ajaxuploader/js/fileuploader.js' %}"></script>
         <script src="{% static 'file_form/file_form.js' %}"></script>
+        <script src="{% static 'core/vendor/gentelella/gentelella.js' %}"></script>
         <script src="{% static 'core/js/dashboard.js' %}"></script>
 
     </body>

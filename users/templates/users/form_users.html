@@ -74,38 +74,6 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.position.auto_id }}">
-                        {{ form.position.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.position|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.position.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-		<div class="col-md-6">
-			<div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.avatar.auto_id }}">
-                        {{ form.avatar.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.avatar|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.avatar.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-	<div class="row">
-        <div class="col-md-6">
-            <div class="row">
-                <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.facebook.auto_id }}">
                         {{ form.facebook.label }}
                     </label>
@@ -155,6 +123,40 @@
                     </div>
                     <div class="col-md-12">
                         {{ form.goodreads.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="row">
+        <div class="col-md-6">
+			{% if user.is_superuser %}
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.position.auto_id }}">
+                        {{ form.position.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.position|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.position.errors }}
+                    </div>
+                </div>
+            </div>
+			{% endif %}
+        </div>
+		<div class="col-md-6">
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.avatar.auto_id }}">
+                        {{ form.avatar.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.avatar|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.avatar.errors }}
                     </div>
                 </div>
             </div>

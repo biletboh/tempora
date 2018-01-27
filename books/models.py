@@ -61,7 +61,7 @@ class Book(models.Model):
     slug = models.SlugField('Посилання', unique=True, null=True)
 
     class Meta:
-        ordering = ('-title',)
+        ordering = ('-pub_date',)
         verbose_name_plural = 'books'
 
     def __str__(self):

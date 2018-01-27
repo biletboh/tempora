@@ -10,5 +10,5 @@ class TagModelForm(forms.ModelForm):
         model = Tag
         fields = ('title', 'description')
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 80, 'rows': 12}),
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 2}),
         }

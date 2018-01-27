@@ -11,7 +11,7 @@ class Post(models.Model):
     """Store post data for a blog."""
 
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    tag = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, related_name='posts', blank=True)
     title = models.CharField('Заголовок', max_length=128)
     short_descr = HTMLField('Короткий опис', max_length=256, blank=True)
     body = HTMLField('Текст', blank=True)

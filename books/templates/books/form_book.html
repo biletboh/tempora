@@ -314,8 +314,10 @@
 <!-- Image upload -->
 {% include 'core/upload_template.html' %}
 
+{% block js %}
 <script type="text/javascript">
     $(function() {
         initUploadFields($('#post-form'));
     });
 </script>
+{% endblock %}
