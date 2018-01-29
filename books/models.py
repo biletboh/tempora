@@ -13,11 +13,17 @@ from tags.models import Tag
 class Book(models.Model):
     """Store book information."""
 
-    COVERS = (('Тверда', 'Тверда'),
-              ("M'яка", "M'яка"))
-    IN_STOCK = (('Так', 'Так'),
-                ('Ні', 'Ні'),
-                ('Очікується', 'Очікується'),
+    HARD = 'Hrd'
+    SOFT = "Sft"
+    AWAITING = 'Очікується'
+    AVAILABLE = 'У наявності'
+    NOT_AVAILABLE = 'Немає у наявності'
+
+    COVERS = ((HARD, 'Тверда'),
+              (SOFT, "M'яка"))
+    IN_STOCK = (('0', NOT_AVAILABLE),
+                ('1', AVAILABLE),
+                ('2', AWAITING),
                 )
 
     title = models.CharField('Заголовок', max_length=200)
@@ -28,15 +34,14 @@ class Book(models.Model):
                                     default=timezone.datetime.now)
     image = ThumbnailerImageField('Світлина', upload_to='photos/books',
                                   blank=True)
-
     price = models.DecimalField(
                         'Ціна', max_digits=8, decimal_places=2,
                         validators=[MinValueValidator(Decimal('0.01'))],
                         blank=True, null=True)
-    in_stock = models.CharField('У наявності', max_length=10, default='Тверда',
+    in_stock = models.CharField('У наявності', max_length=1, default='Тверда',
                                 choices=IN_STOCK, blank=True)
     pages = models.IntegerField('Сторінки', null=True, blank=True)
-    cover = models.CharField('Обгортка', max_length=10, default='Тверда',
+    cover = models.CharField('Обкладинка', max_length=3, default='Тверда',
                              choices=COVERS, blank=True)
     weight = models.IntegerField('Вага (г)', null=True, blank=True)
     height = models.DecimalField(
@@ -51,8 +56,7 @@ class Book(models.Model):
                         'Глибина', max_digits=6, decimal_places=1,
                         validators=[MinValueValidator(Decimal('0.1'))],
                         blank=True, null=True)
-    publisher = models.CharField('Видавництво', max_length=90,
-                                 default='Видавничий дім "Темпора"')
+    publisher = models.CharField('Видавництво', max_length=90)
     isbn_13 = models.CharField('ISBN-13', max_length=15, blank=True)
     isbn_10 = models.CharField('ISBN-10', max_length=15, blank=True)
 

@@ -104,13 +104,13 @@
                         </div>
                     </div>
                     {% endif %}
-
                     {% endfor %}
 
+                    <!-- Start of pagination -->
                     {% if is_paginated %}
                     <ul class="pagination">
                         {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                        <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
                         {% else %}
                         <li class="disabled"><span>&laquo;</span></li>
                         {% endif %}
@@ -128,8 +128,8 @@
                         {% endif %}
                     </ul>
                     {% endif %}
-
                     <!-- End of pagination -->
+
                 </div>
             </div>
         </div>

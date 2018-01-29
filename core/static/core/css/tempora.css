@@ -876,16 +876,30 @@ body {
 .project .text-muted {
   margin-top: 2rem;
 }
-#books {
+#books,
+.books {
   padding: 50px 0;
 }
-#books img {
+#books img,
+.books img {
   width: auto;
   margin: auto;
 }
-#books h4 {
+#books h4,
+.books h4 {
   font-size: 20px;
   font-weight: 600;
+  margin: 20px 40px 10px;
+}
+#books h5,
+.books h5 {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 5px 40px;
+}
+#books .book,
+.books .book {
+  margin: 15px 0;
 }
 .book-description h1 {
   font-size: 40px;
@@ -896,8 +910,15 @@ body {
   font-weight: 600;
   color: #A3112A;
 }
+.book-description h3.not-in-stock {
+  display: inline-block;
+  color: #777;
+  padding: 5px;
+  margin: 10px 10px 10px 0;
+  background-color: #eee;
+}
 .book-description p.short-description {
-  margin-top: 2em;
+  margin-top: 1em;
   font-weight: 600;
 }
 .book-details {
@@ -907,4 +928,16 @@ body {
   font-size: 16px;
   margin-bottom: 0;
   color: #A3112A;
+}
+.book-details ul {
+  margin-top: 1em;
+}
+.tag,
+li.tag {
+  padding: 5px 8px;
+  background-color: rgba(163, 17, 42, 0.7);
+  border-radius: 30px;
+  font-weight: 600;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
 }

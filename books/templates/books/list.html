@@ -1,0 +1,64 @@
+{% extends "core/base.html" %}
+
+
+{% load thumbnail %}
+{% load static %}
+
+{% block navbar %}{% include "core/navbar.html" %}{% endblock %}
+
+{% block content %}
+<div class="content">
+	<section>
+		<div class="container books">
+			{% for book in books %}
+			{% if forloop.first %}<div class="row">{% endif %}
+				<div class="col-md-4">
+					<div class="book text-center">
+						<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
+						<a href="{% url 'books:page' book.slug %}">
+							<h4 class="text-left">{{ book.title }}</h4>
+						</a>
+
+						<h5 class="text-left">
+							{% for author in book.authors.all %}
+							{% if book.authors.all.count < 2 or forloop.last %}
+		  {{ author }}
+		  {% else %}
+		  {{ author }}, 
+		  {% endif %}
+		  {% endfor %}
+						</h5>
+					</div>
+				</div>
+				{% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+				{% if forloop.last %}</div>{% endif %}
+			{% endfor %}
+
+            <!-- Start of pagination -->
+			{% if is_paginated %}
+			<ul class="pagination">
+				{% if page_obj.has_previous %}
+				<li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+				{% else %}
+				<li class="disabled"><span>&laquo;</span></li>
+				{% endif %}
+				{% for i in paginator.page_range %}
+				{% if page_obj.number == i %}
+				<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+				{% else %}
+				<li><a href="?page={{ i }}" class="btn btn-primary btn-sm">{{ i }}</a></li>
+				{% endif %}
+				{% endfor %}
+				{% if page_obj.has_next %}
+				<li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+				{% else %}
+				<li class="disabled"><span>&raquo;</span></li>
+				{% endif %}
+			</ul>
+			{% endif %}
+            <!-- End of pagination -->
+
+		</div>
+	</section>
+</div>
+{% endblock %}

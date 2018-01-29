@@ -26,8 +26,17 @@
 		<div class="item text-center">
 			<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
 			<a href="{% url 'books:page' book.slug %}">
-				<h4>{{ book.title }}</h4>
+				<h4 class="text-left">{{ book.title }}</h4>
 			</a>
+			<h5 class="text-left">
+				{% for author in book.authors.all %}
+				{% if book.authors.all.count < 2 or forloop.last  %}
+				{{ author }}
+				{% else %}
+				{{ author }}, 
+				{% endif %}
+				{% endfor %}
+			</h5>
 		</div>
 		{% endfor %}
 	</div>
@@ -397,7 +406,6 @@
 		items: 4,
 		autoPlay: 5000,
         stopOnHover: true,
-        navigation: true,
         pagination: true,
         addClassActive: true,
         navigationText: ["<i class='fa fa-angle-left' aria-hidden='true'></i>", "<i class='fa fa-angle-right' aria-hidden='true'></i>"],

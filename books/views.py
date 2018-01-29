@@ -13,7 +13,7 @@ class BookList(ListView):
     model = Book
     context_object_name = 'books'
     template_name = 'books/list.html'
-    paginate_by = 10
+    paginate_by = 12
     queryset = Book.objects.all()
 
 

@@ -35,7 +35,15 @@
 									<tr>
 										<td>{{ book.id }}</td>
 										<td>{{ book.title }}</td>
-										<td>{{ book.authors }}</td>
+										<td>
+											{% for author in book.authors.all %}
+											{% if book.authors.all.count < 2 or forloop.last  %}
+											{{ author }}
+											{% else %}
+											{{ author }}, 
+											{% endif %}
+											{% endfor %}
+										</td>
 										<td>{{ book.pub_date }}</td>
 										<td>
 											<a href="{% url 'books:update' book.slug %}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>

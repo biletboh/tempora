@@ -19,11 +19,26 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="book-details">
-								<p>Сторінки: {{ book.pages }}</p>
-								<p>Обкладинка: {{ book.cover }}</p>
-								<p>Розмір: {{ book.height}} x {{ book.length }} x {{ book.depth }}</p>
-								<p>Вага: {{ book.weight|default:'0' }}</p>
-								<p>ISBN: {{ book.isbn_13 }}</p>
+								<h2>
+									{% for author in book.authors.all %}
+									{% if book.authors.all.count < 2 or forloop.last  %}
+									{{ author }}
+									{% else %}
+									{{ author }}, 
+									{% endif %}
+									{% endfor %}
+								</h2>
+								<p><span class="text-muted">Сторінки:</span> {{ book.pages }}</p>
+								<p><span class="text-muted">Обкладинка:</span> {{ book.get_cover_display }}</p>
+								<p><span class="text-muted">Розмір (см):</span> {{ book.height|default:'0' }} x {{ book.length|default:'0' }} x {{ book.depth|default:'0' }}</p>
+								<p><span class="text-muted">Вага (г):</span> {{ book.weight|default:'' }}</p>
+								<p><span class="text-muted">ISBN:</span> {{ book.isbn_13 }}</p>
+								<p>
+								<ul class="list-inline">
+									{% for tag in book.tags.all %}
+									<li class="tag">{{ tag }}</li>
+									{% endfor %}
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -31,7 +46,13 @@
 				<div class="col-md-6">
 					<div class="book-description">
 						<h1>{{ book.title }}</h1>
-						<h3>{{ book.price }} грн.</h3>
+						{% if book.in_stock == '0' %}
+						<h3 class="not-in-stock">{{ book.price|default:'0' }} грн.</h3> <span>{{ book.get_in_stock_display }}</span>
+						{% elif book.in_stock == '2' %}
+						<h3>{{ book.get_in_stock_display }}</h3> 
+						{% else %}
+						<h3>{{ book.price|default:'0' }} грн.</h3>
+						{% endif %}
 						<p class="short-description">{{ book.short_descr }}</p>
 						<p>{{ book.description|safe }}</p>
 					</div>

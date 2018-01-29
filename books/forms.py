@@ -20,6 +20,7 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
         super(BookModelForm, self).__init__(*args, **kwargs)
         if self.instance:
             self.fields['image'].initial = self.instance.image
+        self.fields['publisher'].initial = 'Темпора'
 
     class Meta:
         model = Book
