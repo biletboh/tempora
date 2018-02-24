@@ -1,5 +1,5 @@
-
 $(document).ready(function() {
+	/*
     $("#projects").addClass("js-reveal");
     var j = true;
     var i = "#owl-main";
@@ -244,6 +244,7 @@ $(document).ready(function() {
             j = false
         }
     });
+	*/
     /*
     $(".slider-next").click(function() {
         owl.trigger("owl.next")

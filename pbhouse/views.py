@@ -7,7 +7,7 @@ from django.views.generic import TemplateView, FormView
 
 from blog.models import Post
 from books.models import Book
-from pbhouse.forms import ContactForm
+from pbhouse.forms import ContactForm, BookOrderForm
 from pbhouse.utils import send_contact_message
 from projects.models import Project
 from users.models import UserProfile as UserProfileModel
@@ -59,6 +59,7 @@ class LandingPage(SuccessMessageMixin, AjaxableResponseMixin, FormView):
 
     def get_context_data(self, **kwargs):
         context = super(LandingPage, self).get_context_data(**kwargs)
+        context['order_form'] = BookOrderForm
         context['posts'] = Post.objects.all()[:3]
         context['projects'] = Project.objects.all()
         context['books'] = Book.objects.all()[:15]

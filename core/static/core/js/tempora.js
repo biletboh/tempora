@@ -1,3 +1,11 @@
+// Preloader
+$(window).load(function(){
+	$('.header-content-inner h1').removeClass('hidden');
+	$('.header-content-inner p').removeClass('hidden');
+	$('.header-content-inner h1').addClass('fadeInDown');
+	$('.header-content-inner p').addClass('fadeInDown');
+});
+
 (function($) {
     "use strict"; // Start of use strict
 

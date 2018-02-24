@@ -262,6 +262,10 @@ header {
                 margin-bottom: 0;
                 font-size: 30px;
                 word-spacing: 10px;
+				-webkit-animation-duration: 2s;
+				-moz-animation-duration: 2s;
+				-webkit-animation-delay: 500;
+				-moz-animation-delay: 500;
             }
             hr {
                 margin: 30px auto;
@@ -271,6 +275,10 @@ header {
                 color: fade(white, 85%);
                 font-size: 16px;
                 margin-bottom: 50px;
+				-webkit-animation-duration: 2s;
+				-moz-animation-duration: 2s;
+				-webkit-animation-delay: 1s;
+				-moz-animation-delay: 1s;
             }
         }
     }
@@ -449,9 +457,9 @@ article {
     text-transform: uppercase;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 400;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    -webkit-transition: all .05s ease-in-out;
+    -moz-transition: all .05s ease-in-out;
+    transition: all .05s ease-in-out;
     border-radius: 0;
 }
 .btn-default {
@@ -581,9 +589,6 @@ article {
     label {
         color: @theme-primary;
     }
-}
-form .row:first-child .floating-label-form-group {
-    border-top: 1px solid @gray-light;
 }
 // Extras
 // -- Highlight Color Customization
@@ -752,37 +757,52 @@ body {
 }
 
 // Owl carousel
-#owl-main .owl-pagination {
-	bottom: 30px;
+#owl-main {
+	&.owl-carousel {
+		color: #FFFFFF;
+		text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.6);
+	}
+	.item {
+		background: linear-gradient(
+		rgba(0, 0, 0, 0.7), 
+		rgba(0, 0, 0, 0.7)
+		);
+		background-repeat: no-repeat;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		min-height: 480px;
+		.container {
+			padding-top: 5em;
+		}
+	}
+	.owl-dots {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	h2 {
+		font-size: 50px;
+		font-weight: 600;
+	}
+	p {
+		line-height: 1.8em;
+	}
+	.btn-primary {
+		.btn-base(@theme-primary;
+		@theme-primary;
+		@theme-primary);
+		color: #ffffff;
+	}
 }
-#owl-main:hover .owl-pagination {
-	bottom: 55px;
-}
-#owl-main .caption h2 span {
-	font-size: 50px;
-	font-weight: 600;
-	padding: .250em 0.250em;
-}
+
 .owl-pagination .owl-page span {
 	background-color: #DA5068;
 }
 .owl-pagination .owl-page.active span, .owl-pagination .owl-page:hover span {
 	background-color: @theme-primary;
-}
-#projects h2 {
-	.header-dark;
-}
-#projects p span {
-	background-color: rgba(0, 0, 0, 0.5);
-	padding: .250em 0.450em;
-	line-height: 1.8em;
-}
-#projects .btn-primary {
-	.btn-base(@theme-primary;
-	@theme-primary;
-	@theme-primary);
-	color: #ffffff;
-	background-color: rgba(163, 17, 42, 0.2);
 }
 .project {
 	padding: 25px 0;
@@ -809,12 +829,18 @@ body {
 	h4 {
 		font-size: 20px;
 		font-weight: 600;
-		margin: 20px 40px 10px;
+		margin: 10px 10px 5px;
 	}
 	h5 {
 		font-size: 16px;
 		font-weight: 400;
-		margin: 5px 40px;
+		margin: 5px 10px;
+	}
+	h6 {
+		font-size: 18px;
+		font-weight: 600;
+		color: @theme-primary; 
+		margin: 5px 10px;
 	}
 	.book {
 		margin: 15px 0;
@@ -826,6 +852,17 @@ body {
 		font-weight: 700;
 	}
 	h3 {
+		font-size: 28px;
+		font-weight: 600;
+		color: @theme-primary;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		span {
+		}
+		a {
+			float: right;
+		}
 		&.not-in-stock {
 			display: inline-block;
 			color: #777;
@@ -833,9 +870,6 @@ body {
 			margin: 10px 10px 10px 0;
 			background-color: #eee;
 		}
-		font-size: 28px;
-		font-weight: 600;
-		color: @theme-primary;
 	}
 	p.short-description {
 		margin-top: 1em;
@@ -861,4 +895,12 @@ body {
 	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #fff;
 }
-
+.modal-header {
+	padding: 15px 30px;
+}
+.modal-body {
+	margin: 0 20px;
+}
+.modal-footer {
+	border-top: none;
+}

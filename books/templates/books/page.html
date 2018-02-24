@@ -51,7 +51,10 @@
 						{% elif book.in_stock == '2' %}
 						<h3>{{ book.get_in_stock_display }}</h3> 
 						{% else %}
-						<h3>{{ book.price|default:'0' }} грн.</h3>
+						<h3>
+							<span>{{ book.price|default:'0' }} грн. </span>
+							<a href="{% url 'books:page' book.slug %}" class="btn btn-primary"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Замовити</a>
+						</h3>
 						{% endif %}
 						<p class="short-description">{{ book.short_descr }}</p>
 						<p>{{ book.description|safe }}</p>

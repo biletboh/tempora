@@ -12,9 +12,9 @@
 <header class="landing">
   <div class="header-content">
     <div class="header-content-inner">
-      <h1 id="homeHeading">{% trans "Видавничий дім «Темпора»" %}</h1>
+      <h1 id="homeHeading" class="animated hidden">{% trans "Видавничий дім «Темпора»" %}</h1>
       <br>
-      <p>{% trans "Видавничий дім «Темпора» — це передовсім простір для вільного обміну думками й смислами. Нашою цінністю є відкритий діалог з активним читачем, який не лише приймає культурний продукт, а й бере участь у його творенні й популяризації." %}</p>
+      <p class="animated hidden">{% trans "Видавничий дім «Темпора» — це передовсім простір для вільного обміну думками й смислами. Нашою цінністю є відкритий діалог з активним читачем, який не лише приймає культурний продукт, а й бере участь у його творенні й популяризації." %}</p>
     </div>
   </div>
 
@@ -24,25 +24,95 @@
 	<div class="owl-carousel owl-theme">
 		{% for book in books %}
 		<div class="item text-center">
-			<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
-			<a href="{% url 'books:page' book.slug %}">
-				<h4 class="text-left">{{ book.title }}</h4>
-			</a>
-			<h5 class="text-left">
-				{% for author in book.authors.all %}
-				{% if book.authors.all.count < 2 or forloop.last  %}
-				{{ author }}
-				{% else %}
-				{{ author }}, 
-				{% endif %}
-				{% endfor %}
-			</h5>
+			<div class="row book text-left">
+				<div class="col-md-12">
+					<div class="view view-first view-books">
+						<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
+						<div class="mask">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookModal"
+								data-title="{{ book.title }}"
+								data-id="{{ book.id }}"
+								data-price="{{ book.price }}"
+								>Замовити</button>
+							<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">Дивитися</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<a href="{% url 'books:page' book.slug %}">
+						<h4 class="text-left">{{ book.title }}</h4>
+					</a>
+					<h5 class="text-left">
+						{% for author in book.authors.all %}
+						{% if book.authors.all.count < 2 or forloop.last  %}
+						{{ author }}
+						{% else %}
+						{{ author }}, 
+						{% endif %}
+						{% endfor %}
+					</h5>
+					<h6><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{ book.price|default:"0" }} грн.</h6>
+				</div>
+			</div>
 		</div>
 		{% endfor %}
 	</div>
 </section>
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 id="bookModalLabel">Замовити книгу <b class="modal-title"></b></h4>
+			</div>
+			<form name="sentMessage" method="post" id="contactForm" novalidate>
+				{% csrf_token %}
+				{% render_field order_form.book_id hidden="true" type="text" %}
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<h4>Ціна: <b id="book-price"></b></h4>
+						</div>
+					</div>
+					<div class="row control-group">
+						<div class="form-group col-xs-12 floating-label-form-group controls">
+							<label for="name">{% trans "Ім’я" %}</label>
+							{% render_field order_form.name class+="form-control" type="text" placeholder=order_form.name.label %}
+							<p class="help-block text-danger">{{ order_form.name.errors }}</p>
+						</div>
+					</div>
+					<div class="row control-group">
+						<div class="form-group col-xs-12 floating-label-form-group controls">
+							<label for="email">{% trans "Електронна скринька" %}</label>
+							{% render_field order_form.email class+="form-control" type="text" placeholder=order_form.email.label %}
+							<p class="help-block text-danger">{{ order_form.email.errors }}</p>
+						</div>
+					</div>
+					<div class="row control-group">
+						<div class="form-group col-xs-12 floating-label-form-group controls">
+							<label for="phone">{% trans "Номер телефону" %}</label>
+
+							{% render_field order_form.phone class+="form-control" type="text" placeholder=order_form.phone.label %}
+							<p class="help-block text-danger">{{ order_form.phone.errors }}</p>
+						</div>
+					</div>
+					<div class="row control-group">
+						<div class="form-group col-xs-12 floating-label-form-group controls">
+							<label for="message">{% trans "Повідомлення" %}</label>
+							{% render_field order_form.message class+="form-control" type="text" placeholder=order_form.message.label %}
+							<p class="help-block text-danger">{{ order_form.message.errors }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary btn-lg">Замовити</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 <section class="bg-primary" id="about">
-  <div class="container">
+	<div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center">
         <h2 class="section-heading">{% trans "Про нас" %}</h2>
@@ -55,33 +125,19 @@
 
 <!-- Projects Section -->
 <section class="no-padding" id="projects">
-  <div id="owl-main" class="owl-carousel height-md owl-inner-nav owl-ui-lg">
-	  {% for project in projects %}
-      <div class="item" style="background-image: url({{ project.image.large.url }});">
-		  <div class="container">
-			  {% if forloop.counter|divisibleby:2 %}
-			  <div class="caption vertical-center text-right">
-				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
-				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
-			  </div>
-			  {% elif forloop.counter|divisibleby:3 %}
-			  <div class="caption vertical-center text-left">
-				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
-				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
-			  </div>
-			  {% else %}
-			  <div class="caption vertical-center text-center">
-				  <h2 class="fadeInDown-1 light-color"><span>{{ project.title }}</span></h2>
-				  <p class="fadeInDown-2 light-color"><span>{{ project.short_descr }}</span></p>
-				  <div class="fadeInDown-3"><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
-			  </div>
-			  {% endif %}
-		  </div>
-	  </div>
-	  {% endfor %}
-  </div>
+	<div id="owl-main" class="owl-carousel owl-theme height-md">
+		{% for project in projects %}
+		<div class="item" {% if forloop.first %} id='first-owl-item' {% endif %} style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url({{ project.image.large.url }}); background-size: cover;">
+			<div class="container">
+				<div class="caption vertical-center">
+					<h2 class="">{{ project.title }}</h2>
+					<p class="">{{ project.short_descr }}</p>
+					<div class=""><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
 </section>
 
 <section class="sections-dark" id="blog">
@@ -401,14 +457,15 @@
 
 {% block js %}
 <script>
-	$('#books .owl-carousel').owlCarousel({
-		navigation:true,
-		items: 4,
-		autoPlay: 5000,
-        stopOnHover: true,
-        pagination: true,
-        addClassActive: true,
-        navigationText: ["<i class='fa fa-angle-left' aria-hidden='true'></i>", "<i class='fa fa-angle-right' aria-hidden='true'></i>"],
+	$('#bookModal').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget);
+		var id = button.data('id');
+		var title = button.data('title');
+		var price = button.data('price');
+		var modal = $(this)
+		modal.find('.modal-title').text(title)
+		modal.find('#book-price').text(price + ' грн.')
+		modal.find('#id_book_id').val(id)
 	})
 </script>
 {% endblock %}

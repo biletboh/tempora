@@ -9,6 +9,9 @@
   cursor: default;
   background: #fff no-repeat center center
 }
+.view.view-books {
+	float: left;
+}
 
 .view .mask,
 .view .content {
@@ -73,6 +76,9 @@
   background-color:rgba(163, 17, 42, 0.25);
   transition: all 0.6s ease-in-out;
 }
+.view-first.view-books .mask {
+  padding-top: 125%;
+}
 
 .view-first h2 {
   transform: translateY(-100px);
@@ -114,9 +120,17 @@
   transition-delay: 0.1s;
 }
 
-.view-first a.btn-primary {
-  border-color: #fff;
+.view-first a.btn-primary,
+.view-first button.btn-primary {
+  border-color: #A3112A;
+  color: #A3112A;
+  background-color: #fff;
+}
+.view-first a.btn-primary:hover,
+.view-first button.btn-primary:hover {
+  border-color: #A3112A;
   color: #fff;
+  background-color: #A3112A;
   transition-delay: 0.2s;
 }
 

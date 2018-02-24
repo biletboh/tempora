@@ -13,28 +13,37 @@
 			{% for book in books %}
 			{% if forloop.first %}<div class="row">{% endif %}
 				<div class="col-md-4">
-					<div class="book text-center">
-						<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
-						<a href="{% url 'books:page' book.slug %}">
-							<h4 class="text-left">{{ book.title }}</h4>
-						</a>
-
-						<h5 class="text-left">
-							{% for author in book.authors.all %}
-							{% if book.authors.all.count < 2 or forloop.last %}
-		  {{ author }}
-		  {% else %}
-		  {{ author }}, 
-		  {% endif %}
-		  {% endfor %}
-						</h5>
+					<div class="row book text-left">
+						<div class="col-md-12">
+							<div class="view view-first view-books">
+								<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
+									<div class="mask">
+										<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">Замовити</a>
+									</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<a href="{% url 'books:page' book.slug %}">
+								<h4>{{ book.title }}</h4>
+							</a>
+							<h5>
+								{% for author in book.authors.all %}
+								{% if book.authors.all.count < 2 or forloop.last %}
+								{{ author }}
+								{% else %}
+								{{ author }}, 
+								{% endif %}
+								{% endfor %}
+							</h5>
+							<h6><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{ book.price|default:"0" }} грн.</h6>
+						</div>
 					</div>
 				</div>
 				{% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
 				{% if forloop.last %}</div>{% endif %}
 			{% endfor %}
 
-            <!-- Start of pagination -->
+			<!-- Start of pagination -->
 			{% if is_paginated %}
 			<ul class="pagination">
 				{% if page_obj.has_previous %}
@@ -56,7 +65,7 @@
 				{% endif %}
 			</ul>
 			{% endif %}
-            <!-- End of pagination -->
+			<!-- End of pagination -->
 
 		</div>
 	</section>
