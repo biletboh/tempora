@@ -82,6 +82,11 @@
                             </div>
                             <div class="menu_section">
                                 <ul class="nav side-menu">
+									<li><a><i class="fa fa-shopping-basket"></i>{% trans "Замовлення" %}<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'books:order_list' %}">{% trans "Дивитися замовлення" %}</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a><i class="fa fa-users"></i>{% trans "Користувачі" %}<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{% url 'users:create' %}">{% trans "Додати користувача" %} </a></li>

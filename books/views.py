@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView,\
         ListView, UpdateView, DeleteView
 
-from books.forms import BookModelForm
-from books.models import Book
+from books.forms import BookModelForm, OrderModelForm
+from books.models import Book, Order
 
 
 class BookList(ListView):
@@ -16,12 +16,22 @@ class BookList(ListView):
     paginate_by = 12
     queryset = Book.objects.all()
 
+    def get_context_data(self, **kwargs):
+        context = super(BookList, self).get_context_data(**kwargs)
+        context['order_form'] = OrderModelForm
+        return context
+
 
 class BookPage(DetailView):
     """Render a book page."""
 
     model = Book
     template_name = 'books/page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BookPage, self).get_context_data(**kwargs)
+        context['order_form'] = OrderModelForm
+        return context
 
 
 class CreateBook(SuccessMessageMixin, CreateView):
@@ -62,3 +72,21 @@ class UpdateBookList(ListView):
     template_name = 'books/update_list.html'
     paginate_by = 10
     queryset = Book.objects.all()
+
+
+class OrderList(ListView):
+    """Render list of book orders."""
+
+    model = Order
+    context_object_name = 'orders'
+    template_name = 'books/order_list.html'
+    paginate_by = 10
+    queryset = Order.objects.all()
+
+
+class CreateOrder(SuccessMessageMixin, CreateView):
+    """Create a book order."""
+
+    form_class = OrderModelForm
+    success_url = reverse_lazy('books:list')
+    success_message = 'Книгу замовлено!'

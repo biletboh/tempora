@@ -7,6 +7,7 @@
 {% block navbar %}{% include "core/navbar.html" %}{% endblock %}
 
 {% block content %}
+{% include 'books/modal.html' %}
 <div class="content">
 	<section>
 		<div class="container books">
@@ -17,9 +18,21 @@
 						<div class="col-md-12">
 							<div class="view view-first view-books">
 								<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
-									<div class="mask">
-										<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">Замовити</a>
-									</div>
+								<div class="mask">
+									<button
+										type="button" class="btn btn-primary"
+										data-toggle="modal" data-target="#bookModal"
+										data-title="{{ book.title }}" data-id="{{ book.id }}"
+										data-price="{{ book.price }}"
+									>
+									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+									Замовити
+									</button>
+									<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">
+										<i class="fa fa-book" aria-hidden="true"></i>
+										Дивитися
+									</a>
+								</div>
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -35,7 +48,16 @@
 								{% endif %}
 								{% endfor %}
 							</h5>
-							<h6><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{ book.price|default:"0" }} грн.</h6>
+							<h6>
+								<a
+									href="#bookModal" data-toggle="modal" 
+									data-title="{{ book.title }}" data-id="{{ book.id }}"
+									data-price="{{ book.price }}"
+								>
+									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+								</a> 
+								{{ book.price|default:"0" }} грн.
+							</h6>
 						</div>
 					</div>
 				</div>

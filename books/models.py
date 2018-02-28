@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator
 
 from easy_thumbnails.fields import ThumbnailerImageField
+from phonenumber_field.modelfields import PhoneNumberField
 
 from authors.models import Author
 from tags.models import Tag
@@ -76,3 +77,22 @@ class Book(models.Model):
         if self.depth == '':
             size = '%s x %s' % (self.height, self.lenght)
         return size
+
+
+class Order(models.Model):
+    """Book order."""
+
+    book = models.ForeignKey(Book, on_delete=models.CASCADE,
+                             related_name='orders')
+    date = models.DateTimeField('Дата публікації',
+                                    default=timezone.datetime.now)
+    quantity = models.IntegerField('Кількість', default=1, blank=True)
+    name = models.CharField("Ім'я", max_length=30, blank=True)
+    email = models.EmailField('Емейл', max_length=90)
+    phone = PhoneNumberField('Телефон')
+    message = models.TextField('Повідомлення', blank=True)
+    comment = models.TextField('Коментар', blank=True)
+    processed = models.BooleanField('Опрацьовано', default=False)
+
+    def __str__(self):
+        return f'{self.book.title} by {self.email}'

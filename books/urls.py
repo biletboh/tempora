@@ -19,4 +19,8 @@ urlpatterns = [
             url(r'^delete/(?P<pk>[0-9]+)/$',
                 views.DeleteBook.as_view(),
                 name='delete'),
+            url(r'^create/order/$', views.CreateOrder.as_view(),
+                name='create_order'),
+            url(r'^orders/list/$', views.OrderList.as_view(),
+                name='order_list'),
             ]

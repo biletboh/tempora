@@ -1,97 +1,108 @@
 // Preloader
 $(window).load(function(){
-	$('.header-content-inner h1').removeClass('hidden');
-	$('.header-content-inner p').removeClass('hidden');
-	$('.header-content-inner h1').addClass('fadeInDown');
-	$('.header-content-inner p').addClass('fadeInDown');
+  $('.header-content-inner h1').removeClass('hidden');
+  $('.header-content-inner p').removeClass('hidden');
+  $('.header-content-inner h1').addClass('fadeInDown');
+  $('.header-content-inner p').addClass('fadeInDown');
 });
 
 (function($) {
-    "use strict"; // Start of use strict
+  "use strict"; // Start of use strict
 
-    // jQuery for page scrolling feature - requires jQuery Easing plugin
-    $(document).on('click', 'a.page-scroll', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: ($($anchor.attr('href')).offset().top - 50)
-        }, 1650, 'easeInOutExpo');
-        event.preventDefault();
+  // jQuery for page scrolling feature - requires jQuery Easing plugin
+  $(document).on('click', 'a.page-scroll', function(event) {
+    var $anchor = $(this);
+    $('html, body').stop().animate({
+      scrollTop: ($($anchor.attr('href')).offset().top - 50)
+    }, 1650, 'easeInOutExpo');
+    event.preventDefault();
+  });
+
+  // Highlight the top nav as scrolling occurs
+  $('body').scrollspy({
+    target: '.navbar-fixed-top',
+    offset: 51
+  });
+
+  // Closes the Responsive Menu on Menu Item Click
+  $('.navbar-collapse ul li a').click(function() {
+    $('.navbar-toggle:visible').click();
+  });
+
+  // Offset for Main Navigation
+  $('#mainNav').affix({
+    offset: {
+      top: 100
+    }
+  })
+
+  // Initialize and Configure Scroll Reveal Animation
+  window.sr = ScrollReveal();
+  sr.reveal('.sr-icons', {
+    duration: 600,
+    scale: 0.3,
+    distance: '0px'
+  }, 200);
+  sr.reveal('.sr-button', {
+    duration: 1000,
+    delay: 200
+  });
+  sr.reveal('.sr-contact', {
+    duration: 600,
+    scale: 0.3,
+    distance: '0px'
+  }, 300);
+
+  // Initialize and Configure Magnific Popup Lightbox Plugin
+  $('.popup-gallery').magnificPopup({
+    delegate: 'a',
+    type: 'image',
+    tLoading: 'Loading image #%curr%...',
+    mainClass: 'mfp-img-mobile',
+    gallery: {
+      enabled: true,
+      navigateByImgClick: true,
+      preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+    },
+    image: {
+      tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+    }
+  });
+
+  // Floating label headings for the contact form
+  $(function() {
+    $("body").on("input propertychange", ".floating-label-form-group", function(e) {
+      $(this).toggleClass("floating-label-form-group-with-value", !!$(e.target).val());
+    }).on("focus", ".floating-label-form-group", function() {
+      $(this).addClass("floating-label-form-group-with-focus");
+    }).on("blur", ".floating-label-form-group", function() {
+      $(this).removeClass("floating-label-form-group-with-focus");
     });
+  });
 
-    // Highlight the top nav as scrolling occurs
-    $('body').scrollspy({
-        target: '.navbar-fixed-top',
-        offset: 51
-    });
+  // Scroll to top
+  $("#top").click(function() {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+    return false;
+  });
 
-    // Closes the Responsive Menu on Menu Item Click
-    $('.navbar-collapse ul li a').click(function() {
-        $('.navbar-toggle:visible').click();
-    });
+  $(window).scroll(function() {
+    if($(window).scrollTop() >= 200) {  
+      $('#top').fadeIn('fast');
+    }else{
+      $('#top').fadeOut('fast');
+    }
+  });
 
-    // Offset for Main Navigation
-    $('#mainNav').affix({
-        offset: {
-            top: 100
-        }
-    })
-
-    // Initialize and Configure Scroll Reveal Animation
-    window.sr = ScrollReveal();
-    sr.reveal('.sr-icons', {
-        duration: 600,
-        scale: 0.3,
-        distance: '0px'
-    }, 200);
-    sr.reveal('.sr-button', {
-        duration: 1000,
-        delay: 200
-    });
-    sr.reveal('.sr-contact', {
-        duration: 600,
-        scale: 0.3,
-        distance: '0px'
-    }, 300);
-
-    // Initialize and Configure Magnific Popup Lightbox Plugin
-    $('.popup-gallery').magnificPopup({
-        delegate: 'a',
-        type: 'image',
-        tLoading: 'Loading image #%curr%...',
-        mainClass: 'mfp-img-mobile',
-        gallery: {
-            enabled: true,
-            navigateByImgClick: true,
-            preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        },
-        image: {
-            tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
-        }
-    });
-
-    // Floating label headings for the contact form
-    $(function() {
-        $("body").on("input propertychange", ".floating-label-form-group", function(e) {
-            $(this).toggleClass("floating-label-form-group-with-value", !!$(e.target).val());
-        }).on("focus", ".floating-label-form-group", function() {
-            $(this).addClass("floating-label-form-group-with-focus");
-        }).on("blur", ".floating-label-form-group", function() {
-            $(this).removeClass("floating-label-form-group-with-focus");
-        });
-    });
-
-    // Scroll to top
-    $("#top").click(function() {
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-          return false;
-    });
-
-    $(window).scroll(function() {
-      if($(window).scrollTop() >= 200) {  
-        $('#top').fadeIn('fast');
-      }else{
-        $('#top').fadeOut('fast');
-      }
-    });
-
+  // Show book order modal   
+  $('#bookModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id');
+    var title = button.data('title');
+    var price = button.data('price');
+    var modal = $(this)
+    modal.find('.modal-title').text(title)
+    modal.find('#book-price').text(price + ' грн.')
+    modal.find('#id_book').val(id)
+  })
 })(jQuery); // End of use strict

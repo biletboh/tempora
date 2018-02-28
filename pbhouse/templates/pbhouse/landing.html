@@ -7,7 +7,10 @@
 
 {% block navbar %}{% include "pbhouse/navbar_landing.html" %}{% endblock %}
 
+
 {% block content %}
+
+{% include 'books/modal.html' %}
 
 <header class="landing">
   <div class="header-content">
@@ -29,11 +32,14 @@
 					<div class="view view-first view-books">
 						<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
 						<div class="mask">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookModal"
-								data-title="{{ book.title }}"
-								data-id="{{ book.id }}"
+							<button
+								type="button" class="btn btn-primary"
+								data-toggle="modal" data-target="#bookModal"
+								data-title="{{ book.title }}" data-id="{{ book.id }}"
 								data-price="{{ book.price }}"
-								>Замовити</button>
+							>
+								Замовити
+							</button>
 							<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">Дивитися</a>
 						</div>
 					</div>
@@ -51,66 +57,22 @@
 						{% endif %}
 						{% endfor %}
 					</h5>
-					<h6><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{ book.price|default:"0" }} грн.</h6>
+					<h6>
+						<a
+							href="#bookModal" data-toggle="modal" 
+							data-title="{{ book.title }}" data-id="{{ book.id }}"
+							data-price="{{ book.price }}"
+						>
+							<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+						</a> 
+						{{ book.price|default:"0" }} грн.
+					</h6>
 				</div>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
 </section>
-<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 id="bookModalLabel">Замовити книгу <b class="modal-title"></b></h4>
-			</div>
-			<form name="sentMessage" method="post" id="contactForm" novalidate>
-				{% csrf_token %}
-				{% render_field order_form.book_id hidden="true" type="text" %}
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-xs-12">
-							<h4>Ціна: <b id="book-price"></b></h4>
-						</div>
-					</div>
-					<div class="row control-group">
-						<div class="form-group col-xs-12 floating-label-form-group controls">
-							<label for="name">{% trans "Ім’я" %}</label>
-							{% render_field order_form.name class+="form-control" type="text" placeholder=order_form.name.label %}
-							<p class="help-block text-danger">{{ order_form.name.errors }}</p>
-						</div>
-					</div>
-					<div class="row control-group">
-						<div class="form-group col-xs-12 floating-label-form-group controls">
-							<label for="email">{% trans "Електронна скринька" %}</label>
-							{% render_field order_form.email class+="form-control" type="text" placeholder=order_form.email.label %}
-							<p class="help-block text-danger">{{ order_form.email.errors }}</p>
-						</div>
-					</div>
-					<div class="row control-group">
-						<div class="form-group col-xs-12 floating-label-form-group controls">
-							<label for="phone">{% trans "Номер телефону" %}</label>
-
-							{% render_field order_form.phone class+="form-control" type="text" placeholder=order_form.phone.label %}
-							<p class="help-block text-danger">{{ order_form.phone.errors }}</p>
-						</div>
-					</div>
-					<div class="row control-group">
-						<div class="form-group col-xs-12 floating-label-form-group controls">
-							<label for="message">{% trans "Повідомлення" %}</label>
-							{% render_field order_form.message class+="form-control" type="text" placeholder=order_form.message.label %}
-							<p class="help-block text-danger">{{ order_form.message.errors }}</p>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-lg">Замовити</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
 <section class="bg-primary" id="about">
 	<div class="container">
     <div class="row">
@@ -393,7 +355,7 @@
       <div class="col-lg-8 col-lg-offset-2">
         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-        <form name="sentMessage" method="post" id="contactForm" novalidate>
+		<form name="sentMessage" action="{% url 'pbhouse:landing' %}" method="post" id="contactForm" novalidate>
           {% csrf_token %}
           <div class="row control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -453,19 +415,4 @@
     </div>
   </div>
 </section>
-{% endblock %}
-
-{% block js %}
-<script>
-	$('#bookModal').on('show.bs.modal', function (event) {
-		var button = $(event.relatedTarget);
-		var id = button.data('id');
-		var title = button.data('title');
-		var price = button.data('price');
-		var modal = $(this)
-		modal.find('.modal-title').text(title)
-		modal.find('#book-price').text(price + ' грн.')
-		modal.find('#id_book_id').val(id)
-	})
-</script>
 {% endblock %}

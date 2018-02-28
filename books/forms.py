@@ -4,7 +4,7 @@ from ajax_select import make_ajax_field
 from django_file_form.forms import UploadedFileField
 
 from core.mixins import CustomFileFormMixin
-from books.models import Book
+from books.models import Book, Order
 
 
 class BookModelForm(CustomFileFormMixin, forms.ModelForm):
@@ -33,4 +33,16 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
             'short_descr': forms.Textarea(attrs={'cols': 80, 'rows': 2}),
             'from_author': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
             'description': forms.Textarea(attrs={'cols': 80, 'rows': 12}),
+        }
+
+
+class OrderModelForm(forms.ModelForm):
+    """Render a book order model form."""
+
+    class Meta:
+        model = Order
+        fields = ('name', 'email', 'phone', 'message', 'quantity', 'book')
+        widgets = {
+            'message': forms.Textarea(attrs={'cols': 40, 'rows': 4}),
+            'book': forms.NumberInput()
         }
