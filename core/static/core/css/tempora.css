@@ -610,7 +610,7 @@ article .post-attribution a {
 }
 .box {
   border: 2px solid #A3112A;
-  color: #FFF;
+  color: #A3112A;
   padding: 20px;
   margin: 0 auto;
   max-width: 350px;
@@ -962,6 +962,12 @@ body {
 }
 .book-details ul {
   margin-top: 1em;
+}
+#selected-post {
+  padding: 30px 0;
+}
+#selected-post .post-preview-text {
+  margin: 0 80px;
 }
 .tag,
 li.tag {

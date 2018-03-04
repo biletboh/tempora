@@ -30,39 +30,6 @@
         </div>
     </div>
 	<div class="row">
-		<div class="col-md-6">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-6 col-xs-12" for="{{ form.authors.auto_id }}">
-                        {{ form.authors.label }}
-                    </label>
-                    <div class="col-md-8 col-sm-3 col-xs-12">
-                        {{ form.authors|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.authors.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
-                        {{ form.tags.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-8 col-xs-12">
-                        {{ form.tags|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.tags.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-	</div>
-    
-	<div class="row">
 		<div class="col-md-4">
             <div class="row">
                 <div class="form-group">
@@ -126,6 +93,68 @@
         </div>
     </div>
 	<div class="row">
+		<div class="col-md-4">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-6 col-sm-4 col-xs-12" for="{{ form.release.auto_id }}">
+                        {{ form.release.label }}
+                    </label>
+                    <div class="col-md-6 col-sm-8 col-xs-12">
+                        {{ form.release|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.release.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-2">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-9 col-sm-9 col-xs-9" for="{{ form.selected.auto_id }}">
+						{{ form.selected.label }}
+					</label>
+					<div class="col-md-3 col-sm-3 col-xs-3">
+						{{ form.selected|attr:"class:form-control flat" }}
+					</div>
+					<div class="col-md-12">
+						{{ form.selected.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-6 col-sm-6 col-xs-6" for="{{ form.new.auto_id }}">
+						{{ form.new.label }}
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						{{ form.new|attr:"class:form-control flat" }}
+					</div>
+					<div class="col-md-12">
+						{{ form.new.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-4 col-sm-4 col-xs-4" for="{{ form.best_seller.auto_id }}">
+						{{ form.best_seller.label }}
+					</label>
+					<div class="col-md-8 col-sm-8 col-xs-8">
+						{{ form.best_seller|attr:"class:form-control flat" }}
+					</div>
+					<div class="col-md-12">
+						{{ form.best_seller.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+	<div class="row">
 		<div class="col-md-6">
             <div class="row">
                 <div class="form-group">
@@ -185,7 +214,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 	<div class="row">
         <div class="col-md-6">
@@ -289,10 +317,10 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">
                         {{ form.image.label }}
                     </label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-md-10 col-sm-10 col-xs-12">
                         {{ form.image|attr:"class:form-control" }}
                     </div>
 					{% if form.image.errors %}
@@ -304,6 +332,38 @@
             </div>
         </div>
     </div>
+	<div class="row">
+		<div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-6 col-xs-12" for="{{ form.authors.auto_id }}">
+                        {{ form.authors.label }}
+                    </label>
+                    <div class="col-md-8 col-sm-3 col-xs-12">
+                        {{ form.authors|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.authors.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
+                        {{ form.tags.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-8 col-xs-12">
+                        {{ form.tags|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.tags.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
     <div class="row">
         <div class="col-md-12 text-center">
             <input class="btn btn-primary" type="submit" value="Submit"/>

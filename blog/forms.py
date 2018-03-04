@@ -23,7 +23,7 @@ class PostModelForm(CustomFileFormMixin, forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'body', 'short_descr', 'slug', 'tags')
+        fields = ('title', 'body', 'short_descr', 'slug', 'tags', 'selected')
         widgets = {
             'short_descr': forms.Textarea(attrs={'cols': 80, 'rows': 2}),
             'body': TinyMCE(attrs={'cols': 80, 'rows': 20}),

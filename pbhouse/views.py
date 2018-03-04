@@ -62,8 +62,9 @@ class LandingPage(SuccessMessageMixin, AjaxableResponseMixin, FormView):
         context = super(LandingPage, self).get_context_data(**kwargs)
         context['order_form'] = OrderModelForm
         context['posts'] = Post.objects.all()[:3]
+        context['selected_post'] = Post.objects.filter(selected=True).last()
         context['projects'] = Project.objects.all()
-        context['books'] = Book.objects.all()[:15]
+        context['books'] = Book.objects.filter(selected=True)[:15]
         return context
 
 

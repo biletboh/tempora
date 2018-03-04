@@ -526,7 +526,7 @@ article {
 // Box Styles
 .box {
     border: 2px solid @theme-primary;
-    color: #FFF;
+    color: @theme-primary;
     padding: 20px;
     margin: 0 auto;
     max-width: 350px;
@@ -885,6 +885,12 @@ body {
 	}
 	ul {
 		margin-top: 1em;
+	}
+}
+#selected-post {
+	padding: 30px 0;
+	.post-preview-text {
+		margin: 0 80px;
 	}
 }
 .tag, li.tag {

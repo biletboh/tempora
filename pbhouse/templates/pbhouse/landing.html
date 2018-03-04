@@ -101,6 +101,34 @@
 		{% endfor %}
 	</div>
 </section>
+{% if selected_post %}
+<section id="selected-post">
+	<div class="container-fluid">
+		<div class="row post-preview-middle">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12 post-img-middle">
+						<div class="view view-first">
+							<img class="post-img img-responsive" src="{{ selected_post.image.blog_selected.url }}" alt="{{ selected_post.image.name }}">
+							<div class="mask">
+								<a href="{% url 'blog:page' selected_post.id %}" class="btn btn-primary">Читати</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="post-preview-text">
+							<a href="{% url 'blog:page' selected_post.id %}" class="">
+								<h2 class="post-title middle">{{ selected_post.title }}</h2>
+							</a>
+							<p>{{ selected_post.short_descr }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endif %}
 
 <section class="sections-dark" id="blog">
 	<div class="container-fluid">

@@ -18,7 +18,7 @@ class PostList(ListView):
     context_object_name = "posts"
     template_name = 'blog/blog.html'
     paginate_by = 10
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().exclude(selected=True)
 
 
 class Page(DetailView):

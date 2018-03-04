@@ -41,6 +41,10 @@ class Book(models.Model):
                         blank=True, null=True)
     in_stock = models.CharField('У наявності', max_length=1, default='Тверда',
                                 choices=IN_STOCK, blank=True)
+    release = models.DateField('Дата виходу', null=True, blank=True)
+    selected = models.BooleanField('Обрана книга', default=False, blank=True)
+    new = models.BooleanField('Новинка', default=False, blank=True)
+    best_seller = models.BooleanField('Топ продажів', default=False, blank=True)
     pages = models.IntegerField('Сторінки', null=True, blank=True)
     cover = models.CharField('Обкладинка', max_length=3, default='Тверда',
                              choices=COVERS, blank=True)
