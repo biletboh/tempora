@@ -21,7 +21,7 @@ class AjaxableResponseMixin(object):
     """
 
     def form_invalid(self, form):
-        response = super(AjaxableResponseMixin, self).form_invalid(form)
+        response = super().form_invalid(form)
         if self.request.is_ajax():
             return JsonResponse(form.errors, status=400)
         else:
@@ -31,7 +31,7 @@ class AjaxableResponseMixin(object):
         # We make sure to call the parent's form_valid() method because
         # it might do some processing (in the case of CreateView, it will
         # call form.save() for example).
-        response = super(AjaxableResponseMixin, self).form_valid(form)
+        response = super().form_valid(form)
         if self.request.is_ajax():
             data = {
             }
@@ -56,13 +56,13 @@ class LandingPage(SuccessMessageMixin, AjaxableResponseMixin, FormView):
         message = form.cleaned_data['message']
         send_contact_message(name, email, phone, message)
 
-        return super(LandingPage, self).form_valid(form)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(LandingPage, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['order_form'] = OrderModelForm
-        context['posts'] = Post.objects.all()[:3]
-        context['selected_post'] = Post.objects.filter(selected=True).last()
+        context['posts'] = Post.objects.all().exclude(selected=True)[:3]
+        context['selected_post'] = Post.objects.filter(selected=True).first()
         context['projects'] = Project.objects.all()
         context['books'] = Book.objects.filter(selected=True)[:15]
         return context
@@ -74,6 +74,6 @@ class Team(TemplateView):
     template_name = 'pbhouse/team.html'
 
     def get_context_data(self, **kwargs):
-        context = super(Team, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['team'] = UserProfileModel.objects.filter(groups__name='Team')
         return context

@@ -7,8 +7,6 @@ app_name = 'users'
 
 
 urlpatterns = [
-            #  UserProfile urls
-            url(r'^dashboard/$', views.Profile.as_view(), name='dashboard'),
             url(
                 r'^create/$',
                 views.CreateUser.as_view(), name='create'),

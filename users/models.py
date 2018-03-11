@@ -16,8 +16,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     """
 
     email = models.EmailField('Емейл', unique=True)
-    first_name = models.CharField("Ім'я", max_length=30, blank=True)
-    last_name = models.CharField('Прізвище', max_length=30, blank=True)
+    first_name = models.CharField("Ім'я", max_length=30)
+    last_name = models.CharField('Прізвище', max_length=30)
     date_joined = models.DateTimeField('Дата', auto_now_add=True)
     avatar = ThumbnailerImageField('Світлина', upload_to='profile_images',
                                    blank=True)

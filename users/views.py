@@ -1,33 +1,25 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView,\
-        CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from django_filters.views import FilterView
 
-from core.mixins import IsSuperUserTestMixin
 from users.filters import UserFilter
 from users.forms import AccountUserModelForm, UserModelForm
 from users.models import UserProfile
 
 
-class Profile(IsSuperUserTestMixin, TemplateView):
-    """Render Profile page."""
-
-    template_name = 'users/profile.html'
-
-
-class CreateUser(SuccessMessageMixin, IsSuperUserTestMixin, CreateView):
+class CreateUser(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Create User."""
 
     form_class = UserModelForm
     template_name = 'users/create.html'
-    success_url = reverse_lazy('users:edit_list')
+    success_url = reverse_lazy('users:update_list')
     success_message = 'Акаунт створено.'
 
 
-class UpdateUser(SuccessMessageMixin, IsSuperUserTestMixin, UpdateView):
+class UpdateUser(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Update users."""
 
     model = UserProfile
@@ -51,7 +43,7 @@ class AccountUpdateUser(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         return reverse_lazy('users:update', kwargs={'pk': self.object.pk})
 
 
-class DeleteUser(IsSuperUserTestMixin, DeleteView):
+class DeleteUser(LoginRequiredMixin, DeleteView):
     """Delete a User."""
 
     model = UserProfile
@@ -60,7 +52,7 @@ class DeleteUser(IsSuperUserTestMixin, DeleteView):
     login_url = reverse_lazy('users:dashboard')
 
 
-class UserList(SuccessMessageMixin, IsSuperUserTestMixin, FilterView):
+class UserList(SuccessMessageMixin, LoginRequiredMixin, FilterView):
     """Render a list of Users to edit."""
 
     model = UserProfile

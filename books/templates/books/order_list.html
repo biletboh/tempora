@@ -28,9 +28,9 @@
 										<th>Емейл</th>
 										<th>Телефон</th>
 										<th>Замовлення</th>
+										<th>Кількість</th>
 										<th>Повідомлення</th>
 										<th>Дата</th>
-										<th>Статус</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -41,9 +41,9 @@
 										<td>{{ order.email }}</td>
 										<td>{{ order.phone }}</td>
 										<td>{{ order.book }}</td>
+										<td>{{ order.quantity }}</td>
 										<td>{{ order.message }}</td>
 										<td>{{ order.date }}</td>
-										<td>{{ order.processed }}</td>
 									</tr>
 									{% endfor %}
 								</tbody>

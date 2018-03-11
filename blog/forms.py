@@ -17,7 +17,7 @@ class PostModelForm(CustomFileFormMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
-        super(PostModelForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if self.instance:
             self.fields['image'].initial = self.instance.image
 
@@ -30,7 +30,7 @@ class PostModelForm(CustomFileFormMixin, forms.ModelForm):
         }
 
     def save(self, commit=True):
-        instance = super(PostModelForm, self).save()
+        instance = super().save(commit=False)
         instance.user = self.user
         image = self.cleaned_data['image']
         instance.image = image

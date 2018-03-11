@@ -37,7 +37,7 @@ class CreatePost(SuccessMessageMixin, CreateView):
     success_message = 'Запис додано!'
 
     def get_form_kwargs(self):
-        kwargs = super(CreatePost, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
 
@@ -54,7 +54,7 @@ class UpdatePost(UpdateView):
         return reverse_lazy('blog:update', kwargs={'slug': self.object.slug})
 
     def get_form_kwargs(self):
-        kwargs = super(UpdatePost, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs['user'] = self.object.user
         return kwargs
 
