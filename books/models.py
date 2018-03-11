@@ -100,3 +100,9 @@ class Order(models.Model):
 
     def __str__(self):
         return f'{self.book.title} by {self.email}'
+
+    class Meta:
+        ordering = ('-date',)
+        verbose_name_plural = 'orders'
+
+

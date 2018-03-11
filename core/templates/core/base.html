@@ -80,7 +80,15 @@
 				</div>
 			</div>
 		</footer>
+		
+		<!-- Vuejs -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+		<!-- Vee-Validate -->
+		<script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
 
+		<!-- Axios -->
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
 		<!-- jQuery -->
 		<script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
 
@@ -100,13 +108,19 @@
 		<!-- Owlcarusel Theme JavaScript -->
 		<script src="{% static 'core/vendor/OwlCarousel2-2.2.1/dist/owl.carousel.min.js' %}"></script>
 		<script src="{% static 'core/vendor/OwlCarousel2-2.2.1/dist/owl.custom.js' %}"></script>
+		
+		<!-- Libphonenumber -->
+		<script src="{% static 'core/vendor/libphonenumber/libphonenumber-js.min.js' %}"></script>
 
 		<!-- Theme JavaScript -->
 		<script src="{% static 'core/js/tempora.js' %}"></script>
+		<script src="{% static 'core/js/tempora-vue.js' %}"></script>
 
 		<!-- Contact Form JavaScript -->
 		<script src="{% static 'pbhouse/js/jqBootstrapValidation.js' %}"></script>
 		<script src="{% static 'pbhouse/js/contact_me.js' %}"></script>
+
+
 
 		{% block js %}
 		{% endblock %}

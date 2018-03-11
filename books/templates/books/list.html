@@ -1,16 +1,16 @@
 {% extends "core/base.html" %}
 
-
+{% load widget_tweaks %}
+{% load i18n %}
 {% load thumbnail %}
 {% load static %}
 
 {% block navbar %}{% include "core/navbar.html" %}{% endblock %}
 
 {% block content %}
-{% include 'books/modal.html' %}
 <div class="content">
-	<section>
-		<div class="container books">
+	<section id="orderBooks">
+		<div class="container books" id="books">
 			{% for book in books %}
 			{% if forloop.first %}<div class="row">{% endif %}
 				<div class="col-md-4">
@@ -22,11 +22,10 @@
 									<button
 										type="button" class="btn btn-primary"
 										data-toggle="modal" data-target="#bookModal"
-										data-title="{{ book.title }}" data-id="{{ book.id }}"
-										data-price="{{ book.price }}"
-									>
-									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-									Замовити
+										v-on:click="price={{ book.price }}; title='{{ book.title }}'; bookId={{ book.id }}; quantity=1; setPrice(); submited=false"
+									  >
+									  <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+									  Замовити
 									</button>
 									<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">
 										<i class="fa fa-book" aria-hidden="true"></i>
@@ -52,9 +51,9 @@
 								<a
 									href="#bookModal" data-toggle="modal" 
 									data-title="{{ book.title }}" data-id="{{ book.id }}"
-									data-price="{{ book.price }}"
+									 v-on:click="price={{ book.price }}; title='{{ book.title }}'; bookId={{ book.id }}; quantity=1; setPrice(); submited=false"
 								>
-									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+									 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
 								</a> 
 								{{ book.price|default:"0" }} грн.
 							</h6>
@@ -69,7 +68,11 @@
 			{% if is_paginated %}
 			<ul class="pagination">
 				{% if page_obj.has_previous %}
-				<li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+				<li>
+					<a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary btn-sm">
+						<i class="fa fa-angle-double-left" aria-hidden="true"></i>
+					</a>
+				</li>
 				{% else %}
 				<li class="disabled"><span>&laquo;</span></li>
 				{% endif %}
@@ -90,6 +93,121 @@
 			<!-- End of pagination -->
 
 		</div>
+		<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 id="bookModalLabel">Заповніть форму, щоб замовити книгу <b class="modal-title">[[ title ]]</b></h4>
+					</div>
+					<div id="orderForm">
+						<form v-on:submit="submitForm" novalidate>
+							<div class="modal-body">
+								<div class="row control-group">
+									<div class="col-xs-4">
+										<h4>Ціна: <b>[[ orderPrice ]] грн.</b></h4>
+									</div>
+									<div class="col-xs-5">
+										<h4 class="quantity">
+											<span>Кількість:
+												<b>[[ quantity ]]</b>
+											</span>
+											<span>
+												<button
+													v-on:click="quantity += 1; setPrice()"
+													type="button"
+													class="btn btn-primary btn-xs"
+												>
+													<i class="fa fa-plus" aria-hidden="true"></i>
+												</button>
+												<button
+													v-on:click="substractQuantity(); setPrice()"
+													type="button"
+													class="btn btn-primary btn-xs">
+													<i class="fa fa-minus" aria-hidden="true"></i>
+												</button>
+											</span>
+										</h4>
+									</div>
+								</div>
+								<div v-if="submited">
+									<div class="row">
+										<div class="col-xs-12">
+											<p class="thank-you">Ваше замовлення надіслано. Дякуємо!</p>
+										</div>
+									</div>
+								</div>
+								<div v-else>
+									<div class="row control-group">
+										<div class="form-group col-xs-12 floating-label-form-group controls">
+											<label for="name">{% trans "Ім’я" %}</label>
+											<input
+												v-validate="'required'"
+												data-vv-delay="1000"
+												class="form-control"
+												:class="{'input': true, 'is-danger': errors.has('name') }"
+												name="name" type="text"
+												placeholder="Ім'я"
+												v-model="name"
+											>
+											<span v-show="errors.has('name')" class="help is-danger">[[ errors.first('name') ]]</span>
+										</div>
+									</div>
+									<div class="row control-group">
+										<div class="form-group col-xs-12 floating-label-form-group controls">
+											<label for="email">{% trans "Електронна скринька" %}</label>
+											<input
+												v-validate="'required|email'"
+												data-vv-delay="1000"
+												class="form-control"
+												:class="{'input': true, 'is-danger': errors.has('email') }"
+												name="email" type="text"
+												placeholder="Емейл"
+												v-model="email"
+											>
+											<span v-show="errors.has('email')" class="help is-danger">[[ errors.first('email') ]]</span>
+										</div>
+									</div>
+									<div class="row control-group">
+										<div class="form-group col-xs-12 floating-label-form-group controls">
+											<label for="phone">{% trans "Номер телефону у форматі +380XXXXXXXXX" %}</label>
+											<input
+												v-validate="'required|phonenumber'"
+												data-vv-delay="1000"
+												class="form-control"
+												:class="{'input': true, 'is-danger': errors.has('phone') }"
+												name="phone" type="text"
+												placeholder="Телефон"
+												v-model="phone"
+											>
+											<span v-show="errors.has('phone')" class="help is-danger">[[ errors.first('phone') ]]</span>
+										</div>
+									</div>
+									<div class="row control-group">
+										<div class="form-group col-xs-12 floating-label-form-group controls">
+											<label for="message">{% trans "Повідомлення" %}</label>
+											<textarea
+												name="message" cols="40" rows="4"
+												placeholder="Повідомлення" type="text"
+												id="id_message" class="form-control"
+												v-model="message"
+												v-validate=""
+												data-vv-delay="1000"
+											>
+											</textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div v-if="!submited" class="modal-footer">
+								<button type="submit" v-on:submit="submitForm()" class="btn btn-primary btn-lg">Замовити</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 </div>
+
 {% endblock %}

@@ -93,16 +93,4 @@ $(window).load(function(){
       $('#top').fadeOut('fast');
     }
   });
-
-  // Show book order modal   
-  $('#bookModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var id = button.data('id');
-    var title = button.data('title');
-    var price = button.data('price');
-    var modal = $(this)
-    modal.find('.modal-title').text(title)
-    modal.find('#book-price').text(price + ' грн.')
-    modal.find('#id_book').val(id)
-  })
 })(jQuery); // End of use strict

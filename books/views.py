@@ -3,8 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView,\
         ListView, UpdateView, DeleteView
 
+from rest_framework.generics import CreateAPIView
+
 from books.forms import BookModelForm, OrderModelForm
 from books.models import Book, Order
+from books.serializers import OrderSerializer
 
 
 class BookList(ListView):
@@ -80,13 +83,13 @@ class OrderList(ListView):
     model = Order
     context_object_name = 'orders'
     template_name = 'books/order_list.html'
-    paginate_by = 10
+    paginate_by = 20
     queryset = Order.objects.all()
 
 
-class CreateOrder(SuccessMessageMixin, CreateView):
+class CreateOrder(CreateAPIView):
     """Create a book order."""
 
-    form_class = OrderModelForm
-    success_url = reverse_lazy('books:list')
-    success_message = 'Книгу замовлено!'
+    authentication_classes = []
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer

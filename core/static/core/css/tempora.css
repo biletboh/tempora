@@ -31,6 +31,7 @@ body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
   display: flex;
   flex-direction: column;
+  padding-right: 0 !important;
 }
 .content {
   flex: 1 0 auto;
@@ -608,6 +609,9 @@ article .post-attribution a {
 .form-group-custom {
   margin: 20px 0;
 }
+.is-danger {
+  color: #e70028;
+}
 .box {
   border: 2px solid #A3112A;
   color: #A3112A;
@@ -978,12 +982,25 @@ li.tag {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #fff;
 }
-.modal-header {
+.modal-content .modal-header {
   padding: 15px 30px;
 }
-.modal-body {
+.modal-content .modal-body {
   margin: 0 20px;
 }
-.modal-footer {
+.modal-content .modal-body .quantity {
+  display: flex;
+  justify-content: space-around;
+}
+.modal-content .modal-footer {
   border-top: none;
+}
+.modal-content b {
+  color: #A3112A;
+}
+.modal-content .thank-you {
+  padding: 150px 70px;
+}
+.modal-open {
+  padding-right: 0px !important;
 }

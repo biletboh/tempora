@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    # django rest
+    'rest_framework',
+
     # allauth apps
     'allauth',
     'allauth.account',

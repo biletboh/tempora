@@ -11,6 +11,7 @@ body {
     .serif-font;
     display: flex;
     flex-direction: column;
+	padding-right: 0 !important;
 }
 
 .content {
@@ -523,6 +524,9 @@ article {
 .form-group-custom {
     margin: 20px 0;
 }
+.is-danger {
+	color: saturate(lighten(@theme-primary, 10%), 40%);
+}
 // Box Styles
 .box {
     border: 2px solid @theme-primary;
@@ -901,12 +905,27 @@ body {
 	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #fff;
 }
-.modal-header {
-	padding: 15px 30px;
+.modal-content {
+	.modal-header {
+		padding: 15px 30px;
+	}
+	.modal-body {
+		margin: 0 20px;
+		.quantity {
+			display: flex;
+			justify-content: space-around;
+		}
+	}
+	.modal-footer {
+		border-top: none;
+	}
+	b {
+		color: @theme-primary;
+	}
+	.thank-you {
+		padding: 150px 70px;
+	}
 }
-.modal-body {
-	margin: 0 20px;
-}
-.modal-footer {
-	border-top: none;
+.modal-open {
+    padding-right: 0px !important;
 }
