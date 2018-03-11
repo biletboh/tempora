@@ -3,26 +3,14 @@ Django settings for tempora project.
 """
 
 import os
-import configparser
 from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
-conf = configparser.ConfigParser()
-conf.read(os.path.join(BASE_DIR, 'settings.ini'))
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = conf.get(
-                'tempora', 'secret',
-                fallback='8ze8kfn8@c!jat$*wryy+u@2^+1@ln27t5fql54qfq$2x$ac8x')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = conf.getboolean('tempora', 'debug', fallback=True)
+# Local secret key
+SECRET_KEY = '8ze8kfn8@c!jat$*wryy+u@2^+1@ln27t5fql54qfq$2x$ac8x'
 
 ALLOWED_HOSTS = ['*']
 
@@ -109,25 +97,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'tempora.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-CURRDB = {'ENGINE': 'django.db.backends.sqlite3',
-          'NAME': os.path.join(BASE_DIR, 'db.sqlite3')}
-
-if DEBUG is False:
-    CURRDB = {'ENGINE': 'django.db.backends.postgresql',
-              'NAME': conf.get('tempora', 'dbname', fallback='tempora'),
-              'USER': conf.get('tempora', 'dbuser', fallback='postgres'),
-              'PASSWORD': conf.get('tempora', 'dbpass',
-                                   fallback='postgres'),
-              'HOST': 'localhost',
-              'PORT': '5432'}
-
-DATABASES = {
-    'default': CURRDB
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -200,8 +169,6 @@ AUTH_USER_MODEL = 'users.UserProfile'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'tempora.publ.house@gmail.com'
-EMAIL_HOST_PASSWORD = 'TemporaFiliaVeritas'
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Tempora'
 
 LOGIN_REDIRECT_URL = '/profiles/dashboard/'
