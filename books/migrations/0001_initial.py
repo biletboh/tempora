@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('height', models.DecimalField(blank=True, decimal_places=2, max_digits=6, null=True, validators=[django.core.validators.MinValueValidator(Decimal('0.01'))], verbose_name='Висота')),
                 ('length', models.DecimalField(blank=True, decimal_places=2, max_digits=6, null=True, validators=[django.core.validators.MinValueValidator(Decimal('0.01'))], verbose_name='Ширина')),
                 ('depth', models.DecimalField(blank=True, decimal_places=2, max_digits=6, null=True, validators=[django.core.validators.MinValueValidator(Decimal('0.01'))], verbose_name='Глибина')),
-                ('publisher', models.IntegerField(default='Видавничий дім "Темпора"', verbose_name='Видавництво')),
+                ('publisher', models.IntegerField(default='', verbose_name='Видавництво')),
                 ('isbn_13', models.CharField(blank=True, max_length=15, verbose_name='ISBN-13')),
                 ('isbn_10', models.CharField(blank=True, max_length=15, verbose_name='ISBN-10')),
                 ('slug', models.SlugField(null=True, unique=True, verbose_name='Посилання')),
