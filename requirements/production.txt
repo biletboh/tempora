@@ -1,3 +1,4 @@
 -r base.txt # includes the base.txt requirements file
 
 gunicorn==19.7.1
+psycopg2-binary==2.7.4

@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'django_file_form.ajaxuploader',
     'django_filters',
     'widget_tweaks',
-    'el_pagination',
     'datetimewidget',
     'phonenumber_field',
     'ajax_select',
