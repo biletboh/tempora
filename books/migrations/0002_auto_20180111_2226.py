@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='book',
             name='publisher',
-            field=models.CharField(default='Видавничий дім "Темпора"', max_length=90, verbose_name='Видавництво'),
+            field=models.CharField(default='', max_length=90, verbose_name='Видавництво'),
         ),
     ]
