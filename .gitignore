@@ -3,6 +3,7 @@
 *.swp
 *.sqlite3
 *.ini
+*.log
 nodeenv
 /media/
 /static/
