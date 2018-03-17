@@ -2,3 +2,4 @@
 
 gunicorn==19.7.1
 psycopg2-binary==2.7.4
+raven==6.6.0

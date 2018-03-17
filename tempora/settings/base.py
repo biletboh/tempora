@@ -173,6 +173,33 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Tempora'
 LOGIN_REDIRECT_URL = '/profiles/dashboard/'
 
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        # Log to a text file that can be rotated by logrotate
+        'logfile': {
+                'class': 'logging.handlers.WatchedFileHandler',
+                'filename': os.path.join(BASE_DIR, 'website.log')
+        }
+    },
+    'loggers': {
+        # Again, default Django configuration to email unhandled exceptions
+        'django.request': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        # Might as well log any errors anywhere else in Django
+        'django': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+        }
+    }
+}
+
+
 # Tumnails settings
 
 THUMBNAIL_ALIASES = {
