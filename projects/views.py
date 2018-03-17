@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView,\
@@ -21,7 +22,7 @@ class ProjectPage(DetailView):
         return context
 
 
-class CreateProject(IsSuperUserTestMixin, SuccessMessageMixin, CreateView):
+class CreateProject(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Create a project."""
 
     form_class = ProjectModelForm
@@ -30,7 +31,7 @@ class CreateProject(IsSuperUserTestMixin, SuccessMessageMixin, CreateView):
     success_message = 'Проект додано!'
 
 
-class UpdateProject(SuccessMessageMixin, UpdateView):
+class UpdateProject(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """Update a project."""
 
     model = Project
@@ -43,16 +44,15 @@ class UpdateProject(SuccessMessageMixin, UpdateView):
                             kwargs={'slug': self.object.slug})
 
 
-class DeleteProject(SuccessMessageMixin, DeleteView):
+class DeleteProject(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     """Delete a project."""
 
     model = Project
     success_url = reverse_lazy('projects:update_list')
-    login_url = reverse_lazy('users:dashboard')
     success_message = 'Проект видалено!'
 
 
-class UpdateProjectList(ListView):
+class UpdateProjectList(LoginRequiredMixin, ListView):
     """Render a list of projects to edit."""
 
     model = Project

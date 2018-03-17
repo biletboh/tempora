@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,\
@@ -7,7 +8,7 @@ from tags.forms import TagModelForm
 from tags.models import Tag
 
 
-class CreateTag(SuccessMessageMixin, CreateView):
+class CreateTag(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Create a tag."""
 
     model = Tag
@@ -17,7 +18,7 @@ class CreateTag(SuccessMessageMixin, CreateView):
     success_message = 'Тег додано!'
 
 
-class UpdateTag(SuccessMessageMixin, UpdateView):
+class UpdateTag(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """Update a tag."""
 
     model = Tag
@@ -30,16 +31,15 @@ class UpdateTag(SuccessMessageMixin, UpdateView):
         return reverse_lazy('tags:update', kwargs={'pk': self.object.pk})
 
 
-class DeleteTag(SuccessMessageMixin, DeleteView):
+class DeleteTag(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     """Delete a tag."""
 
     model = Tag
     success_url = reverse_lazy('tags:update_list')
-    login_url = reverse_lazy('users:dashboard')
     success_message = 'Тег видалено!'
 
 
-class AdminTagList(ListView):
+class AdminTagList(LoginRequiredMixin, ListView):
     """Render a list of tags to edit."""
 
     model = Tag

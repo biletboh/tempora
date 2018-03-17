@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView,\
@@ -37,7 +38,7 @@ class BookPage(DetailView):
         return context
 
 
-class CreateBook(SuccessMessageMixin, CreateView):
+class CreateBook(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Create a book."""
 
     form_class = BookModelForm
@@ -46,7 +47,7 @@ class CreateBook(SuccessMessageMixin, CreateView):
     success_message = 'Книгу додано!'
 
 
-class UpdateBook(SuccessMessageMixin, UpdateView):
+class UpdateBook(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """Update a book."""
 
     model = Book
@@ -58,16 +59,15 @@ class UpdateBook(SuccessMessageMixin, UpdateView):
         return reverse_lazy('books:update', kwargs={'slug': self.object.slug})
 
 
-class DeleteBook(SuccessMessageMixin, DeleteView):
+class DeleteBook(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     """Delete a book."""
 
     model = Book
     success_url = reverse_lazy('books:update_list')
-    login_url = reverse_lazy('users:dashboard')
     success_message = 'Книгу видалено!'
 
 
-class UpdateBookList(ListView):
+class UpdateBookList(LoginRequiredMixin, ListView):
     """Render a list of books to edit."""
 
     model = Book
@@ -77,7 +77,7 @@ class UpdateBookList(ListView):
     queryset = Book.objects.all()
 
 
-class OrderList(ListView):
+class OrderList(LoginRequiredMixin, ListView):
     """Render list of book orders."""
 
     model = Order

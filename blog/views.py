@@ -1,5 +1,5 @@
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView,\
         DeleteView, ListView, UpdateView, CreateView
@@ -28,7 +28,7 @@ class Page(DetailView):
     template_name = 'blog/page.html'
 
 
-class CreatePost(SuccessMessageMixin, CreateView):
+class CreatePost(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Create Posts."""
 
     form_class = PostModelForm
@@ -42,7 +42,7 @@ class CreatePost(SuccessMessageMixin, CreateView):
         return kwargs
 
 
-class UpdatePost(UpdateView):
+class UpdatePost(LoginRequiredMixin, UpdateView):
     """Update a post."""
 
     model = Post
@@ -59,12 +59,11 @@ class UpdatePost(UpdateView):
         return kwargs
 
 
-class DeletePost(DeleteView):
+class DeletePost(LoginRequiredMixin, DeleteView):
     """Delete a Post."""
 
     model = Post
     success_url = reverse_lazy('blog:update_list')
-    login_url = reverse_lazy('users:dashboard')
 
 
 class UpdatePostList(LoginRequiredMixin, FilterView):
@@ -74,6 +73,5 @@ class UpdatePostList(LoginRequiredMixin, FilterView):
     template_name = 'blog/update_list.html'
     context_object_name = 'posts'
     paginate_by = 20
-    login_url = reverse_lazy('users:dashboard')
     filterset_class = PostFilter
     queryset = Post.objects.all()

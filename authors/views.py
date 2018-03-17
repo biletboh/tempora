@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView,\
@@ -24,7 +25,7 @@ class AuthorPage(DetailView):
     template_name = 'authors/page.html'
 
 
-class CreateAuthor(SuccessMessageMixin, CreateView):
+class CreateAuthor(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Create an author."""
 
     form_class = AuthorModelForm
@@ -33,7 +34,7 @@ class CreateAuthor(SuccessMessageMixin, CreateView):
     success_message = 'Автора додано!'
 
 
-class UpdateAuthor(SuccessMessageMixin, UpdateView):
+class UpdateAuthor(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """Update an author."""
 
     model = Author
@@ -46,16 +47,15 @@ class UpdateAuthor(SuccessMessageMixin, UpdateView):
                             kwargs={'slug': self.object.slug})
 
 
-class DeleteAuthor(SuccessMessageMixin, DeleteView):
+class DeleteAuthor(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     """Delete an author."""
 
     model = Author
     success_url = reverse_lazy('authors:admin_list')
-    login_url = reverse_lazy('users:dashboard')
     success_message = 'Автора видалено!'
 
 
-class UpdateAuthorList(ListView):
+class UpdateAuthorList(LoginRequiredMixin, ListView):
     """Render a list of authors to edit."""
 
     model = Author
