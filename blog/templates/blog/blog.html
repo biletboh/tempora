@@ -9,18 +9,8 @@
 {% block content %}
 
 {% include "core/navbar.html" %}
-<div class="wrapper">
-    <header class="blog-header" style="">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="section-heading text-center hidden">Блог Видавництва "Темпора"</h1>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section class="content">
+<div class="content">
+    <section>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
@@ -82,7 +72,7 @@
                     {% endif %}
                     {% else %}
                     <div class="row post-preview">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="view view-first">
                                 <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
                                 <div class="mask">
@@ -134,6 +124,5 @@
             </div>
         </div>
     </section>
-</div>
-
+	</div>
 {% endblock %}
