@@ -9,8 +9,37 @@
 
 {% block content %}
 <div class="content">
-	<section id="orderBooks">
+	<section id="orderBooks" class="half">
 		<div class="container books" id="books">
+			<div class="row">
+				<div class="col-md-12">
+					<form action="" class="pull-right" method="get">
+						{{ filter.form.new|attr:"v-model:newBooks"|attr:"hidden" }}
+						{{ filter.form.best_seller|attr:"v-model:bestSeller"|attr:"hidden" }}
+						{{ filter.form.selected|attr:"v-model:selected"|attr:"hidden" }}
+						{{ filter.form.tags|attr:"v-model:categoryValue"|attr:"hidden" }}
+
+						<ul class="list-inline">
+							<li><button type="button" class="btn tag" v-bind:class="{ active: newBooks }" @click="setNewBooksFilterValue">Новинки</button></li>
+							<li><button type="button" class="btn tag" v-bind:class="{ active: bestSeller }" @click="setBestSellerFilterValue">Топ продажів</button></li>
+							<li><button type="button" class="btn tag" v-bind:class="{ active: selected }" @click="setSelectedFilterValue">Обрані</button></li>
+							<li>
+								<div class="dropdown">
+									<button class="btn tag dropdown-toggle" type="button" data-toggle="dropdown">[[ category ]]
+										<span class="caret"></span></button>
+									<ul class="dropdown-menu">
+										<li><a href="#" v-bind:class="" @click="setCategory(false, 'Без категорії')" >Без категорії</a></li>
+										{% for x, y in filter.form.tags.field.choices %}
+										<li><a href="#" v-bind:class="" @click="setCategory('{{ x }}', '{{ y }}')" >{{ y }}</a></li>
+										{% endfor %}
+									</ul>
+								</div>
+							</li>
+							<li><button type="submit" class="btn btn-primary">Фільтрувати</button></li>
+						</ul>
+					</form>
+				</div>
+			</div>
 			{% for book in books %}
 			{% if forloop.first %}<div class="row">{% endif %}
 				<div class="col-md-4">

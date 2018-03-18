@@ -4,14 +4,16 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView,\
         ListView, UpdateView, DeleteView
 
+from django_filters.views import FilterView
 from rest_framework.generics import CreateAPIView
 
+from books.filters import BookFilter
 from books.forms import BookModelForm, OrderModelForm
 from books.models import Book, Order
 from books.serializers import OrderSerializer
 
 
-class BookList(ListView):
+class BookList(FilterView):
     """Render list of books."""
 
     model = Book
@@ -19,9 +21,10 @@ class BookList(ListView):
     template_name = 'books/list.html'
     paginate_by = 12
     queryset = Book.objects.all()
+    filterset_class = BookFilter
 
     def get_context_data(self, **kwargs):
-        context = super(BookList, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['order_form'] = OrderModelForm
         return context
 
@@ -33,7 +36,7 @@ class BookPage(DetailView):
     template_name = 'books/page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(BookPage, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['order_form'] = OrderModelForm
         return context
 

@@ -77,9 +77,11 @@ class Book(models.Model):
         return self.title
 
     def show_size(self):
-        size = '%s x %s x %s' % (self.height, self.lenght, self.depth)
-        if self.depth == '':
-            size = '%s x %s' % (self.height, self.lenght)
+        size = '{self.height} x {self.length} x {self.depth}'
+        if not self.depth:
+            size = f'{self.height} x {self.length}'
+        if (not self.height) or (not self.length):
+            size = ''
         return size
 
 
@@ -89,7 +91,7 @@ class Order(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE,
                              related_name='orders')
     date = models.DateTimeField('Дата публікації',
-                                    default=timezone.datetime.now)
+                                default=timezone.datetime.now)
     quantity = models.IntegerField('Кількість', default=1, blank=True)
     name = models.CharField("Ім'я", max_length=30, blank=True)
     email = models.EmailField('Емейл', max_length=90)
@@ -104,5 +106,3 @@ class Order(models.Model):
     class Meta:
         ordering = ('-date',)
         verbose_name_plural = 'orders'
-
-

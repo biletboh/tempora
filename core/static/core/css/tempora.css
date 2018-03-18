@@ -114,6 +114,9 @@ section.login {
     height: auto;
   }
 }
+section.half {
+  padding: 50px 0;
+}
 aside.clients img {
   margin: 50px auto;
 }
@@ -494,6 +497,27 @@ article .post-attribution a {
   transition: all 0.05s ease-in-out;
   border-radius: 0;
 }
+.btn.focus,
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.active.focus,
+.btn:active:focus {
+  outline: none;
+}
+.btn.tag {
+  text-transform: none;
+}
+.btn.tag.active,
+.btn.tag:hover,
+.btn.tag:focus {
+  color: #fff;
+}
+.btn.tag.active,
+.btn.tag:hover {
+  background-color: #A3112A;
+  color: #fff;
+}
 .btn-default {
   border: 2px solid #A3112A;
   color: rgba(255, 255, 255, 0.7);
@@ -521,6 +545,9 @@ article .post-attribution a {
   outline: none;
   color: white;
   background-color: #A3112A;
+}
+.dropdown {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .pagination > li > a,
 .pagination > li > span,

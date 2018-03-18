@@ -85,6 +85,9 @@ section {
             height: auto;
         }
     }
+	&.half {
+		padding: 50px 0;
+	}
 }
 aside.clients {
     img {
@@ -462,6 +465,20 @@ article {
     -moz-transition: all .05s ease-in-out;
     transition: all .05s ease-in-out;
     border-radius: 0;
+	&.focus, &:focus, &:active:focus, &.active:focus,
+	&.active.focus, &:active:focus {
+		outline: none;
+	}
+	&.tag {
+		text-transform: none;
+		&.active, &:hover, &:focus {
+			color: #fff;
+		}
+		&.active, &:hover {
+			background-color: @theme-primary;
+			color: #fff;
+		}
+	}
 }
 .btn-default {
     .btn-base(rgba(255, 255, 255, 0.7);
@@ -473,6 +490,9 @@ article {
     .btn-base(@theme-primary;
     @theme-primary;
     @theme-primary);
+}
+.dropdown {
+	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .pagination>li>a, .pagination>li>span,
 .pagination>li:first-child>a, .pagination>li:first-child>span, 
@@ -904,6 +924,7 @@ body {
 	font-weight: 600;
 	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #fff;
+	
 }
 .modal-content {
 	.modal-header {

@@ -33,11 +33,18 @@ VeeValidate.Validator.extend('phonenumber', {
     return false
   }
 });
+
 Vue.use(VeeValidate, config);
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: []
+});
 
 new Vue({
   delimiters: ['[[', ']]'],
   el: '#orderBooks',
+  router,
   data: {
     title: '',
     bookId: '',
@@ -48,7 +55,15 @@ new Vue({
     phone: '',
     quantity: 1,
     message: '',
-    submited: false
+    submited: false,
+    selected: false,
+    bestSeller: false,
+    newBooks: false,
+    category: 'Категорії',
+    categoryValue: [],
+  },
+  created: function() {
+    this.getFilterData();
   },
   methods: {
     submitForm (event) {
@@ -95,6 +110,53 @@ new Vue({
     },
     setPrice () {
       this.orderPrice = this.price * this.quantity
+    },
+    getFilterData() {
+      let query = this.$route.query
+      if (query.new && query.new === 'on') {
+        this.newBooks = true
+      }
+      if (query.selected && query.selected === 'on') {
+        this.selected = true
+      }
+      if (query.best_seller && query.best_seller === 'on') {
+        this.bestSeller = true
+      }
+      if (query.tags) {
+        for (var i=0; i < query.tags.length; i++) {
+          this.categoryValue.push(query.tags[i])
+        }
+      }
+    },
+    setNewBooksFilterValue () {
+      if (this.newBooks) {
+        this.newBooks = false
+      } else {
+        this.newBooks = true
+      }
+    },
+    setBestSellerFilterValue () {
+      console.log('bestseller')
+      if (this.bestSeller) {
+        this.bestSeller = false
+      } else {
+        this.bestSeller = true
+      }
+    },
+    setSelectedFilterValue () {
+      if (this.selected) {
+        this.selected = false
+      } else {
+        this.selected = true
+      }
+    },
+    setCategory (value, category) {
+      this.category = category 
+      if (value) {
+        this.categoryValue.push(value)
+      } else {
+        this.categoryValue = []
+      }
     }
   }
 })
