@@ -18,3 +18,8 @@ class AccountAdapter(DefaultAccountAdapter):
             url = reverse('books:order_list')
 
         return resolve_url(url)
+
+    def is_open_for_signup(self, request):
+        """Close the website for a signup."""
+
+        return False

@@ -164,13 +164,28 @@
     </div>
 	{% if user.is_superuser %}	
 	<div class="row">
+		<div class="col-md-2">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-9 col-sm-9 col-xs-9" for="{{ form.is_superuser.auto_id }}">
+                        {{ form.is_superuser.label }}
+                    </label>
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        {{ form.is_superuser|attr:"class:form-control flat" }}
+                    </div>
+                    <div class="col-md-10 col-md-offset-2">
+                        {{ form.is_superuser.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-2">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-6 col-xs-6" for="{{ form.is_staff.auto_id }}">
+                    <label class="control-label col-md-9 col-sm-9 col-xs-9" for="{{ form.is_staff.auto_id }}">
                         {{ form.is_staff.label }}
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
                         {{ form.is_staff|attr:"class:form-control flat" }}
                     </div>
                     <div class="col-md-10 col-md-offset-2">

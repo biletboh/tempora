@@ -48,7 +48,7 @@ class DeleteUser(LoginRequiredMixin, DeleteView):
 
     model = UserProfile
     template_name = 'users/delete.html'
-    success_url = reverse_lazy('users:user_list')
+    success_url = reverse_lazy('users:update_list')
 
 
 class UserList(LoginRequiredMixin, SuccessMessageMixin, FilterView):

@@ -49,7 +49,7 @@ class AccountUserModelForm(BaseUserModelForm):
 class UserModelForm(BaseUserModelForm):
     """Render Admin User model form."""
 
-    team = forms.BooleanField(label=_('Співробітник(ця)'), required=False,
+    team = forms.BooleanField(label=_('Команда'), required=False,
                               initial=False)
     author = forms.BooleanField(label=_('Автор(к)а'), required=False,
                                 initial=False)
@@ -58,6 +58,7 @@ class UserModelForm(BaseUserModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserModelForm, self).__init__(*args, **kwargs)
+        self.fields['is_superuser'].label = 'Адміністратор'
 
         # user groups
         self.team = Group.objects.get(name='Team')
@@ -75,8 +76,8 @@ class UserModelForm(BaseUserModelForm):
     class Meta:
         model = UserProfile
         fields = ('email', 'first_name', 'last_name', 'position', 'info',
-                  'is_staff', 'is_active', 'facebook', 'twitter', 'linkedin',
-                  'goodreads')
+                  'is_superuser', 'is_staff', 'is_active', 'facebook',
+                  'twitter', 'linkedin', 'goodreads')
         widgets = {
             'info': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
         }
@@ -100,6 +101,9 @@ class UserModelForm(BaseUserModelForm):
             instance.groups.add(self.authors)
         if blogger:
             instance.groups.add(self.bloggers)
+
+        if instance.is_superuser:
+            instance.is_staff = True
 
         if commit:
             instance.save()

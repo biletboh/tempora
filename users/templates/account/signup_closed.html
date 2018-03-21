@@ -1,11 +1,15 @@
-{% extends "pbhouse/base.html" %}
+{% extends "core/base.html" %}
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Sign Up Closed" %}{% endblock %}
+{% block head_title %}{% trans "Реєстрація закрита" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up Closed" %}</h1>
-
-<p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+<div class="content">
+	<!-- Start Signup Section -->
+	<section class="login">
+		<h1>{% trans "Реєстрація закрита" %}</h1>
+		<p>{% trans "На жаль, реєстрація закрита." %}</p>
+	</section>
+</div>
 {% endblock %}
