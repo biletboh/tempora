@@ -170,7 +170,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Tempora'
 
-LOGIN_REDIRECT_URL = '/profiles/dashboard/'
+MAIN_TEMPORA_EMAIL = 'tempora@ukr.net'
+
+LOGIN_REDIRECT_URL = '/books/orders/list/'
 
 
 LOGGING = {
