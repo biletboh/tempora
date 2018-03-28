@@ -67,7 +67,7 @@ class Book(models.Model):
 
     authors = models.ManyToManyField(Author, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    slug = models.SlugField('Посилання', unique=True, null=True)
+    slug = models.SlugField('Посилання', max_length=255, unique=True, null=True)
 
     class Meta:
         ordering = ('-pub_date',)
