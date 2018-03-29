@@ -19,7 +19,7 @@ class BookList(FilterView):
     model = Book
     context_object_name = 'books'
     template_name = 'books/list.html'
-    paginate_by = 12
+    paginate_by = 15
     queryset = Book.objects.all()
     filterset_class = BookFilter
 

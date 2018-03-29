@@ -4,6 +4,7 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load static %}
+{% load paginate_filters %}
 
 {% block navbar %}{% include "core/navbar.html" %}{% endblock %}
 
@@ -98,7 +99,7 @@
 			<ul class="pagination">
 				{% if page_obj.has_previous %}
 				<li>
-					<a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary btn-sm">
+                    <a href="?{% filter_page page=page_obj.previous_page_number %}" class="btn btn-primary btn-sm">
 						<i class="fa fa-angle-double-left" aria-hidden="true"></i>
 					</a>
 				</li>
@@ -109,11 +110,11 @@
 				{% if page_obj.number == i %}
 				<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
 				{% else %}
-				<li><a href="?page={{ i }}" class="btn btn-primary btn-sm">{{ i }}</a></li>
+                <li><a href="?{% filter_page page=i %}" class="btn btn-primary btn-sm">{{ i }}</a></li>
 				{% endif %}
 				{% endfor %}
 				{% if page_obj.has_next %}
-				<li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                <li><a href="?{% filter_page page=page_obj.next_page_number %}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
 				{% else %}
 				<li class="disabled"><span>&raquo;</span></li>
 				{% endif %}

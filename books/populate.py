@@ -1,9 +1,10 @@
-import json
+# import json
 
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import is_aware, make_aware
 
 from books.models import Book
+
 
 def get_aware_datetime(date_str):
     ret = parse_datetime(date_str)
@@ -22,5 +23,6 @@ def populate_books(data):
             if not Book.objects.filter(title=p['post_title']).exists():
                 b = Book.objects.create(
                         pub_date=date, title=p['post_title'],
+                        publisher='Темпора',
                         description=p['post_content'], slug=p['ID'])
                 print(b)
