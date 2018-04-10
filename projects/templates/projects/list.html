@@ -1,0 +1,72 @@
+{% extends "core/base.html" %}
+
+{% load widget_tweaks %}
+{% load i18n %}
+{% load thumbnail %}
+{% load static %}
+{% load paginate_filters %}
+
+{% block navbar %}{% include "core/navbar.html" %}{% endblock %}
+
+{% block content %}
+<div class="content">
+	<section id="orderBooks" class="half">
+		<div class="container projects" id="projects">
+			{% for project in projects %}
+			{% if forloop.first %}<div class="row">{% endif %}
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="view view-first">
+								<img src="{{ project.image.project_small.url }}" class="img-responsive" alt="Project image">
+								<div class="mask">
+									<a href="{% url 'projects:page' project.slug %}" class="btn btn-primary">
+										Дивитися
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<a href="{% url 'projects:page' project.slug %}">
+								<h4 class="project-title">{{ project.title }}</h4>
+							</a>
+						</div>
+					</div>
+				</div>
+				{% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+				{% if forloop.last %}</div>{% endif %}
+			{% endfor %}
+
+			<!-- Start of pagination -->
+			{% if is_paginated %}
+			<ul class="pagination">
+				{% if page_obj.has_previous %}
+				<li>
+                    <a href="?{% filter_page page=page_obj.previous_page_number %}" class="btn btn-primary btn-sm">
+						<i class="fa fa-angle-double-left" aria-hidden="true"></i>
+					</a>
+				</li>
+				{% else %}
+				<li class="disabled"><span>&laquo;</span></li>
+				{% endif %}
+				{% for i in paginator.page_range %}
+				{% if page_obj.number == i %}
+				<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+				{% else %}
+                <li><a href="?{% filter_page page=i %}" class="btn btn-primary btn-sm">{{ i }}</a></li>
+				{% endif %}
+				{% endfor %}
+				{% if page_obj.has_next %}
+                <li><a href="?{% filter_page page=page_obj.next_page_number %}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+				{% else %}
+				<li class="disabled"><span>&raquo;</span></li>
+				{% endif %}
+			</ul>
+			{% endif %}
+			<!-- End of pagination -->
+
+		</div>
+	</section>
+</div>
+
+{% endblock %}

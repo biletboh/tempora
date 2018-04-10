@@ -13,7 +13,7 @@ class Project(models.Model):
     short_descr = models.CharField('Короткий опис', max_length=256)
     description = models.CharField('Опис', max_length=2000)
     pub_date = models.DateTimeField('Дата публікації',
-                                    default=timezone.datetime.now)
+                                    default=timezone.now)
     image = ThumbnailerImageField('Світлина',
                                   upload_to='photos/projects')
     curators = models.ManyToManyField(UserProfile, related_name='projects')

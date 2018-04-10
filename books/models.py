@@ -32,7 +32,7 @@ class Book(models.Model):
     description = models.TextField('Опис', blank=True)
     from_author = models.TextField('Від автора', blank=True)
     pub_date = models.DateTimeField('Дата публікації',
-                                    default=timezone.datetime.now)
+                                    default=timezone.now)
     image = ThumbnailerImageField('Світлина', upload_to='photos/books',
                                   blank=True)
     price = models.DecimalField(
@@ -64,8 +64,8 @@ class Book(models.Model):
                         validators=[MinValueValidator(Decimal('0.1'))],
                         blank=True, null=True)
     publisher = models.CharField('Видавництво', max_length=90, blank=True)
-    isbn_13 = models.CharField('ISBN-13', max_length=15, blank=True)
-    isbn_10 = models.CharField('ISBN-10', max_length=15, blank=True)
+    isbn_13 = models.CharField('ISBN-13', max_length=20, blank=True)
+    isbn_10 = models.CharField('ISBN-10', max_length=20, blank=True)
 
     authors = models.ManyToManyField(Author, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -80,7 +80,7 @@ class Book(models.Model):
         return self.title
 
     def show_size(self):
-        size = '{self.height} x {self.length} x {self.depth}'
+        size = f'{self.height} x {self.length} x {self.depth}'
         if not self.depth:
             size = f'{self.height} x {self.length}'
         if (not self.height) or (not self.length):

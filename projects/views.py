@@ -7,7 +7,15 @@ from django.views.generic import CreateView, DetailView, UpdateView,\
 from blog.models import Post
 from projects.forms import ProjectModelForm
 from projects.models import Project
-from core.mixins import IsSuperUserTestMixin
+
+
+class ProjectList(ListView):
+    """Render list of projects."""
+
+    model = Project
+    context_object_name = 'projects'
+    template_name = 'projects/list.html'
+    paginate_by = 15
 
 
 class ProjectPage(DetailView):

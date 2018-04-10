@@ -13,7 +13,7 @@ class Author(models.Model):
     last_name = models.CharField('Прізвище', max_length=200)
     about_author = models.TextField('Про автора', blank=True)
     pub_date = models.DateTimeField('Дата публікації',
-                                    default=timezone.datetime.now)
+                                    default=timezone.now)
     image = ThumbnailerImageField('Світлина', upload_to='photos/blog',
                                   blank=True)
     tags = models.ManyToManyField(Tag, blank=True)

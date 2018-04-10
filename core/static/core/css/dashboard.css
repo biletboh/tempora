@@ -1493,6 +1493,11 @@ ul.msg_list li a .message {
     display: block !important;
     font-size: 11px
 }
+ul.ui-autocomplete li a {
+	background: #22ba9b;
+	color: #fff;
+	padding: 3px 10px !important;
+}
 .dropdown-menu.msg_list span {
     white-space: normal
 }

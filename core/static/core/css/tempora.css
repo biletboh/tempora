@@ -926,35 +926,51 @@ body {
   margin-top: 2rem;
 }
 #books,
-.books {
+.books,
+.projects {
   padding: 50px 0;
 }
 #books img,
-.books img {
+.books img,
+.projects img {
   width: auto;
   margin: auto;
 }
 #books h4,
-.books h4 {
+.books h4,
+.projects h4 {
   font-size: 20px;
   font-weight: 600;
   margin: 10px 10px 5px;
 }
 #books h5,
-.books h5 {
+.books h5,
+.projects h5 {
   font-size: 16px;
   font-weight: 400;
   margin: 5px 10px;
 }
 #books h6,
-.books h6 {
+.books h6,
+.projects h6 {
   font-size: 18px;
   font-weight: 600;
   color: #A3112A;
   margin: 5px 10px;
 }
+#books .project-title,
+.books .project-title,
+.projects .project-title {
+  margin-left: 60px;
+}
+#books .project-title,
+.books .project-title,
+.projects .project-title {
+  margin-left: 60px;
+}
 #books .book,
-.books .book {
+.books .book,
+.projects .book {
   margin: 15px 0;
 }
 .book-description h1 {

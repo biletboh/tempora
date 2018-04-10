@@ -49,6 +49,7 @@
 							<div class="view view-first view-books">
 								<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
 								<div class="mask">
+									{% if book.in_stock == '1' %}
 									<button
 										type="button" class="btn btn-primary"
 										data-toggle="modal" data-target="#bookModal"
@@ -57,6 +58,7 @@
 									  <i class="fa fa-shopping-basket" aria-hidden="true"></i>
 									  Замовити
 									</button>
+									{% endif %}
 									<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">
 										<i class="fa fa-book" aria-hidden="true"></i>
 										Дивитися
