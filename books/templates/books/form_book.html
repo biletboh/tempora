@@ -161,25 +161,18 @@
                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.height.auto_id }}">
                        Розміри 
                     </label>
-                    <div class="col-md-2 col-sm-2 col-xs-4">
+                    <div class="col-md-3 col-sm-3 col-xs-4">
                         {{ form.height|attr:"class:form-control" }}
                     </div>
-					<div class="col-md-1 col-sm-2 col-xs-4">
+					<div class="col-md-1 col-sm-3 col-xs-4 text-center">
 						<i class="fa fa-times fa-lg" aria-hidden="true"></i>
 					</div>
-					<div class="col-md-2 col-sm-2 col-xs-4">
+					<div class="col-md-3 col-sm-2 col-xs-4">
                         {{ form.length|attr:"class:form-control" }}
-                    </div>
-					<div class="col-md-1 col-sm-2 col-xs-4">
-						<i class="fa fa-times fa-lg" aria-hidden="true"></i>
-                    </div>
-					<div class="col-md-2 col-sm-2 col-xs-4">
-                        {{ form.depth|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
                         {{ form.height.errors }}
                         {{ form.lenght.errors }}
-                        {{ form.depth.errors }}
                     </div>
                 </div>
             </div>
@@ -366,7 +359,7 @@
 	</div>
     <div class="row">
         <div class="col-md-12 text-center">
-            <input class="btn btn-primary" type="submit" value="Submit"/>
+            <input class="btn btn-primary" type="submit" value="Зберегти"/>
         </div>
     </div>
 </form>

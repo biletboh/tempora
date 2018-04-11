@@ -31,7 +31,7 @@
 								</h2>
 								<p><span class="text-muted">Сторінки:</span> {{ book.pages|default:'' }}</p>
 								<p><span class="text-muted">Обкладинка:</span> {{ book.get_cover_display }}</p>
-								<p><span class="text-muted">Розмір (см):</span> {{ book.show_size }}</p>
+								<p><span class="text-muted">Розмір (мм):</span> {{ book.show_size }}</p>
 								<p><span class="text-muted">Вага (г):</span> {{ book.weight|default:'' }}</p>
 								<p><span class="text-muted">ISBN:</span> {{ book.isbn_13 }}</p>
 								<p>

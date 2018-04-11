@@ -33,6 +33,8 @@ class Book(models.Model):
     from_author = models.TextField('Від автора', blank=True)
     pub_date = models.DateTimeField('Дата публікації',
                                     default=timezone.now)
+    pub_year = models.PositiveSmallIntegerField('Рік видання', null=True,
+                                                blank=True)
     image = ThumbnailerImageField('Світлина', upload_to='photos/books',
                                   blank=True)
     price = models.DecimalField(
@@ -47,30 +49,21 @@ class Book(models.Model):
     new = models.BooleanField('Новинка', default=False, blank=True)
     best_seller = models.BooleanField('Топ продажів', default=False,
                                       blank=True)
-    pages = models.IntegerField('Сторінки', null=True, blank=True)
+    pages = models.PositiveSmallIntegerField('Сторінки', null=True, blank=True)
     cover = models.CharField('Обкладинка', max_length=3, default=COVERS[0][0],
                              choices=COVERS, blank=True)
-    weight = models.IntegerField('Вага (г)', null=True, blank=True)
-    height = models.DecimalField(
-                        'Висота', max_digits=6, decimal_places=1,
-                        validators=[MinValueValidator(Decimal('0.1'))],
-                        blank=True, null=True)
-    length = models.DecimalField(
-                        'Ширина', max_digits=6, decimal_places=1,
-                        validators=[MinValueValidator(Decimal('0.1'))],
-                        blank=True, null=True)
-    depth = models.DecimalField(
-                        'Глибина', max_digits=6, decimal_places=1,
-                        validators=[MinValueValidator(Decimal('0.1'))],
-                        blank=True, null=True)
+    weight = models.PositiveSmallIntegerField('Вага (г)', null=True,
+                                              blank=True)
+    height = models.PositiveSmallIntegerField('Висота', blank=True, null=True)
+    length = models.PositiveSmallIntegerField('Ширина', blank=True, null=True)
     publisher = models.CharField('Видавництво', max_length=90, blank=True)
     isbn_13 = models.CharField('ISBN-13', max_length=20, blank=True)
     isbn_10 = models.CharField('ISBN-10', max_length=20, blank=True)
 
     authors = models.ManyToManyField(Author, blank=True)
+    translators = models.CharField('Переклад', max_length=200, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    slug = models.SlugField('Посилання', unique=True,
-                            null=True)
+    slug = models.SlugField('Посилання', unique=True, null=True)
 
     class Meta:
         ordering = ('-pub_date',)
@@ -80,9 +73,7 @@ class Book(models.Model):
         return self.title
 
     def show_size(self):
-        size = f'{self.height} x {self.length} x {self.depth}'
-        if not self.depth:
-            size = f'{self.height} x {self.length}'
+        size = f'{self.height}x{self.length}'
         if (not self.height) or (not self.length):
             size = ''
         return size
@@ -95,7 +86,8 @@ class Order(models.Model):
                              related_name='orders')
     date = models.DateTimeField('Дата публікації',
                                 default=timezone.datetime.now)
-    quantity = models.IntegerField('Кількість', default=1, blank=True)
+    quantity = models.PositiveSmallIntegerField('Кількість', default=1,
+                                                blank=True)
     name = models.CharField("Ім'я", max_length=30, blank=True)
     email = models.EmailField('Емейл', max_length=90)
     phone = PhoneNumberField('Телефон')

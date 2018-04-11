@@ -27,7 +27,7 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
         fields = ('title', 'short_descr', 'description',
                   'from_author', 'image', 'price', 'in_stock',
                   'pages', 'cover', 'weight', 'height', 'length',
-                  'depth', 'publisher', 'isbn_13', 'isbn_10',
+                  'publisher', 'isbn_13', 'isbn_10',
                   'authors', 'tags', 'slug', 'release', 'selected',
                   'new', 'best_seller')
         widgets = {

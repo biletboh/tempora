@@ -3,10 +3,10 @@ from django.utils import timezone
 
 
 class Tag(models.Model):
-    title = models.CharField('Назва', max_length=40)
-    description = models.CharField('Опис', max_length=100, blank=True)
+    title = models.CharField('Назва', max_length=140)
+    description = models.CharField('Опис', max_length=200, blank=True)
     pub_date = models.DateTimeField('Дата публікації',
-                                    default=timezone.datetime.now)
+                                    default=timezone.now)
 
     class Meta:
         ordering = ('-title',)

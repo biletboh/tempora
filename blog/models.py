@@ -17,7 +17,7 @@ class Post(models.Model):
     body = HTMLField('Текст', blank=True)
     selected = models.BooleanField('Обраний пост', default=False, blank=True)
     pub_date = models.DateTimeField('Дата публікації',
-                                    default=timezone.datetime.now)
+                                    default=timezone.now)
     image = ThumbnailerImageField('Світлина', upload_to='photos/blog',
                                   blank=True)
     slug = models.SlugField('Посилання', unique=True, null=True)
