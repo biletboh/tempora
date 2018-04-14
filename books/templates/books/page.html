@@ -20,7 +20,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="book-details">
-								<h2>
+								<h3>
 									{% for author in book.authors.all %}
 									{% if book.authors.all.count < 2 or forloop.last  %}
 									{{ author }}
@@ -28,7 +28,10 @@
 									{{ author }}, 
 									{% endif %}
 									{% endfor %}
-								</h2>
+								</h3>
+								{% if book.translators %}
+								<p><span class="text-muted">Переклад:</span> {{ book.translators }}</p>
+								{% endif %}
 								<p><span class="text-muted">Сторінки:</span> {{ book.pages|default:'' }}</p>
 								<p><span class="text-muted">Обкладинка:</span> {{ book.get_cover_display }}</p>
 								<p><span class="text-muted">Розмір (мм):</span> {{ book.show_size }}</p>

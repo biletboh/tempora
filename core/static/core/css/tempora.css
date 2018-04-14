@@ -936,6 +936,11 @@ body {
   width: auto;
   margin: auto;
 }
+#books img.bordered,
+.books img.bordered,
+.projects img.bordered {
+  border: 2px solid #f6a4b2;
+}
 #books h4,
 .books h4,
 .projects h4 {

@@ -357,6 +357,23 @@
             </div>
         </div>
 	</div>
+	<div class="row">
+		<div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-4 col-xs-12" for="{{ form.translators.auto_id }}">
+                        {{ form.translators.label }}
+                    </label>
+                    <div class="col-md-10 col-sm-8 col-xs-12">
+                        {{ form.translators|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.translators.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
     <div class="row">
         <div class="col-md-12 text-center">
             <input class="btn btn-primary" type="submit" value="Зберегти"/>
