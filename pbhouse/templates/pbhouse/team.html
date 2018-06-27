@@ -26,11 +26,11 @@
                         <h4>{{ member.first_name }} {{ member.last_name }}</h4>
                         <p class="text-muted">{{ member.position }}</p>
                         <ul class="list-inline social-buttons">
-                            <li><a href="#" class="btn btn-primary"><i class="fa fa-twitter"></i></a>
+							<li><a href="{{ member.twitter }}" class="btn btn-primary"><i class="fa fa-twitter"></i></a>
                             </li>
-                            <li><a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
+							<li><a href="{{ member.facebook }}" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#" class="btn btn-primary"><i class="fa fa-linkedin"></i></a>
+							<li><a href="{{ member.linkedin }}" class="btn btn-primary"><i class="fa fa-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
