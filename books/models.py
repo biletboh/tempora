@@ -87,8 +87,8 @@ class Order(models.Model):
 
     book = models.ForeignKey(Book, on_delete=models.CASCADE,
                              related_name='orders')
-    date = models.DateTimeField('Дата публікації',
-                                default=timezone.datetime.now)
+    date = models.DateTimeField('Час замовлення',
+                                default=timezone.now)
     quantity = models.PositiveSmallIntegerField('Кількість', default=1,
                                                 blank=True)
     name = models.CharField("Ім'я", max_length=30, blank=True)

@@ -10,10 +10,11 @@ BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Local secret key
-SECRET_KEY = '8ze8kfn8@c!jat$*wryy+u@2^+1@ln27t5fql54qfq$2x$ac8x'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', '8ze8kfn8@c!jat$*wryy+u@2^+1@ln27t5fql54qfq$2x$ac8x')
 
-ALLOWED_HOSTS = ['*']
-
+# Parse a string of allowed hosts separated by coma
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 # Application definition
 
@@ -181,7 +182,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Tempora'
 
-MAIN_TEMPORA_EMAIL = 'tempora@ukr.net'
+# Email configuration
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+NOTIFICATION_EMAIL = os.environ.get('NOTIFICATION_EMAIL', '')
+MAIN_TEMPORA_EMAIL = os.environ.get('MAIN_TEMPORA_EMAIL', '')
 
 LOGIN_REDIRECT_URL = '/books/orders/list/'
 

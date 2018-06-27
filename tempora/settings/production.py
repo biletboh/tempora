@@ -10,10 +10,6 @@ RAVEN_CONFIG = {
     'dsn': os.environ.get('RAVEN_DSN', 'default'),
 }
 
-# Email configuration
-EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-
 # Security configuration
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
