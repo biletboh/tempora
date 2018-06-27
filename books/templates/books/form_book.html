@@ -13,7 +13,7 @@
     </div>
     {% endif %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
 					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.title.auto_id }}">
@@ -30,13 +30,13 @@
         </div>
     </div>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-4 col-xs-12" for="{{ form.in_stock.auto_id }}">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.in_stock.auto_id }}">
                         {{ form.in_stock.label }}
                     </label>
-                    <div class="col-md-6 col-sm-8 col-xs-12">
+                    <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.in_stock|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -45,44 +45,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-6 col-xs-12" for="{{ form.price.auto_id }}">
-                        {{ form.price.label }}
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        {{ form.price|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.price.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
         
-		<div class="col-md-2">
+		<div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-6 col-xs-12" for="{{ form.pages.auto_id }}">
-                        {{ form.pages.label }}<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        {{ form.pages|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.pages.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-		<div class="col-md-4">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.cover.auto_id }}">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.cover.auto_id }}">
                         {{ form.cover.label }}
                     </label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.cover|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -93,28 +63,77 @@
         </div>
     </div>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-4 col-xs-12" for="{{ form.release.auto_id }}">
-                        {{ form.release.label }}
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.price.auto_id }}">
+                        {{ form.price.label }}
                     </label>
-                    <div class="col-md-6 col-sm-8 col-xs-12">
-                        {{ form.release|attr:"class:form-control" }}
+                    <div class="col-md-8 col-sm-10 col-xs-12">
+                        {{ form.price|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
-                        {{ form.release.errors }}
+                        {{ form.price.errors }}
                     </div>
                 </div>
             </div>
         </div>
-		<div class="col-md-2">
+		<div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.pages.auto_id }}">
+                        {{ form.pages.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-10 col-xs-12">
+                        {{ form.pages|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.pages.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.pub_year.auto_id }}">
+                        {{ form.pub_year.label }}
+                    </label>
+                    <div class="col-md-8 col-sm-10 col-xs-12">
+                        {{ form.pub_year|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.pub_year.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="col-md-6 col-sm-12 col-xs-12">
+			<div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.publisher.auto_id }}">
+                        {{ form.publisher.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-10 col-xs-12">
+                        {{ form.publisher|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.publisher.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-sm-4 com-xs-12">
 			<div class="row">
 				<div class="form-group">
-					<label class="control-label col-md-9 col-sm-9 col-xs-9" for="{{ form.selected.auto_id }}">
+					<label class="control-label col-md-8 col-sm-6 col-xs-8" for="{{ form.selected.auto_id }}">
 						{{ form.selected.label }}
 					</label>
-					<div class="col-md-3 col-sm-3 col-xs-3">
+					<div class="col-md-4 col-sm-6 col-xs-4">
 						{{ form.selected|attr:"class:form-control flat" }}
 					</div>
 					<div class="col-md-12">
@@ -123,13 +142,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3 col-sm-4 com-xs-12">
 			<div class="row">
 				<div class="form-group">
-					<label class="control-label col-md-6 col-sm-6 col-xs-6" for="{{ form.new.auto_id }}">
+					<label class="control-label col-md-8 col-sm-6 col-xs-8" for="{{ form.new.auto_id }}">
 						{{ form.new.label }}
 					</label>
-					<div class="col-md-6 col-sm-6 col-xs-6">
+					<div class="col-md-4 col-sm-6 col-xs-4">
 						{{ form.new|attr:"class:form-control flat" }}
 					</div>
 					<div class="col-md-12">
@@ -138,13 +157,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3 col-sm-4 com-xs-12">
 			<div class="row">
 				<div class="form-group">
-					<label class="control-label col-md-4 col-sm-4 col-xs-4" for="{{ form.best_seller.auto_id }}">
+					<label class="control-label col-md-8 col-sm-8 col-xs-8" for="{{ form.best_seller.auto_id }}">
 						{{ form.best_seller.label }}
 					</label>
-					<div class="col-md-8 col-sm-8 col-xs-8">
+					<div class="col-md-4 col-sm-4 col-xs-4">
 						{{ form.best_seller|attr:"class:form-control flat" }}
 					</div>
 					<div class="col-md-12">
@@ -155,16 +174,16 @@
 		</div>
     </div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.height.auto_id }}">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.height.auto_id }}">
                        Розміри 
                     </label>
-                    <div class="col-md-3 col-sm-3 col-xs-4">
+                    <div class="col-md-3 col-sm-2 col-xs-4">
                         {{ form.height|attr:"class:form-control" }}
                     </div>
-					<div class="col-md-1 col-sm-3 col-xs-4 text-center">
+					<div class="col-md-1 col-sm-1 col-xs-1 text-center">
 						<i class="fa fa-times fa-lg" aria-hidden="true"></i>
 					</div>
 					<div class="col-md-3 col-sm-2 col-xs-4">
@@ -177,13 +196,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+		<div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-6 col-sm-6 col-xs-12" for="{{ form.weight.auto_id }}">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.weight.auto_id }}">
                         {{ form.weight.label }}
                     </label>
-                    <div class="col-md-6 col-sm-8 col-xs-12">
+                    <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.weight|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -192,73 +211,43 @@
                 </div>
             </div>
         </div>
-		<div class="col-md-4">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.publisher.auto_id }}">
-                        {{ form.publisher.label }}<span class="required">*</span>
-                    </label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                        {{ form.publisher|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.publisher.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-	<div class="row">
-        <div class="col-md-6">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.isbn_10.auto_id }}">
-                        {{ form.isbn_10.label }}
-                    </label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                        {{ form.isbn_10|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.isbn_10.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-		<div class="col-md-6">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.isbn_13.auto_id }}">
-                        {{ form.isbn_13.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.isbn_13|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.isbn_13.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
 	</div>
 	<div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.short_descr.auto_id }}">
-                        {{ form.short_descr.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.short_descr|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.short_descr.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.isbn_13.auto_id }}">
+						{{ form.isbn_13.label }}
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.isbn_13|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-12">
+						{{ form.isbn_13.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.short_descr.auto_id }}">
+						{{ form.short_descr.label }}
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.short_descr|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-12">
+						{{ form.short_descr.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.description.auto_id }}">
@@ -275,7 +264,7 @@
         </div>
     </div>
 	<div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.from_author.auto_id }}">
@@ -292,13 +281,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.slug.auto_id }}">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.slug.auto_id }}">
                         {{ form.slug.label }}<span class="required">*</span>
                     </label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.slug|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -307,7 +296,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12">
@@ -326,13 +315,13 @@
         </div>
     </div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-6 col-xs-12" for="{{ form.authors.auto_id }}">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.authors.auto_id }}">
                         {{ form.authors.label }}
                     </label>
-                    <div class="col-md-8 col-sm-3 col-xs-12">
+                    <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.authors|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -341,13 +330,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.tags.auto_id }}">
                         {{ form.tags.label }}
                     </label>
-                    <div class="col-md-10 col-sm-8 col-xs-12">
+                    <div class="col-md-10 col-sm-10 col-xs-12">
                         {{ form.tags|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -358,13 +347,13 @@
         </div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-4 col-xs-12" for="{{ form.translators.auto_id }}">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.translators.auto_id }}">
                         {{ form.translators.label }}
                     </label>
-                    <div class="col-md-10 col-sm-8 col-xs-12">
+                    <div class="col-md-10 col-sm-10 col-xs-12">
                         {{ form.translators|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -375,8 +364,11 @@
         </div>
 	</div>
     <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
             <input class="btn btn-primary" type="submit" value="Зберегти"/>
+			{% if form.instance.slug %}
+			<a href="{% url 'books:page' form.instance.slug %}" class="btn btn-primary">Дивитися</a>
+			{% endif %}
         </div>
     </div>
 </form>

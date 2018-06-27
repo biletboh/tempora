@@ -101,7 +101,7 @@
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.image.auto_id }}">
-                        {{ form.image.label }}<span class="required">*</span>
+                        {{ form.image.label }}
                     </label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         {{ form.image|attr:"class:form-control" }}
@@ -118,7 +118,7 @@
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
-                        {{ form.tags.label }}<span class="required">*</span>
+                        {{ form.tags.label }}
                     </label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         {{ form.tags|attr:"class:form-control" }}
@@ -147,7 +147,10 @@
     </div>
     <div class="row">
         <div class="col-md-12 text-center">
-            <input class="btn btn-primary" type="submit" value="Submit"/>
+            <input class="btn btn-primary" type="submit" value="Зберегти"/>
+			{% if form.instance.slug %}
+			<a href="{% url 'projects:page' form.instance.slug %}" class="btn btn-primary">Дивитися</a>
+			{% endif %}
         </div>
     </div>
 </form>

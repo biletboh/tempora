@@ -226,13 +226,13 @@
 						<div class="view view-first">
 							<img class="post-img img-responsive" src="{{ selected_post.image.blog_selected.url }}" alt="{{ selected_post.image.name }}">
 							<div class="mask">
-								<a href="{% url 'blog:page' selected_post.id %}" class="btn btn-primary">Читати</a>
+								<a href="{% url 'blog:page' selected_post.slug %}" class="btn btn-primary">Читати</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="post-preview-text">
-							<a href="{% url 'blog:page' selected_post.id %}" class="">
+							<a href="{% url 'blog:page' selected_post.slug %}" class="">
 								<h2 class="post-title middle">{{ selected_post.title }}</h2>
 							</a>
 							<p>{{ selected_post.short_descr }}</p>
@@ -258,13 +258,13 @@
 								<div class="view view-first">
 									<img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
 									<div class="mask">
-										<a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Читати</a>
+										<a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="post-preview-text">
-									<a href="{% url 'blog:page' post.id %}" class="">
+									<a href="{% url 'blog:page' post.slug %}" class="">
 										<h2 class="post-title middle">{{ post.title }}</h2>
 									</a>
 									<p>{{ post.short_descr }}</p>

@@ -22,13 +22,13 @@
                             <div class="view view-first">
                                 <img class="post-img img-responsive" src="{{ post.image.blog_first.url }}" alt="{{ post.image.name }}">
                                 <div class="mask">
-                                    <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Читати</a>
+                                    <a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="post-preview-text">
-                                <a href="{% url 'blog:page' post.id %}" class="">
+                                <a href="{% url 'blog:page' post.slug %}" class="">
                                     <h2 class="post-title">{{ post.title }}</h2>
                                 </a>
 								<p>{{ post.short_descr }}</p>
@@ -49,13 +49,13 @@
                                 <div class="view view-first">
                                     <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
                                     <div class="mask">
-                                        <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Читати</a>
+                                        <a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="post-preview-text">
-                                    <a href="{% url 'blog:page' post.id %}" class="">
+                                    <a href="{% url 'blog:page' post.slug %}" class="">
                                         <h2 class="post-title middle">{{ post.title }}</h2>
 									</a>
 									<p>{{ post.short_descr }}</p>
@@ -76,13 +76,13 @@
                             <div class="view view-first">
                                 <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
                                 <div class="mask">
-                                    <a href="{% url 'blog:page' post.id %}" class="btn btn-primary">Читати</a>
+                                    <a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="post-preview-text">
-                                <a href="{% url 'blog:page' post.id %}" class="">
+                                <a href="{% url 'blog:page' post.slug %}" class="">
                                     <h2 class="post-title bottom">{{ post.title }}</h2>
                                 </a>
 								<p>{{ post.short_descr }}</p>

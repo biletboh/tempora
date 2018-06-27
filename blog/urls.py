@@ -10,7 +10,7 @@ urlpatterns = [
 
             #  Blog urls
             url(r'^$', views.PostList.as_view(), name='blog'),
-            url(r'^(?P<pk>[0-9]+)/$', views.Page.as_view(), name='page'),
+            url(r'^(?P<slug>[\w-]+)/$', views.Page.as_view(), name='page'),
             url(r'^post/create/$', views.CreatePost.as_view(), name='create'),
             url(
                 r'^update/list/$', views.UpdatePostList.as_view(),

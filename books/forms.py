@@ -26,9 +26,9 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
         model = Book
         fields = ('title', 'short_descr', 'description',
                   'from_author', 'image', 'price', 'in_stock',
-                  'pages', 'cover', 'weight', 'height', 'length',
-                  'publisher', 'isbn_13', 'isbn_10',
-                  'authors', 'tags', 'slug', 'release', 'selected',
+                  'pages', 'cover', 'height', 'length', 'weight',
+                  'publisher', 'isbn_13', 'authors', 'tags', 'slug',
+                  'pub_year', 'release', 'selected',
                   'new', 'best_seller', 'translators')
         widgets = {
             'short_descr': forms.Textarea(attrs={'cols': 80, 'rows': 2}),

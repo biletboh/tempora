@@ -54,7 +54,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         ordering = ('-date_joined',)
 
     def __str__(self):
-        return self.email
+        return f'{self.first_name} {self.last_name}'
 
     def get_full_name(self):
         """ Returns the first_name plus the last_name, with a space in between.

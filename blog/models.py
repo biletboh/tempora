@@ -13,7 +13,7 @@ class Post(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, related_name='posts', blank=True)
     title = models.CharField('Заголовок', max_length=128)
-    short_descr = HTMLField('Короткий опис', max_length=256, blank=True)
+    short_descr = HTMLField('Короткий опис', max_length=256)
     body = HTMLField('Текст', blank=True)
     selected = models.BooleanField('Обраний пост', default=False, blank=True)
     pub_date = models.DateTimeField('Дата публікації',
