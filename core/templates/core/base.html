@@ -63,7 +63,13 @@
 							<a href="{% url 'pbhouse:landing' %}">{% trans "Головна" %}</a>
 						</li>
 						<li>
-							<a href="#">{% trans "Блог" %}</a>
+							<a href="{% url 'books:list' %}">{% trans "Книги" %}</a>
+						</li>
+						<li>
+							<a href="{% url 'blog:blog' %}">{% trans "Блог" %}</a>
+						</li>
+						<li>
+							<a href="{% url 'projects:list' %}">{% trans "Проекти" %}</a>
 						</li>
 					</ul>
 				</nav>

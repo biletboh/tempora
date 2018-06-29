@@ -23,7 +23,7 @@ class Post(models.Model):
     slug = models.SlugField('Посилання', unique=True, null=True)
 
     def __str__(self):
-        return 'Post: %s' % self.title
+        return self.title
 
     class Meta:
         ordering = ('-pub_date',)

@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView,\
     DeleteView, ListView
 
-from blog.models import Post
 from projects.forms import ProjectModelForm
 from projects.models import Project
 
@@ -25,8 +24,9 @@ class ProjectPage(DetailView):
     template_name = 'projects/page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProjectPage, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.all()[:3]
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.object.project_tag.posts.all()[:3]
+        context['books'] = self.object.project_tag.books.all()[:6]
         return context
 
 

@@ -65,7 +65,7 @@ class Book(models.Model):
 
     authors = models.ManyToManyField(Author, blank=True)
     translators = models.CharField('Переклад', max_length=200, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = models.ManyToManyField(Tag, related_name='books', blank=True)
     slug = models.SlugField('Посилання', unique=True, null=True)
 
     class Meta:

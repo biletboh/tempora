@@ -29,13 +29,10 @@ class PostModelForm(CustomFileFormMixin, forms.ModelForm):
             'body': TinyMCE(attrs={'cols': 80, 'rows': 20}),
         }
 
-    def save(self, commit=True):
-        instance = super().save(commit=False)
-        instance.user = self.user
+    def save(self):
+        instance = super().save()
         image = self.cleaned_data['image']
         instance.image = image
-        if commit:
-            instance.save()
-
+        instance.save()
         self.delete_temporary_files()
         return instance
