@@ -61,7 +61,7 @@ class Book(models.Model):
     height = models.PositiveSmallIntegerField('Висота', blank=True, null=True)
     length = models.PositiveSmallIntegerField('Ширина', blank=True, null=True)
     publisher = models.CharField('Видавництво', max_length=90, blank=True)
-    isbn_13 = models.CharField('ISBN-13', max_length=60, blank=True)
+    isbn_13 = models.CharField('ISBN-13', max_length=256, blank=True)
 
     authors = models.ManyToManyField(Author, blank=True)
     translators = models.CharField('Переклад', max_length=200, blank=True)
@@ -80,6 +80,9 @@ class Book(models.Model):
         if (not self.height) or (not self.length):
             size = ''
         return size
+
+    def isbn_list(self):
+        return self.isbn_13.split(' ')
 
 
 class Order(models.Model):

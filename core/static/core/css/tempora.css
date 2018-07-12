@@ -936,11 +936,6 @@ body {
   width: auto;
   margin: auto;
 }
-#books img.bordered,
-.books img.bordered,
-.projects img.bordered {
-  border: 2px solid #f6a4b2;
-}
 #books h4,
 .books h4,
 .projects h4 {
@@ -1051,4 +1046,11 @@ li.tag {
 }
 .modal-open {
   padding-right: 0px !important;
+}
+.isbn_list {
+  display: block;
+  margin-left: 5rem;
+}
+img.bordered {
+  border: 2px solid #f6a4b2;
 }
