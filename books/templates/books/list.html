@@ -15,10 +15,10 @@
 			<div class="row">
 				<div class="col-md-12">
 					<form action="" class="pull-right" method="get">
-						{{ filter.form.new|attr:"v-model:newBooks" }}
-						{{ filter.form.best_seller|attr:"v-model:bestSeller" }}
-						{{ filter.form.selected|attr:"v-model:selected" }}
-						{{ filter.form.tags|attr:"v-model:categoryValue" }}
+						{{ filter.form.new|attr:"v-model:newBooks"|attr:"hidden" }}
+						{{ filter.form.best_seller|attr:"v-model:bestSeller"|attr:"hidden" }}
+						{{ filter.form.selected|attr:"v-model:selected"|attr:"hidden" }}
+						{{ filter.form.tags|attr:"v-model:categoryValue"|attr:"hidden" }}
 
 						<ul class="list-inline">
 							<li><button type="button" class="btn tag" v-bind:class="{ active: newBooksIsActive }" @click="setNewBooksFilterValue">Новинки</button></li>
