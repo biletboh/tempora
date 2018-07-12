@@ -56,9 +56,12 @@ new Vue({
     quantity: 1,
     message: '',
     submited: false,
-    selected: false,
-    bestSeller: false,
-    newBooks: false,
+    selected: 1,
+    bestSeller: 1,
+    newBooks: 1,
+    selectedIsActive: false,
+    bestSellerIsActive: false,
+    newBooksIsActive: false,
     category: 'Категорії',
     categoryValue: [],
   },
@@ -113,14 +116,17 @@ new Vue({
     },
     getFilterData() {
       let query = this.$route.query
-      if (query.new && query.new === 'on') {
-        this.newBooks = true
+      if (query.new && query.new === '2') {
+        this.newBooks = 2 
+        this.newBooksIsActive = true 
       }
-      if (query.selected && query.selected === 'on') {
-        this.selected = true
+      if (query.selected && query.selected === '2') {
+        this.selected = 2 
+        this.selectedIsActive = true 
       }
-      if (query.best_seller && query.best_seller === 'on') {
-        this.bestSeller = true
+      if (query.best_seller && query.best_seller === '2') {
+        this.bestSeller = 2 
+        this.bestSellerIsActive = true 
       }
       if (query.tags) {
         for (var i=0; i < query.tags.length; i++) {
@@ -129,25 +135,30 @@ new Vue({
       }
     },
     setNewBooksFilterValue () {
-      if (this.newBooks) {
-        this.newBooks = false
+      if (this.newBooks === 2) {
+        this.newBooks = 1 
+        this.newBooksIsActive = false 
       } else {
-        this.newBooks = true
+        this.newBooks = 2 
+        this.newBooksIsActive = true 
       }
     },
     setBestSellerFilterValue () {
-      console.log('bestseller')
-      if (this.bestSeller) {
-        this.bestSeller = false
+      if (this.bestSeller === 2) {
+        this.bestSeller = 1 
+        this.bestSellerIsActive = false 
       } else {
-        this.bestSeller = true
+        this.bestSeller = 2 
+        this.bestSellerIsActive = true 
       }
     },
     setSelectedFilterValue () {
-      if (this.selected) {
-        this.selected = false
+      if (this.selected === 2) {
+        this.selected = 1 
+        this.selectedIsActive = false
       } else {
-        this.selected = true
+        this.selected = 2 
+        this.selectedIsActive = true 
       }
     },
     setCategory (value, category) {

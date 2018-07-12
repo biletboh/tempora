@@ -12,11 +12,3 @@ class BookFilter(django_filters.FilterSet):
     class Meta:
         model = Book
         fields = ['in_stock', 'selected', 'new', 'best_seller', 'tags']
-        filter_overrides = {
-            models.BooleanField: {
-                'filter_class': django_filters.BooleanFilter,
-                'extra': lambda f: {
-                    'widget': forms.CheckboxInput,
-                },
-            },
-         }
