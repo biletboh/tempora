@@ -347,13 +347,13 @@
         </div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.translators.auto_id }}">
+                    <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.translators.auto_id }}">
                         {{ form.translators.label }}
                     </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
+                    <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.translators|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-12">
@@ -362,6 +362,21 @@
                 </div>
             </div>
         </div>
+		<div class="col-md-6 col-sm-12 col-xs-12">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.pub_date.auto_id }}">
+						{{ form.pub_date.label }}
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.pub_date|attr:"class:form-control datetimepicker" }}
+					</div>
+					<div class="col-md-12">
+						{{ form.pub_date.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
@@ -378,8 +393,16 @@
 
 {% block js %}
 <script type="text/javascript">
-    $(function() {
-        initUploadFields($('#post-form'));
-    });
+	$(function() {
+		initUploadFields($('#post-form'));
+		if ($(".datetimepicker").length != 0) {
+			var minD = new Date('01-01-1990 00:00');
+			$('.datetimepicker').datetimepicker({
+				format: "DD-MM-YYYY HH:mm",
+				minDate: minD,
+				viewMode: 'years',
+			});
+		}
+	});
 </script>
 {% endblock %}

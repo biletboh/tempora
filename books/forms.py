@@ -1,4 +1,5 @@
 from django import forms
+from django.utils import timezone
 
 from ajax_select import make_ajax_field
 from django_file_form.forms import UploadedFileField
@@ -17,10 +18,14 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
                            plugin_options={'minLength': 2})
 
     def __init__(self, *args, **kwargs):
-        super(BookModelForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if self.instance:
             self.fields['image'].initial = self.instance.image
         self.fields['publisher'].initial = 'Темпора'
+        self.fields['pub_date'].input_formats = ['%d-%m-%Y %H:%M']
+        if not self.instance.pub_date:
+            self.fields['pub_date'].initial = timezone.now().strftime(
+                                                             '%d-%m-%Y %H:%M')
 
     class Meta:
         model = Book
@@ -28,7 +33,7 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
                   'from_author', 'image', 'price', 'in_stock',
                   'pages', 'cover', 'height', 'length', 'weight',
                   'publisher', 'isbn_13', 'authors', 'tags', 'slug',
-                  'pub_year', 'release', 'selected',
+                  'pub_year', 'pub_date', 'release', 'selected',
                   'new', 'best_seller', 'translators')
         widgets = {
             'short_descr': forms.Textarea(attrs={'cols': 80, 'rows': 2}),
