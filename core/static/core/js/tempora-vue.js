@@ -68,7 +68,20 @@ new Vue({
   created: function() {
     this.getFilterData();
   },
+  mounted: function() {
+    this.okSize();
+  },
   methods: {
+    okSize() {
+      console.log(this.$refs);
+      for (ref in this.$refs) {
+        let img = this.$refs[ref].children[0];
+        let mask = this.$refs[ref].children[1];
+        if (img.clientHeight < 450 || img.clientWidth < 300) {
+          this.$refs[ref].removeChild(mask);
+        }
+      }
+    },
     submitForm (event) {
       event.preventDefault()
       this.validateBeforeSubmit()
