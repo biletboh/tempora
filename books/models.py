@@ -33,12 +33,8 @@ class Book(models.Model):
     from_author = models.TextField('Від автора', blank=True)
     pub_date = models.DateTimeField('Дата публікації',
                                     default=timezone.now)
-    pub_year = models.PositiveSmallIntegerField(
-            'Рік Видання', null=True, blank=True,
-            validators=[
-                MinValueValidator(1980),
-                MaxValueValidator(timezone.now().year+5)],
-            help_text='Рік у форматі: <YYYY>')
+    pub_year = models.CharField('Рік видання', max_length=50, blank=True,
+                                default='')
     release = models.DateField('Дата виходу', null=True, blank=True)
     image = ThumbnailerImageField('Світлина', upload_to='photos/books',
                                   blank=True)
@@ -53,7 +49,7 @@ class Book(models.Model):
     new = models.BooleanField('Новинка', default=False, blank=True)
     best_seller = models.BooleanField('Топ продажів', default=False,
                                       blank=True)
-    pages = models.PositiveSmallIntegerField('Сторінки', null=True)
+    pages = models.CharField('Сторінки', max_length=50, blank=True, default='')
     cover = models.CharField('Обкладинка', max_length=3, default=COVERS[0][0],
                              choices=COVERS, blank=True)
     weight = models.PositiveSmallIntegerField('Вага (г)', null=True,
