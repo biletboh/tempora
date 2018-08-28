@@ -4,6 +4,7 @@
 *.sqlite3
 *.ini
 *.log
+*.sh
 nodeenv
 /media/
 /static/
