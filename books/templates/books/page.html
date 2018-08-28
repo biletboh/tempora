@@ -186,6 +186,21 @@
 									</div>
 									<div class="row control-group">
 										<div class="form-group col-xs-12 floating-label-form-group controls">
+											<label for="phone">{% trans "Адреса доставки" %}</label>
+											<input
+												v-validate="'required'"
+												data-vv-delay="1000"
+												class="form-control"
+												:class="{'input': true, 'is-danger': errors.has('address') }"
+												name="address" type="text"
+												placeholder="Адреса"
+												v-model="address"
+											>
+											<span v-show="errors.has('address')" class="help is-danger">[[ errors.first('address') ]]</span>
+										</div>
+									</div>
+									<div class="row control-group">
+										<div class="form-group col-xs-12 floating-label-form-group controls">
 											<label for="message">{% trans "Повідомлення" %}</label>
 											<textarea
 												name="message" cols="40" rows="4"

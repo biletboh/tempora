@@ -16,7 +16,8 @@ def send_order_notification(order_id):
     context = {
         'name': order.name, 'email': order.email, 'phone': order.phone,
         'message': order.message, 'quantity': order.quantity,
-        'book': order.book, 'id': order.id, 'date': date
+        'book': order.book, 'id': order.id, 'date': date,
+        'address': order.address
         }
     body = message.render(context)
 

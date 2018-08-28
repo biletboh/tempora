@@ -53,6 +53,7 @@ new Vue({
     name: '',
     email: '',
     phone: '',
+    address: '',
     quantity: 1,
     message: '',
     submited: false,
@@ -73,7 +74,6 @@ new Vue({
   },
   methods: {
     okSize() {
-      console.log(this.$refs);
       for (ref in this.$refs) {
         let img = this.$refs[ref].children[0];
         let mask = this.$refs[ref].children[1];
@@ -109,6 +109,7 @@ new Vue({
         email: this.email,
         phone: this.phone,
         message: this.message,
+        address: this.address,
         quantity: this.quantity,
       })
         .then(function (response) {
@@ -118,6 +119,20 @@ new Vue({
           console.log(error);
         });
       this.submited = true
+      this.clearUpOrderData()
+    },
+    clearUpOrderData () {
+      console.log('test', this.bookId);
+      this.name = '',
+      this.bookId = '',
+      this.email = '',
+      this.phone = '',
+      this.message = '',
+      this.price = '',
+      this.orderPrice = '',
+      this.address = '',
+      this.quantity = 1 
+      console.log('test after', this.bookId);
     },
     substractQuantity() {
       if (this.quantity > 1) {
@@ -126,6 +141,7 @@ new Vue({
     },
     setPrice () {
       this.orderPrice = this.price * this.quantity
+      console.log('test after price', this.bookId);
     },
     getFilterData() {
       let query = this.$route.query

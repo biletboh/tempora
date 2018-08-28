@@ -40,8 +40,7 @@ class Book(models.Model):
                                   blank=True)
     price = models.DecimalField(
                         'Ціна', max_digits=8, decimal_places=2,
-                        validators=[MinValueValidator(Decimal('0.01'))],
-                        blank=True, null=True)
+                        blank=True, null=True, default=0)
     in_stock = models.CharField('У наявності', max_length=1,
                                 default=IN_STOCK[0][0], choices=IN_STOCK,
                                 blank=True)
@@ -95,6 +94,7 @@ class Order(models.Model):
     phone = PhoneNumberField('Телефон')
     message = models.TextField('Повідомлення', blank=True)
     comment = models.TextField('Коментар', blank=True)
+    address = models.CharField('Адреса доставки', max_length=512, blank=True)
     processed = models.BooleanField('Опрацьовано', default=False)
 
     def __str__(self):

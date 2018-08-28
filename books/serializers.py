@@ -9,7 +9,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ('name', 'email', 'phone', 'message', 'quantity', 'book')
+        fields = ('name', 'email', 'phone', 'message', 'quantity', 'book',
+                  'address')
 
     def create(self, validated_data):
         order = Order.objects.create(**validated_data)
