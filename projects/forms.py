@@ -38,7 +38,7 @@ class ProjectModelForm(CustomFileFormMixin, forms.ModelForm):
         }
 
     def save(self):
-        instance = super(ProjectModelForm, self).save()
+        instance = super().save()
         image = self.cleaned_data['image']
         instance.image = image
         instance.save()

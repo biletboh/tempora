@@ -30,9 +30,10 @@ class PostModelForm(CustomFileFormMixin, forms.ModelForm):
         }
 
     def save(self):
-        instance = super().save()
+        instance = super().save(commit=False)
         image = self.cleaned_data['image']
         instance.image = image
+        instance.user = self.user
         instance.save()
         self.delete_temporary_files()
         return instance

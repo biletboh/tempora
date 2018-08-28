@@ -145,6 +145,7 @@ aside.clients {
         border-color: fade(white, 30%);
         .navbar-header .navbar-brand {
             color: fade(white, 70%);
+			text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.6);
             &:hover, &:focus {
                 color: white;
             }
@@ -152,6 +153,7 @@ aside.clients {
         .nav > li > a,
         .nav > li > a:focus {
             color: fade(white, 70%);
+			text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.6);
             &:hover {
                 color: white;
             }
@@ -163,6 +165,7 @@ aside.clients {
             .navbar-header .navbar-brand {
                 color: @theme-primary;
                 font-size: 14px;
+				text-shadow: none;
                 &:hover, &:focus {
                     color: darken(@theme-primary, 10%);
                 }
@@ -170,6 +173,7 @@ aside.clients {
             .nav > li > a,
             .nav > li > a:focus {
                 color: @gray-darker;
+				text-shadow: none;
                 &:hover {
                     color: @theme-primary;
                 }
@@ -259,6 +263,7 @@ header {
         padding: 100px 15px 100px;
         width: 100%;
         .header-content-inner {
+			text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.6);
             h1 {
                 font-weight: 700;
                 text-transform: uppercase;
@@ -495,7 +500,7 @@ article {
 	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .pagination>li>a, .pagination>li>span,
-.pagination>li:first-child>a, .pagination>li:first-child>span, 
+.pagination>li:first-child>a, .pagination>li:first-child>span,
 .pagination>li:last-child>a, .pagination>li:last-child>span {
     .btn-base(@theme-primary;
     @theme-primary;
@@ -503,11 +508,22 @@ article {
 	border-radius: 0;
 	margin: 3px;
 	font-size: 12px;
+
+    @media (max-width: 768px) {
+		margin: 2px;
+		padding: 5px 10px;
+	}
 }
-.pagination>.active>span {
+.pagination>.active>span, .pagination>.active>a,
+.pagination > li:first-child.active > a,
+.pagination > li:last-child > a {
 	.btn-hover(@theme-primary; @theme-primary);
 	&:hover {
 		.btn-hover(darken(@theme-primary, 5%); darken(@theme-primary, 5%));
+	}
+	@media (max-width: 768px) {
+		margin: 2px;
+		padding: 5px 10px;
 	}
 }
 .btn-xl {
@@ -777,7 +793,8 @@ body {
 
 // Pagination
 .pagination {
-    display: block;
+    display: flex;
+	justify-content: center;
 }
 
 // Owl carousel
@@ -844,6 +861,11 @@ body {
 		margin-top: 2rem;
 	}
 }
+
+.filter li {
+	margin: 5px 0;
+}
+
 #books, .books, .projects {
 	padding: 50px 0;
 	img {
