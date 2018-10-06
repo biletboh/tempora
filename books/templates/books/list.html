@@ -229,14 +229,14 @@
 								<div v-else>
 									<div class="row control-group">
 										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label for="name">{% trans "Ім’я" %}</label>
+											<label for="name">{% trans "ПІБ" %}</label>
 											<input
 												v-validate="'required'"
 												data-vv-delay="1000"
 												class="form-control"
 												:class="{'input': true, 'is-danger': errors.has('name') }"
 												name="name" type="text"
-												placeholder="Ім'я"
+												placeholder="ПІБ"
 												v-model="name"
 											>
 											<span v-show="errors.has('name')" class="help is-danger">[[ errors.first('name') ]]</span>

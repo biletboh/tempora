@@ -2,7 +2,7 @@ const dict = {
   uk: {
     custom: {
       name: {
-        required: "Поле ім'я обов'язкове.",
+        required: "Поле ПІБ обов'язкове.",
       },
       email: {
         required: "Поле емейл обов'язкове.",
