@@ -18,17 +18,16 @@ const dict = {
     }
   }
 };
-const config = {
-  locale: 'uk',
-  dictionary: dict 
-}
+
+Vue.use(VeeValidate);
+
 VeeValidate.Validator.extend('phonenumber', {
   getMessage: field => 'Invalid phone number.',
   validate: value => {
     let plusregex = new RegExp('^[\+]')
     if (!plusregex.test(value)) {
       value = '+' + value
-    } 
+    }
     let valid_number = libphonenumber.isValidNumber(value)
     if (valid_number) {
       return true
@@ -37,7 +36,7 @@ VeeValidate.Validator.extend('phonenumber', {
   }
 });
 
-Vue.use(VeeValidate, config);
+VeeValidate.Validator.localize('uk', dict.uk)
 
 const router = new VueRouter({
     mode: 'history',
