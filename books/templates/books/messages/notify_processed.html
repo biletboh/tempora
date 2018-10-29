@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Замовлення №{{ id }} від {{ name }}, {{ date }}.</title>
+    <title>{{ title }}</title>
     <style>
 /* -------------------------------------
    GLOBAL RESETS
@@ -13,6 +13,7 @@ img {
   border: none;
   -ms-interpolation-mode: bicubic;
   max-width: 100%; }
+
       body {
         background-color: #f6f6f6;
         font-family: sans-serif;
@@ -88,14 +89,14 @@ img {
   h4 {
     color: #000000;
     font-family: sans-serif;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 1.4;
     margin: 0;
-    Margin-bottom: 30px; }
+    margin-bottom: 20px; }
 h1 {
-  font-size: 35px;
-  font-weight: 300;
-  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: left;
   text-transform: capitalize; }
       p,
       ul,
@@ -113,6 +114,13 @@ h1 {
   a {
     color: #3498db;
     text-decoration: underline; }
+/* -------------------------------------
+   LISTS
+     ------------------------------------- */
+ul.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
 /* -------------------------------------
    BUTTONS
      ------------------------------------- */
@@ -153,7 +161,6 @@ h1 {
     .logo {
       text-align: center;
     }
-
     .last {
       margin-bottom: 0; }
   .first {
@@ -256,7 +263,7 @@ table[class=body] .container {
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">Нове замовлення №{{ id }} від {{ name }}.</span>
+            <span class="preheader">{{ title }}</span>
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -270,28 +277,18 @@ table[class=body] .container {
                             <img src="https://tempora.com.ua/static/core/img/tempora-logo.jpg" alt="Лого видавництва Темпора">
                           </a>
                         </div>
-						<br>
-                        <p>Привіт,</p>
-                        <p>прийшло нове замовлення №{{ id }} від {{ name }}.</p>
                         <br>
-                        <h2>Деталі замовлення</h2>
-                        <p>Книга: {{ book }}</p>
-                        <p>Автори: {{ authors }}</p>
-                        <p>Кількість: {{ quantity }}</p>
-                        <p>Дата: {{ date }}</p>
+                        <h1>Замовлення надіслано</h1>
+                        <p>Ми надіслали ваше замовлення.</p>
                         <br>
-                        <h2>Контакти клієнта</h2>
-                        <p>Емейл: {{ email }}</p>
-                        <p>Телефон: {{ phone }}</p>
-                        <p>Адреса: {{ address }}</p>
-                        <br>
-                        {% if message %}
-                        <h2>Повідомлення</h2>
-                        <p>{{ message }}</p>
-                        <br>
-                        {% endif %}
-                        <p>Не забудьте позначити замовлення як опрацьоване у адмінці сайта.</p>
-                        <p>Успіхів!</p>
+                        <h3>Деталі замовлення</h3>
+                        <ul class="list-unstyled">
+                          <li>Номер замовлення: {{ id }}</li>
+                          <li>Книга: {{ book }}</li>
+                          <li>Автори: {{ authors }}</li>
+                          <li>Кількість: {{ quantity }}</li>
+                          <li>Дата відправки: {{ date }}</li>
+                          </u>
                       </td>
                     </tr>
                   </table>
@@ -306,7 +303,7 @@ table[class=body] .container {
               <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Видавництво "Темпора"</span>
+                    <span class="apple-link"><a href="https://tempora.com.ua/">Видавництво "Темпора"</a></span>
                   </td>
                 </tr>
                 <tr>

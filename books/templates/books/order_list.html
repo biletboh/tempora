@@ -24,28 +24,44 @@
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>Iм'я</th>
-										<th>Емейл</th>
-										<th>Телефон</th>
+										<th>Контакти</th>
 										<th>Замовлення</th>
-										<th>Кількість</th>
-										<th>Адреса</th>
 										<th>Повідомлення</th>
 										<th>Дата</th>
+										<th>Опрацьовано</th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for order in orders %}
 									<tr>
 										<td>{{ order.id }}</td>
-										<td>{{ order.name }}</td>
-										<td>{{ order.email }}</td>
-										<td>{{ order.phone }}</td>
-										<td>{{ order.book }}</td>
-										<td>{{ order.quantity }}</td>
-										<td>{{ order.address }}</td>
+										<td>
+											<ul class="list-unstyled">
+												<li><i class="fa fa-user" aria-hidden="true"></i> {{ order.name }}</li>
+												<li><i class="fa fa-envelope" aria-hidden="true"></i> {{ order.email }}</li>
+												<li><i class="fa fa-phone" aria-hidden="true"></i> {{ order.phone }}</li>
+												<li><i class="fa fa-send" aria-hidden="true"></i> {{ order.address }}</li>
+											</ul>
+										</td>
+										<td>
+											<ul class="list-unstyled">
+												<li><strong>Назва:</strong> {{ order.book }}</li>
+												<li><strong>Автори:</strong> {{ order.book.show_authors }}</li>
+												<li><strong>Кількість:</strong> {{ order.quantity }}</li>
+											</ul>
+										</td>
 										<td>{{ order.message }}</td>
-										<td>{{ order.date }}</td>
+										<td>{{ order.date|date:'Y-m-d H:m:s' }}</td>
+										<td>
+											{% if order.processed %}
+											<button class="btn btn-success">Опрацьовано</button>
+											{% else %}
+											<button class="btn btn-warning" type="button" data-toggle="modal"
+											 data-target="#orderProcessingModal" data-orderid="{{ order.id }}" id="proc-btn-{{ order.id }}">
+												Опрацювати
+											</button>
+											{% endif %}
+										</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -81,5 +97,113 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="orderProcessingModal" tabindex="-1" role="dialog" aria-labelledby="orderProcessingModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="orderProcessingModalLabel">Позначити замовлення як опрацьоване?</h4>
+			</div>
+			<form id="modal-form">
+				<input type="text" id="order-id" name="order-id" hidden>
+				<div class="modal-body">
+					<input type="checkbox" name="notification" id="notification" class="form-control flat" value="true" checked>
+					<label class="control-label" for="notification">
+						Надіслати сповіщення
+                    </label>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Ні</button>
+					<button type="submit" class="btn btn-primary">Так</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<!-- Axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="text/javascript">
+	$('#orderProcessingModal').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget);
+		var orderId= button.data('orderid');
+		var modal = $(this);
+		modal.find('.modal-title').text('Позначити замовлення №' + orderId + ' як опрацьоване?');
+		modal.find('.modal-content input').val(orderId);
+	});
+
+function getCookie(name) {
+	var cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = jQuery.trim(cookies[i]);
+			// Does this cookie string begin with the name we want?
+			if (cookie.substring(0, name.length + 1) === (name + '=')) {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
+			}
+		}
+	}
+	return cookieValue;
+}
+
+function markAsProcessed (orderId, notification) {
+	var url = '/en/books/process/order/' + orderId + '/';
+	var csrftoken = getCookie('csrftoken');
+	var sessionid = getCookie('sessionid');
+	axios.put(
+			url,
+			{
+			processed: true,
+			notification: notification,
+			},
+			{
+			headers: {'X-CSRFToken': csrftoken, 'sessionid': sessionid}
+			}
+		)
+		.then(function (response) {
+			console.log(response);
+			$('#proc-btn-' + orderId).removeClass('btn-warning').addClass('btn-success');
+			$('#proc-btn-' + orderId).removeAttr('data-toggle').removeAttr('data-target');
+			$("#modal-form" ).find('button').removeAttr('disabled','disabled');
+			$('#orderProcessingModal').modal('hide');
+		})
+		.catch(function (error) {
+			console.log(error);
+			if (error.response) {
+				// The request was made and the server responded with a status code
+				// that falls out of the range of 2xx
+				console.log(error.response.data);
+				console.log(error.response.status);
+				console.log(error.response.headers);
+			} else if (error.request) {
+				// The request was made but no response was received
+				// `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+				// http.ClientRequest in node.js
+				console.log(error.request);
+			} else {
+				// Something happened in setting up the request that triggered an Error
+				console.log('Error', error.message);
+			};
+			$("#modal-form" ).find('button').removeAttr('disabled','disabled');
+			$('#orderProcessingModal').modal('hide');
+		});
+};
+
+$("#modal-form" ).submit(function( event ) {
+	var form = $(this);
+	form.find('button').attr('disabled','disabled');
+	var orderId = form.find('input[name=order-id]').val();
+	var notification = form.find('input[name=notification]').is(':checked');
+	markAsProcessed(orderId, notification);
+	event.preventDefault();
+});
+</script>
 
 {% endblock %}

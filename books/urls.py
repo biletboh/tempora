@@ -21,6 +21,9 @@ urlpatterns = [
                 name='delete'),
             url(r'^create/order/$', views.CreateOrder.as_view(),
                 name='create_order'),
+            url(r'^process/order/(?P<pk>[0-9]+)/$',
+                views.ProcessOrder.as_view(),
+                name='process_order'),
             url(r'^orders/list/$', views.OrderList.as_view(),
                 name='order_list'),
             ]

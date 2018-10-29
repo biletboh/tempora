@@ -20,15 +20,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="book-details">
-								<h3>
-									{% for author in book.authors.all %}
-									{% if book.authors.all.count < 2 or forloop.last  %}
-									{{ author }}
-									{% else %}
-									{{ author }}, 
-									{% endif %}
-									{% endfor %}
-								</h3>
+								<h3>{{ book.show_authors }}</h3>
 								{% if book.translators %}
 								<p><span class="text-muted">Переклад:</span> {{ book.translators }}</p>
 								{% endif %}

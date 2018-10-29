@@ -1,8 +1,5 @@
-from decimal import Decimal
-
 from django.db import models
 from django.utils import timezone
-from django.core.validators import MinValueValidator, MaxValueValidator
 
 from easy_thumbnails.fields import ThumbnailerImageField
 from phonenumber_field.modelfields import PhoneNumberField
@@ -79,6 +76,16 @@ class Book(models.Model):
     def isbn_list(self):
         return self.isbn_13.split(' ')
 
+    def show_authors(self):
+        authors = ''
+        for index, author in enumerate(self.authors.all()):
+            count = self.authors.count()
+            if count < 2 or index == (count - 1):
+                authors += str(author)
+            else:
+                authors += str(author) + ', '
+        return authors
+
 
 class Order(models.Model):
     """Book order."""
@@ -96,6 +103,8 @@ class Order(models.Model):
     comment = models.TextField('Коментар', blank=True)
     address = models.CharField('Адреса доставки', max_length=512, blank=True)
     processed = models.BooleanField('Опрацьовано', default=False)
+    date_processed = models.DateTimeField('Час опрацювання',
+                                          blank=True, null=True)
 
     def __str__(self):
         return f'{self.book.title} by {self.email}'

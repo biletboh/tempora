@@ -1414,6 +1414,9 @@ td.details {
     background-color: #d1cfd0;
     border: 2px solid #A19B9E
 }
+td ul {
+    margin-bottom: 0
+}
 .example_alt_pagination div.dataTables_info {
     width: 40%
 }

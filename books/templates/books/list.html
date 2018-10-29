@@ -71,15 +71,7 @@
 							<a href="{% url 'books:page' book.slug %}">
 								<h4>{{ book.title }}</h4>
 							</a>
-							<h5>
-								{% for author in book.authors.all %}
-								{% if book.authors.all.count < 2 or forloop.last %}
-								{{ author }}
-								{% else %}
-								{{ author }}, 
-								{% endif %}
-								{% endfor %}
-							</h5>
+							<h5>{{ book.show_authors }}</h5>
 							<h6>
 
 								{% if book.in_stock == '1' %}

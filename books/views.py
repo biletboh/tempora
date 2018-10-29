@@ -5,12 +5,15 @@ from django.views.generic import CreateView, DetailView,\
         ListView, UpdateView, DeleteView
 
 from django_filters.views import FilterView
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView
+from rest_framework.authentication import SessionAuthentication,\
+    BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from books.filters import BookFilter
 from books.forms import BookModelForm, OrderModelForm
 from books.models import Book, Order
-from books.serializers import OrderSerializer
+from books.serializers import OrderSerializer, OrderProcessingSerializer
 
 
 class BookList(FilterView):
@@ -96,3 +99,12 @@ class CreateOrder(CreateAPIView):
     authentication_classes = []
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+
+class ProcessOrder(UpdateAPIView):
+    """Update order's processing status."""
+
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = Order.objects.all()
+    serializer_class = OrderProcessingSerializer
