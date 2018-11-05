@@ -1105,3 +1105,6 @@ img.bordered {
   display: flex;
   flex-wrap: wrap;
 }
+.card-wrapper .flex-item-wrapper {
+  display: flex;
+}

@@ -59,9 +59,9 @@
 				<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 			<div class="row card-wrapper">
 			{% for book in books %}
-				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-					<div class="row book text-left">
-						<div class="col-md-12">
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 flex-item-wrapper">
+					<div class="card book text-left">
+						<div class="card-image">
 							<div class="view view-first view-books" ref="book-{{ book.id }}">
 								<img src="{{ book.image.book.url }}" class="img-responsive bordered" alt="Book image">
 								<div class="mask">
@@ -82,7 +82,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-12">
+						<div class="card-content">
 							<a href="{% url 'books:page' book.slug %}">
 								<h4>{{ book.title }}</h4>
 							</a>

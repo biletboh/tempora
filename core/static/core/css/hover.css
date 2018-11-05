@@ -2,17 +2,12 @@
 
 .view {
   margin: 10px;
-  float: right;
   overflow: hidden;
   position: relative;
   text-align: center;
   cursor: default;
   background: #fff no-repeat center center
 }
-.view.view-books {
-	float: left;
-}
-
 .view .mask,
 .view .content {
   position: absolute;
