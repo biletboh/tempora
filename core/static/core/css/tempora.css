@@ -980,6 +980,12 @@ body {
   width: auto;
   margin: auto;
 }
+#books .card-image img,
+.books .card-image img,
+.projects .card-image img {
+  margin-left: 0;
+  margin-right: auto;
+}
 #books h4,
 .books h4,
 .projects h4 {
