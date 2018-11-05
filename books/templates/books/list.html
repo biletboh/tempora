@@ -12,36 +12,51 @@
 <div class="content">
 	<section id="orderBooks" class="half">
 		<div class="books" id="books">
-			<div class="container">
+			<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12">
-					<form action="" class="pull-right" method="get">
+				<div class="col-lg-3 col-md-3">
+					<form class="text-center filter-form" method="get">
 						{{ filter.form.new|attr:"v-model:newBooks"|attr:"hidden" }}
 						{{ filter.form.best_seller|attr:"v-model:bestSeller"|attr:"hidden" }}
 						{{ filter.form.selected|attr:"v-model:selected"|attr:"hidden" }}
 						{{ filter.form.tags|attr:"v-model:categoryValue"|attr:"hidden" }}
-
-						<ul class="list-inline filter">
-							<li><button type="button" class="btn tag" v-bind:class="{ active: newBooksIsActive }" @click="setNewBooksFilterValue">Новинки</button></li>
-							<li><button type="button" class="btn tag" v-bind:class="{ active: bestSellerIsActive }" @click="setBestSellerFilterValue">Топ продажів</button></li>
-							<li><button type="button" class="btn tag" v-bind:class="{ active: selectedIsActive }" @click="setSelectedFilterValue">Обрані</button></li>
-							<li>
-								<div class="dropdown">
-									<button class="btn tag dropdown-toggle" type="button" data-toggle="dropdown">[[ category ]]
-										<span class="caret"></span></button>
-									<ul class="dropdown-menu">
-										<li><a href="#" v-bind:class="" @click="setCategory(false, 'Без категорії')" >Без категорії</a></li>
-										{% for x, y in filter.form.tags.field.choices %}
-										<li><a href="#" v-bind:class="" @click="setCategory('{{ x }}', '{{ y }}')" >{{ y }}</a></li>
-										{% endfor %}
-									</ul>
-								</div>
-							</li>
-							<li><button type="submit" class="btn btn-primary">Фільтрувати</button></li>
-						</ul>
+						<h2>Пошук</h2>
+						<div class="form-group">
+							{{ filter.form.title__icontains|attr:"class:form-control form-custom"|attr:"placeholder:Назва книги" }}
+						</div>
+						<div class="form-group">
+							{{ filter.form.authors|attr:"class:form-control form-custom"|attr:"placeholder:Автор" }}
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn tag" v-bind:class="{ active: newBooksIsActive }" @click="setNewBooksFilterValue">Новинки</button>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn tag" v-bind:class="{ active: bestSellerIsActive }" @click="setBestSellerFilterValue">Топ продажів</button>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn tag" v-bind:class="{ active: selectedIsActive }" @click="setSelectedFilterValue">Обрані</button>
+						</div>
+						<div class="form-group">
+							<div class="dropdown">
+								<button class="btn tag dropdown-toggle" type="button" data-toggle="dropdown">[[ category ]]
+									<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#" v-bind:class="" @click="setCategory(false, 'Без категорії')" >Без категорії</a></li>
+									{% for x, y in filter.form.tags.field.choices %}
+									<li><a href="#" v-bind:class="" @click="setCategory('{{ x }}', '{{ y }}')" >{{ y }}</a></li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Фільтрувати</button>
+						</div>
+						<div class="form-group">
+							<a href="{% url 'books:list' %}" class="no-border reset"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
+						</div>
 					</form>
 				</div>
-			</div>
+				<div class="col-lg-9">
 			{% for book in books %}
 			{% if forloop.first %}<div class="row">{% endif %}
 				<div class="col-md-4">
@@ -92,6 +107,8 @@
 				{% if forloop.last %}</div>{% endif %}
 			{% endfor %}
 
+			</div>
+			</div>
 			<div class="row">
 				<div class="col-md-12 col-lg-12 hidden-xs hidden-sm">
 					<!-- Start of pagination -->

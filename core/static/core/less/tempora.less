@@ -479,21 +479,29 @@ article {
 		&.active, &:hover, &:focus {
 			color: #fff;
 		}
-		&.active, &:hover {
+		&.active {
 			background-color: @theme-primary;
+			color: #fff;
+		}
+		&.active:hover {
+			background-color: @theme-primary;
+			color: #fff;
+		}
+		&:hover {
+			background-color: fade(@theme-primary, 90%);
 			color: #fff;
 		}
 	}
 }
 .btn-default {
-    .btn-base(rgba(255, 255, 255, 0.7);
-    @theme-primary;
+    .btn-base(fade(@theme-primary, 70%);
+    fade(@theme-primary, 90%);
     @theme-primary;
     );
 }
 .btn-primary {
     .btn-base(@theme-primary;
-    @theme-primary;
+    fade(@theme-primary, 90%);
     @theme-primary);
 }
 .dropdown {
@@ -985,4 +993,11 @@ body {
 }
 img.bordered {
 	border: 2px solid #f6a4b2;
+}
+.filter-form {
+	.form-group {
+		button {
+			width: 100%;
+		}
+	}
 }
