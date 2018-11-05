@@ -57,9 +57,9 @@
 					</form>
 				</div>
 				<div class="col-lg-9">
+			<div class="row card-wrapper">
 			{% for book in books %}
-			{% if forloop.first %}<div class="row">{% endif %}
-				<div class="col-md-4">
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 					<div class="row book text-left">
 						<div class="col-md-12">
 							<div class="view view-first view-books" ref="book-{{ book.id }}">
@@ -103,9 +103,8 @@
 						</div>
 					</div>
 				</div>
-				{% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
-				{% if forloop.last %}</div>{% endif %}
 			{% endfor %}
+			</div>
 
 			</div>
 			</div>

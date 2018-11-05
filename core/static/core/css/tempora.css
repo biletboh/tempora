@@ -1101,3 +1101,7 @@ img.bordered {
 .filter-form .form-group button {
   width: 100%;
 }
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
