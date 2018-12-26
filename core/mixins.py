@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import ImproperlyConfigured
 from django import forms
+from django.utils.text import slugify as django_slugify
 
 from django_file_form.forms import FileFormMixin
 from transliterate import slugify
@@ -43,12 +44,16 @@ class SlugCleanMixin:
             raise ImproperlyConfigured(
                 'Provide the get_slug_fields method that returns a list '
                 + 'of values for fields to slugify')
-
         for idx, field in enumerate(fields_to_slugify):
+
+            slugified = slugify(self.cleaned_data[field])
+            if not slugified:
+                slugified = django_slugify(self.cleaned_data[field])
+
             if idx == 0:
-                slug = slugify(self.cleaned_data[field])
+                slug = slugified
             else:
-                slug = slug + '-' + slugify(self.cleaned_data[field])
+                slug = slug + '-' + slugified
         return slug
 
     def clean_slug(self):
@@ -61,12 +66,15 @@ class SlugCleanMixin:
         else:
             slug = self.slugify_fields()
 
-        try:
-            self.Meta.model.objects.get(slug=slug)
-            error_text = ('Запис з таким посиланням уже існує. '
-                          + 'Оновіть посилання.')
-            self.data = self.data.copy()
-            self.data['slug'] = slug
-            raise forms.ValidationError(error_text)
-        except self.Meta.model.DoesNotExist:
-            return slug
+        if self.instance.pk is None:
+            try:
+                self.Meta.model.objects.get(slug=slug)
+                error_text = (
+                    'Запис з таким посиланням уже існує. '
+                    + 'Оновіть посилання.')
+                self.data = self.data.copy()
+                self.data['slug'] = slug
+                raise forms.ValidationError(error_text)
+            except self.Meta.model.DoesNotExist:
+                pass
+        return slug
