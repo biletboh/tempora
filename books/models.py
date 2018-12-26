@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from easy_thumbnails.fields import ThumbnailerImageField
 from phonenumber_field.modelfields import PhoneNumberField
+from transliterate import slugify
 
 from authors.models import Author
 from tags.models import Tag
@@ -58,7 +59,7 @@ class Book(models.Model):
     authors = models.ManyToManyField(Author, blank=True)
     translators = models.CharField('Переклад', max_length=200, blank=True)
     tags = models.ManyToManyField(Tag, related_name='books', blank=True)
-    slug = models.SlugField('Посилання', unique=True, null=True)
+    slug = models.SlugField('Посилання', unique=True, null=True, blank=True)
 
     class Meta:
         ordering = ('-pub_date',)
@@ -66,6 +67,11 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def show_size(self):
         size = f'{self.height}x{self.length}'
@@ -106,9 +112,9 @@ class Order(models.Model):
     date_processed = models.DateTimeField('Час опрацювання',
                                           blank=True, null=True)
 
-    def __str__(self):
-        return f'{self.book.title} by {self.email}'
-
     class Meta:
         ordering = ('-date',)
         verbose_name_plural = 'orders'
+
+    def __str__(self):
+        return f'{self.book.title} by {self.email}'

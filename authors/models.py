@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from easy_thumbnails.fields import ThumbnailerImageField
+from transliterate import slugify
 
 from tags.models import Tag
 
@@ -17,7 +18,7 @@ class Author(models.Model):
     image = ThumbnailerImageField('Світлина', upload_to='photos/blog',
                                   blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    slug = models.SlugField('Посилання', unique=True, null=True)
+    slug = models.SlugField('Посилання', unique=True, null=True, blank=True)
 
     class Meta:
         ordering = ('last_name',)
@@ -25,3 +26,8 @@ class Author(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.first_name + '-' + self.last_name)
+        super().save(*args, **kwargs)

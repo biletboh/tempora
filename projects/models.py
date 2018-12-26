@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 
 from easy_thumbnails.fields import ThumbnailerImageField
+from transliterate import slugify
+
 from tags.models import Tag
 from users.models import UserProfile
 
@@ -19,7 +21,7 @@ class Project(models.Model):
     curators = models.ManyToManyField(UserProfile, related_name='projects')
     project_tag = models.ForeignKey(Tag, related_name='project_tag', null=True)
     tags = models.ManyToManyField(Tag, related_name='projects', blank=True)
-    slug = models.SlugField('Посилання', unique=True, null=True)
+    slug = models.SlugField('Посилання', unique=True, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Project'
@@ -28,3 +30,8 @@ class Project(models.Model):
 
     def __str__(self):
         return 'Project %s' % self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)

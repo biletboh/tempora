@@ -4,11 +4,11 @@ from django.utils import timezone
 from ajax_select import make_ajax_field
 from django_file_form.forms import UploadedFileField
 
-from core.mixins import CustomFileFormMixin
+from core.mixins import CustomFileFormMixin, SlugCleanMixin
 from books.models import Book, Order
 
 
-class BookModelForm(CustomFileFormMixin, forms.ModelForm):
+class BookModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
     """Render a Book model form."""
 
     image = UploadedFileField(label='Світлина', required=False)
@@ -40,6 +40,9 @@ class BookModelForm(CustomFileFormMixin, forms.ModelForm):
             'from_author': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
             'description': forms.Textarea(attrs={'cols': 80, 'rows': 12}),
         }
+
+    def get_slug_fields(self):
+        return ['title']
 
 
 class OrderModelForm(forms.ModelForm):

@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils import timezone
+
 from easy_thumbnails.fields import ThumbnailerImageField
 from tinymce.models import HTMLField
+from transliterate import slugify
 
 from users.models import UserProfile
 from tags.models import Tag
@@ -20,11 +22,16 @@ class Post(models.Model):
                                     default=timezone.now)
     image = ThumbnailerImageField('Світлина', upload_to='photos/blog',
                                   blank=True)
-    slug = models.SlugField('Посилання', unique=True, null=True)
-
-    def __str__(self):
-        return self.title
+    slug = models.SlugField('Посилання', unique=True, null=True, blank=True)
 
     class Meta:
         ordering = ('-pub_date',)
         verbose_name_plural = 'posts'
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)

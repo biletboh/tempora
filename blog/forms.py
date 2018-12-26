@@ -4,11 +4,11 @@ from ajax_select import make_ajax_field
 from django_file_form.forms import UploadedFileField
 from tinymce.widgets import TinyMCE
 
-from core.mixins import CustomFileFormMixin
+from core.mixins import CustomFileFormMixin, SlugCleanMixin
 from blog.models import Post
 
 
-class PostModelForm(CustomFileFormMixin, forms.ModelForm):
+class PostModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
     """Render a Post model form."""
 
     image = UploadedFileField(label='Світлина', required=False)
@@ -37,3 +37,6 @@ class PostModelForm(CustomFileFormMixin, forms.ModelForm):
         instance.save()
         self.delete_temporary_files()
         return instance
+
+    def get_slug_fields(self):
+        return ['title']
