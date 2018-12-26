@@ -5,6 +5,7 @@
     {{ form.form_id }}
     {{ form.upload_url }}
     {{ form.delete_url }}
+    {{ form.project_tag_new }}
     {% if form.non_field_errors %}
     <div class="row">
         <div class="col-md-12">
@@ -86,7 +87,7 @@
             <div class="row">
                 <div class="form-group">
 					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.project_tag.auto_id }}">
-                        {{ form.project_tag.label }}<span class="required">*</span>
+                        {{ form.project_tag.label }}
                     </label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         {{ form.project_tag|attr:"class:form-control" }}
@@ -163,7 +164,13 @@
 <script type="text/javascript">
 $(function() {
 	initUploadFields($('#post-form'));
-	
+	$("#post-form").on("submit", function(){
+		var project_tag = $('#id_project_tag').val();
+		if (project_tag != null || project_tag == "") {
+			var project_tag_text = $('#id_project_tag_text').val();
+			$('#id_project_tag_new').val(project_tag_text);
+		}
+	})
 });
 </script>
 {% endblock %}

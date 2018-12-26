@@ -6,6 +6,7 @@ from tinymce.widgets import TinyMCE
 
 from core.mixins import CustomFileFormMixin, SlugCleanMixin
 from projects.models import Project
+from tags.models import Tag
 
 
 class ProjectModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
@@ -18,7 +19,10 @@ class ProjectModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
                            plugin_options={'minLength': 2})
     project_tag = make_ajax_field(Project, 'project_tag', 'tags',
                                   help_text=None,
-                                  plugin_options={'minLength': 2})
+                                  plugin_options={'minLength': 2},
+                                  required=False)
+    project_tag_new = forms.CharField(max_length=100, required=False,
+                                      widget=forms.HiddenInput())
 
     def __init__(self, *args, **kwargs):
         super(ProjectModelForm, self).__init__(*args, **kwargs)
@@ -39,6 +43,14 @@ class ProjectModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
 
     def save(self):
         instance = super().save()
+
+        new_tag = self.cleaned_data['project_tag_new']
+        try:
+            Tag.objects.get(title=new_tag)
+        except Tag.DoesNotExist:
+            tag = Tag.objects.create(title=new_tag)
+            instance.project_tag = tag
+
         image = self.cleaned_data['image']
         instance.image = image
         instance.save()
