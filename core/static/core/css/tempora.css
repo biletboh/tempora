@@ -387,7 +387,7 @@ article .post-attribution a {
 }
 .team-member img {
   margin: 0 auto;
-  border: 4px solid;
+  border: 5px solid;
   border-color: #f6a4b2;
 }
 .team-member h4 {
@@ -531,6 +531,9 @@ article .post-attribution a {
 .btn.tag:hover {
   background-color: rgba(163, 17, 42, 0.9);
   color: #fff;
+}
+li .btn.tag {
+  margin-bottom: 10px;
 }
 .btn-default {
   border: 2px solid #A3112A;
@@ -721,7 +724,7 @@ article .post-attribution a {
   top: 2em;
   margin: 0;
   font-size: 0.85em;
-  line-height: 1.76470588em;
+  line-height: 1.764705882em;
   vertical-align: middle;
   vertical-align: baseline;
   opacity: 0;
@@ -1113,4 +1116,7 @@ img.bordered {
 }
 .card-wrapper .flex-item-wrapper {
   display: flex;
+}
+ul.errorlist li {
+  color: #F30D36;
 }

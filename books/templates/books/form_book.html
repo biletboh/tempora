@@ -22,7 +22,7 @@
                     <div class="col-md-10 col-sm-10 col-xs-12">
                         {{ form.title|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-10 col-md-offset-2">
                         {{ form.title.errors }}
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.in_stock|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.in_stock.errors }}
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.cover|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.cover.errors }}
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.price|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.price.errors }}
                     </div>
                 </div>
@@ -82,12 +82,12 @@
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.pages.auto_id }}">
-                        {{ form.pages.label }}<span class="required">*</span>
+                        {{ form.pages.label }}
                     </label>
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.pages|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.pages.errors }}
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.pub_year|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.pub_year.errors }}
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.publisher|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.publisher.errors }}
                     </div>
                 </div>
@@ -136,7 +136,7 @@
 					<div class="col-md-4 col-sm-6 col-xs-4">
 						{{ form.selected|attr:"class:form-control flat" }}
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-4 col-md-offset-8">
 						{{ form.selected.errors }}
 					</div>
 				</div>
@@ -151,7 +151,7 @@
 					<div class="col-md-4 col-sm-6 col-xs-4">
 						{{ form.new|attr:"class:form-control flat" }}
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-4 col-md-offset-8">
 						{{ form.new.errors }}
 					</div>
 				</div>
@@ -166,7 +166,7 @@
 					<div class="col-md-4 col-sm-4 col-xs-4">
 						{{ form.best_seller|attr:"class:form-control flat" }}
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-4 col-md-offset-8">
 						{{ form.best_seller.errors }}
 					</div>
 				</div>
@@ -189,7 +189,7 @@
 					<div class="col-md-3 col-sm-2 col-xs-4">
                         {{ form.length|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-7 col-md-offset-4">
                         {{ form.height.errors }}
                         {{ form.lenght.errors }}
                     </div>
@@ -205,7 +205,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.weight|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.weight.errors }}
                     </div>
                 </div>
@@ -222,7 +222,7 @@
 					<div class="col-md-10 col-sm-10 col-xs-12">
 						{{ form.isbn_13|attr:"class:form-control" }}
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-10 col-md-offset-2">
 						{{ form.isbn_13.errors }}
 					</div>
 				</div>
@@ -239,7 +239,7 @@
 					<div class="col-md-10 col-sm-10 col-xs-12">
 						{{ form.short_descr|attr:"class:form-control" }}
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-10 col-md-offset-2">
 						{{ form.short_descr.errors }}
 					</div>
 				</div>
@@ -256,7 +256,7 @@
                     <div class="col-md-10 col-sm-10 col-xs-12">
                         {{ form.description|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-10 col-md-offset-2">
                         {{ form.description.errors }}
                     </div>
                 </div>
@@ -273,7 +273,7 @@
                     <div class="col-md-10 col-sm-10 col-xs-12">
                         {{ form.from_author|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-10 col-md-offset-2">
                         {{ form.from_author.errors }}
                     </div>
                 </div>
@@ -290,7 +290,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.slug|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.slug.errors }}
                     </div>
                 </div>
@@ -307,7 +307,7 @@
 						<span class="text-muted">*Розмір: 1.5x1 (300x450)</span>
                     </div>
 					{% if form.image.errors %}
-                    <div class="col-md-12">
+                    <div class="col-md-10 col-md-offset-2">
                         {{ form.image.errors }}
                     </div>
 					{% endif %}
@@ -325,7 +325,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.authors|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.authors.errors }}
                     </div>
                 </div>
@@ -340,7 +340,7 @@
                     <div class="col-md-10 col-sm-10 col-xs-12">
                         {{ form.tags|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-10 col-md-offset-2">
                         {{ form.tags.errors }}
                     </div>
                 </div>
@@ -357,7 +357,7 @@
                     <div class="col-md-8 col-sm-10 col-xs-12">
                         {{ form.translators|attr:"class:form-control" }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-4">
                         {{ form.translators.errors }}
                     </div>
                 </div>
@@ -372,7 +372,7 @@
 					<div class="col-md-10 col-sm-10 col-xs-12">
 						{{ form.pub_date|attr:"class:form-control datetimepicker" }}
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-10 col-md-offset-2">
 						{{ form.pub_date.errors }}
 					</div>
 				</div>

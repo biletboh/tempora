@@ -1,113 +1,113 @@
 {% load widget_tweaks %}
 
 <form action="" name="post-form" id="author-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
-    {% csrf_token %}
-    {{ form.form_id }}
-    {{ form.upload_url }}
-    {{ form.delete_url }}
-    {% if form.non_field_errors %}
-    <div class="row">
-        <div class="col-md-12">
-            {{ form.non_field_errors }}
-        </div>
-    </div>
-    {% endif %}
+	{% csrf_token %}
+	{{ form.form_id }}
+	{{ form.upload_url }}
+	{{ form.delete_url }}
+	{% if form.non_field_errors %}
 	<div class="row">
-        <div class="col-md-6">
-			<div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
-                        {{ form.first_name.label }}<span class="required">*</span>
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.first_name|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.first_name.errors }}
-                    </div>
-                </div>
-            </div>
-			<div class="row">
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
-                        {{ form.last_name.label }}<span class="required">*</span>
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.last_name|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.last_name.errors }}
-                    </div>
-                </div>
-            </div>
-			<div class="row">
-                <div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.tags.auto_id }}">
-                        {{ form.tags.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.tags|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.tags.errors }}
-                    </div>
-                </div>
-            </div>
-			<div class="row">
-                <div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.slug.auto_id }}">
-                        {{ form.slug.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.slug|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.slug.errors }}
-                    </div>
-                </div>
-            </div>
-			<div class="row">
-                <div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.image.auto_id }}">
-                        {{ form.image.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.image|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.image.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="col-md-12">
+			{{ form.non_field_errors }}
+		</div>
+	</div>
+	{% endif %}
+	<div class="row">
 		<div class="col-md-6">
-            <div class="row">
-                <div class="form-group">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+						{{ form.first_name.label }}<span class="required">*</span>
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.first_name|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-10 col-md-offset-2">
+						{{ form.first_name.errors }}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+						{{ form.last_name.label }}<span class="required">*</span>
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.last_name|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-10 col-md-offset-2">
+						{{ form.last_name.errors }}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.tags.auto_id }}">
+						{{ form.tags.label }}
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.tags|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-10 col-md-offset-2">
+						{{ form.tags.errors }}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.slug.auto_id }}">
+						{{ form.slug.label }}
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.slug|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-10 col-md-offset-2">
+						{{ form.slug.errors }}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.image.auto_id }}">
+						{{ form.image.label }}
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.image|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-10 col-md-offset-2">
+						{{ form.image.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
 					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.about_author.auto_id }}">
-                        {{ form.about_author.label }}
-                    </label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        {{ form.about_author|attr:"class:form-control" }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ form.about_author.errors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <input class="btn btn-primary" type="submit" value="Зберегти"/>
-        </div>
-    </div>
+						{{ form.about_author.label }}
+					</label>
+					<div class="col-md-10 col-sm-10 col-xs-12">
+						{{ form.about_author|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-10 col-md-offset-2">
+						{{ form.about_author.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<input class="btn btn-primary" type="submit" value="Зберегти"/>
+		</div>
+	</div>
 </form>
 
 <!-- Image upload -->
 {% include 'core/upload_template.html' %}
 
 <script type="text/javascript">
-    $(function() {
-        initUploadFields($('#author-form'));
-    });
+	$(function() {
+		initUploadFields($('#author-form'));
+	});
 </script>

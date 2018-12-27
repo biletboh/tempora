@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 
-<form action="" name="user-form" id="user-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+<form action="" name="user-form" id="post-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ form.form_id }}
     {{ form.upload_url }}
@@ -174,7 +174,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-3">
                         {{ form.is_superuser|attr:"class:form-control flat" }}
                     </div>
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-12">
                         {{ form.is_superuser.errors }}
                     </div>
                 </div>
@@ -189,7 +189,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-3">
                         {{ form.is_staff|attr:"class:form-control flat" }}
                     </div>
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-12">
                         {{ form.is_staff.errors }}
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         {{ form.is_active|attr:"class:form-control flat" }}
                     </div>
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-12">
                         {{ form.is_active.errors }}
                     </div>
                 </div>
@@ -219,7 +219,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-6">
                         {{ form.team|attr:"class:form-control flat" }}
                     </div>
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-12">
                         {{ form.team.errors }}
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         {{ form.author|attr:"class:form-control flat" }}
                     </div>
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-12">
                         {{ form.author.errors }}
                     </div>
                 </div>
@@ -249,7 +249,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-6">
                         {{ form.blogger|attr:"class:form-control flat" }}
                     </div>
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-12">
                         {{ form.blogger.errors }}
                     </div>
                 </div>
@@ -270,6 +270,6 @@
 {% include 'core/upload_template.html' %}
 <script type="text/javascript">
 $(function() {
-    initUploadFields($('#user-form'));
+    initUploadFields($('#post-form'));
     });
 </script>
