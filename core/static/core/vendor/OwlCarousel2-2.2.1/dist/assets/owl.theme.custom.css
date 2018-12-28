@@ -19,6 +19,7 @@
 .owl-nav .owl-next {
 	right: 3%;
 }
+
 .owl-theme .owl-nav [class*='owl-'] {
 	color: #FFF;
 	font-size: 20px;
@@ -59,3 +60,9 @@ margin-top: 10px; }
 		  border-radius: 30px; }
 		  .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
 		  background: #bf586a; }
+
+@media (max-width: 991px) {
+	.owl-nav {
+		display: none;
+	}
+}

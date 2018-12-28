@@ -72,10 +72,25 @@
 </section>
 {% if projects %}
 <!-- Projects Section -->
-<section class="no-padding" id="projects">
+<section class="no-padding hidden-xs hidden-sm" id="projects">
 	<div id="owl-main" class="owl-carousel owl-theme height-md">
 		{% for project in projects %}
-		<div class="item" {% if forloop.first %} id='first-owl-item' {% endif %} style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url({{ project.image.project_large.url }}); background-size: cover;">
+		<div class="item {% if forloop.first %}first-owl-item{% endif %}" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url({{ project.image.project_large.url }}); background-size: cover;">
+			<div class="container">
+				<div class="caption vertical-center">
+					<h2 class="">{{ project.title }}</h2>
+					<p class="">{{ project.short_descr }}</p>
+					<div class=""><a href="{% url 'projects:page' project.slug %}" class="btn btn-primary btn-lg">Дізнатися ще</a></div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+<section class="no-padding hidden-md hidden-lg" id="projects-mobile">
+	<div id="owl-main-mobile" class="owl-carousel owl-theme height-md">
+		{% for project in projects %}
+		<div class="item {% if forloop.first %}first-owl-item{% endif %}" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url({{ project.image.project_small.url }}); background-size: cover;">
 			<div class="container">
 				<div class="caption vertical-center">
 					<h2 class="">{{ project.title }}</h2>

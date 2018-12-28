@@ -663,6 +663,14 @@ li .btn.tag {
   background: #8c0f24;
   border-color: #8c0f24;
 }
+@media (max-width: 768px) {
+  #top.btn {
+    bottom: 10px;
+    right: 10px;
+    font-size: 16px;
+    padding: 5px 8px;
+  }
+}
 .form-custom {
   margin: 20px 0;
   border: 1px solid rgba(0, 0, 0, 0.4);
@@ -902,11 +910,13 @@ body {
   display: flex;
   justify-content: center;
 }
-#owl-main.owl-carousel {
+#owl-main.owl-carousel,
+#owl-main-mobile.owl-carousel {
   color: #FFFFFF;
   text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.6);
 }
-#owl-main .item {
+#owl-main .item,
+#owl-main-mobile .item {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   background-repeat: no-repeat;
   -webkit-background-size: cover;
@@ -915,36 +925,57 @@ body {
   background-size: cover;
   min-height: 400px;
 }
-#owl-main .item .container {
+#owl-main .item .container,
+#owl-main-mobile .item .container {
   padding-top: 5em;
 }
-#owl-main .owl-dots {
+#owl-main .owl-dots,
+#owl-main-mobile .owl-dots {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
 }
-#owl-main h2 {
+#owl-main h2,
+#owl-main-mobile h2 {
   font-size: 50px;
   font-weight: 600;
 }
-#owl-main p {
+#owl-main p,
+#owl-main-mobile p {
   line-height: 1.8em;
 }
-#owl-main .btn-primary {
+#owl-main .btn-primary,
+#owl-main-mobile .btn-primary {
   border: 2px solid #A3112A;
   color: #A3112A;
   background-color: transparent;
   color: #ffffff;
 }
 #owl-main .btn-primary:hover,
+#owl-main-mobile .btn-primary:hover,
 #owl-main .btn-primary:focus,
+#owl-main-mobile .btn-primary:focus,
 #owl-main .btn-primary:active,
-#owl-main .btn-primary:active:hover {
+#owl-main-mobile .btn-primary:active,
+#owl-main .btn-primary:active:hover,
+#owl-main-mobile .btn-primary:active:hover {
   border: 2px solid #A3112A;
   outline: none;
   color: white;
   background-color: #A3112A;
+}
+@media (max-width: 767px) {
+  #owl-main .item,
+  #owl-main-mobile .item {
+    min-height: calc(100vh - 50px);
+  }
+  #owl-main .item h2,
+  #owl-main-mobile .item h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 0;
+  }
 }
 .owl-pagination .owl-page span {
   background-color: #DA5068;

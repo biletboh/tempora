@@ -555,6 +555,12 @@ li {
         background: darken(@theme-primary, 5%);
         border-color: darken(@theme-primary, 5%);
     }
+	@media (max-width: 768px) {
+		bottom: 10px;
+		right: 10px;
+		font-size: 16px;
+		padding: 5px 8px;
+	}
 }
 // Form Styles
 .form-custom {
@@ -811,7 +817,7 @@ body {
 }
 
 // Owl carousel
-#owl-main {
+#owl-main, #owl-main-mobile {
 	&.owl-carousel {
 		color: #FFFFFF;
 		text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.6);
@@ -849,6 +855,16 @@ body {
 		@theme-primary;
 		@theme-primary);
 		color: #ffffff;
+	}
+	@media (max-width: 767px) {
+		.item {
+			min-height: calc(~"100vh - 50px");
+			h2 {
+				font-size: 32px;
+				font-weight: 600;
+				margin-top: 0;
+			}
+		}
 	}
 }
 
