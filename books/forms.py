@@ -22,10 +22,11 @@ class BookModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
         if self.instance:
             self.fields['image'].initial = self.instance.image
         self.fields['publisher'].initial = 'Темпора'
-        self.fields['pub_date'].input_formats = ['%d-%m-%Y %H:%M']
+        self.fields['pub_date'].input_formats = ['%Y-%m-%d %H:%M']
+        self.fields['pub_date'].widget = forms.TextInput()
         if not self.instance.pub_date:
             self.fields['pub_date'].initial = timezone.now().strftime(
-                                                             '%d-%m-%Y %H:%M')
+                '%Y-%m-%d %H:%M')
 
     class Meta:
         model = Book

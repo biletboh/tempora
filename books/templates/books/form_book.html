@@ -397,9 +397,9 @@
 	$(function() {
 		initUploadFields($('#post-form'));
 		if ($(".datetimepicker").length != 0) {
-			var minD = new Date('01-01-1990 00:00');
+			var minD = new Date('1990-01-01 00:00');
 			$('.datetimepicker').datetimepicker({
-				format: "DD-MM-YYYY HH:mm",
+				format: "YYYY-MM-DD HH:MM",
 				minDate: minD,
 				viewMode: 'years',
 			});
