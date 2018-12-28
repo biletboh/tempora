@@ -101,15 +101,14 @@
 		<div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.image.auto_id }}">
-                        {{ form.image.label }}
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
+                        {{ form.tags.label }}
                     </label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                        {{ form.image|attr:"class:form-control" }}
-						<span class="text-muted">*Розмір: 2x1 (1200x600)</span>
+                        {{ form.tags|attr:"class:form-control" }}
                     </div>
                     <div class="col-md-8 col-md-offset-4">
-                        {{ form.image.errors }}
+                        {{ form.tags.errors }}
                     </div>
                 </div>
             </div>
@@ -119,14 +118,15 @@
 		<div class="col-md-6">
             <div class="row">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
-                        {{ form.tags.label }}
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.image.auto_id }}">
+                        {{ form.image.label }}
                     </label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                        {{ form.tags|attr:"class:form-control" }}
+                        {{ form.image|attr:"class:form-control" }}
+						<span class="text-muted">*Розмір: 3x1 (1200x400)</span>
                     </div>
                     <div class="col-md-8 col-md-offset-4">
-                        {{ form.tags.errors }}
+                        {{ form.image.errors }}
                     </div>
                 </div>
             </div>
@@ -142,6 +142,24 @@
                     </div>
                     <div class="col-md-8 col-md-offset-4">
                         {{ form.curators.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="row">
+		<div class="col-md-6">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.icon_image.auto_id }}">
+                        {{ form.icon_image.label }}
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        {{ form.icon_image|attr:"class:form-control" }}
+						<span class="text-muted">*Розмір: 5x4 (500x400)</span>
+                    </div>
+                    <div class="col-md-8 col-md-offset-4">
+                        {{ form.icon_image.errors }}
                     </div>
                 </div>
             </div>

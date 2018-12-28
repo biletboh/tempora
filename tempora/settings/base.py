@@ -230,7 +230,7 @@ THUMBNAIL_ALIASES = {
         'blog_selected': {'size': (1400, 480), 'crop': True},
         'book': {'size': (300, 450), 'crop': True},
         'project_small': {'size': (500, 400), 'crop': True},
-        'project': {'size': (1000, 800), 'crop': True},
+        'project_large': {'size': (1200, 400), 'crop': True},
         'medium': {'size': (750, 450), 'crop': True},
         'large': {'size': (800, 480), 'crop': True},
         'extra_large': {'size': (1200, 600), 'crop': True},

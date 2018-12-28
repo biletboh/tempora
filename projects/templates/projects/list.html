@@ -18,7 +18,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="view view-first">
-								<img src="{{ project.image.project_small.url }}" class="img-responsive" alt="Project image">
+								<img src="{{ project.icon_image.project_small.url }}" class="img-responsive" alt="Зображення: {{ project.title }}">
 								<div class="mask">
 									<a href="{% url 'projects:page' project.slug %}" class="btn btn-primary">
 										Дивитися
@@ -28,7 +28,7 @@
 						</div>
 						<div class="col-md-12">
 							<a href="{% url 'projects:page' project.slug %}">
-								<h4 class="project-title">{{ project.title }}</h4>
+								<h4 class="project-title text-center">{{ project.title }}</h4>
 							</a>
 						</div>
 					</div>

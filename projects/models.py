@@ -16,8 +16,10 @@ class Project(models.Model):
     description = models.CharField('Опис', max_length=2000)
     pub_date = models.DateTimeField('Дата публікації',
                                     default=timezone.now)
-    image = ThumbnailerImageField('Світлина',
-                                  upload_to='photos/projects')
+    image = ThumbnailerImageField(
+        'Світлина', upload_to='photos/projects')
+    icon_image = ThumbnailerImageField(
+        'Іконка', upload_to='photos/projects', null=True)
     curators = models.ManyToManyField(UserProfile, related_name='projects')
     project_tag = models.ForeignKey(Tag, related_name='project_tag', null=True)
     tags = models.ManyToManyField(Tag, related_name='projects', blank=True)

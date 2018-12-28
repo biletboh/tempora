@@ -75,7 +75,7 @@
 <section class="no-padding" id="projects">
 	<div id="owl-main" class="owl-carousel owl-theme height-md">
 		{% for project in projects %}
-		<div class="item" {% if forloop.first %} id='first-owl-item' {% endif %} style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url({{ project.image.large.url }}); background-size: cover;">
+		<div class="item" {% if forloop.first %} id='first-owl-item' {% endif %} style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url({{ project.image.project_large.url }}); background-size: cover;">
 			<div class="container">
 				<div class="caption vertical-center">
 					<h2 class="">{{ project.title }}</h2>

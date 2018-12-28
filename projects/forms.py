@@ -13,6 +13,7 @@ class ProjectModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
     """Render a form for the Project model."""
 
     image = UploadedFileField(label='Світлина', required=False)
+    icon_image = UploadedFileField(label='Іконка', required=False)
     curators = make_ajax_field(Project, 'curators', 'curators', help_text=None,
                                plugin_options={'minLength': 2})
     tags = make_ajax_field(Project, 'tags', 'tags', help_text=None,
@@ -28,6 +29,7 @@ class ProjectModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
         super(ProjectModelForm, self).__init__(*args, **kwargs)
         if self.instance:
             self.fields['image'].initial = self.instance.image
+            self.fields['icon_image'].initial = self.instance.icon_image
             self.fields['tags'].label = 'Теги'
             self.fields['project_tag'].label = 'Тег проекту'
             self.fields['curators'].label = 'Куратори'
@@ -52,7 +54,9 @@ class ProjectModelForm(CustomFileFormMixin, SlugCleanMixin, forms.ModelForm):
             instance.project_tag = tag
 
         image = self.cleaned_data['image']
+        icon_image = self.cleaned_data['icon_image']
         instance.image = image
+        instance.icon_image = icon_image
         instance.save()
         self.delete_temporary_files()
         return instance

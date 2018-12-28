@@ -6,20 +6,18 @@
 /*
  * 	Default theme - Owl Carousel CSS File
  */
-.owl-theme .owl-nav {
+.owl-theme .owl-nav .owl-prev,
+.owl-theme .owl-nav .owl-next {
 	position: absolute;
 	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	width: 95%;
 	margin-top: 10px;
 	text-align: center;
--webkit-tap-highlight-color: transparent; }
+}
 .owl-nav .owl-prev {
-	float: left;
+	left: 3%;
 }
 .owl-nav .owl-next {
-	float: right;
+	right: 3%;
 }
 .owl-theme .owl-nav [class*='owl-'] {
 	color: #FFF;

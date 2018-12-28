@@ -26,7 +26,7 @@ $(function () {
 	projects_owl.owlCarousel({
 		loop:true,
 		autoplay:true,
-		autoplayTimeout:4500,
+		autoplayTimeout:6500,
 		autoplaySpeed:1000,
 		autoplayHoverPause:true,
 		margin:0,

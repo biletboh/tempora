@@ -7,7 +7,7 @@
 {% block navbar %}{% include "pbhouse/navbar_landing.html" %}{% endblock %}
 
 {% block content %}
-<header class="project header" style="background-image: url('{{ object.image.extra_large.url }}')">
+<header class="project header" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url('{{ object.image.project_large.url }}'); background-size: cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;">
 </header>
 <section class="project">
 	<div class="container">
@@ -24,7 +24,7 @@
 <section class="project" id="contact">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-5 text-center">
+			<div class="col-lg-5 col-md-5 text-center">
 				{% for curator in object.curators.all %}
 				<div class="curators team-member">
 					<img src="{{ curator.avatar.extra_large_avatar.url }}" class="img-responsive img-circle" alt="Curator's image">
@@ -32,7 +32,7 @@
 				</div>
 				{% endfor %}
 			</div>
-			<div class="col-lg-7 text-left">
+			<div class="col-lg-7 col-md-7 text-left">
 				<h2 class="section-heading">Про проект</h2>
 				<hr class="primary">
 				<p>{{ object.description|safe }}</p>
