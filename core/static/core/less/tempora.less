@@ -16,6 +16,10 @@ body {
 
 .content {
     flex: 1 0 auto;
+	padding: 0 15px;
+    @media (max-width: 767px) {
+		padding: 0 5px;
+	}
 }
 hr {
     &.light {
@@ -101,6 +105,7 @@ aside.clients {
 .navbar-default {
     background-color: white;
     border-color: fade(@gray-darker, 5%);
+	padding: 0 5px;
     .sans-serif-font;
     .transition-all;
     .navbar-header .navbar-brand {
@@ -141,6 +146,7 @@ aside.clients {
         }
     }
     @media (min-width: 768px) {
+		padding: 0 15px;
         background-color: transparent;
         border-color: fade(white, 30%);
         .navbar-header .navbar-brand {
@@ -476,6 +482,8 @@ article {
 	}
 	&.tag {
 		text-transform: none;
+		padding-right: 10px;
+		padding-left: 10px;
 		&.active, &:hover, &:focus {
 			color: #fff;
 		}
@@ -966,6 +974,15 @@ body {
 	}
 	ul {
 		margin-top: 1em;
+		li {
+			width: 100%;
+			.btn {
+				&.tag {
+					white-space: normal;
+					width: 100%;
+				}
+			}
+		}
 	}
 }
 #selected-post {

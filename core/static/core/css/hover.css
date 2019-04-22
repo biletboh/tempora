@@ -8,6 +8,11 @@
   cursor: default;
   background: #fff no-repeat center center
 }
+@media (max-width: 767px) {
+	.view {
+		margin: 0;
+	}
+}
 .view .mask,
 .view .content {
   position: absolute;

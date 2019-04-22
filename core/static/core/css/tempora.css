@@ -35,6 +35,12 @@ body {
 }
 .content {
   flex: 1 0 auto;
+  padding: 0 15px;
+}
+@media (max-width: 767px) {
+  .content {
+    padding: 0 5px;
+  }
 }
 hr {
   border-color: #A3112A;
@@ -126,6 +132,7 @@ aside.clients img {
 .navbar-default {
   background-color: white;
   border-color: rgba(34, 34, 34, 0.05);
+  padding: 0 5px;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
@@ -169,6 +176,7 @@ aside.clients img {
 }
 @media (min-width: 768px) {
   .navbar-default {
+    padding: 0 15px;
     background-color: transparent;
     border-color: rgba(255, 255, 255, 0.3);
   }
@@ -514,6 +522,8 @@ article .post-attribution a {
 }
 .btn.tag {
   text-transform: none;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .btn.tag.active,
 .btn.tag:hover,
@@ -1083,6 +1093,13 @@ body {
 }
 .book-details ul {
   margin-top: 1em;
+}
+.book-details ul li {
+  width: 100%;
+}
+.book-details ul li .btn.tag {
+  white-space: normal;
+  width: 100%;
 }
 #selected-post {
   padding: 30px 0;
