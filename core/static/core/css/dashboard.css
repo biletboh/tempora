@@ -2354,6 +2354,9 @@ a.btn-danger {
 .open .dropdown-toggle.btn-success {
     background: #169F85
 }
+.btn-success.filterActive {
+	background: #008265;
+}
 .btn-dark {
     color: #E9EDEF;
     background-color: #4B5F71;
@@ -3223,6 +3226,9 @@ ul.project_files li a i {
 }
 .form-group .btn {
     margin-bottom: -6px;
+}
+.filter-form .form-group .btn {
+	margin-bottom: 0;
 }
 
 .input-group-btn .btn { margin-bottom:0; }

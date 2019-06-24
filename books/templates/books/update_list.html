@@ -11,6 +11,70 @@
 <div class="right_col" role="main">
 	<div class="">
 		<div class="clearfix"></div>
+		<div class="row" id="orderBooks">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<form class="text-left filter-form" method="get">
+					{{ filter.form.new|attr:"v-model:newBooks"|attr:"hidden" }}
+					{{ filter.form.best_seller|attr:"v-model:bestSeller"|attr:"hidden" }}
+					{{ filter.form.selected|attr:"v-model:selected"|attr:"hidden" }}
+					{{ filter.form.tags|attr:"v-model:categoryValue"|attr:"hidden" }}
+					<h2>Пошук</h2>
+					<ul class="list-inline">
+						<li>
+							<div class="form-group">
+								{{ filter.form.title__icontains|attr:"class:form-control form-custom"|attr:"placeholder:Назва книги" }}
+							</div>
+						</li>
+						<li>
+							<div class="form-group">
+								{{ filter.form.authors|attr:"class:form-control form-custom"|attr:"placeholder:Автор" }}
+							</div>
+						</li>
+						<li>
+							<div class="form-group">
+								<button type="button" class="btn btn-success" v-bind:class="{ filterActive: newBooksIsActive }" @click="setNewBooksFilterValue">Новинки</button>
+							</div>
+						</li>
+						<li>
+							<div class="form-group">
+								<button type="button" class="btn btn-success" v-bind:class="{ filterActive: bestSellerIsActive }" @click="setBestSellerFilterValue">Топ продажів</button>
+							</div>
+						</li>
+						<li>
+							<div class="form-group">
+								<button type="button" class="btn btn-success" v-bind:class="{ filterActive: selectedIsActive }" @click="setSelectedFilterValue">Обрані</button>
+							</div>
+						</li>
+						<li>
+							<div class="form-group">
+								<div class="dropdown">
+									<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">[[ category ]]
+										<span class="caret"></span></button>
+									<ul class="dropdown-menu">
+										<li><a href="#" v-bind:class="" @click="setCategory(false, 'Без категорії')" >Без категорії</a></li>
+										{% for x, y in filter.form.tags.field.choices %}
+										<li><a href="#" v-bind:class="" @click="setCategory('{{ x }}', '{{ y }}')" >{{ y }}</a></li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary">Фільтрувати</button>
+							</div>
+						</li>
+						<li>
+							<div class="form-group">
+								<a href="{% url 'books:update_list' %}" class="no-border reset"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
+							</div>
+						</li>
+						<li>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
@@ -110,3 +174,18 @@
 </div>
 
 {% endblock %}
+
+{% block js %}
+<!-- Vuejs -->
+<!--
+<script src="{% static 'core/vendor/vue/vue.min.js' %}"></script>
+	-->
+<!-- Development Vuejs -->
+	<script src="{% static 'core/vendor/vue/vue.js' %}"></script>
+	<!-- Vue Router -->
+	<script src="{% static 'core/vendor/vue-router/vue-router.js' %}"></script>
+
+	<!-- Vee-Validate -->
+	<script src="{% static 'core/vendor/vue/vee-validate.min.js' %}"></script>
+	<script src="{% static 'core/js/tempora-vue.js' %}"></script>
+	{% endblock %}
