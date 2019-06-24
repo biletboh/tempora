@@ -6,8 +6,8 @@ from django.views.generic import CreateView, DetailView,\
 
 from django_filters.views import FilterView
 from rest_framework.generics import CreateAPIView, UpdateAPIView
-from rest_framework.authentication import SessionAuthentication,\
-    BasicAuthentication
+from rest_framework.authentication import SessionAuthentication
+
 from rest_framework.permissions import IsAuthenticated
 
 from books.filters import BookFilter
@@ -73,7 +73,7 @@ class DeleteBook(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = 'Книгу видалено!'
 
 
-class UpdateBookList(LoginRequiredMixin, ListView):
+class UpdateBookList(LoginRequiredMixin, FilterView):
     """Render a list of books to edit."""
 
     model = Book
@@ -81,6 +81,7 @@ class UpdateBookList(LoginRequiredMixin, ListView):
     template_name = 'books/update_list.html'
     paginate_by = 10
     queryset = Book.objects.all()
+    filterset_class = BookFilter
 
 
 class OrderList(LoginRequiredMixin, ListView):
