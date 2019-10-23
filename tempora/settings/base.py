@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'tags.apps.TagsConfig',
     'books.apps.BooksConfig',
     'authors.apps.AuthorsConfig',
+    'video.apps.VideoConfig',
 
     # filebrowser and tinymce apps
     'grappelli',
