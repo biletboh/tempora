@@ -102,6 +102,12 @@
 											<li><a href="{% url 'blog:update_list' %}">{% trans "Дивитися записи" %}</a></li>
 										</ul>
 									</li>
+									<li><a><i class="fa fa-play-circle-o" aria-hidden="true"></i>{% trans "Відео" %}<span class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu">
+											<li><a href="{% url 'video:create' %}">{% trans "Додати відео" %}</a></li>
+											<li><a href="{% url 'video:update_list' %}">{% trans "Дивитися відео" %}</a></li>
+										</ul>
+									</li>
 									<li><a><i class="fa fa-rocket" aria-hidden="true"></i>{% trans "Проекти" %}<span class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu">
 											<li><a href="{% url 'projects:create' %}">{% trans "Додати проекти" %}</a></li>

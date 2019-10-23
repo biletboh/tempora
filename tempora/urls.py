@@ -26,6 +26,7 @@ urlpatterns = [
                             url(r'^tag/', include('tags.urls')),
                             url(r'^books/', include('books.urls')),
                             url(r'^authors/', include('authors.urls')),
+                            url(r'^video/', include('video.urls'))
                             )
 
 

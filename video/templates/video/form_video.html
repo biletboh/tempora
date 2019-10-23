@@ -1,0 +1,146 @@
+{% load widget_tweaks %}
+
+<form action="" name="post-form" id="post-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="row">
+        <div class="col-md-12">
+            {{ form.non_field_errors }}
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.title.auto_id }}">
+                        {{ form.title.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.title|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-10 col-md-offset-2">
+                        {{ form.title.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.short_descr.auto_id }}">
+                        {{ form.short_descr.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.short_descr|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-10 col-md-offset-2">
+                        {{ form.short_descr.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.body.auto_id }}">
+                        {{ form.youtube.label }}<span class="required">*</span>
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        {{ form.youtube|attr:"class:form-control" }}
+                    </div>
+                    <div class="col-md-10 col-md-offset-2">
+                        {{ form.youtube.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.slug.auto_id }}">
+						{{ form.slug.label }}
+					</label>
+					<div class="col-md-8 col-sm-8 col-xs-12">
+						{{ form.slug|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-10 col-md-offset-2">
+						{{ form.slug.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-4 col-sm-4 col-xs-4" for="{{ form.selected.auto_id }}">
+						{{ form.selected.label }}
+					</label>
+					<div class="col-md-8 col-sm-8 col-xs-8">
+						{{ form.selected|attr:"class:form-control flat" }}
+					</div>
+					<div class="col-md-10 col-md-offset-2">
+						{{ form.selected.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
+						{{ form.user.label }}
+					</label>
+					<div class="col-md-8 col-sm-8 col-xs-12">
+						{{ form.user|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-8 col-md-offset-4">
+						{{ form.user.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
+						{{ form.tags.label }}
+					</label>
+					<div class="col-md-8 col-sm-8 col-xs-12">
+						{{ form.tags|attr:"class:form-control" }}
+					</div>
+					<div class="col-md-8 col-md-offset-4">
+						{{ form.tags.errors }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+        <div class="col-md-12 text-center">
+            <input class="btn btn-primary" type="submit" value="Зберегти"/>
+			{% if form.instance.slug %}
+			<a href="{% url 'video:page' form.instance.slug %}" class="btn btn-primary">Дивитися</a>
+			{% endif %}
+        </div>
+    </div>
+</form>
+
+<!-- Image upload -->
+{% include 'core/upload_template.html' %}
+
+{% block js %}
+<script type="text/javascript">
+    $(function() {
+        initUploadFields($('#post-form'));
+    });
+</script>
+{% endblock %}
