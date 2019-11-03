@@ -152,13 +152,13 @@
 							<div class="col-md-12">
 								<div class="post-preview-text">
 									<a href="{% url 'blog:page' post.slug %}" class="">
-										<h2 class="post-title middle">{{ post.title }}</h2>
+										<h4>{{ post.title }}</h4>
 									</a>
-									<p>{{ post.short_descr }}</p>
-									<p class="post-meta">
-									<span class="meta"><a href="#">{{ post.user.first_name }} {{ post.user.last_name }}</a></span>
-									<span class="meta">{{ post.pub_date }}</span>
-									</p>
+									<div class="description">{{ post.short_descr }}</div>
+									<div class="authors">
+										<span class="author-name">{{ post.user.first_name }} {{ post.user.last_name }}</span>
+										<span class="date">{{ post.pub_date }}</span>
+									</div>
 								</div>
 							</div>
 						</div>

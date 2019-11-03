@@ -78,6 +78,9 @@ h5,
 h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
+h4 {
+  font-size: 20px;
+}
 p {
   font-size: 18px;
   line-height: 1.5;
@@ -742,7 +745,7 @@ li .btn.tag {
   top: 2em;
   margin: 0;
   font-size: 0.85em;
-  line-height: 1.764705882em;
+  line-height: 1.76470588em;
   vertical-align: middle;
   vertical-align: baseline;
   opacity: 0;
@@ -1033,8 +1036,6 @@ body {
 #books h4,
 .books h4,
 .projects h4 {
-  font-size: 20px;
-  font-weight: 600;
   margin: 10px 10px 5px;
 }
 #books h5,
@@ -1154,4 +1155,25 @@ img.bordered {
 }
 .card-wrapper .flex-item-wrapper {
   display: flex;
+}
+.video-container {
+  max-width: 640px;
+  margin-bottom: 30px;
+}
+.video-container iframe {
+  border: none;
+}
+.description {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.authors {
+  display: flex;
+  justify-content: space-between;
+}
+.authors .author-name {
+  color: #A3112A;
+}
+.authors .date {
+  color: #777;
 }

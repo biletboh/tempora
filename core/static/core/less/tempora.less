@@ -42,6 +42,8 @@ a {
     .transition-all;
     .link;
 }
+
+
 h1,
 h2,
 h3,
@@ -50,6 +52,13 @@ h5,
 h6 {
     .sans-serif-font;
 }
+
+
+h4 {
+	font-size: 20px
+}
+
+
 p {
     font-size: 18px;
     line-height: 1.5;
@@ -736,6 +745,8 @@ body {
 .footer:not(.footer-big) nav > ul {
     font-size: 16px;
 }
+
+
 .footer:not(.footer-big) nav > ul li {
     margin-left: 20px;
     float: left;
@@ -743,13 +754,18 @@ body {
         float: none !important;
     }
 }
+
+
 .footer:not(.footer-big) nav > ul a {
     padding: 10px 0px;
     margin: 15px 10px 15px 0px;
 }
+
+
 .footer-default {
     background-color: whitesmoke;
 }
+
 @media (max-width: 767px) {
     .footer nav.pull-left,
     .footer:not(.footer-big) nav > ul li,
@@ -757,6 +773,8 @@ body {
         float: none !important;
     }
 }
+
+
 // Post Preiew Pages
 .post-preview {
     display: flex;
@@ -781,7 +799,6 @@ body {
 		a {
 			font-weight: 600;
 		}
-
 	}
     @media only screen and (min-width: 768px) {
         > .post-preview-text > a {
@@ -792,6 +809,8 @@ body {
         }
     }
 }
+
+
 .post-preview-middle {
 	margin: 3em 0;
 	.post-preview-text {
@@ -811,6 +830,8 @@ body {
 
 	}
 }
+
+
 .post-img-middle {
         display: flex;
         justify-content: center;
@@ -818,11 +839,13 @@ body {
 .post-heading h1 {
 }
 
+
 // Pagination
 .pagination {
     display: flex;
 	justify-content: center;
 }
+
 
 // Owl carousel
 #owl-main, #owl-main-mobile {
@@ -879,9 +902,11 @@ body {
 .owl-pagination .owl-page span {
 	background-color: #DA5068;
 }
+
 .owl-pagination .owl-page.active span, .owl-pagination .owl-page:hover span {
 	background-color: @theme-primary;
 }
+
 .project {
 	padding: 25px 0;
 	&.header {
@@ -903,6 +928,7 @@ body {
 	margin: 5px 0;
 }
 
+
 #books, .books, .projects {
 	padding: 50px 0;
 	img {
@@ -916,8 +942,6 @@ body {
 		}
 	}
 	h4 {
-		font-size: 20px;
-		font-weight: 600;
 		margin: 10px 10px 5px;
 	}
 	h5 {
@@ -935,6 +959,7 @@ body {
 		margin: 15px 0;
 	}
 }
+
 .book-description {
 	h1 {
 		font-size: 40px;
@@ -965,6 +990,7 @@ body {
 		font-weight: 600;
 	}
 }
+
 .book-details {
 	margin-top: 2rem;
 	p {
@@ -985,12 +1011,14 @@ body {
 		}
 	}
 }
+
 #selected-post {
 	padding: 30px 0;
 	.post-preview-text {
 		margin: 0 80px;
 	}
 }
+
 .tag, li.tag {
 	padding: 5px 8px;
 	background-color: fade(@theme-primary, 70%);
@@ -1000,6 +1028,7 @@ body {
 	color: #fff;
 	
 }
+
 .modal-content {
 	.modal-header {
 		padding: 15px 30px;
@@ -1021,16 +1050,20 @@ body {
 		padding: 150px 70px;
 	}
 }
+
 .modal-open {
     padding-right: 0px !important;
 }
+
 .isbn_list {
 	display: block;
 	margin-left: 5rem;
 }
+
 img.bordered {
 	border: 2px solid #f6a4b2;
 }
+
 .filter-form {
 	.form-group {
 		button {
@@ -1039,10 +1072,43 @@ img.bordered {
 	}
 }
 
+
 .card-wrapper {
 	display: flex;
 	flex-wrap: wrap;
 	.flex-item-wrapper {
 		display: flex;
+	}
+}
+
+
+.video-container {
+	max-width: 640px;
+	margin-bottom: 30px;
+
+	iframe {
+		border: none;
+	}
+
+	
+}
+
+
+.description {
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+
+.authors {
+	display: flex;
+	justify-content: space-between;
+
+	.author-name {
+		color: #A3112A;
+	}
+
+	.date {
+		color: #777;
 	}
 }
