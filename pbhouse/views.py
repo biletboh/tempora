@@ -7,7 +7,6 @@ from django.views.generic import TemplateView, FormView
 
 from blog.models import Post
 from books.models import Book
-from books.forms import OrderModelForm
 from pbhouse.forms import ContactForm
 from pbhouse.utils import send_contact_message
 from projects.models import Project
@@ -41,27 +40,14 @@ class AjaxableResponseMixin(object):
             return response
 
 
-class LandingPage(SuccessMessageMixin, AjaxableResponseMixin, FormView):
+class LandingPage(TemplateView):
     """Render landing page and contact form."""
 
     template_name = 'pbhouse/landing.html'
-    form_class = ContactForm
-    success_url = reverse_lazy('pbhouse:landing')
-    success_message = _('A user was created successfully')
-
-    def form_valid(self, form):
-        name = form.cleaned_data['name']
-        email = form.cleaned_data['email']
-        phone = form.cleaned_data['phone']
-        message = form.cleaned_data['message']
-        send_contact_message(name, email, phone, message)
-
-        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['order_form'] = OrderModelForm
-        context['posts'] = Post.objects.all().exclude(selected=True)[:3]
+        # context['posts'] = Post.objects.all().exclude(selected=True)[:3]
         context['selected_post'] = Post.objects.filter(selected=True).first()
         context['projects'] = Project.objects.all()
         context['books'] = Book.objects.filter(selected=True)[:15]
@@ -77,3 +63,21 @@ class Team(TemplateView):
         context = super().get_context_data(**kwargs)
         context['team'] = UserProfileModel.objects.filter(groups__name='Team')
         return context
+
+
+class Contacts(SuccessMessageMixin, AjaxableResponseMixin, FormView):
+    """Render contacts page."""
+
+    template_name = 'pbhouse/contacts.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('pbhouse:contacts')
+    success_message = _('Повідомлення надіслано!')
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name']
+        email = form.cleaned_data['email']
+        phone = form.cleaned_data['phone']
+        message = form.cleaned_data['message']
+        send_contact_message(name, email, phone, message)
+
+        return super().form_valid(form)
