@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, FormView
 
 from blog.models import Post
 from books.models import Book
+from video.models import Video
 from pbhouse.forms import ContactForm
 from pbhouse.utils import send_contact_message
 from projects.models import Project
@@ -50,6 +51,7 @@ class LandingPage(TemplateView):
         # context['posts'] = Post.objects.all().exclude(selected=True)[:3]
         context['selected_post'] = Post.objects.filter(selected=True).first()
         context['projects'] = Project.objects.all()
+        context['videos'] = Video.objects.all()[:3]
         context['books'] = Book.objects.filter(selected=True)[:15]
         return context
 

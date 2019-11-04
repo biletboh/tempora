@@ -132,10 +132,29 @@
 </section>
 {% endif %}
 
-<section class="sections-dark">
+<section class="sections-dark section-video">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-12">
+			{% for object in videos %}
+			<div class="col-lg-4">
+				<div class="video-container video-container-small">
+					<iframe width="320" height="180" src="{{ object.youtube }}">
+					</iframe>
+					<a href="{% url 'video:page' object.slug %}">
+						<h4>{{ object.title }}</h4>
+					</a>
+					<div class="description">{{ object.short_descr }}</div>
+					<div class="authors">
+						<a href="#">{{ object.user.first_name }} {{ object.user.last_name }}</a>
+						<span class="date">{{ object.pub_date }}</span>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<a href="{% url 'video:list' %}" class="btn btn-primary btn-md btn-more">Дивитися ще</a>
 			</div>
 		</div>
 	</div>

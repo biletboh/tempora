@@ -1086,11 +1086,16 @@ img.bordered {
 	max-width: 640px;
 	margin-bottom: 30px;
 
+	&.video-container-small {
+		max-width: 320px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 0
+	}
+
 	iframe {
 		border: none;
 	}
-
-	
 }
 
 
@@ -1110,5 +1115,11 @@ img.bordered {
 
 	.date {
 		color: #777;
+	}
+}
+
+.section-video {
+	.btn-more {
+		margin-top: 30px;
 	}
 }
