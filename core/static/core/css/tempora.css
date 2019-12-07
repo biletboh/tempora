@@ -1159,6 +1159,8 @@ img.bordered {
 .video-container {
   max-width: 640px;
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .video-container.video-container-small {
   max-width: 320px;

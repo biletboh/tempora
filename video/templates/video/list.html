@@ -13,22 +13,7 @@
 	<section>
 		<div class="container">
 			{% for object in objects %}
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<div class="video-container">
-						<iframe width="640" height="360" src="{{ object.youtube }}">
-						</iframe>
-						<a href="{% url 'video:page' object.slug %}">
-							<h4>{{ object.title }}</h4>
-						</a>
-						<div class="description">{{ object.short_descr }}</div>
-						<div class="authors">
-							<a href="#">{{ object.user.first_name }} {{ object.user.last_name }}</a>
-							<span class="date">{{ object.pub_date }}</span>
-						</div>
-					</div>
-				</div>
-			</div>
+			{% include 'video/list_item.html' with object=object %}
 			{% endfor %}
 
 			<!-- Start of pagination -->
@@ -36,7 +21,7 @@
 			<ul class="pagination">
 				{% if page_obj.has_previous %}
 				<li>
-                    <a href="?{% filter_page page=page_obj.previous_page_number %}" class="btn btn-primary btn-sm">
+					<a href="?{% filter_page page=page_obj.previous_page_number %}" class="btn btn-primary btn-sm">
 						<i class="fa fa-angle-double-left" aria-hidden="true"></i>
 					</a>
 				</li>
@@ -47,11 +32,11 @@
 				{% if page_obj.number == i %}
 				<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
 				{% else %}
-                <li><a href="?{% filter_page page=i %}" class="btn btn-primary btn-sm">{{ i }}</a></li>
+				<li><a href="?{% filter_page page=i %}" class="btn btn-primary btn-sm">{{ i }}</a></li>
 				{% endif %}
 				{% endfor %}
 				{% if page_obj.has_next %}
-                <li><a href="?{% filter_page page=page_obj.next_page_number %}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+				<li><a href="?{% filter_page page=page_obj.next_page_number %}" class="btn btn-primary btn-sm"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
 				{% else %}
 				<li class="disabled"><span>&raquo;</span></li>
 				{% endif %}
