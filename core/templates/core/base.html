@@ -11,6 +11,19 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
+		{% block meta %}
+		{% if object.title %}
+		<meta name="title" content="{{ object.title }}">
+		<meta property="og:title" content="{{ object.title }}">
+		<meta name="twitter:title" content="{{ object.title }}">
+		{% endif %}
+
+		{% if object.image %}
+		<link rel="image_src" href="{{ object.image.url }}">
+		{% endif %}
+
+		{% endblock %}
+
 		<title>
 			{% block head_title %}
 			{% trans "Видавництво Темпора" %}

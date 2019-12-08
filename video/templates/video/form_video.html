@@ -10,7 +10,7 @@
     </div>
     {% endif %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12">
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.title.auto_id }}">
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12">
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.short_descr.auto_id }}">
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12">
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="{{ form.body.auto_id }}">
@@ -61,13 +61,13 @@
         </div>
     </div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 col-sm-12">
 			<div class="row">
 				<div class="form-group">
-					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.slug.auto_id }}">
+					<label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.slug.auto_id }}">
 						{{ form.slug.label }}
 					</label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
+					<div class="col-md-8 col-sm-10 col-xs-12">
 						{{ form.slug|attr:"class:form-control" }}
 					</div>
 					<div class="col-md-10 col-md-offset-2">
@@ -76,13 +76,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 col-sm-12">
 			<div class="row">
 				<div class="form-group">
-					<label class="control-label col-md-4 col-sm-4 col-xs-4" for="{{ form.selected.auto_id }}">
+					<label class="control-label col-md-4 col-sm-2 col-xs-6" for="{{ form.selected.auto_id }}">
 						{{ form.selected.label }}
 					</label>
-					<div class="col-md-8 col-sm-8 col-xs-8">
+					<div class="col-md-8 col-sm-10 col-xs-6">
 						{{ form.selected|attr:"class:form-control flat" }}
 					</div>
 					<div class="col-md-10 col-md-offset-2">
@@ -93,13 +93,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 col-sm-12">
 			<div class="row">
 				<div class="form-group">
-					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
+					<label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.tags.auto_id }}">
 						{{ form.user.label }}
 					</label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
+					<div class="col-md-8 col-sm-10 col-xs-12">
 						{{ form.user|attr:"class:form-control" }}
 					</div>
 					<div class="col-md-8 col-md-offset-4">
@@ -108,13 +108,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 col-sm-12">
 			<div class="row">
 				<div class="form-group">
-					<label class="control-label col-md-4 col-sm-4 col-xs-12" for="{{ form.tags.auto_id }}">
+					<label class="control-label col-md-4 col-sm-2 col-xs-12" for="{{ form.tags.auto_id }}">
 						{{ form.tags.label }}
 					</label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
+					<div class="col-md-8 col-sm-10 col-xs-12">
 						{{ form.tags|attr:"class:form-control" }}
 					</div>
 					<div class="col-md-8 col-md-offset-4">
