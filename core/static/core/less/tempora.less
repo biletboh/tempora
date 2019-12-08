@@ -990,23 +990,34 @@ body {
 	}
 }
 
+
 .book-description {
+
 	h1 {
-		font-size: 40px;
-		font-weight: 700;
-	}
-	h3 {
 		font-size: 28px;
+		font-weight: 700;
+
+		@media (max-width: 767px) {
+			font-size: 24px;
+		}
+	}
+
+	h2 {
+		font-size: 24px;
+
+		@media (max-width: 767px) {
+			font-size: 22px;
+		}
+	}
+
+	h3 {
+		font-size: 22px;
 		font-weight: 600;
 		color: @theme-primary;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		span {
-		}
-		a {
-			float: right;
-		}
+
 		&.not-in-stock {
 			display: inline-block;
 			color: #777;
@@ -1014,24 +1025,39 @@ body {
 			margin: 10px 10px 10px 0;
 			background-color: #eee;
 		}
+
+		a {
+			float: right;
+		}
+
+
+		@media (max-width: 767px) {
+			font-size: 20px;
+		}
 	}
+
 	p.short-description {
 		margin-top: 1em;
 		font-weight: 600;
 	}
 }
 
+
 .book-details {
 	margin-top: 2rem;
+
 	p {
 		font-size: 16px;
 		margin-bottom: 0;
 		color: @theme-primary;
 	}
+
 	ul {
 		margin-top: 1em;
+
 		li {
 			width: 100%;
+
 			.btn {
 				&.tag {
 					white-space: normal;
@@ -1042,12 +1068,15 @@ body {
 	}
 }
 
+
 #selected-post {
 	padding: 30px 0;
+
 	.post-preview-text {
 		margin: 0 80px;
 	}
 }
+
 
 .tag, li.tag {
 	padding: 5px 8px;
@@ -1068,6 +1097,10 @@ body {
 		.quantity {
 			display: flex;
 			justify-content: space-around;
+
+			@media (max-width: 767px) {
+				display: block;
+			}
 		}
 	}
 	.modal-footer {
@@ -1094,8 +1127,12 @@ body {
 
 .filter-form {
 	.form-group {
+
 		button {
 			width: 100%;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 		}
 	}
 }

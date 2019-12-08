@@ -1056,19 +1056,29 @@ body {
   margin: 15px 0;
 }
 .book-description h1 {
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 700;
 }
+@media (max-width: 767px) {
+  .book-description h1 {
+    font-size: 24px;
+  }
+}
+.book-description h2 {
+  font-size: 24px;
+}
+@media (max-width: 767px) {
+  .book-description h2 {
+    font-size: 22px;
+  }
+}
 .book-description h3 {
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 600;
   color: #A3112A;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.book-description h3 a {
-  float: right;
 }
 .book-description h3.not-in-stock {
   display: inline-block;
@@ -1076,6 +1086,14 @@ body {
   padding: 5px;
   margin: 10px 10px 10px 0;
   background-color: #eee;
+}
+.book-description h3 a {
+  float: right;
+}
+@media (max-width: 767px) {
+  .book-description h3 {
+    font-size: 20px;
+  }
 }
 .book-description p.short-description {
   margin-top: 1em;
@@ -1124,6 +1142,11 @@ li.tag {
   display: flex;
   justify-content: space-around;
 }
+@media (max-width: 767px) {
+  .modal-content .modal-body .quantity {
+    display: block;
+  }
+}
 .modal-content .modal-footer {
   border-top: none;
 }
@@ -1142,6 +1165,9 @@ li.tag {
 }
 .filter-form .form-group button {
   width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .card-wrapper {
   display: flex;
