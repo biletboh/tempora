@@ -136,10 +136,12 @@
 	<div class="container-fluid">
 		<div class="row">
 			{% for object in videos %}
-			<div class="col-lg-4">
+			<div class="col-sm-12 col-md-4 col-lg-4">
 				<div class="video-container video-container-small">
-					<iframe width="320" height="180" src="{{ object.youtube }}">
-					</iframe>
+					<div class="aspect-ratio">
+						<iframe src="{{ object.youtube }}">
+						</iframe>
+					</div>
 					<a href="{% url 'video:page' object.slug %}">
 						<h4>{{ object.title }}</h4>
 					</a>

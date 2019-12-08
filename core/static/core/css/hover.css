@@ -6,7 +6,8 @@
   position: relative;
   text-align: center;
   cursor: default;
-  background: #fff no-repeat center center
+  background: #fff no-repeat center center;
+  border: 2px solid #f6a4b2;
 }
 @media (max-width: 767px) {
 	.view {
