@@ -13,3 +13,9 @@ class Video(AbstractPublication):
     class Meta:
         ordering = ('-pub_date',)
         verbose_name_plural = 'videos'
+
+    def save(self, *args, **kwargs):
+        embed = 'https://www.youtube.com/embed/'
+        self.youtube = self.youtube.replace(
+            'https://youtu.be/', embed)
+        super().save(*args, **kwargs)

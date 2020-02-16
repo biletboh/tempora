@@ -16,7 +16,8 @@ class AbstractPublication(models.Model):
     selected = models.BooleanField('Обраний', default=False, blank=True)
     pub_date = models.DateTimeField('Дата публікації',
                                     default=timezone.now)
-    slug = models.SlugField('Посилання', unique=True, null=True, blank=True)
+    slug = models.SlugField('Посилання на сайті', unique=True,
+                            null=True, blank=True)
 
     class Meta:
         ordering = ('-pub_date',)
