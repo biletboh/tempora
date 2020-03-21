@@ -17,3 +17,18 @@ To run the website you have to install anaconda/miniconda and set up virtual env
 5. Load default user groups: `python manage.py loaddata users/fixtures/usergroups.json`
 6. Configure translations for existing languages. For example: `python manage.py compilemessages -l en`
 
+
+### Styles
+We use less to work with project styles.
+
+Install less packages:
+
+```
+npm install -g less
+npm install less-plugin-clean-css -g
+```
+
+Use this command to comple less to minified css files:
+```
+lessc -clean-css tempora.less ../css/tempora.min.css
+```

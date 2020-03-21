@@ -10,305 +10,308 @@
 
 {% block content %}
 <div class="content">
-	<section id="orderBooks" class="half">
-		<div class="books" id="books">
-			<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<form class="text-center filter-form" method="get">
-						{{ filter.form.new|attr:"v-model:newBooks"|attr:"hidden" }}
-						{{ filter.form.best_seller|attr:"v-model:bestSeller"|attr:"hidden" }}
-						{{ filter.form.selected|attr:"v-model:selected"|attr:"hidden" }}
-						{{ filter.form.tags|attr:"v-model:categoryValue"|attr:"hidden" }}
-						<h2>Пошук</h2>
-						<div class="form-group">
-							{{ filter.form.title__icontains|attr:"class:form-control form-custom"|attr:"placeholder:Назва книги" }}
-						</div>
-						<div class="form-group">
-							{{ filter.form.authors|attr:"class:form-control form-custom"|attr:"placeholder:Автор" }}
-						</div>
-						<div class="form-group">
-							<button type="button" class="btn tag" v-bind:class="{ active: newBooksIsActive }" @click="setNewBooksFilterValue">Новинки</button>
-						</div>
-						<div class="form-group">
-							<button type="button" class="btn tag" v-bind:class="{ active: bestSellerIsActive }" @click="setBestSellerFilterValue">Топ продажів</button>
-						</div>
-						<div class="form-group">
-							<button type="button" class="btn tag" v-bind:class="{ active: selectedIsActive }" @click="setSelectedFilterValue">Обрані</button>
-						</div>
-						<div class="form-group">
-							<div class="dropdown">
-								<button class="btn tag dropdown-toggle" type="button" data-toggle="dropdown">
-									<span>[[ category ]]</span>
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#" v-bind:class="" @click="setCategory(false, 'Без категорії')" >Без категорії</a></li>
-									{% for x, y in filter.form.tags.field.choices %}
-									<li><a href="#" v-bind:class="" @click="setCategory('{{ x }}', '{{ y }}')" >{{ y }}</a></li>
-									{% endfor %}
-								</ul>
-							</div>
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Шукати</button>
-						</div>
-						<div class="form-group">
-							<a href="{% url 'books:list' %}" class="no-border reset"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
-						</div>
-					</form>
-				</div>
-				<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-			<div class="row card-wrapper">
-			{% for book in books %}
-				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 flex-item-wrapper">
-					<div class="card book text-left">
-						<div class="card-image">
-							<div class="view view-first view-books" ref="book-{{ book.id }}">
-								<a href="{% url 'books:page' book.slug %}">
-									<img src="{{ book.image.book.url }}" class="img-responsive bordered" alt="Book image">
-								</a>
-								<div class="mask">
+	<section class="half">
+		{% include 'core/carantine.html' %}
+		<div id="orderBooks">
+			<div class="books" id="books">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+							<form class="text-center filter-form" method="get">
+								{{ filter.form.new|attr:"v-model:newBooks"|attr:"hidden" }}
+								{{ filter.form.best_seller|attr:"v-model:bestSeller"|attr:"hidden" }}
+								{{ filter.form.selected|attr:"v-model:selected"|attr:"hidden" }}
+								{{ filter.form.tags|attr:"v-model:categoryValue"|attr:"hidden" }}
+								<h2>Пошук</h2>
+								<div class="form-group">
+									{{ filter.form.title__icontains|attr:"class:form-control form-custom"|attr:"placeholder:Назва книги" }}
 								</div>
-							</div>
+								<div class="form-group">
+									{{ filter.form.authors|attr:"class:form-control form-custom"|attr:"placeholder:Автор" }}
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn tag" v-bind:class="{ active: newBooksIsActive }" @click="setNewBooksFilterValue">Новинки</button>
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn tag" v-bind:class="{ active: bestSellerIsActive }" @click="setBestSellerFilterValue">Топ продажів</button>
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn tag" v-bind:class="{ active: selectedIsActive }" @click="setSelectedFilterValue">Обрані</button>
+								</div>
+								<div class="form-group">
+									<div class="dropdown">
+										<button class="btn tag dropdown-toggle" type="button" data-toggle="dropdown">
+											<span>[[ category ]]</span>
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="#" v-bind:class="" @click="setCategory(false, 'Без категорії')" >Без категорії</a></li>
+											{% for x, y in filter.form.tags.field.choices %}
+											<li><a href="#" v-bind:class="" @click="setCategory('{{ x }}', '{{ y }}')" >{{ y }}</a></li>
+											{% endfor %}
+										</ul>
+									</div>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Шукати</button>
+								</div>
+								<div class="form-group">
+									<a href="{% url 'books:list' %}" class="no-border reset"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
+								</div>
+							</form>
 						</div>
-						<div class="card-content">
-							<a href="{% url 'books:page' book.slug %}">
-								<h4>{{ book.title }}</h4>
-							</a>
-							<h5>{{ book.show_authors }}</h5>
-							<h6>
-								{% if book.in_stock == '1' %}
-								<a
-									href="#bookModal" data-toggle="modal" 
-									data-title="{{ book.title }}" data-id="{{ book.id }}"
-									 v-on:click="clearUpOrderData(), price={{ book.price|default:"0" }}; title='{{ book.title }}'; bookId={{ book.id }}; quantity=1; setPrice(); submited=false"
-								>
-									 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-								</a> 
+						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+							<div class="row card-wrapper">
+								{% for book in books %}
+								<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 flex-item-wrapper">
+									<div class="card book text-left">
+										<div class="card-image">
+											<div class="view view-first view-books" ref="book-{{ book.id }}">
+												<a href="{% url 'books:page' book.slug %}">
+													<img src="{{ book.image.book.url }}" class="img-responsive bordered" alt="Book image">
+												</a>
+												<div class="mask">
+												</div>
+											</div>
+										</div>
+										<div class="card-content">
+											<a href="{% url 'books:page' book.slug %}">
+												<h4>{{ book.title }}</h4>
+											</a>
+											<h5>{{ book.show_authors }}</h5>
+											<h6>
+												{% if book.in_stock == '1' %}
+												<a
+													href="#bookModal" data-toggle="modal" 
+																	  data-title="{{ book.title }}" data-id="{{ book.id }}"
+																									v-on:click="clearUpOrderData(), price={{ book.price|default:"0" }}; title='{{ book.title }}'; bookId={{ book.id }}; quantity=1; setPrice(); submited=false"
+																									>
+																									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+												</a> 
+												{% endif %}
+												{{ book.price|default:"0" }} грн.
+											</h6>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-lg-12 hidden-xs hidden-sm">
+							<!-- Start of pagination -->
+							{% if is_paginated %}
+							<ul class="pagination pagination-primary">
+
+								{% if page_obj.has_previous %}
+								<li class="page-item">
+									<a href="?{% filter_page page=page_obj.previous_page_number %}" class="page-link">
+										<i class="fa fa-angle-double-left" aria-hidden="true"></i>
+									</a>
+								</li>
 								{% endif %}
-								{{ book.price|default:"0" }} грн.
-							</h6>
+
+								{% if page_obj.number|add:'-7' > 1 %}
+								<li class="page-item"><a href="?{% filter_page page=page_obj.number|add:'-8' %}" class="page-link">&hellip;</a></li>
+								{% endif %}
+
+								{% for i in paginator.page_range %}
+								{% if page_obj.number == i %}
+								<li class="page-item active "><a href="#" class="page-link">{{ i }}</a></li>
+								{% elif i > page_obj.number|add:'-8' and i < page_obj.number|add:'8' %}
+								<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
+								{% endif %}
+								{% endfor %}
+
+								{% if page_obj.paginator.num_pages > page_obj.number|add:'7' %}
+								<li class="page-item"><a href="?{% filter_page page=page_obj.number|add:'8' %}" class="page-link">&hellip;</a></li>
+								{% endif %}
+
+								{% if page_obj.has_next %}
+								<li class="page-item"><a href="?{% filter_page page=page_obj.next_page_number %}" class="page-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+								{% else %}
+								<li class="page-item disabled "><a href="#" class="page-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+								{% endif %}
+							</ul>
+							{% endif %}
+							<!-- End of pagination -->
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">
+							<!-- Start of pagination -->
+							{% if is_paginated %}
+							<ul class="pagination pagination-primary">
+
+								{% if page_obj.has_previous %}
+								<li class="page-item">
+									<a href="?{% filter_page page=page_obj.previous_page_number %}" class="page-link">
+										<i class="fa fa-angle-double-left" aria-hidden="true"></i>
+									</a>
+								</li>
+								{% endif %}
+
+								{% for i in paginator.page_range %}
+								{% if page_obj.number == i %}
+								<li class="page-item active "><a href="#" class="page-link">{{ i }}</a></li>
+								{% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+								<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
+								{% elif page_obj.number == 1 and i < page_obj.number|add:'6' %}
+								<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
+								{% elif page_obj.number == 2 and i < page_obj.number|add:'4' %}
+								<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
+								{% elif page_obj.number == paginator.num_pages and i > paginator.num_pages|add:'-5' %}
+								<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
+								{% elif page_obj.number == paginator.num_pages|add:'-1' and i > paginator.num_pages|add:'-4' %}
+								<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
+								{% endif %}
+								{% endfor %}
+
+								{% if page_obj.has_next %}
+								<li class="page-item"><a href="?{% filter_page page=page_obj.next_page_number %}" class="page-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+								{% endif %}
+							</ul>
+							{% endif %}
+							<!-- End of pagination -->
+						</div>
+					</div>
+
+
+				</div>
+				<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 id="bookModalLabel">Заповніть форму, щоб замовити книгу <b class="modal-title">[[ title ]]</b></h4>
+							</div>
+							<div id="orderForm">
+								<form v-on:submit="submitForm" novalidate>
+									<div class="modal-body">
+										<div class="row control-group">
+											<div class="col-xs-5">
+												<h4>Ціна: <b>[[ orderPrice ]] грн.</b></h4>
+											</div>
+											<div class="col-xs-5">
+												<h4 class="quantity">
+													<span>Кількість:
+														<b>[[ quantity ]]</b>
+													</span>
+													<span>
+														<button
+															v-on:click="quantity += 1; setPrice()"
+															type="button"
+															class="btn btn-primary btn-xs"
+															>
+															<i class="fa fa-plus" aria-hidden="true"></i>
+														</button>
+														<button
+															v-on:click="substractQuantity(); setPrice()"
+															type="button"
+															class="btn btn-primary btn-xs">
+															<i class="fa fa-minus" aria-hidden="true"></i>
+														</button>
+													</span>
+												</h4>
+											</div>
+										</div>
+										<div v-if="submited">
+											<div class="row">
+												<div class="col-xs-12">
+													<p class="thank-you">Ваше замовлення надіслано. Дякуємо!</p>
+												</div>
+											</div>
+										</div>
+										<div v-else>
+											<div class="row control-group">
+												<div class="form-group col-xs-12 floating-label-form-group controls">
+													<label for="name">{% trans "ПІБ" %}</label>
+													<input
+														v-validate="'required'"
+														data-vv-delay="1000"
+														class="form-control"
+														:class="{'input': true, 'is-danger': errors.has('name') }"
+														name="name" type="text"
+																	placeholder="ПІБ"
+																	v-model="name"
+																	>
+																	<span v-show="errors.has('name')" class="help is-danger">[[ errors.first('name') ]]</span>
+												</div>
+											</div>
+											<div class="row control-group">
+												<div class="form-group col-xs-12 floating-label-form-group controls">
+													<label for="email">{% trans "Електронна скринька" %}</label>
+													<input
+														v-validate="'required|email'"
+														data-vv-delay="1000"
+														class="form-control"
+														:class="{'input': true, 'is-danger': errors.has('email') }"
+														name="email" type="text"
+																	 placeholder="Емейл"
+																	 v-model="email"
+																	 >
+																	 <span v-show="errors.has('email')" class="help is-danger">[[ errors.first('email') ]]</span>
+												</div>
+											</div>
+											<div class="row control-group">
+												<div class="form-group col-xs-12 floating-label-form-group controls">
+													<label for="phone">{% trans "Номер телефону у форматі +380XXXXXXXXX" %}</label>
+													<input
+														v-validate="'required|phonenumber'"
+														data-vv-delay="1000"
+														class="form-control"
+														:class="{'input': true, 'is-danger': errors.has('phone') }"
+														name="phone" type="text"
+																	 placeholder="Телефон"
+																	 v-model="phone"
+																	 >
+																	 <span v-show="errors.has('phone')" class="help is-danger">[[ errors.first('phone') ]]</span>
+												</div>
+											</div>
+											<div class="row control-group">
+												<div class="form-group col-xs-12 floating-label-form-group controls">
+													<label for="phone">{% trans "Адреса доставки" %}</label>
+													<input
+														v-validate="'required'"
+														data-vv-delay="1000"
+														class="form-control"
+														:class="{'input': true, 'is-danger': errors.has('address') }"
+														name="address" type="text"
+																	   placeholder="Адреса доставки"
+																	   v-model="address"
+																	   >
+																	   <span v-show="errors.has('address')" class="help is-danger">[[ errors.first('address') ]]</span>
+												</div>
+												<span class="text-muted">*Mісто, вулиця, будинок, квартира або місто і № Нової пошти/Укрпошти</span>
+											</div>
+											<div class="row control-group">
+												<div class="form-group col-xs-12 floating-label-form-group controls">
+													<label for="message">{% trans "Повідомлення" %}</label>
+													<textarea
+														name="message" cols="40" rows="4"
+																				 placeholder="Повідомлення" type="text"
+																											id="id_message" class="form-control"
+																															v-model="message"
+																															v-validate=""
+																															data-vv-delay="1000"
+																															>
+													</textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div v-if="!submited" class="modal-footer">
+										<button type="submit" v-on:submit="submitForm()" class="btn btn-primary btn-lg">Замовити</button>
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-			{% endfor %}
 			</div>
-
-			</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-lg-12 hidden-xs hidden-sm">
-					<!-- Start of pagination -->
-					{% if is_paginated %}
-					<ul class="pagination pagination-primary">
-
-						{% if page_obj.has_previous %}
-						<li class="page-item">
-							<a href="?{% filter_page page=page_obj.previous_page_number %}" class="page-link">
-								<i class="fa fa-angle-double-left" aria-hidden="true"></i>
-							</a>
-						</li>
-						{% endif %}
-
-						{% if page_obj.number|add:'-7' > 1 %}
-						<li class="page-item"><a href="?{% filter_page page=page_obj.number|add:'-8' %}" class="page-link">&hellip;</a></li>
-						{% endif %}
-
-						{% for i in paginator.page_range %}
-						{% if page_obj.number == i %}
-						<li class="page-item active "><a href="#" class="page-link">{{ i }}</a></li>
-						{% elif i > page_obj.number|add:'-8' and i < page_obj.number|add:'8' %}
-						<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
-						{% endif %}
-						{% endfor %}
-
-						{% if page_obj.paginator.num_pages > page_obj.number|add:'7' %}
-						<li class="page-item"><a href="?{% filter_page page=page_obj.number|add:'8' %}" class="page-link">&hellip;</a></li>
-						{% endif %}
-
-						{% if page_obj.has_next %}
-						<li class="page-item"><a href="?{% filter_page page=page_obj.next_page_number %}" class="page-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-						{% else %}
-						<li class="page-item disabled "><a href="#" class="page-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-						{% endif %}
-					</ul>
-					{% endif %}
-					<!-- End of pagination -->
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">
-					<!-- Start of pagination -->
-					{% if is_paginated %}
-					<ul class="pagination pagination-primary">
-
-						{% if page_obj.has_previous %}
-						<li class="page-item">
-							<a href="?{% filter_page page=page_obj.previous_page_number %}" class="page-link">
-								<i class="fa fa-angle-double-left" aria-hidden="true"></i>
-							</a>
-						</li>
-						{% endif %}
-
-						{% for i in paginator.page_range %}
-						{% if page_obj.number == i %}
-						<li class="page-item active "><a href="#" class="page-link">{{ i }}</a></li>
-						{% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
-						<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
-						{% elif page_obj.number == 1 and i < page_obj.number|add:'6' %}
-						<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
-						{% elif page_obj.number == 2 and i < page_obj.number|add:'4' %}
-						<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
-						{% elif page_obj.number == paginator.num_pages and i > paginator.num_pages|add:'-5' %}
-						<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
-						{% elif page_obj.number == paginator.num_pages|add:'-1' and i > paginator.num_pages|add:'-4' %}
-						<li class="page-item"><a href="?{% filter_page page=i %}" class="page-link">{{ i }}</a></li>
-						{% endif %}
-						{% endfor %}
-
-						{% if page_obj.has_next %}
-						<li class="page-item"><a href="?{% filter_page page=page_obj.next_page_number %}" class="page-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-						{% endif %}
-					</ul>
-					{% endif %}
-					<!-- End of pagination -->
-				</div>
-			</div>
-
-
-		</div>
-		<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 id="bookModalLabel">Заповніть форму, щоб замовити книгу <b class="modal-title">[[ title ]]</b></h4>
-					</div>
-					<div id="orderForm">
-						<form v-on:submit="submitForm" novalidate>
-							<div class="modal-body">
-								<div class="row control-group">
-									<div class="col-xs-5">
-										<h4>Ціна: <b>[[ orderPrice ]] грн.</b></h4>
-									</div>
-									<div class="col-xs-5">
-										<h4 class="quantity">
-											<span>Кількість:
-												<b>[[ quantity ]]</b>
-											</span>
-											<span>
-												<button
-													v-on:click="quantity += 1; setPrice()"
-													type="button"
-													class="btn btn-primary btn-xs"
-												>
-													<i class="fa fa-plus" aria-hidden="true"></i>
-												</button>
-												<button
-													v-on:click="substractQuantity(); setPrice()"
-													type="button"
-													class="btn btn-primary btn-xs">
-													<i class="fa fa-minus" aria-hidden="true"></i>
-												</button>
-											</span>
-										</h4>
-									</div>
-								</div>
-								<div v-if="submited">
-									<div class="row">
-										<div class="col-xs-12">
-											<p class="thank-you">Ваше замовлення надіслано. Дякуємо!</p>
-										</div>
-									</div>
-								</div>
-								<div v-else>
-									<div class="row control-group">
-										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label for="name">{% trans "ПІБ" %}</label>
-											<input
-												v-validate="'required'"
-												data-vv-delay="1000"
-												class="form-control"
-												:class="{'input': true, 'is-danger': errors.has('name') }"
-												name="name" type="text"
-												placeholder="ПІБ"
-												v-model="name"
-											>
-											<span v-show="errors.has('name')" class="help is-danger">[[ errors.first('name') ]]</span>
-										</div>
-									</div>
-									<div class="row control-group">
-										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label for="email">{% trans "Електронна скринька" %}</label>
-											<input
-												v-validate="'required|email'"
-												data-vv-delay="1000"
-												class="form-control"
-												:class="{'input': true, 'is-danger': errors.has('email') }"
-												name="email" type="text"
-												placeholder="Емейл"
-												v-model="email"
-											>
-											<span v-show="errors.has('email')" class="help is-danger">[[ errors.first('email') ]]</span>
-										</div>
-									</div>
-									<div class="row control-group">
-										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label for="phone">{% trans "Номер телефону у форматі +380XXXXXXXXX" %}</label>
-											<input
-												v-validate="'required|phonenumber'"
-												data-vv-delay="1000"
-												class="form-control"
-												:class="{'input': true, 'is-danger': errors.has('phone') }"
-												name="phone" type="text"
-												placeholder="Телефон"
-												v-model="phone"
-											>
-											<span v-show="errors.has('phone')" class="help is-danger">[[ errors.first('phone') ]]</span>
-										</div>
-									</div>
-									<div class="row control-group">
-										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label for="phone">{% trans "Адреса доставки" %}</label>
-											<input
-												v-validate="'required'"
-												data-vv-delay="1000"
-												class="form-control"
-												:class="{'input': true, 'is-danger': errors.has('address') }"
-												name="address" type="text"
-												placeholder="Адреса доставки"
-												v-model="address"
-											>
-											<span v-show="errors.has('address')" class="help is-danger">[[ errors.first('address') ]]</span>
-										</div>
-										<span class="text-muted">*Mісто, вулиця, будинок, квартира або місто і № Нової пошти/Укрпошти</span>
-									</div>
-									<div class="row control-group">
-										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label for="message">{% trans "Повідомлення" %}</label>
-											<textarea
-												name="message" cols="40" rows="4"
-												placeholder="Повідомлення" type="text"
-												id="id_message" class="form-control"
-												v-model="message"
-												v-validate=""
-												data-vv-delay="1000"
-											>
-											</textarea>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div v-if="!submited" class="modal-footer">
-								<button type="submit" v-on:submit="submitForm()" class="btn btn-primary btn-lg">Замовити</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		</div>
 	</section>
 </div>
