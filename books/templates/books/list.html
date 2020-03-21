@@ -63,15 +63,13 @@
 						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 							<div class="row card-wrapper">
 								{% for book in books %}
-								<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 flex-item-wrapper">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 flex-item-wrapper">
 									<div class="card book text-left">
 										<div class="card-image">
-											<div class="view view-first view-books" ref="book-{{ book.id }}">
+											<div class="view" ref="book-{{ book.id }}">
 												<a href="{% url 'books:page' book.slug %}">
-													<img src="{{ book.image.book.url }}" class="img-responsive bordered" alt="Book image">
+													<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
 												</a>
-												<div class="mask">
-												</div>
 											</div>
 										</div>
 										<div class="card-content">
@@ -81,6 +79,7 @@
 											<h5>{{ book.show_authors }}</h5>
 											<h6>
 												{% if book.in_stock == '1' %}
+												<!--
 												<a
 													href="#bookModal" data-toggle="modal" 
 																	  data-title="{{ book.title }}" data-id="{{ book.id }}"
@@ -88,6 +87,7 @@
 																									>
 																									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 												</a> 
+												-->
 												{% endif %}
 												{{ book.price|default:"0" }} грн.
 											</h6>

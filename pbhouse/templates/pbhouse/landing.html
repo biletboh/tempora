@@ -45,11 +45,10 @@
 		<div class="item text-center">
 			<div class="row book text-left">
 				<div class="col-md-12">
-					<div class="view view-first view-books">
-						<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
-						<div class="mask">
-							<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">Дивитися</a>
-						</div>
+					<div class="view">
+						<a href="{% url 'books:page' book.slug %}">
+							<img src="{{ book.image.book.url }}" class="img-responsive" alt="Book image">
+						</a>
 					</div>
 				</div>
 				<div class="col-md-12">
@@ -126,16 +125,15 @@
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-12 post-img-middle">
-						<div class="view view-first">
-							<img class="post-img img-responsive" src="{{ selected_post.image.blog_selected.url }}" alt="{{ selected_post.image.name }}">
-							<div class="mask">
-								<a href="{% url 'blog:page' selected_post.slug %}" class="btn btn-primary">Читати</a>
-							</div>
+						<div class="view">
+							<a href="{% url 'blog:page' selected_post.slug %}">
+								<img class="post-img img-responsive" src="{{ selected_post.image.blog_selected.url }}" alt="{{ selected_post.image.name }}">
+							</a>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="post-preview-text">
-							<a href="{% url 'blog:page' selected_post.slug %}" class="">
+							<a href="{% url 'blog:page' selected_post.slug %}">
 								<h2 class="post-title middle">{{ selected_post.title }}</h2>
 							</a>
 							<p>{{ selected_post.short_descr }}</p>
@@ -191,11 +189,10 @@
 					<div class="col-md-4">
 						<div class="row">
 							<div class="col-md-12 post-img-middle">
-								<div class="view view-first">
-									<img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
-									<div class="mask">
-										<a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
-									</div>
+								<div class="view">
+									<a href="{% url 'blog:page' post.slug %}">
+										<img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
+									</a>
 								</div>
 							</div>
 							<div class="col-md-12">

@@ -11,7 +11,7 @@
 {% include "core/navbar.html" %}
 <div class="content">
     <section>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
 
@@ -24,12 +24,11 @@
                     {% if forloop.first %}
                     <div class="row post-preview">
                         <div class="col-md-6">
-                            <div class="view view-first">
-                                <img class="post-img img-responsive" src="{{ post.image.blog_first.url }}" alt="{{ post.image.name }}">
-                                <div class="mask">
-                                    <a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
-                                </div>
-                            </div>
+							<div class="view">
+								<a href="{% url 'blog:page' post.slug %}" class="">
+									<img class="post-img img-responsive" src="{{ post.image.blog_first.url }}" alt="{{ post.image.name }}">
+								</a>
+							</div>
                         </div>
                         <div class="col-md-6">
                             <div class="post-preview-text">
@@ -51,11 +50,10 @@
                     <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12 post-img-middle">
-                                <div class="view view-first">
-                                    <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
-                                    <div class="mask">
-                                        <a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
-                                    </div>
+								<div class="view">
+									<a href="{% url 'blog:page' post.slug %}" class="">
+										<img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
+									</a>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -78,11 +76,10 @@
                     {% else %}
                     <div class="row post-preview">
                         <div class="col-md-5">
-                            <div class="view view-first">
-                                <img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
-                                <div class="mask">
-                                    <a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
-                                </div>
+                            <div class="view">
+								<a href="{% url 'blog:page' post.slug %}" class="">
+									<img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
+								</a>
                             </div>
                         </div>
                         <div class="col-md-6">
