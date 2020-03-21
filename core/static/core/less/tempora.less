@@ -7,6 +7,7 @@ body {
     height: 100%;
     width: 100%;
 }
+
 body {
     .serif-font;
     display: flex;
@@ -16,11 +17,12 @@ body {
 
 .content {
     flex: 1 0 auto;
-	padding: 0 15px;
+
     @media (max-width: 767px) {
 		padding: 0 5px;
 	}
 }
+
 hr {
     &.light {
         border-color: white;
@@ -163,7 +165,7 @@ aside.clients {
 
 
     @media (min-width: 768px) {
-		padding: 0 15px;
+		padding: 0 30px;
         background-color: transparent;
         border-color: fade(white, 30%);
 
@@ -960,31 +962,25 @@ body {
 
 
 #books, .books, .projects {
-	padding: 50px 0;
-	img {
-		width: auto;
-		margin: auto;
-	}
-	.card-image {
-		img {
-			margin-left: 0;
-			margin-right: auto;
-		}
-	}
 	h4 {
-		margin: 10px 10px 5px;
+		margin-top: 20px;
+		margin-bottom: 10px;
 	}
+
 	h5 {
 		font-size: 16px;
 		font-weight: 400;
-		margin: 5px 10px;
+		margin-top: 10px;
+		margin-bottom: 5px;
 	}
+
 	h6 {
 		font-size: 18px;
 		font-weight: 600;
 		color: @theme-primary; 
-		margin: 5px 10px;
+		margin-top: 5px;
 	}
+
 	.book {
 		margin: 15px 0;
 	}
@@ -1214,5 +1210,27 @@ iframe {
 .section-video {
 	.btn-more {
 		margin-top: 30px;
+	}
+}
+
+.alert-top {
+	margin: 0 auto 30px;
+	max-width: 1200px;
+
+	.message {
+		padding: 15px 30px;
+
+		@media (max-width: 992px) {
+			padding: 0;
+		}
+	}
+}
+
+.view {
+	position: relative;
+	text-align: center;
+
+	img {
+		border: 2px solid #f6a4b2;
 	}
 }

@@ -6,6 +6,35 @@ $(window).load(function(){
   $('.header-content-inner p').addClass('fadeInDown');
 });
 
+
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days*24*60*60*1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0;i < ca.length;i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}
+
+
+function eraseCookie(name) {
+  document.cookie = name+'=; Max-Age=-99999999;';
+}
+
+
 (function($) {
   "use strict"; // Start of use strict
 
@@ -93,4 +122,28 @@ $(window).load(function(){
       $('#top').fadeOut('fast');
     }
   });
+
+  $("#carantineClose").click(function() {
+    $('.close').alert('close');
+  });
+
+  function carantine () {
+    const notification = $('#carantineAlert');
+    let x = getCookie('carantineNotification');
+
+    if (!x) {
+      const notification = $('#carantineAlert').removeClass('hidden');
+      notification.on('closed.bs.alert', function () {
+        if (!x) {
+          setCookie('carantineNotification', true, 7);
+
+          x = getCookie('carantineNotification');
+          console.log(x);
+        }
+      })
+    };
+  };
+
+  carantine();
+
 })(jQuery); // End of use strict
