@@ -123,16 +123,18 @@ function eraseCookie(name) {
     }
   });
 
+  $("#carantineClose").click(function() {
+    $('.close').alert('close');
+  });
+
   function carantine () {
     const notification = $('#carantineAlert');
     let x = getCookie('carantineNotification');
 
-    if (x) {
-      notification.remove();
-    } else {
+    if (!x) {
+      const notification = $('#carantineAlert').removeClass('hidden');
       notification.on('closed.bs.alert', function () {
         if (!x) {
-          notification.alert()
           setCookie('carantineNotification', true, 7);
 
           x = getCookie('carantineNotification');
