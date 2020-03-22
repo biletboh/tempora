@@ -40,7 +40,7 @@
 		</div>
 	</div>
 </section>
-<section class="project">
+<section class="project books">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -53,13 +53,10 @@
 			<div class="col-md-4">
 				<div class="row book text-left">
 					<div class="col-md-12">
-						<div class="view view-first view-books">
-							<img src="{{ book.image.book.url }}" class="img-responsive bordered" alt="Book image"> <div class="mask">
-								<a href="{% url 'books:page' book.slug %}" class="btn btn-primary">
-									<i class="fa fa-book" aria-hidden="true"></i>
-									Дивитися
-								</a>
-							</div>
+						<div class="view">
+							<a href="{% url 'books:page' book.slug %}">
+								<img src="{{ book.image.book.url }}" class="img-responsive bordered" alt="Book image">
+							</a>
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -76,7 +73,6 @@
 							{% endfor %}
 						</h5>
 						<h6>
-							<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 							{{ book.price|default:"0" }} грн.
 						</h6>
 					</div>
@@ -112,11 +108,10 @@
 					<div class="col-md-4">
 						<div class="row">
 							<div class="col-md-12 post-img-middle">
-								<div class="view view-first">
-									<img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
-									<div class="mask">
-										<a href="{% url 'blog:page' post.slug %}" class="btn btn-primary">Читати</a>
-									</div>
+								<div class="view">
+									<a href="{% url 'blog:page' post.slug %}">
+										<img class="post-img img-responsive" src="{{ post.image.blog_second.url }}" alt="{{ post.image.name }}">
+									</a>
 								</div>
 							</div>
 							<div class="col-md-12">
