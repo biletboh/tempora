@@ -17,13 +17,10 @@
 				<div class="col-md-6">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="view view-first">
-								<img src="{{ project.icon_image.project_small.url }}" class="img-responsive" alt="Зображення: {{ project.title }}">
-								<div class="mask">
-									<a href="{% url 'projects:page' project.slug %}" class="btn btn-primary">
-										Дивитися
-									</a>
-								</div>
+							<div class="view">
+								<a href="{% url 'projects:page' project.slug %}">
+									<img src="{{ project.icon_image.project_small.url }}" class="img-responsive" alt="Зображення: {{ project.title }}">
+								</a>
 							</div>
 						</div>
 						<div class="col-md-12">

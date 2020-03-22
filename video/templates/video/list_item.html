@@ -1,3 +1,5 @@
+{% load datetimetags %}
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="video-container">
@@ -11,7 +13,7 @@
       <div class="description">{{ object.short_descr }}</div>
       <div class="authors">
         <a href="#">{{ object.user.first_name }} {{ object.user.last_name }}</a>
-        <span class="date">{{ object.pub_date }}</span>
+        <span class="date">{{ object.pub_date|prettydates }}</span>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% load widget_tweaks %}
+{% load datetimetags %}
 
 {% block head_title %}{% trans "Видавництво «Темпора»" %}{% endblock %}
 
@@ -163,7 +164,7 @@
 					<div class="description">{{ object.short_descr }}</div>
 					<div class="authors">
 						<a href="#">{{ object.user.first_name }} {{ object.user.last_name }}</a>
-						<span class="date">{{ object.pub_date }}</span>
+						<span class="date">{{ object.pub_date|prettydates }}</span>
 					</div>
 				</div>
 			</div>
