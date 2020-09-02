@@ -11,7 +11,6 @@
 {% block content %}
 <div class="content">
 	<section>
-		{% include 'core/carantine.html' %}
 		<div id="orderBooks">
 			<div class="books" id="books">
 				<div class="container">
@@ -79,7 +78,6 @@
 											<h5>{{ book.show_authors }}</h5>
 											<h6>
 												{% if book.in_stock == '1' %}
-												<!--
 												<a
 													href="#bookModal" data-toggle="modal" 
 																	  data-title="{{ book.title }}" data-id="{{ book.id }}"
@@ -87,7 +85,6 @@
 																									>
 																									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 												</a> 
-												-->
 												{% endif %}
 												{{ book.price|default:"0" }} грн.
 											</h6>

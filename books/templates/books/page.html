@@ -9,7 +9,6 @@
 {% block content %}
 <div class="content">
 	<section>
-		{% include 'core/carantine.html' %}
 		<div id="orderBooks">
 			<div class="container">
 				<div class="row">
@@ -72,7 +71,6 @@
 							{% else %}
 							<h3>
 								<span>{{ book.price|default:'0' }} грн. </span>
-								<!--
 								<button
 									type="button" class="btn btn-primary"
 												  data-toggle="modal" data-target="#bookModal"
@@ -81,7 +79,6 @@
 																	  <i class="fa fa-shopping-basket" aria-hidden="true"></i>
 																	  Замовити
 								</button>
-								-->
 							</h3>
 							{% endif %}
 							<p class="short-description">{{ book.short_descr }}</p>
