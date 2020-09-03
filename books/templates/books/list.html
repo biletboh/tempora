@@ -80,8 +80,8 @@
 												{% if book.in_stock == '1' %}
 												<a
 													href="#bookModal" data-toggle="modal" 
-																	  data-title="{{ book.title }}" data-id="{{ book.id }}"
-																									v-on:click="clearUpOrderData(), price={{ book.price|default:"0" }}; title='{{ book.title }}'; bookId={{ book.id }}; quantity=1; setPrice(); submited=false"
+																	  data-title="{{ book.title|escape }}" data-id="{{ book.id }}"
+																									v-on:click="clearUpOrderData(), price={{ book.price|default:"0" }}; title='{{ book.title|escape }}'; bookId={{ book.id }}; quantity=1; setPrice(); submited=false"
 																									>
 																									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 												</a> 

@@ -74,7 +74,7 @@
 								<button
 									type="button" class="btn btn-primary"
 												  data-toggle="modal" data-target="#bookModal"
-																	  v-on:click="price={{ book.price }}; title='{{ book.title }}'; bookId={{ book.id }}; quantity=1; setPrice(); submited=false"
+																	  v-on:click="price={{ book.price }}; title='{{ book.title|escape }}'; bookId={{ book.id }}; quantity=1; setPrice(); submited=false"
 																	  >
 																	  <i class="fa fa-shopping-basket" aria-hidden="true"></i>
 																	  Замовити
