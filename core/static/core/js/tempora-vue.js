@@ -112,7 +112,6 @@ new Vue({
       this.clearUpOrderData()
     },
     clearUpOrderData () {
-      console.log('test', this.bookId);
       this.name = '',
       this.bookId = '',
       this.email = '',
@@ -122,7 +121,6 @@ new Vue({
       this.orderPrice = '',
       this.address = '',
       this.quantity = 1 
-      console.log('test after', this.bookId);
     },
     substractQuantity() {
       if (this.quantity > 1) {
@@ -131,7 +129,6 @@ new Vue({
     },
     setPrice () {
       this.orderPrice = this.price * this.quantity
-      console.log('test after price', this.bookId);
     },
     getFilterData() {
       let query = this.$route.query
