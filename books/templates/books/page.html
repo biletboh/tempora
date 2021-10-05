@@ -92,12 +92,12 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 id="bookModalLabel">Заповніть форму, щоб замовити книгу <b class="modal-title">[[ title ]]</b></h4>
+							<h4 id="bookModalLabel"><span v-if="!submited">Заповніть форму, щоб замовити книгу </span><span v-else>Замовлення отримане: </span><b class="modal-title">[[ title ]]</b></h4>
 						</div>
 						<div id="orderForm">
 							<form v-on:submit="submitForm" novalidate>
 								<div class="modal-body">
-									<div class="row control-group">
+									<div v-if="!submited" class="row control-group">
 										<div class="col-xs-12 col-sm-5">
 											<h4>Ціна: <b>[[ orderPrice ]] грн.</b></h4>
 										</div>
@@ -127,7 +127,20 @@
 									<div v-if="submited">
 										<div class="row">
 											<div class="col-xs-12">
-												<p class="thank-you">Ваше замовлення надіслано. Дякуємо!</p>
+												<h3>Оплата замовлення за реквізитами</h3>
+												<ul class="list-unstyled">
+													<li><strong>Номер карти:</strong> 4239 2200 2126 3180</li>
+													<li><strong>Отримувач:</strong> Сергій Дорошенко, менеджер з продажів видавництва «ТЕМПОРА»</li>
+													<li><strong>Банк отримувача:</strong> АТ «Райффайзен Банк»</li>
+													<li><strong>Отримувач:</strong> ФОП Дорошенко Сергій Миколайович</li>
+													<li><strong>КОД (ЄДРПОУ) отримувача:</strong> 2295514491</li>
+													<li><strong>Розрахунковий рахунок отримувача (IBAN):</strong> UA623229040000000260072160769</li>
+													<li><strong>Призначення платежу:</strong> Поповнення карткового рахунку XXXXXX (вказати номер замовлення з емейлу)</li>
+												</ul>
+												<hr>
+												<p>Отримайте сплачене вами замовлення на відділеннях Нової пошти або Укрпошти, які ви вказали у формі замовлення.</p>
+												<p>На вашу електронну пошту надісланий номер замовлення та інструкції для оплати замовлення.</p>
+												<p><strong>Контактний телефон:</strong> +38 (044) 234 4640</p>
 											</div>
 										</div>
 									</div>
