@@ -103,6 +103,7 @@ new Vue({
         quantity: this.quantity,
       })
         .then(function (response) {
+          console.log(this.email)
           console.log(response);
         })
         .catch(function (error) {

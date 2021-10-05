@@ -3,8 +3,11 @@ from django.utils import timezone
 from rest_framework import serializers
 
 from .models import Order
-from .utils import send_order_notification, send_received_notification,\
-    send_processed_notification
+from .utils import (
+    send_order_notification,
+    send_received_notification,
+    send_processed_notification,
+)
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -12,8 +15,16 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ('name', 'email', 'phone', 'message', 'quantity', 'book',
-                  'address')
+        fields = (
+            "id",
+            "name",
+            "email",
+            "phone",
+            "message",
+            "quantity",
+            "book",
+            "address",
+        )
 
     def create(self, validated_data):
         order = Order.objects.create(**validated_data)
@@ -29,15 +40,16 @@ class OrderProcessingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ('processed', 'notification')
+        fields = ("processed", "notification")
 
     def update(self, instance, validated_data):
         instance.processed = validated_data.get(
-            'processed', instance.processed)
+            "processed", instance.processed
+        )
         instance.date_processed = timezone.now()
         instance.save()
 
-        notification = validated_data.get('notification', False)
+        notification = validated_data.get("notification", False)
         if notification:
             send_processed_notification(instance.id)
 
