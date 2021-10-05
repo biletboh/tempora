@@ -278,16 +278,33 @@ table[class=body] .container {
                           </a>
                         </div>
                         <br>
-                        <h1>Замовлення отримано</h1>
+                        <h1>Замовлення №{{ id }}</h1>
                         <br>
                         <h3>Деталі замовлення</h3>
                         <ul class="list-unstyled">
-                          <li>Номер замовлення: {{ id }}</li>
-                          <li>Книга: {{ book }}</li>
-                          <li>Автори: {{ authors }}</li>
-                          <li>Кількість: {{ quantity }}</li>
-                          <li>Дата: {{ date }}</li>
-                          </u>
+							<li><strong>Книга:</strong> {{ book }}</li>
+						  <li><strong>Автори:</strong> {{ authors }}</li>
+						  <li><strong>Кількість:</strong> {{ quantity }}</li>
+						</ul>
+						<hr>
+						<h3>Оплата замовлення на картковий рахунок</h3>
+						<ul class="list-unstyled">
+							<li><strong>Номер карти:</strong> 4239 2200 2126 3180</li>
+							<li><strong>Отримувач:</strong> Сергій Дорошенко, менеджер з продажів видавництва «ТЕМПОРА»</li>
+							<li><strong>Призначення платежу:</strong> Поповнення карткового рахунку №{{ id }}</li>
+						</ul>
+						<hr>
+						<h3>Оплата замовлення за реквізитами</h3>
+						<ul class="list-unstyled">
+							<li><strong>Банк отримувача:</strong> АТ «Райффайзен Банк»</li>
+							<li><strong>Отримувач:</strong> ФОП Дорошенко Сергій Миколайович</li>
+							<li><strong>КОД (ЄДРПОУ) отримувача:</strong> 2295514491</li>
+							<li><strong>Розрахунковий рахунок отримувача (IBAN):</strong> UA623229040000000260072160769</li>
+							<li><strong>Призначення платежу:</strong> Поповнення карткового рахунку №{{ id }}</li>
+						</ul>
+						<hr>
+						<p>Отримайте сплачене вами замовлення на відділеннях Нової пошти або Укрпошти, які ви вказали у формі замовлення.</p>
+						<p><strong>Контактний телефон:</strong> +38 (044) 234 4640</p>
                       </td>
                     </tr>
                   </table>
@@ -308,11 +325,6 @@ table[class=body] .container {
                 <tr>
                   <td class="content-block">
                     <span class="apple-link"><a href="https://tempora.com.ua/">Видавництво "Темпора"</a></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="content-block powered-by">
-                    Розроблено <a href="https://github.com/biletboh">biletboh</a>.
                   </td>
                 </tr>
               </table>
